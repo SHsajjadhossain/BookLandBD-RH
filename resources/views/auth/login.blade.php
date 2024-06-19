@@ -51,6 +51,9 @@ Pustok - Book Store | Login
                                 <label for="email">Enter your email address here...</label>
                                 <input class="mb-0 form-control" type="email" id="email1" name="email"
                                     placeholder="Enter you email address here...">
+                                @error('email')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="col-12 mb--20">
                                 <div class="mt-2 password-flex">
@@ -59,6 +62,9 @@ Pustok - Book Store | Login
                                 </div>
                                 <input class="mb-0 form-control" type="password" id="login-password" name="password"
                                     placeholder="Enter your password">
+                                @error('password')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <!-- Remember Me -->
                             <div class="block mt-2 mb-2">

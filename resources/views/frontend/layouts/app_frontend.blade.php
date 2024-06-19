@@ -36,7 +36,7 @@
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-lg-3">
-                            <a href="index.html" class="site-brand">
+                            <a href="{{ route('frontend.home') }}" class="site-brand">
                                 <img src="{{ asset('frontend_assets') }}/image/logo.png" alt="">
                             </a>
                         </div>
@@ -226,7 +226,7 @@
                             <div class="main-navigation flex-lg-right">
                                 <ul class="main-menu menu-right li-last-0">
                                     <li class="menu-item has-children">
-                                        <a href="javascript:void(0)">Home</a>
+                                        <a href="{{ route('frontend.home') }}">Home</a>
                                     </li>
                                     <!-- Shop -->
                                     <li class="menu-item has-children mega-menu">
