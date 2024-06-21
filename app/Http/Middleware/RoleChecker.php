@@ -22,6 +22,11 @@ class RoleChecker
             return $next($request);
         }
 
-        return $next($request);
+        if(session()->has('url.intended')){
+            return redirect(session()->get('url.intended'));
+        }else{
+            return redirect( route('user.dashboard') );
+        }
+
     }
 }

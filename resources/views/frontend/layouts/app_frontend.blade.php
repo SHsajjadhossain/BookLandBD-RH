@@ -50,8 +50,16 @@
                             <div class="main-navigation flex-lg-right">
                                 <div class="cart-widget">
                                     <div class="login-block">
-                                        <a href="{{ route('login') }}" class="font-weight-bold">Login</a> <br>
-                                        <span>or</span><a href="{{ route('register') }}">Register</a>
+                                        @auth
+                                            @if (Auth::user()->role == '1' || Auth::user()->role == '3')
+                                                <a href="{{ route('dashboard') }}" class="font-weight-bold">{{ Auth::user()->name }}</a>
+                                            @else
+                                                <a href="{{ route('user.dashboard') }}" class="font-weight-bold">{{ Auth::user()->name }}</a>
+                                            @endif
+                                        @else
+                                            <a href="{{ route('login') }}" class="font-weight-bold">Login</a> <br>
+                                            <span>or</span><a href="{{ route('register') }}">Register</a>
+                                        @endauth
                                     </div>
                                     <div class="cart-block">
                                         <div class="cart-total">
