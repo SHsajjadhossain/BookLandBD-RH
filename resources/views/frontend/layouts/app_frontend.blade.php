@@ -109,7 +109,7 @@
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-lg-3">
-                            <nav class="category-nav primary-nav show">
+                            <nav class="category-nav primary-nav {{ URL::current() == route('user.dashboard') ? '' : 'show' }}">
                                 <div>
                                     <a href="javascript:void(0)" class="category-trigger"><i
                                             class="fa fa-bars"></i>Browse
