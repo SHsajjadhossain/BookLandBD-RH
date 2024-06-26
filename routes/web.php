@@ -15,6 +15,7 @@ Route::get('/', [FrontendController::class, 'index'])->name('frontend.home');
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified', 'rolechecker']], function(){
     Route::get('/dashboard',[AdminController::class, 'index'])->name('dashboard');
     Route::get('/my-profile', [AdminController::class, 'myProfile'])->name('my-profile');
+    Route::post('/my-profile/update', [AdminController::class, 'myProfileUpdate'])->name('my-profile.update');
 });
 
 Route::middleware('auth', 'verified')->group(function () {
