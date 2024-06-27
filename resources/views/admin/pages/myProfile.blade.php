@@ -77,7 +77,7 @@ Dashboard Pustok | My Profile
                                 <h4 class="card-title">Profile Details</h4>
                             </div>
                             <div class="py-2 card-body">
-                                <form action="{{ route('my-profile.update') }}" method="POST">
+                                <form action="{{ route('my-profile.update') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <div class="flex-wrap d-flex align-items-end">
                                         <div class="mb-1 mr-1">

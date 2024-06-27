@@ -26,15 +26,15 @@ class AdminController extends Controller
             'profile_photo' => 'image|mimes:png,jpg,jpeg',
         ]);
 
-        // if ($request->hasFile('profile_photo')) {
-        //     $image = $request->file('profile_photo');
-        //     $image_name = time().'_'.Str::random(10).'-'.uniqid().'.'.$request->file('profile_photo')->getClientOriginalExtension();
-        //     $location = public_path('uploads/profile_photoes');
-        //     $image->move($location, $image_name);
-        //     User::find(Auth::id())->update([
-        //         'profile_photo' => $image_name
-        //     ]);
-        // }
+        if ($request->hasFile('profile_photo')) {
+            $image = $request->file('profile_photo');
+            $image_name = time().'_'.Str::random(3).'-'.uniqid().'.'.$request->file('profile_photo')->getClientOriginalExtension();
+            $location = public_path('uploads/profile_photoes');
+            $image->move($location, $image_name);
+            User::find(Auth::id())->update([
+                'profile_photo' => $image_name
+            ]);
+        }
 
         User::find(Auth::id())->update([
             'name' => $request->name,
