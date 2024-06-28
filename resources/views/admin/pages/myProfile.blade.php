@@ -50,7 +50,7 @@ Dashboard Pustok | My Profile
                         </a>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link" data-toggle="pill" href="#pills-security" role="tab" aria-selected="false">
+                        <a class="nav-link" data-toggle="pill" href="#pills-security" id="password-security" role="tab" aria-selected="false">
                             <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none"
                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                 class="feather feather-lock mr-50">
@@ -66,6 +66,12 @@ Dashboard Pustok | My Profile
                 @if (session('success'))
                 <div class="pt-2 pb-2 alert alert-success">
                     <span class="ml-2">{{ session('success') }}</span>
+                </div>
+                @endif
+
+                @if (session('successpass'))
+                <div class="pt-2 pb-2 alert alert-success">
+                    <span class="ml-2">{{ session('successpass') }}</span>
                 </div>
                 @endif
 
@@ -137,7 +143,8 @@ Dashboard Pustok | My Profile
                                 <h4 class="card-title">Change Password</h4>
                             </div>
                             <div class="py-2 card-body">
-                                <form action="#!">
+                                <form action="{{ route('my-profile.update.password') }}" method="POST">
+                                    @csrf
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="form-group">
@@ -158,6 +165,12 @@ Dashboard Pustok | My Profile
                                                         </span>
                                                     </div>
                                                 </div>
+                                                @error('password')
+                                                <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                                @if (session('errorpass'))
+                                                <span class="text-danger">{{ session('errorpass') }}</span>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -165,7 +178,7 @@ Dashboard Pustok | My Profile
                                                 <label for="account-new-password">New Password</label>
                                                 <div class="input-group form-password-toggle">
                                                     <input type="password" class="form-control" id="account-new-password"
-                                                        name="new-password" placeholder="Enter current password">
+                                                        name="new_password" placeholder="Enter new password">
                                                     <div class="cursor-pointer input-group-append">
                                                         <span role="button" class="input-group-text">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
@@ -179,6 +192,9 @@ Dashboard Pustok | My Profile
                                                         </span>
                                                     </div>
                                                 </div>
+                                                @error('new_password')
+                                                <span class="text-danger">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -186,8 +202,8 @@ Dashboard Pustok | My Profile
                                                 <label for="account-retype-new-password">Retype New Password</label>
                                                 <div class="input-group form-password-toggle">
                                                     <input type="password" class="form-control"
-                                                        id="account-retype-new-password" name="confirm-new-password"
-                                                        placeholder="Enter current password">
+                                                        id="account-retype-new-password" name="confirm_new_password"
+                                                        placeholder="Retype new password">
                                                     <div class="cursor-pointer input-group-append">
                                                         <span role="button" class="input-group-text">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
@@ -201,11 +217,16 @@ Dashboard Pustok | My Profile
                                                         </span>
                                                     </div>
                                                 </div>
+                                                @error('confirm_new_password')
+                                                <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                                @if (session('errornewpass'))
+                                                <span class="text-danger">{{ session('errornewpass') }}</span>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="col-12">
-                                            <button type="submit"
-                                                class="btn btn-primary waves-effect waves-float waves-light">Submit</button>
+                                            <button type="submit" class="btn btn-primary waves-effect waves-float waves-light">Submit</button>
                                         </div>
                                     </div>
                                 </form>
@@ -252,6 +273,10 @@ Dashboard Pustok | My Profile
             //     }
             // });
         })
+
+        $(document).ready(function () {
+
+        });
 </script>
 
 @endpush

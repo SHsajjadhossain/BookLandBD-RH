@@ -16,6 +16,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified', 'roleche
     Route::get('/dashboard',[AdminController::class, 'index'])->name('dashboard');
     Route::get('/my-profile', [AdminController::class, 'myProfile'])->name('my-profile');
     Route::post('/my-profile/update', [AdminController::class, 'myProfileUpdate'])->name('my-profile.update');
+    Route::post('/my-profile/update/password', [AdminController::class, 'myProfileUpdatePassword'])->name('my-profile.update.password');
 });
 
 Route::middleware('auth', 'verified')->group(function () {

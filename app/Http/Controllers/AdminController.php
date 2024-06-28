@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 class AdminController extends Controller
@@ -22,18 +23,29 @@ class AdminController extends Controller
     public function myProfileUpdate(Request $request){
         $request->validate([
             'name'  => 'required',
-            'email' => 'required | email',
+            'email' => 'required|email',
             'profile_photo' => 'image|mimes:png,jpg,jpeg',
         ]);
 
         if ($request->hasFile('profile_photo')) {
-            $image = $request->file('profile_photo');
-            $image_name = time().'_'.Str::random(3).'-'.uniqid().'.'.$request->file('profile_photo')->getClientOriginalExtension();
-            $location = public_path('uploads/profile_photoes');
-            $image->move($location, $image_name);
-            User::find(Auth::id())->update([
-                'profile_photo' => $image_name
-            ]);
+            $location = public_path('uploads/profile_photoes/');
+            if (Auth::user()->profile_photo == 'default.png') {
+                $image = $request->file('profile_photo');
+                $image_name = time().'_'.Str::random(3).'-'.uniqid().'.'.$request->file('profile_photo')->getClientOriginalExtension();
+                $image->move($location, $image_name);
+                User::find(Auth::id())->update([
+                    'profile_photo' => $image_name
+                ]);
+            }
+            else {
+                unlink($location.Auth::user()->profile_photo);
+                $image = $request->file('profile_photo');
+                $image_name = time().'_'.Str::random(3).'-'.uniqid().'.'.$request->file('profile_photo')->getClientOriginalExtension();
+                $image->move($location, $image_name);
+                User::find(Auth::id())->update([
+                    'profile_photo' => $image_name
+                ]);
+            }
         }
 
         User::find(Auth::id())->update([
@@ -42,5 +54,29 @@ class AdminController extends Controller
         ]);
 
         return back()->with('success', 'Profile Updated Successfully!!');
+    }
+
+    public function myProfileUpdatePassword(Request $request){
+        $request->validate([
+            'password' => 'required',
+            'new_password' => 'required|min:8',
+            'confirm_new_password' => 'required',
+        ]);
+
+        if (Hash::check($request->password, Auth::user()->password)) {
+            if ($request->new_password == $request->confirm_new_password) {
+                User::find(Auth::id())->update([
+                    'password' => bcrypt($request->new_password)
+                ]);
+
+                return back()->with('successpass', 'Your password updated successfully!!');
+            }
+            else {
+                return back()->with('errornewpass', 'The password does not match');
+            }
+        }
+        else {
+            return back()->with('errorpass', 'The current password does not match');
+        }
     }
 }
