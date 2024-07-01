@@ -38,7 +38,7 @@ Dashboard Pustok | My Profile
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a>
                             </li>
-                            <li class="breadcrumb-item active">My Profile
+                            <li class="breadcrumb-item active">Product Category
                             </li>
                         </ol>
                     </div>
@@ -56,17 +56,17 @@ Dashboard Pustok | My Profile
                 <div class="card">
                     <div class="card-header d-block d-sm-flex">
                         <h4 class="card-title">Category List (0)</h4>
-                        <div class="button-group-spacing">
+                        <div class="button-group-spacing d-flex">
                             {{-- @if (havePermission('category','import')) --}}
                             {{-- <button class="btn btn-success waves-effect w-100 w-sm-auto" data-toggle="modal"
                                 data-target="#csvImportModal">+ Import</button> --}}
                             {{-- @endif --}}
 
                             {{-- @if (havePermission('category','create')) --}}
-                            <button class="btn btn-warning waves-effect w-100 w-sm-auto" data-toggle="modal"
+                            <button class="btn btn-warning waves-effect w-100 w-sm-auto mr-1" data-toggle="modal"
                                 data-target="#add_category_modal">+ Add New Category</button>
                             {{-- @endif --}}
-                            <div id="all_actions" class="dropdown w-100 w-sm-auto ">
+                            <div id="all_actions" class="dropdown w-sm-auto ">
                                 <button class="btn btn-info w-100 w-sm-auto dropdown-toggle" type="button" data-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false">
                                     All Action
@@ -137,31 +137,35 @@ Dashboard Pustok | My Profile
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-                                        <form action="" method="">
+                                        <form action="{{ route('category.store') }}" method="POST">
+                                            @csrf
                                             <div class="modal-body">
                                                 <div class="form-group">
-                                                    <label for="name">Category Name<span class="text-danger">*</span></label>
-                                                    <input type="text" value="{{ old('name') }}" name="name" id="name" class="form-control">
+                                                    <label for="category_name">Category Name<span class="text-danger">*</span></label>
+                                                    <input type="text" value="{{ old('category_name') }}" name="category_name" id="category_name" class="form-control">
+
+                                                    @error('category_name')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                    @enderror
                                                 </div>
-                                                @error('name')
-                                                <small class="text-danger">{{ $message }}</small>
-                                                @enderror
 
                                                 <div class="form-group">
-                                                    <label for="name">Category Left Photo<small class="text-warning">(Dimensions: 255 x 386 px)</small> <span class="text-danger">*</span></label>
-                                                    <input type="file" value="{{ old('name') }}" name="name" id="name" class="form-control">
+                                                    <label for="category_left_photo">Category Left Photo<small class="text-warning">(Dimensions: 255 x 386 px)</small></label>
+                                                    <input type="file" value="" name="category_left_photo" id="category_left_photo" class="form-control">
+
+                                                    @error('category_left_photo')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                    @enderror
                                                 </div>
-                                                @error('name')
-                                                <small class="text-danger">{{ $message }}</small>
-                                                @enderror
 
                                                 <div class="form-group">
-                                                    <label for="name">Category Photo<small class="text-warning">(Dimensions: 397 x 203 px)</small> <span class="text-danger">*</span></label>
-                                                    <input type="file" value="{{ old('name') }}" name="name" id="name" class="form-control">
+                                                    <label for="category_photo">Category Photo<small class="text-warning">(Dimensions: 397 x 203 px)</small> <span class="text-danger">*</span></label>
+                                                    <input type="file" value="" name="category_photo" id="category_photo" class="form-control">
+
+                                                    @error('category_photo')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                    @enderror
                                                 </div>
-                                                @error('name')
-                                                <small class="text-danger">{{ $message }}</small>
-                                                @enderror
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancle</button>
@@ -270,11 +274,15 @@ Dashboard Pustok | My Profile
                                                     {{-- @if (havePermission('category','delete')) --}}
                                                     <form action="" method="">
                                                         <button type="submit" class="dropdown-item">
-                                                            <i data-feather="trash" class="mr-50"></i>
+                                                            <i data-feather="trash"></i>
                                                             Delete
                                                         </button>
                                                     </form>
                                                     {{-- @endif --}}
+                                                    <button data-toggle="modal" data-target="#edit_category_" class="dropdown-item">
+                                                        <i data-feather='eye'></i>
+                                                        Details
+                                                    </button>
                                                 </div>
                                             </div>
                                         </td>
