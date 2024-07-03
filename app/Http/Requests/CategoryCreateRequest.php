@@ -23,16 +23,14 @@ class CategoryCreateRequest extends FormRequest
     {
         return [
             'category_name' => 'required',
-            'category_left_photo' => ['image','mimes:png,jpg,jpeg','dimensions:min_width=255px,min_height=386px'],
-            'category_photo' => ['required', 'dimensions:width=397px,height=203px']
+            'category_photo' => ['required', 'mimes:png,jpg,jpeg', 'dimensions:width=397px,height=203px']
         ];
     }
 
-    // public function messages(): array
-    // {
-    //     return[
-    //         'category_left_photo.image' => 'Please give a image',
-    //         'category_left_photo.dimensions' => 'Wrong image dimension',
-    //     ];
-    // }
+    public function messages(): array
+    {
+        return[
+            'category_photo.dimensions' => 'Wrong image dimension',
+        ];
+    }
 }

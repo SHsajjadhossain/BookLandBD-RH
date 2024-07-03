@@ -6,6 +6,70 @@ Pustok - Book Store
 
 @endsection
 
+@push('custom-css')
+
+<style>
+    .category-wrapper{
+        margin-top: 60px;
+    }
+    .category-gallery-block .inner-block-wrapper{
+        width: 100%;
+    }
+
+    .category-gallery-block .inner-block-wrapper .category-slider .category-single-slide .category-item{
+        width: 95%;
+    }
+
+    .category-gallery-block .inner-block-wrapper .category-slider .prev {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+        background: #ffffff;
+        border-radius: 50%;
+        border: 1px solid #ffffff;
+        line-height: 50px;
+        text-align: center;
+        cursor: pointer;
+        box-shadow: -6px 0px 30px 0px rgba(0, 0, 0, 0.1);
+        position: absolute;
+        top: 50%;
+        left: 15px;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+        transition: .4s;
+    }
+
+    .category-gallery-block .inner-block-wrapper .category-slider .next {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+        background: #ffffff;
+        border-radius: 50%;
+        border: 1px solid #ffffff;
+        line-height: 50px;
+        text-align: center;
+        cursor: pointer;
+        box-shadow: -6px 0px 30px 0px rgba(0, 0, 0, 0.1);
+        position: absolute;
+        top: 50%;
+        right: 30px;
+        transform: translate(50%, -50%);
+        transition: .4s;
+    }
+
+    .category-gallery-block .inner-block-wrapper .category-slider .prev:hover {
+        background: #ffc712;
+        border-color: #ffc712;
+    }
+
+    .category-gallery-block .inner-block-wrapper .category-slider .next:hover {
+        background: #ffc712;
+        border-color: #ffc712;
+    }
+</style>
+
+@endpush
+
 @section('content')
 
 <!--=================================
@@ -115,41 +179,44 @@ Pustok - Book Store
 <!--=================================
         Home Category Gallery
 ===================================== -->
-    <section class="section-margin">
+    <section class="section-margin category-wrapper">
         <h2 class="sr-only">Category Gallery Section</h2>
         {{-- <p>412px 397x203px
             ins 370x189px
         </p> --}}
         <div class="container">
             <div class="category-gallery-block">
-                <a href="#" class="single-block hr-large">
-                    <img src="{{ asset('frontend_assets') }}/image/others/cat-gal-large.png" alt="">
-                </a>
                 <div class="single-block inner-block-wrapper">
-                    {{-- <a href="#" class="single-image mid-image">
-                        <img src="{{ asset('frontend_assets') }}/image/others/cat-gal-mid.png" alt="">
-                    </a>
-                    <a href="#" class="single-image small-image">
-                        <img src="{{ asset('frontend_assets') }}/image/others/cat-gal-small.png" alt="">
-                    </a> --}}
-                    <a href="#" class="single-image small-image">
-                        <img src="{{ asset('frontend_assets') }}/image/others/cat-gal-small-2.jpg" alt="">
-                    </a>
-                    <a href="#" class="single-image small-image">
-                        <img src="{{ asset('frontend_assets') }}/image/others/cat-gal-small-2.jpg" alt="">
-                    </a>
-                    <a href="#" class="single-image small-image">
-                        <img src="{{ asset('frontend_assets') }}/image/others/cat-gal-small.png" alt="">
-                    </a>
-                    <a href="#" class="single-image small-image">
-                        <img src="{{ asset('frontend_assets') }}/image/others/cat-gal-small-2.jpg" alt="">
-                    </a>
-                    <a href="#" class="single-image small-image">
-                        <img src="{{ asset('frontend_assets') }}/image/others/cat-gal-small-2.jpg" alt="">
-                    </a>
-                    {{-- <a href="#" class="single-image mid-image">
-                        <img src="{{ asset('frontend_assets') }}/image/others/cat-gal-mid-2.png" alt="">
-                    </a> --}}
+                    <div class="category-slider" >
+                        <div class="category-single-slide">
+                            <div class="category-item">
+                                <a href="#" class="">
+                                    <img src="{{ asset('frontend_assets') }}/image/others/blog-img-big-1.jpg" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="category-single-slide">
+                            <div class="category-item">
+                                <a href="#" class="">
+                                    <img src="{{ asset('frontend_assets') }}/image/others/blog-img-big-2.jpg" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="category-single-slide">
+                            <div class="category-item">
+                                <a href="#" class="">
+                                    <img src="{{ asset('frontend_assets') }}/image/others/blog-img-big-1.jpg" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="category-single-slide">
+                            <div class="category-item">
+                                <a href="#" class="">
+                                    <img src="{{ asset('frontend_assets') }}/image/others/blog-img-big-2.jpg" alt="">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -3910,3 +3977,20 @@ Pustok - Book Store
     </section>
 
 @endsection
+
+@push('custom-js')
+
+<script>
+    $('.category-slider').slick({
+    dots: false,
+    infinite: true,
+    autoplay: true,
+    speed: 300,
+    slidesToShow: 2,
+    slidesToScroll: 1,
+    prevArrow: '<i class="fa fa-angle-left prev" aria-hidden="true"></i>',
+    nextArrow: '<i class="fa fa-angle-right next" aria-hidden="true"></i>',
+    });
+</script>
+
+@endpush

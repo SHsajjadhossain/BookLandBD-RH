@@ -149,14 +149,14 @@ Dashboard Pustok | My Profile
                                                     @enderror
                                                 </div>
 
-                                                <div class="form-group">
+                                                {{-- <div class="form-group">
                                                     <label for="category_left_photo">Category Left Photo<small class="text-warning">(Dimensions: 255 x 386 px)</small></label>
                                                     <input type="file" value="" name="category_left_photo" id="category_left_photo" class="form-control">
 
                                                     @error('category_left_photo')
                                                     <small class="text-danger">{{ $message }}</small>
                                                     @enderror
-                                                </div>
+                                                </div> --}}
 
                                                 <div class="form-group">
                                                     <label for="category_photo">Category Photo<small class="text-warning">(Dimensions: 397 x 203 px)</small> <span class="text-danger">*</span></label>
@@ -271,6 +271,11 @@ Dashboard Pustok | My Profile
                                                     </button>
                                                     {{-- @endif --}}
 
+                                                    <button data-toggle="modal" data-target="#edit_category_" class="dropdown-item">
+                                                        <i data-feather='eye'></i>
+                                                        Details
+                                                    </button>
+
                                                     {{-- @if (havePermission('category','delete')) --}}
                                                     <form action="" method="">
                                                         <button type="submit" class="dropdown-item">
@@ -279,10 +284,6 @@ Dashboard Pustok | My Profile
                                                         </button>
                                                     </form>
                                                     {{-- @endif --}}
-                                                    <button data-toggle="modal" data-target="#edit_category_" class="dropdown-item">
-                                                        <i data-feather='eye'></i>
-                                                        Details
-                                                    </button>
                                                 </div>
                                             </div>
                                         </td>
