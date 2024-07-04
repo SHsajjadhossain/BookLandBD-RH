@@ -18,54 +18,55 @@ Pustok - Book Store
 
     .category-gallery-block .inner-block-wrapper .category-slider .category-single-slide .category-item{
         width: 95%;
+        position: relative;
     }
 
-    .category-gallery-block .inner-block-wrapper .category-slider .prev {
-        width: 50px;
-        height: 50px;
-        font-size: 20px;
-        background: #ffffff;
-        border-radius: 50%;
-        border: 1px solid #ffffff;
-        line-height: 50px;
+    .category-gallery-block .inner-block-wrapper .category-slick-slider .slick-dots{
         text-align: center;
+        margin-top: 30px;
+    }
+
+    .category-gallery-block .inner-block-wrapper .category-slick-slider .slick-dots li{
+        font-size: 0;
+        width: 11px;
+        height: 11px;
+        border-radius: 100%;
+        background: #d3d3d3;
+        margin: 4px;
+        display: inline-block;
+        opacity: 1;
+        -webkit-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
         cursor: pointer;
-        box-shadow: -6px 0px 30px 0px rgba(0, 0, 0, 0.1);
+    }
+
+    .category-gallery-block .inner-block-wrapper .category-slick-slider .slick-dots .slick-active{
+        background: #62ab00;
+    }
+
+    .category-gallery-block .inner-block-wrapper .category-slider .category-single-slide .category-item .overlay{
+        width: 100%;
+        height: 100%;
         position: absolute;
-        top: 50%;
-        left: 15px;
-        transform: translate(-50%, -50%);
-        z-index: 1;
-        transition: .4s;
+        top: 0;
+        left: 0;
     }
 
-    .category-gallery-block .inner-block-wrapper .category-slider .next {
-        width: 50px;
-        height: 50px;
-        font-size: 20px;
-        background: #ffffff;
-        border-radius: 50%;
-        border: 1px solid #ffffff;
-        line-height: 50px;
-        text-align: center;
-        cursor: pointer;
-        box-shadow: -6px 0px 30px 0px rgba(0, 0, 0, 0.1);
-        position: absolute;
-        top: 50%;
-        right: 30px;
-        transform: translate(50%, -50%);
-        transition: .4s;
+    .category-gallery-block .inner-block-wrapper .category-slider .category-single-slide .category-item .overlay h4{
+        font-weight: 700;
+        color: #ffffff;
+        margin-top: 100px;
+        margin-left: 35px;
     }
 
-    .category-gallery-block .inner-block-wrapper .category-slider .prev:hover {
-        background: #ffc712;
-        border-color: #ffc712;
+    .category-gallery-block .inner-block-wrapper .category-slider .category-single-slide .category-item .overlay .cat-btn{
+        padding: 8px 15px;
+        border-radius: 3px;
+        font-weight: 600;
+        margin-left: 35px;
+        margin-top: 10px;
     }
 
-    .category-gallery-block .inner-block-wrapper .category-slider .next:hover {
-        background: #ffc712;
-        border-color: #ffc712;
-    }
 </style>
 
 @endpush
@@ -187,33 +188,57 @@ Pustok - Book Store
         <div class="container">
             <div class="category-gallery-block">
                 <div class="single-block inner-block-wrapper">
-                    <div class="category-slider" >
+                    <div class="category-slider category-slick-slider">
                         <div class="category-single-slide">
                             <div class="category-item">
-                                <a href="#" class="">
+                                <div class="img bg-overlay--dark">
                                     <img src="{{ asset('frontend_assets') }}/image/others/blog-img-big-1.jpg" alt="">
-                                </a>
+                                </div>
+                                <div class="overlay">
+                                    <h4 class="home-sidebar-title">Children's Books</h4>
+                                    <a href="shop-grid.html" class="cat-btn btn--yellow">
+                                        Shop Now
+                                    </a>
+                                </div>
                             </div>
                         </div>
                         <div class="category-single-slide">
                             <div class="category-item">
-                                <a href="#" class="">
+                                <div class="img bg-overlay--dark">
                                     <img src="{{ asset('frontend_assets') }}/image/others/blog-img-big-2.jpg" alt="">
-                                </a>
+                                </div>
+                                <div class="overlay">
+                                    <h4 class="home-sidebar-title">Children's Books</h4>
+                                    <a href="shop-grid.html" class="cat-btn btn--yellow">
+                                        Shop Now
+                                    </a>
+                                </div>
                             </div>
                         </div>
                         <div class="category-single-slide">
                             <div class="category-item">
-                                <a href="#" class="">
+                                <div class="img bg-overlay--dark">
                                     <img src="{{ asset('frontend_assets') }}/image/others/blog-img-big-1.jpg" alt="">
-                                </a>
+                                </div>
+                                <div class="overlay">
+                                    <h4 class="home-sidebar-title">Children's Books</h4>
+                                    <a href="shop-grid.html" class="cat-btn btn--yellow">
+                                        Shop Now
+                                    </a>
+                                </div>
                             </div>
                         </div>
                         <div class="category-single-slide">
                             <div class="category-item">
-                                <a href="#" class="">
+                                <div class="img bg-overlay--dark">
                                     <img src="{{ asset('frontend_assets') }}/image/others/blog-img-big-2.jpg" alt="">
-                                </a>
+                                </div>
+                                <div class="overlay">
+                                    <h4 class="home-sidebar-title">Children's Books</h4>
+                                    <a href="shop-grid.html" class="cat-btn btn--yellow">
+                                        Shop Now
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -3982,14 +4007,13 @@ Pustok - Book Store
 
 <script>
     $('.category-slider').slick({
-    dots: false,
+    dots: true,
+    arrows: false,
     infinite: true,
-    autoplay: true,
+    autoplay: false,
     speed: 300,
     slidesToShow: 2,
     slidesToScroll: 1,
-    prevArrow: '<i class="fa fa-angle-left prev" aria-hidden="true"></i>',
-    nextArrow: '<i class="fa fa-angle-right next" aria-hidden="true"></i>',
     });
 </script>
 

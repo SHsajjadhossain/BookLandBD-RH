@@ -23,7 +23,7 @@ class CategoryCreateRequest extends FormRequest
     {
         return [
             'category_name' => 'required',
-            'category_photo' => ['required', 'mimes:png,jpg,jpeg', 'dimensions:width=397px,height=203px']
+            'category_photo' => ['required', 'mimes:png,jpg,jpeg', 'dimensions:width=521px,height=270px']
         ];
     }
 

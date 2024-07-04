@@ -63,7 +63,7 @@ Dashboard Pustok | My Profile
                             {{-- @endif --}}
 
                             {{-- @if (havePermission('category','create')) --}}
-                            <button class="btn btn-warning waves-effect w-100 w-sm-auto mr-1" data-toggle="modal"
+                            <button class="mr-1 btn btn-warning waves-effect w-100 w-sm-auto" data-toggle="modal"
                                 data-target="#add_category_modal">+ Add New Category</button>
                             {{-- @endif --}}
                             <div id="all_actions" class="dropdown w-sm-auto ">
@@ -159,7 +159,7 @@ Dashboard Pustok | My Profile
                                                 </div> --}}
 
                                                 <div class="form-group">
-                                                    <label for="category_photo">Category Photo<small class="text-warning">(Dimensions: 397 x 203 px)</small> <span class="text-danger">*</span></label>
+                                                    <label for="category_photo">Category Photo<small class="text-warning">(Dimensions: 521 x 270 px)</small> <span class="text-danger">*</span></label>
                                                     <input type="file" value="" name="category_photo" id="category_photo" class="form-control">
 
                                                     @error('category_photo')
@@ -363,6 +363,13 @@ Dashboard Pustok | My Profile
 
 <script>
     $(document).ready(function () {
+        @error('category_name')
+        $('#add_category_modal').modal('show');
+        @enderror
+
+        @error('category_photo')
+        $('#add_category_modal').modal('show');
+        @enderror
     });
 </script>
 

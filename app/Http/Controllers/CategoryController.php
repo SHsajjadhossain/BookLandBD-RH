@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CategoryCreateRequest;
 use App\Models\Category;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -29,10 +30,16 @@ class CategoryController extends Controller
      */
     public function store(CategoryCreateRequest $request)
     {
+        $image = $request->file('images');
+        $imageName = uniqid() . time() .'.'.$image->getClientOriginalExtension();
+        $location = public_path('uploads/category_photoes/');
+        $image->move($location, $imageName);
 
-        // Category::insert([
-
-        // ]);
+        Category::insert([
+            'category_name' => $request->category_name,
+            'category_photo' => $imageName,
+            'created_at' => Carbon::now()
+        ]);
     }
 
     /**
