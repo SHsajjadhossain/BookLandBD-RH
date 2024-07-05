@@ -30,16 +30,18 @@ class CategoryController extends Controller
      */
     public function store(CategoryCreateRequest $request)
     {
-        $image = $request->file('images');
+        $image = $request->file('category_photo');
         $imageName = uniqid() . time() .'.'.$image->getClientOriginalExtension();
         $location = public_path('uploads/category_photoes/');
         $image->move($location, $imageName);
 
-        Category::insert([
+        Category::create([
             'category_name' => $request->category_name,
             'category_photo' => $imageName,
             'created_at' => Carbon::now()
         ]);
+
+        return back()->with('success', 'Product category created successfully!!');
     }
 
     /**

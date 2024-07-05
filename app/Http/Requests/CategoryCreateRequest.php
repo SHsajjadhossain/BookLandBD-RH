@@ -23,14 +23,17 @@ class CategoryCreateRequest extends FormRequest
     {
         return [
             'category_name' => 'required',
-            'category_photo' => ['required', 'mimes:png,jpg,jpeg', 'dimensions:width=521px,height=270px']
+            'category_photo' => 'required|image|mimes:png,jpg,jpeg|dimensions:width=521, height=270',
         ];
     }
 
     public function messages(): array
     {
         return[
-            'category_photo.dimensions' => 'Wrong image dimension',
+            'category_photo.image' => 'Please give a image',
+            'category_photo.dimensions' => 'Wrong image dimensions',
         ];
     }
+    // 'mimes:png,jpg,jpeg'
+    // dimensions:width=521px, height=270px
 }

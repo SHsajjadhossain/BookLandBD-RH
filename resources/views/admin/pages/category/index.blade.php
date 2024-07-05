@@ -54,6 +54,11 @@ Dashboard Pustok | My Profile
         <div class="row">
             <div class="col-12">
                 <div class="card">
+                    @if (session('success'))
+                    <div class="p-2 alert alert-success">
+                        <span>{{ session('success') }}</span>
+                    </div>
+                    @endif
                     <div class="card-header d-block d-sm-flex">
                         <h4 class="card-title">Category List (0)</h4>
                         <div class="button-group-spacing d-flex">
@@ -137,7 +142,14 @@ Dashboard Pustok | My Profile
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-                                        <form action="{{ route('category.store') }}" method="POST">
+                                        {{-- @if ($errors->any())
+                                            <div class="p-1 alert alert-danger">
+                                                    @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                    @endforeach
+                                            </div>
+                                        @endif --}}
+                                        <form action="{{ route('category.store') }}" method="POST" enctype="multipart/form-data">
                                             @csrf
                                             <div class="modal-body">
                                                 <div class="form-group">
