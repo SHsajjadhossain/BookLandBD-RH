@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoryCreateRequest extends FormRequest
+class CategoryUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,21 +22,22 @@ class CategoryCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'category_name' => 'required',
-            'category_photo' => 'required|image|mimes:png,jpg,jpeg|dimensions:width=521, height=270',
+            'category_update_name' => 'required',
+            'category_update_photo' => 'image|mimes:png,jpg,jpeg|dimensions:width=521, height=270'
         ];
     }
 
-     /**
+    /**
      * Get the validation messages that apply to the request.
      *
      */
-
     public function messages(): array
     {
-        return[
-            'category_photo.image' => 'Please give a image',
-            'category_photo.dimensions' => 'Wrong image dimensions',
+        return [
+            'category_update_name.required' => 'The category name field is required',
+            'category_update_photo.image' => 'Please give a image',
+            'category_update_photo.mimes' => 'The file only support type: png, jpg, jpeg',
+            'category_update_photo.dimensions' => 'Wrong image dimensions',
         ];
     }
 }

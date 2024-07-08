@@ -60,7 +60,7 @@ Dashboard Pustok | My Profile
                     </div>
                     @endif
                     <div class="card-header d-block d-sm-flex">
-                        <h4 class="card-title">Category List (0)</h4>
+                        <h4 class="card-title">Category List ({{ $categories->count() }})</h4>
                         <div class="button-group-spacing d-flex">
                             {{-- @if (havePermission('category','import')) --}}
                             {{-- <button class="btn btn-success waves-effect w-100 w-sm-auto" data-toggle="modal"
@@ -71,7 +71,7 @@ Dashboard Pustok | My Profile
                             <button class="mr-1 btn btn-warning waves-effect w-100 w-sm-auto" data-toggle="modal"
                                 data-target="#add_category_modal">+ Add New Category</button>
                             {{-- @endif --}}
-                            <div id="all_actions" class="dropdown w-sm-auto ">
+                            <div id="all_actions" class="dropdown w-sm-auto d-none">
                                 <button class="btn btn-info w-100 w-sm-auto dropdown-toggle" type="button" data-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false">
                                     All Action
@@ -161,18 +161,13 @@ Dashboard Pustok | My Profile
                                                     @enderror
                                                 </div>
 
-                                                {{-- <div class="form-group">
-                                                    <label for="category_left_photo">Category Left Photo<small class="text-warning">(Dimensions: 255 x 386 px)</small></label>
-                                                    <input type="file" value="" name="category_left_photo" id="category_left_photo" class="form-control">
-
-                                                    @error('category_left_photo')
-                                                    <small class="text-danger">{{ $message }}</small>
-                                                    @enderror
-                                                </div> --}}
-
                                                 <div class="form-group">
                                                     <label for="category_photo">Category Photo<small class="text-warning">(Dimensions: 521 x 270 px)</small> <span class="text-danger">*</span></label>
-                                                    <input type="file" value="" name="category_photo" id="category_photo" class="form-control">
+                                                    <div class="mb-1 mr-1">
+                                                        <img src="" data-reset-src="" id="category_photo_upload_img"
+                                                            class="rounded uploadedAvatar object-fit--cover" alt="category photo" width="200" height="80">
+                                                    </div>
+                                                    <input type="file" value="" name="category_photo" id="category_photo_upload" class="form-control">
 
                                                     @error('category_photo')
                                                     <small class="text-danger">{{ $message }}</small>
@@ -255,99 +250,172 @@ Dashboard Pustok | My Profile
                                         </th>
                                         <th>Actions</th>
                                         <th>Category Name</th>
-                                        <th>Created By</th>
-                                        <th>Updated By</th>
+                                        <th>Category Photo</th>
+                                        {{-- <th>Created By</th>
+                                        <th>Updated By</th> --}}
                                         <th>Created At</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input all_checkbox" name="select_individual[]"
-                                                    id="single-select-">
-                                                <label class="custom-control-label" for="single-select-"></label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="dropdown position-static">
-                                                <button type="button" class="btn btn-icon btn-outline-secondary waves-effect dropdown-toggle hide-arrow"
-                                                    data-toggle="dropdown" data-boundary="viewport">
-                                                    <i data-feather="more-vertical"></i>
-                                                </button>
-                                                <div class="dropdown-menu">
-                                                    {{-- @if (havePermission('category','edit')) --}}
-                                                    <button data-toggle="modal" data-target="#edit_category_" class="dropdown-item">
-                                                        <i data-feather='edit'></i>
-                                                        Edit
+                                    @forelse ($categories as $category)
+                                        <tr>
+                                            <td>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input all_checkbox" name="select_individual[]"
+                                                        id="single-select-">
+                                                    <label class="custom-control-label" for="single-select-"></label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="dropdown position-static">
+                                                    <button type="button" class="btn btn-icon btn-outline-secondary waves-effect dropdown-toggle hide-arrow"
+                                                        data-toggle="dropdown" data-boundary="viewport">
+                                                        <i data-feather="more-vertical"></i>
                                                     </button>
-                                                    {{-- @endif --}}
-
-                                                    <button data-toggle="modal" data-target="#edit_category_" class="dropdown-item">
-                                                        <i data-feather='eye'></i>
-                                                        Details
-                                                    </button>
-
-                                                    {{-- @if (havePermission('category','delete')) --}}
-                                                    <form action="" method="">
-                                                        <button type="submit" class="dropdown-item">
-                                                            <i data-feather="trash"></i>
-                                                            Delete
+                                                    <div class="dropdown-menu">
+                                                        {{-- @if (havePermission('category','edit')) --}}
+                                                        <button data-toggle="modal" data-target="#edit_category_{{ $category->id }}" class="dropdown-item">
+                                                            <i data-feather='edit'></i>
+                                                            Edit
                                                         </button>
-                                                    </form>
+                                                        {{-- @endif --}}
+
+                                                        <a href="#" class="dropdown-item">
+                                                            <i data-feather='eye'></i>
+                                                            Details
+                                                        </a>
+
+                                                        {{-- @if (havePermission('category','delete')) --}}
+                                                        <form action="" method="">
+                                                            <button type="submit" class="dropdown-item">
+                                                                <i data-feather="trash"></i>
+                                                                Delete
+                                                            </button>
+                                                        </form>
+                                                        {{-- @endif --}}
+                                                    </div>
+                                                </div>
+                                                {{-- Edit Modal Start --}}
+                                                    @push('all_modals')
+                                                    <!-- Modal -->
+                                                    {{-- @if (havePermission('category','edit')) --}}
+                                                    <div class="modal fade" id="edit_category_{{ $category->id }}" tabindex="-1" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title">Edit Category</h5>
+                                                                    {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button> --}}
+                                                                </div>
+                                                                {{-- @if ($errors->any())
+                                                                <div class="p-1 alert alert-danger">
+                                                                    @foreach ($errors->all() as $error)
+                                                                    <li>{{ $error }}</li>
+                                                                    @endforeach
+                                                                </div>
+                                                                @endif --}}
+                                                                <form action="{{ route('category.update', $category->id) }}" method="POST" enctype="multipart/form-data">
+                                                                    @csrf
+                                                                    @method('PUT')
+                                                                    <div class="modal-body">
+                                                                        <input type="hidden" name="category_update_id" value="{{ $category->id }}">
+                                                                        <div class="form-group">
+                                                                            <label for="category_name">Category Name<span class="text-danger">*</span></label>
+                                                                            <input type="text" value="{{ $category->category_name}}" name="category_update_name" id="category_name"
+                                                                                class="form-control">
+
+                                                                            @error('category_update_name')
+                                                                            <small class="text-danger">{{ $message }}</small>
+                                                                            @enderror
+                                                                        </div>
+
+                                                                        <div class="form-group">
+                                                                            <label for="category_photo">Category Photo<small class="text-warning">(Dimensions: 521 x 270
+                                                                                    px)</small>
+                                                                                <span class="text-danger">*</span></label>
+                                                                            <div class="mb-1 mr-1">
+                                                                                <img src="{{ asset('uploads/category_photoes') }}/{{ $category->category_photo }}" data-reset-src="" id="category_photo_upload_img"
+                                                                                    class="rounded uploadedAvatar object-fit--cover" alt="category photo" width="200"
+                                                                                    height="80">
+                                                                            </div>
+                                                                            <input type="file" value="" name="category_update_photo" id="category_photo_upload"
+                                                                                class="form-control">
+
+                                                                            @error('category_update_photo')
+                                                                                <small class="text-danger">{{ $message }}</small>
+                                                                            @enderror
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancle</button>
+                                                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                     {{-- @endif --}}
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <img src="../../../app-assets/images/icons/bootstrap.svg" class="mr-75" height="20" width="20"
-                                                alt="Bootstrap">
-                                            <span class="font-weight-bold">Bootstrap Project</span>
-                                        </td>
-                                        <td>Jerry Milton</td>
-                                        <td>
-                                            <div class="avatar-group">
-                                                <div data-toggle="tooltip" data-popup="tooltip-custom" data-placement="top" title=""
-                                                    class="my-0 avatar pull-up" data-original-title="Lilian Nenez">
-                                                    <img src="../../../app-assets/images/portrait/small/avatar-s-5.jpg" alt="Avatar" height="26"
-                                                        width="26">
-                                                </div>
-                                                <div data-toggle="tooltip" data-popup="tooltip-custom" data-placement="top" title=""
-                                                    class="my-0 avatar pull-up" data-original-title="Alberto Glotzbach">
-                                                    <img src="../../../app-assets/images/portrait/small/avatar-s-6.jpg" alt="Avatar" height="26"
-                                                        width="26">
-                                                </div>
-                                                <div data-toggle="tooltip" data-popup="tooltip-custom" data-placement="top" title=""
-                                                    class="my-0 avatar pull-up" data-original-title="Alberto Glotzbach">
-                                                    <img src="../../../app-assets/images/portrait/small/avatar-s-7.jpg" alt="Avatar" height="26"
-                                                        width="26">
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td><span class="mr-1 badge badge-pill badge-light-warning">Pending</span></td>
-                                    </tr>
+                                                    @endpush
+                                                {{-- Edit Modal End --}}
+                                            </td>
+                                            <td>
+                                                {{-- <img src="../../../app-assets/images/icons/bootstrap.svg" class="mr-75" height="20" width="20" alt="Bootstrap"> --}}
+                                                <span class="font-weight-bold">{{ $category->category_name }}</span>
+                                            </td>
+                                            <td><img src="{{ asset('uploads/category_photoes') }}/{{ $category->category_photo }}" class="mr-75" height="70" width="150" alt="Bootstrap"></td>
+                                            <td><span class="font-weight-bold">{{ $category->created_at->diffForHumans() }}</span></td>
+                                            {{-- <td><span class="mr-1 badge badge-pill badge-light-warning">Pending</span></td> --}}
+                                        </tr>
+                                    @empty
+                                        <span class="text-center text-danger font-weight-bold">No data to show</span>
+                                    @endforelse
+
                                     @push('all_modals')
                                     <!-- Modal -->
                                     {{-- @if (havePermission('category','edit')) --}}
-                                    <div class="modal fade" id="edit_category_" tabindex="-1" aria-hidden="true">
+                                    <div class="modal fade" id="add_category_modal" tabindex="-1" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title">Edit Blog Category</h5>
+                                                    <h5 class="modal-title">Edit Category</h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
-                                                <form action="" method="">
+                                                {{-- @if ($errors->any())
+                                                <div class="p-1 alert alert-danger">
+                                                    @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                    @endforeach
+                                                </div>
+                                                @endif --}}
+                                                <form action="{{ route('category.store') }}" method="POST" enctype="multipart/form-data">
+                                                    @csrf
                                                     <div class="modal-body">
                                                         <div class="form-group">
-                                                            <label for="category_name">Categoy Name <span class="text-danger">*</span></label>
-                                                            <input type="text" value="" name="category_name" id="category_name" class="form-control">
-                                                            {{-- {{ $category->name ?? old('category_name') }} --}}
+                                                            <label for="category_name">Category Name<span class="text-danger">*</span></label>
+                                                            <input type="text" value="{{ old('category_name') }}" name="category_name" id="category_name"
+                                                                class="form-control">
+
+                                                            @error('category_name')
+                                                            <small class="text-danger">{{ $message }}</small>
+                                                            @enderror
                                                         </div>
-                                                        @error('category_name')
-                                                        <small class="text-danger">{{ $message }}</small>
-                                                        @enderror
+
+                                                        <div class="form-group">
+                                                            <label for="category_photo">Category Photo<small class="text-warning">(Dimensions: 521 x 270 px)</small>
+                                                                <span class="text-danger">*</span></label>
+                                                            <div class="mb-1 mr-1">
+                                                                <img src="" data-reset-src="" id="category_photo_upload_img"
+                                                                    class="rounded uploadedAvatar object-fit--cover" alt="category photo" width="200" height="80">
+                                                            </div>
+                                                            <input type="file" value="" name="category_photo" id="category_photo_upload" class="form-control">
+
+                                                            @error('category_photo')
+                                                            <small class="text-danger">{{ $message }}</small>
+                                                            @enderror
+                                                        </div>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancle</button>
@@ -375,6 +443,7 @@ Dashboard Pustok | My Profile
 
 <script>
     $(document).ready(function () {
+        var ids = [];
         @error('category_name')
         $('#add_category_modal').modal('show');
         @enderror
@@ -382,6 +451,130 @@ Dashboard Pustok | My Profile
         @error('category_photo')
         $('#add_category_modal').modal('show');
         @enderror
+
+        @error('category_update_name')
+        $('#edit_category_'+'{{ old('category_update_id') }}').modal('show');
+        @enderror
+
+        @error('category_update_photo')
+        $('#edit_category_'+'{{ old('category_update_id') }}').modal('show');
+        @enderror
+
+        // Select All Checkbox Features
+            $('#all-select').change(function(){
+                 ids = [];
+                 // Get all the id
+                if($(this).is(":checked")){
+                    $('.custom-control-input').prop('checked', true);
+
+
+                    $('.all_checkbox').each(function(){
+                        ids.push($(this).attr('id').split('-')[2]);
+                    });
+
+                    if(ids.length == 0){
+                        $('#all_actions').removeClass('d-inline-block');
+                        $('#all_actions').addClass('d-none');
+                    }
+                    else
+                    {
+                        $('#all_actions').removeClass(' d-none');
+                        $('#all_actions').addClass('d-inline-block');
+                        $('#export_all').val(ids);
+                    }
+                    // Delete all
+                    $("#delete_all").on('click', function(){
+
+                        $.ajax({
+                        url: "{{ route('categories.mass_action') }}",
+                        type: 'POST',
+                        data: {
+                            ids: ids,
+                        },
+                        success: function(data){
+                            if(data.success == 'done'){
+                                window.location.reload();
+                            }
+                            if(data.error){
+                                $('#deleteModal').modal('hide');
+                                toastr.error(data.error);
+                            }
+                        }
+                    });
+
+                });
+
+                }else{
+                    $('.custom-control-input').prop('checked', false);
+                    $('#all_actions').addClass('d-none');
+                    $('#all_actions').removeClass('d-inline-block');
+                }
+            });
+
+            // Select Individual Checkbox Features
+            $('.all_checkbox').change(function(){
+                 ids = [];
+                $('.all_checkbox').each(function(){
+                    if($(this).is(":checked")){
+                        ids.push($(this).attr('id').split('-')[2]);
+                    }
+                });
+                if(ids.length == 0){
+                    $('#all_actions').removeClass('d-inline-block');
+                    $('#all_actions').addClass('d-none');
+                }
+                else
+                {
+                    $('#all_actions').removeClass(' d-none');
+                    $('#all_actions').addClass('d-inline-block');
+                    $('#export_all').val(ids);
+
+                        // Delete trigger
+
+                        $("#delete_all").on('click', function(){
+
+                            $.ajax({
+                                    url: "{{ route('categories.mass_action') }}",
+                                    type: 'POST',
+                                    data: {
+                                        ids: ids,
+                                    },
+                                    success: function(data){
+                                        if(data.success == 'done'){
+                                            window.location.reload();
+                                        }
+                                    }
+                            });
+
+                        });
+                }
+            });
+
+            // Table Search
+
+            $('.table_search').on('input', function(){
+            var tableSearchValue = $(this).val();
+            $(this).closest(".card-body").find(".table tbody tr").each(function(){
+            if($(this).text().search(new RegExp(tableSearchValue, "i")) < 0){ $(this).hide(); } else{ $(this).show(); } }); });
+
+
+            // Update & Reset Profile photo on click of button
+
+            let categoryUploadImg = $('#category_photo_upload_img');
+            let categoryUploadInput = $('#category_photo_upload');
+            let accountResetBtn = $('#account-reset');
+            if (categoryUploadInput) {
+                categoryUploadInput.on('change', function (e) {
+                    var reader = new FileReader(),
+                        files = e.target.files;
+                    reader.onload = function () {
+                        if (categoryUploadImg) {
+                            categoryUploadImg.attr('src', reader.result);
+                        }
+                    };
+                    reader.readAsDataURL(files[0]);
+                });
+            }
     });
 </script>
 

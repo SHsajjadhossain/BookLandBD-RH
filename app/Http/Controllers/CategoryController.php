@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CategoryCreateRequest;
+use App\Http\Requests\CategoryUpdateRequest;
 use App\Models\Category;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -14,7 +15,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('admin.pages.category.index');
+        return view('admin.pages.category.index',[
+            'categories' => Category::all(),
+        ]);
     }
 
     /**
@@ -63,9 +66,11 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(CategoryUpdateRequest $request, string $id)
     {
-        //
+        // Category::find($id)->update([
+        //     'category_name' => $request->category_update_name
+        // ]);
     }
 
     /**
