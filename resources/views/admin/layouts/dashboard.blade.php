@@ -19,6 +19,8 @@
 
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_assets/app-assets/vendors/css/vendors.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_assetsapp-assets/vendors/css/animate/animate.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_assetsapp-assets/vendors/css/extensions/sweetalert2.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_assets/app-assets/vendors/css/charts/apexcharts.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_assets/app-assets/vendors/css/extensions/toastr.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_assets/app-assets/css/plugins/charts/chart-apex.css') }}">
@@ -50,6 +52,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_assets/app-assets/css/core/menu/menu-types/vertical-menu.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_assets/app-assets/css/pages/dashboard-ecommerce.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_assets/app-assets/css/plugins/extensions/ext-component-toastr.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_assets/app-assets/css/plugins/extensions/ext-component-sweet-alerts.css') }}">
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
@@ -485,6 +488,7 @@
 
     <!-- BEGIN: Page JS-->
     <script src="{{ asset('dashboard_assets/app-assets/js/scripts/pages/dashboard-ecommerce.js') }}"></script>
+    <script src="../../../app-assets/js/scripts/extensions/ext-component-sweet-alerts.js"></script>
     <!-- END: Page JS-->
 
     <!-- BEGIN: Vendor JS-->
@@ -512,6 +516,11 @@
     <script src="{{ asset('dashboard_assets/app-assets/vendors/js/editors/trix/trix.min.js') }}"></script>
     <!-- END Vendor JS-->
 
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="{{ asset('dashboard_assets/app-assets/vendors/js/extensions/sweetalert2.all.min.js') }}"></script>
+    <script src="{{ asset('dashboard_assets/app-assets/vendors/js/extensions/polyfill.min.js') }}"></script>
+    <!-- END: Page Vendor JS-->
+
     <!-- BEGIN: Theme JS-->
     <script src="{{ asset('dashboard_assets/app-assets/js/core/app.js') }}"></script>
     <script src="{{ asset('dashboard_assets/app-assets/js/core/app-menu.js') }}"></script>
@@ -530,6 +539,43 @@
         //     setTimeout(() => {
         //         $('.welcome-card')
         //     }, 2000);
+        // });
+
+
+    // <!-- Toastr Message Script-->
+
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": true,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "3000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+
+        // $(window).on("load", function(){
+        //     @if ($errors->any())
+        //         @foreach ($errors->all() as $error)
+        //             toastr.error('{{ $error }}');
+        //         @endforeach
+        //     @endif
+
+        //     @if(session()->get('error'))
+        //         toastr.error('{{ session()->get('error') }}');
+        //     @endif
+
+        //     @if(session()->get('success'))
+        //         toastr.success('{{ session()->get('success') }}');
+        //     @endif
         // });
     </script>
 

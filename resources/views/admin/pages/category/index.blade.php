@@ -54,11 +54,11 @@ Dashboard Pustok | My Profile
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    @if (session('success'))
+                    {{-- @if (session('success'))
                     <div class="p-2 alert alert-success">
                         <span>{{ session('success') }}</span>
                     </div>
-                    @endif
+                    @endif --}}
                     <div class="card-header d-block d-sm-flex">
                         <h4 class="card-title">Category List ({{ $categories->count() }})</h4>
                         <div class="button-group-spacing d-flex">
@@ -335,9 +335,11 @@ Dashboard Pustok | My Profile
                                                                                     px)</small>
                                                                                 <span class="text-danger">*</span></label>
                                                                             <div class="mb-1 mr-1">
-                                                                                <img src="{{ asset('uploads/category_photoes') }}/{{ $category->category_photo }}" data-reset-src="" id="category_photo_upload_img"
+                                                                                <img src="{{ asset('uploads/category_photoes') }}/{{ $category->category_photo }}" data-reset-src="{{ asset('uploads/category_photoes') }}/{{ $category->category_photo }}" id="category_photo_upload_img"
                                                                                     class="rounded uploadedAvatar object-fit--cover" alt="category photo" width="200"
                                                                                     height="80">
+                                                                                    {{-- <img src="" data-reset-src="" id="category_photo_upload_img" class="rounded uploadedAvatar object-fit--cover"
+                                                                                        alt="category photo" width="200" height="80"> --}}
                                                                             </div>
                                                                             <input type="file" value="" name="category_update_photo" id="category_photo_upload"
                                                                                 class="form-control">
@@ -368,7 +370,9 @@ Dashboard Pustok | My Profile
                                             {{-- <td><span class="mr-1 badge badge-pill badge-light-warning">Pending</span></td> --}}
                                         </tr>
                                     @empty
-                                        <span class="text-center text-danger font-weight-bold">No data to show</span>
+                                        <tr>
+                                            <td colspan="50" class="text-center"><span class="text-center text-danger font-weight-bold">No data to show</span></td>
+                                        </tr>
                                     @endforelse
 
                                     @push('all_modals')
@@ -461,64 +465,17 @@ Dashboard Pustok | My Profile
         @enderror
 
         // Select All Checkbox Features
-            $('#all-select').change(function(){
-                 ids = [];
-                 // Get all the id
-                if($(this).is(":checked")){
-                    $('.custom-control-input').prop('checked', true);
+        $('#all-select').change(function(){
+                ids = [];
+                // Get all the id
+            if($(this).is(":checked")){
+                $('.custom-control-input').prop('checked', true);
 
 
-                    $('.all_checkbox').each(function(){
-                        ids.push($(this).attr('id').split('-')[2]);
-                    });
-
-                    if(ids.length == 0){
-                        $('#all_actions').removeClass('d-inline-block');
-                        $('#all_actions').addClass('d-none');
-                    }
-                    else
-                    {
-                        $('#all_actions').removeClass(' d-none');
-                        $('#all_actions').addClass('d-inline-block');
-                        $('#export_all').val(ids);
-                    }
-                    // Delete all
-                    $("#delete_all").on('click', function(){
-
-                        $.ajax({
-                        url: "{{ route('categories.mass_action') }}",
-                        type: 'POST',
-                        data: {
-                            ids: ids,
-                        },
-                        success: function(data){
-                            if(data.success == 'done'){
-                                window.location.reload();
-                            }
-                            if(data.error){
-                                $('#deleteModal').modal('hide');
-                                toastr.error(data.error);
-                            }
-                        }
-                    });
-
-                });
-
-                }else{
-                    $('.custom-control-input').prop('checked', false);
-                    $('#all_actions').addClass('d-none');
-                    $('#all_actions').removeClass('d-inline-block');
-                }
-            });
-
-            // Select Individual Checkbox Features
-            $('.all_checkbox').change(function(){
-                 ids = [];
                 $('.all_checkbox').each(function(){
-                    if($(this).is(":checked")){
-                        ids.push($(this).attr('id').split('-')[2]);
-                    }
+                    ids.push($(this).attr('id').split('-')[2]);
                 });
+
                 if(ids.length == 0){
                     $('#all_actions').removeClass('d-inline-block');
                     $('#all_actions').addClass('d-none');
@@ -528,53 +485,129 @@ Dashboard Pustok | My Profile
                     $('#all_actions').removeClass(' d-none');
                     $('#all_actions').addClass('d-inline-block');
                     $('#export_all').val(ids);
-
-                        // Delete trigger
-
-                        $("#delete_all").on('click', function(){
-
-                            $.ajax({
-                                    url: "{{ route('categories.mass_action') }}",
-                                    type: 'POST',
-                                    data: {
-                                        ids: ids,
-                                    },
-                                    success: function(data){
-                                        if(data.success == 'done'){
-                                            window.location.reload();
-                                        }
-                                    }
-                            });
-
-                        });
                 }
+                // Delete all
+                $("#delete_all").on('click', function(){
+
+                    $.ajax({
+                    url: "{{ route('categories.mass_action') }}",
+                    type: 'POST',
+                    data: {
+                        ids: ids,
+                    },
+                    success: function(data){
+                        if(data.success == 'done'){
+                            window.location.reload();
+                        }
+                        if(data.error){
+                            $('#deleteModal').modal('hide');
+                            toastr.error(data.error);
+                        }
+                    }
+                });
+
             });
 
-            // Table Search
-
-            $('.table_search').on('input', function(){
-            var tableSearchValue = $(this).val();
-            $(this).closest(".card-body").find(".table tbody tr").each(function(){
-            if($(this).text().search(new RegExp(tableSearchValue, "i")) < 0){ $(this).hide(); } else{ $(this).show(); } }); });
-
-
-            // Update & Reset Profile photo on click of button
-
-            let categoryUploadImg = $('#category_photo_upload_img');
-            let categoryUploadInput = $('#category_photo_upload');
-            let accountResetBtn = $('#account-reset');
-            if (categoryUploadInput) {
-                categoryUploadInput.on('change', function (e) {
-                    var reader = new FileReader(),
-                        files = e.target.files;
-                    reader.onload = function () {
-                        if (categoryUploadImg) {
-                            categoryUploadImg.attr('src', reader.result);
-                        }
-                    };
-                    reader.readAsDataURL(files[0]);
-                });
+            }else{
+                $('.custom-control-input').prop('checked', false);
+                $('#all_actions').addClass('d-none');
+                $('#all_actions').removeClass('d-inline-block');
             }
+        });
+
+        // Select Individual Checkbox Features
+        $('.all_checkbox').change(function(){
+                ids = [];
+            $('.all_checkbox').each(function(){
+                if($(this).is(":checked")){
+                    ids.push($(this).attr('id').split('-')[2]);
+                }
+            });
+            if(ids.length == 0){
+                $('#all_actions').removeClass('d-inline-block');
+                $('#all_actions').addClass('d-none');
+            }
+            else
+            {
+                $('#all_actions').removeClass(' d-none');
+                $('#all_actions').addClass('d-inline-block');
+                $('#export_all').val(ids);
+
+                    // Delete trigger
+
+                    $("#delete_all").on('click', function(){
+
+                        $.ajax({
+                                url: "{{ route('categories.mass_action') }}",
+                                type: 'POST',
+                                data: {
+                                    ids: ids,
+                                },
+                                success: function(data){
+                                    if(data.success == 'done'){
+                                        window.location.reload();
+                                    }
+                                }
+                        });
+
+                    });
+            }
+        });
+
+        // Table Search
+
+        $('.table_search').on('input', function(){
+        var tableSearchValue = $(this).val();
+        $(this).closest(".card-body").find(".table tbody tr").each(function(){
+        if($(this).text().search(new RegExp(tableSearchValue, "i")) < 0){ $(this).hide(); } else{ $(this).show(); } }); });
+
+
+        // Update & Reset Category photo on click of button
+
+        let categoryUploadImg = $('#category_photo_upload_img');
+        let categoryUploadInput = $('#category_photo_upload');
+        let accountResetBtn = $('#account-reset');
+        if (categoryUploadInput) {
+            categoryUploadInput.on('change', function (e) {
+                var reader = new FileReader(),
+                    files = e.target.files;
+                reader.onload = function () {
+                    if (categoryUploadImg) {
+                        categoryUploadImg.attr('src', reader.result);
+                    }
+                };
+                reader.readAsDataURL(files[0]);
+            });
+        }
+
+        // Tostr success
+
+        @if (session("success"))
+            // toastr.success("{{ session('success') }}")
+            Swal.fire({
+                title: 'Done!',
+                text: '{{ session("success") }}',
+                icon: 'success',
+                customClass: {
+                confirmButton: 'btn btn-primary'
+                },
+                buttonsStyling: false
+            });
+        @endif
+
+        @if (session("imgUpdateSuccess"))
+            // toastr.success("{{ session('imgUpdateSuccess') }}")
+            Swal.fire({
+                    title: 'Done!',
+                    text: '{{ session("imgUpdateSuccess") }}',
+                    icon: 'success',
+                    customClass: {
+                    confirmButton: 'btn btn-primary'
+                    },
+                    buttonsStyling: false
+            });
+        @endif
+
     });
 </script>
 

@@ -16,7 +16,7 @@ class CategoryController extends Controller
     public function index()
     {
         return view('admin.pages.category.index',[
-            'categories' => Category::all(),
+            'categories' => Category::orderBy('id', 'desc')->get(),
         ]);
     }
 
@@ -68,9 +68,23 @@ class CategoryController extends Controller
      */
     public function update(CategoryUpdateRequest $request, string $id)
     {
-        // Category::find($id)->update([
-        //     'category_name' => $request->category_update_name
-        // ]);
+        if ($request->hasFile('category_update_photo')) {
+            $image = $request->file('category_update_photo');
+            $imageName = uniqid() . time() .'.'.$image->getClientOriginalExtension();
+            $location = public_path('uploads/category_photoes/');
+            // delete old photo
+            if (file_exists($location)) {
+                @unlink($location.Category::find($id)->category_photo);
+            }
+            $image->move($location, $imageName);
+        }
+
+        Category::find($id)->update([
+            'category_name' => $request->category_update_name,
+            'category_photo' => $imageName
+        ]);
+
+        return back()->with('imgUpdateSuccess', 'Category photo updated successfully!!');
     }
 
     /**
