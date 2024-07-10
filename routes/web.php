@@ -19,7 +19,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified', 'roleche
     Route::post('/my-profile/update', [AdminController::class, 'myProfileUpdate'])->name('my-profile.update');
     Route::post('/my-profile/update/password', [AdminController::class, 'myProfileUpdatePassword'])->name('my-profile.update.password');
     Route::resource('category', CategoryController::class);
-    Route::post('/categories-all-delete', [CategoryController::class, 'mass_delete'])->name('categories.mass_action');
+    Route::post('/category/single/cat/delete', [CategoryController::class, 'single_cat_delete'])->name('category.single_cat_delete');
+    // Route::post('/categories/all/delete', [CategoryController::class, 'cat_mass_delete'])->name('categories.mass_action');
     // Route::post('/categories-all-export', [CategoryController::class, 'mass_export'])->name('categories.mass_export');
 });
 

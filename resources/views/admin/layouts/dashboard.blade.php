@@ -5,6 +5,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta name="description"
         content="Vuexy admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
@@ -526,6 +527,17 @@
     <script src="{{ asset('dashboard_assets/app-assets/js/core/app-menu.js') }}"></script>
 
     <script>
+
+        //ajax setup start
+        // $(document).ready(function(){
+        //     $.ajaxSetup({
+        //         headers: {
+        //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //         }
+        //     });
+        // })
+        //ajax setup end
+
         $(window).on('load', function() {
             if (feather) {
                 feather.replace({
@@ -577,6 +589,37 @@
         //         toastr.success('{{ session()->get('success') }}');
         //     @endif
         // });
+    </script>
+
+    <!-- DataTable Script-->
+    <script>
+        $(document).ready(function(){
+            $('.data_table').dataTable({
+                "bProcessing": false,
+                "sAutoWidth": false,
+                "bDestroy":false,
+                "bSort":true,
+                "sPaginationType": "bootstrap", // full_numbers
+                // "iDisplayStart ": 10,
+                // "iDisplayLength": 10,
+                "bPaginate": false, //hide/show pagination
+                "bFilter": true, //hide/show Search bar
+                "bInfo": false, // hide/show showing entries
+            });
+
+            $('.data_table--without-sort').dataTable({
+                "bProcessing": false,
+                "sAutoWidth": false,
+                "bDestroy":false,
+                "bSort":false,
+                "sPaginationType": "bootstrap", // full_numbers
+                // "iDisplayStart ": 10,
+                // "iDisplayLength": 10,
+                "bPaginate": false, //hide/show pagination
+                "bFilter": true, //hide/show Search bar
+                "bInfo": false, // hide/show showing entries
+            });
+        })
     </script>
 
     @stack('js')

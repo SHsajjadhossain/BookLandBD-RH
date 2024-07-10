@@ -52,7 +52,9 @@ class CategoryController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return view('admin.pages.category.show',[
+            'single_cat' => Category::find($id)
+        ]);
     }
 
     /**
@@ -94,4 +96,29 @@ class CategoryController extends Controller
     {
         //
     }
+
+    // Custom methods
+
+    public function single_cat_delete(Request $request){
+        $location = public_path('uploads/category_photoes/');
+        $cat_del = Category::findOrFail($request->single_delete);
+        @unlink($location.$cat_del->category_photo);
+        $cat_del->delete();
+        return response()->json([
+            'status' => 'success',
+            'tr' => 'tr_'.$request->single_delete,
+        ]);
+    }
+
+    // public function cat_mass_delete(Request $request){
+    //     echo "Here I'm";
+    //     $categories = Category::findMany($request->ids);
+    //     foreach ($categories as $category) {
+    //         if ($category->getBlogs->count() > 0) {
+    //             return response()->json(['error' => 'Category Attach with blog.']);
+    //         }
+    //     }
+    //     $categories->each->delete();
+    //     return response()->json(['success' => 'done']);
+    // }
 }

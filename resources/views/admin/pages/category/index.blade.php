@@ -21,6 +21,10 @@ Dashboard Pustok | My Profile
         padding: 0.72rem 2rem !important;
         text-align: left;
     }
+
+    .swal2-confirm{
+        margin-left: 15px
+    }
 </style>
 
 @endpush
@@ -33,12 +37,12 @@ Dashboard Pustok | My Profile
         <div class="mb-2 content-header-left col-md-9 col-12">
             <div class="row breadcrumbs-top">
                 <div class="col-12">
-                    <h2 class="float-left mb-0 content-header-title">Admin Dashboard</h2>
+                    <h2 class="float-left mb-0 content-header-title">Product Category</h2>
                     <div class="breadcrumb-wrapper">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a>
                             </li>
-                            <li class="breadcrumb-item active">Product Category
+                            <li class="breadcrumb-item active">Category
                             </li>
                         </ol>
                     </div>
@@ -258,7 +262,7 @@ Dashboard Pustok | My Profile
                                 </thead>
                                 <tbody>
                                     @forelse ($categories as $category)
-                                        <tr>
+                                        <tr id="tr_{{ $category->id }}">
                                             <td>
                                                 <div class="custom-control custom-checkbox">
                                                     <input type="checkbox" class="custom-control-input all_checkbox" name="select_individual[]"
@@ -280,18 +284,22 @@ Dashboard Pustok | My Profile
                                                         </button>
                                                         {{-- @endif --}}
 
-                                                        <a href="#" class="dropdown-item">
+                                                        <a href="{{ route('category.show', $category->id) }}" class="dropdown-item">
                                                             <i data-feather='eye'></i>
                                                             Details
                                                         </a>
 
                                                         {{-- @if (havePermission('category','delete')) --}}
-                                                        <form action="" method="">
-                                                            <button type="submit" class="dropdown-item">
+                                                        {{-- <form action="" method="">
+                                                            <button type="submit" class="dropdown-item single-cat-delete" data-id ="{{ $category->id }}">
                                                                 <i data-feather="trash"></i>
                                                                 Delete
                                                             </button>
-                                                        </form>
+                                                        </form> --}}
+                                                            <a href="" data-id ="{{ $category->id }}" class="dropdown-item single-cat-delete">
+                                                                <i data-feather="trash"></i>
+                                                                Delete
+                                                            </a>
                                                         {{-- @endif --}}
                                                     </div>
                                                 </div>
@@ -465,94 +473,94 @@ Dashboard Pustok | My Profile
         @enderror
 
         // Select All Checkbox Features
-        $('#all-select').change(function(){
-                ids = [];
-                // Get all the id
-            if($(this).is(":checked")){
-                $('.custom-control-input').prop('checked', true);
+        // $('#all-select').change(function(){
+        //         ids = [];
+        //         // Get all the id
+        //     if($(this).is(":checked")){
+        //         $('.custom-control-input').prop('checked', true);
 
 
-                $('.all_checkbox').each(function(){
-                    ids.push($(this).attr('id').split('-')[2]);
-                });
+        //         $('.all_checkbox').each(function(){
+        //             ids.push($(this).attr('id').split('-')[2]);
+        //         });
 
-                if(ids.length == 0){
-                    $('#all_actions').removeClass('d-inline-block');
-                    $('#all_actions').addClass('d-none');
-                }
-                else
-                {
-                    $('#all_actions').removeClass(' d-none');
-                    $('#all_actions').addClass('d-inline-block');
-                    $('#export_all').val(ids);
-                }
-                // Delete all
-                $("#delete_all").on('click', function(){
+        //         if(ids.length == 0){
+        //             $('#all_actions').removeClass('d-inline-block');
+        //             $('#all_actions').addClass('d-none');
+        //         }
+        //         else
+        //         {
+        //             $('#all_actions').removeClass(' d-none');
+        //             $('#all_actions').addClass('d-inline-block');
+        //             $('#export_all').val(ids);
+        //         }
+        //         // Delete all
+        //         $("#delete_all").on('click', function(){
 
-                    $.ajax({
-                    url: "{{ route('categories.mass_action') }}",
-                    type: 'POST',
-                    data: {
-                        ids: ids,
-                    },
-                    success: function(data){
-                        if(data.success == 'done'){
-                            window.location.reload();
-                        }
-                        if(data.error){
-                            $('#deleteModal').modal('hide');
-                            toastr.error(data.error);
-                        }
-                    }
-                });
+        //             $.ajax({
+        //             url: "{{ route('categories.mass_action') }}",
+        //             type: 'POST',
+        //             data: {
+        //                 ids: ids,
+        //             },
+        //             success: function(data){
+        //                 if(data.success == 'done'){
+        //                     window.location.reload();
+        //                 }
+        //                 if(data.error){
+        //                     $('#deleteModal').modal('hide');
+        //                     toastr.error(data.error);
+        //                 }
+        //             }
+        //         });
 
-            });
+        //     });
 
-            }else{
-                $('.custom-control-input').prop('checked', false);
-                $('#all_actions').addClass('d-none');
-                $('#all_actions').removeClass('d-inline-block');
-            }
-        });
+        //     }else{
+        //         $('.custom-control-input').prop('checked', false);
+        //         $('#all_actions').addClass('d-none');
+        //         $('#all_actions').removeClass('d-inline-block');
+        //     }
+        // });
 
         // Select Individual Checkbox Features
-        $('.all_checkbox').change(function(){
-                ids = [];
-            $('.all_checkbox').each(function(){
-                if($(this).is(":checked")){
-                    ids.push($(this).attr('id').split('-')[2]);
-                }
-            });
-            if(ids.length == 0){
-                $('#all_actions').removeClass('d-inline-block');
-                $('#all_actions').addClass('d-none');
-            }
-            else
-            {
-                $('#all_actions').removeClass(' d-none');
-                $('#all_actions').addClass('d-inline-block');
-                $('#export_all').val(ids);
+        // $('.all_checkbox').change(function(){
+        //         ids = [];
+        //     $('.all_checkbox').each(function(){
+        //         if($(this).is(":checked")){
+        //             ids.push($(this).attr('id').split('-')[2]);
+        //         }
+        //     });
+        //     if(ids.length == 0){
+        //         $('#all_actions').removeClass('d-inline-block');
+        //         $('#all_actions').addClass('d-none');
+        //     }
+        //     else
+        //     {
+        //         $('#all_actions').removeClass(' d-none');
+        //         $('#all_actions').addClass('d-inline-block');
+        //         $('#export_all').val(ids);
 
-                    // Delete trigger
+        //             // Delete trigger
 
-                    $("#delete_all").on('click', function(){
+        //             $("#delete_all").on('click', function(){
 
-                        $.ajax({
-                                url: "{{ route('categories.mass_action') }}",
-                                type: 'POST',
-                                data: {
-                                    ids: ids,
-                                },
-                                success: function(data){
-                                    if(data.success == 'done'){
-                                        window.location.reload();
-                                    }
-                                }
-                        });
+        //                 $.ajax({
+        //                         url: "{{ route('categories.mass_action') }}",
+        //                         type: 'POST',
+        //                         data: {
+        //                             ids: ids,
+        //                         },
+        //                         success: function(data){
+        //                             if(data.success == 'done'){
+        //                                 window.location.reload();
+        //                             }
+        //                         }
+        //                 });
 
-                    });
-            }
-        });
+        //             });
+        //     }
+        // });
 
         // Table Search
 
@@ -609,6 +617,66 @@ Dashboard Pustok | My Profile
         @endif
 
     });
+
+    //Sweet alert message single cat delete start
+        $(document).on('click', '.single-cat-delete', function (e) {
+                e.preventDefault();
+                const swalWithBootstrapButtons = Swal.mixin({
+                    customClass: {
+                        confirmButton: 'btn btn-success',
+                        cancelButton: 'btn btn-danger'
+                    },
+                    buttonsStyling: false
+                })
+
+                    swalWithBootstrapButtons.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to recover this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, delete it!',
+                    cancelButtonText: 'No, cancel!',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var single_delete = $(this).data('id');
+                        $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            }
+                        });
+
+                        $.ajax({
+                            type: 'POST',
+                            url: "{{ route('category.single_cat_delete') }}",
+                            data: {single_delete:single_delete},
+                            success: function (response) {
+                                if (response.status=='success') {
+                                    $("#"+response['tr']).slideUp('slow');
+                                    swalWithBootstrapButtons.fire(
+                                    'Deleted!',
+                                    'Your file has been deleted Successfully.',
+                                    'success'
+                                    );
+                                    // $('.table').load(location.href+' .table');
+                                }
+                            }
+                        });
+
+                    }
+                    else if (
+                        /* Read more about handling dismissals below */
+                        result.dismiss === Swal.DismissReason.cancel
+                    ) {
+                        swalWithBootstrapButtons.fire(
+                        'Cancelled',
+                        'Your file is safe :)',
+                        'error'
+                        )
+                    }
+                })
+        });
+    //Sweet alert message single cat delete end
 </script>
 
 @endpush
