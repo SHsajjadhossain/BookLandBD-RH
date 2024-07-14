@@ -6,7 +6,7 @@ Dashboard Pustok | Home
 
 @endsection
 
-@section('menu-active')
+@section('dashboard-active')
 
 active
 

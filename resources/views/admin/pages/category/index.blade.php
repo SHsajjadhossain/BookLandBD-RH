@@ -6,6 +6,12 @@ Dashboard Pustok | My Profile
 
 @endsection
 
+@section('category-active')
+
+active
+
+@endsection
+
 @push('custom-css')
 
 <style>
@@ -443,6 +449,17 @@ Dashboard Pustok | My Profile
                             </table>
                         </div>
                     </div>
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination mt-2 mb-2 ml-2">
+                            <li class="page-item prev"><a class="page-link" href="javascript:void(0);">Prev</a></li>
+                            <li class="page-item"><a class="page-link" href="javascript:void(0);">1</a></li>
+                            <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
+                            <li class="page-item active"><a class="page-link" href="javascript:void(0);">3</a></li>
+                            <li class="page-item"><a class="page-link" href="javascript:void(0);">4</a></li>
+                            <li class="page-item"><a class="page-link" href="javascript:void(0);">5</a></li>
+                            <li class="page-item next"><a class="page-link" href="javascript:void(0);">Next</a></li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>
