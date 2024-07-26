@@ -401,12 +401,29 @@
                         <i data-feather="eye"></i>
                         <span class="menu-title text-truncate" data-i18n="web">View Website</span></a>
                 </li>
-                <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Apps &amp; Pages</span><i
+                {{-- <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Apps &amp; Pages</span><i
+                        data-feather="more-horizontal"></i>
+                </li> --}}
+                <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Categories</span><i
                         data-feather="more-horizontal"></i>
                 </li>
-                <li class="nav-item @yield('category-active')"><a class="d-flex align-items-center" href="{{ route('category.index') }}"><i
+                {{-- <li class="nav-item @yield('category-active')"><a class="d-flex align-items-center" href="{{ route('category.index') }}"><i
                             data-feather="grid"></i><span class="menu-title text-truncate"
                             data-i18n="Kanban">Product Category</span></a>
+                </li> --}}
+                <li class=" nav-item"><a class="d-flex align-items-center" href="#">
+                    <i data-feather="grid"></i>
+                    <span class="menu-title text-truncate" data-i18n="Kanban">Product Categories</span></a>
+                    <ul class="menu-content">
+                        <li class="@yield('category-active')"><a class="d-flex align-items-center" href="{{ route('category.index') }}"><i
+                                    data-feather="circle"></i><span class="menu-item text-truncate"
+                                    data-i18n="List">Categories</span></a>
+                        </li>
+                        <li><a class="d-flex align-items-center" href="app-invoice-preview.html"><i
+                                    data-feather="circle"></i><span class="menu-item text-truncate"
+                                    data-i18n="Preview">Sub Categories</span></a>
+                        </li>
+                    </ul>
                 </li>
                 <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i
                             data-feather="file-text"></i><span class="menu-title text-truncate"

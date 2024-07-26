@@ -15,11 +15,11 @@ active
 @push('custom-css')
 
 <style>
-    .dropdown-menu button.dropdown-item{
+    .dropdown-menu button.dropdown-item {
         width: 100%;
     }
 
-    table td{
+    table td {
         font-family: Roboto, sans-serif !important;
         font-size: 1rem !important;
         font-weight: 400 !important;
@@ -28,7 +28,7 @@ active
         text-align: left;
     }
 
-    .swal2-confirm{
+    .swal2-confirm {
         margin-left: 15px
     }
 </style>
@@ -82,8 +82,8 @@ active
                                 data-target="#add_category_modal">+ Add New Category</button>
                             {{-- @endif --}}
                             <div id="all_actions" class="dropdown w-sm-auto d-none">
-                                <button class="btn btn-info w-100 w-sm-auto dropdown-toggle" type="button" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
+                                <button class="btn btn-info w-100 w-sm-auto dropdown-toggle" type="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     All Action
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-right w-100">
@@ -92,35 +92,41 @@ active
                                             data-feather='trash-2'></i> Delete</button>
                                     @push('all_modals')
                                     <!-- Bulk Delete Modal -->
-                                    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-hidden="true">
+                                    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"
+                                        aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                             <div class="modal-content">
                                                 <div class="text-center modal-body">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" style="font-size: 100px" width="1em"
-                                                        height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"
-                                                        stroke-linecap="round" stroke-linejoin="round"
+                                                    <svg xmlns="http://www.w3.org/2000/svg" style="font-size: 100px"
+                                                        width="1em" height="1em" viewBox="0 0 24 24" fill="none"
+                                                        stroke="currentColor" stroke-width="1" stroke-linecap="round"
+                                                        stroke-linejoin="round"
                                                         class="feather feather-alert-circle text-danger">
                                                         <circle cx="12" cy="12" r="10"></circle>
                                                         <line x1="12" y1="8" x2="12" y2="12"></line>
                                                         <line x1="12" y1="16" x2="12.01" y2="16"></line>
                                                     </svg>
                                                     <h2 class="mt-1 font-weight-normal">{{ __('Are you sure') }}?</h2>
-                                                    <h4 class="mb-0 font-weight-light">{{ __("You won't be able to revert this!") }}</h4>
+                                                    <h4 class="mb-0 font-weight-light">{{ __("You won't be able to
+                                                        revert this!") }}</h4>
                                                 </div>
                                                 <div class="modal-footer border-top-0 justify-content-center">
                                                     <button type="button" class="btn btn-outline-secondary waves-effect"
                                                         data-dismiss="modal">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"
-                                                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+                                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                            stroke-width="2" stroke-linecap="round"
                                                             stroke-linejoin="round" class="feather feather-x">
                                                             <line x1="18" y1="6" x2="6" y2="18"></line>
                                                             <line x1="6" y1="6" x2="18" y2="18"></line>
                                                         </svg>
                                                         {{ __('Close') }}
                                                     </button>
-                                                    <button id="delete_all" class="btn btn-danger waves-effect waves-float waves-light">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"
-                                                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                    <button id="delete_all"
+                                                        class="btn btn-danger waves-effect waves-float waves-light">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+                                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                            stroke-width="2" stroke-linecap="round"
                                                             stroke-linejoin="round" class="feather feather-trash-2">
                                                             <polyline points="3 6 5 6 21 6"></polyline>
                                                             <path
@@ -143,55 +149,63 @@ active
                         <!-- Add Category Modal Start -->
                         @push('all_modals')
 
-                            <div class="modal fade" id="add_category_modal" tabindex="-1" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Add New Category</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        {{-- @if ($errors->any())
-                                            <div class="p-1 alert alert-danger">
-                                                    @foreach ($errors->all() as $error)
-                                                    <li>{{ $error }}</li>
-                                                    @endforeach
-                                            </div>
-                                        @endif --}}
-                                        <form action="{{ route('category.store') }}" method="POST" enctype="multipart/form-data">
-                                            @csrf
-                                            <div class="modal-body">
-                                                <div class="form-group">
-                                                    <label for="category_name">Category Name<span class="text-danger">*</span></label>
-                                                    <input type="text" value="{{ old('category_name') }}" name="category_name" id="category_name" class="form-control">
-
-                                                    @error('category_name')
-                                                    <small class="text-danger">{{ $message }}</small>
-                                                    @enderror
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label for="category_photo">Category Photo<small class="text-warning">(Dimensions: 521 x 270 px)</small> <span class="text-danger">*</span></label>
-                                                    <div class="mb-1 mr-1">
-                                                        <img src="" data-reset-src="" id="category_photo_upload_img"
-                                                            class="rounded uploadedAvatar object-fit--cover" alt="category photo" width="200" height="80">
-                                                    </div>
-                                                    <input type="file" value="" name="category_photo" id="category_photo_upload" class="form-control">
-
-                                                    @error('category_photo')
-                                                    <small class="text-danger">{{ $message }}</small>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancle</button>
-                                                <button type="submit" class="btn btn-primary">Submit</button>
-                                            </div>
-                                        </form>
+                        <div class="modal fade" id="add_category_modal" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Add New Category</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
                                     </div>
+                                    {{-- @if ($errors->any())
+                                    <div class="p-1 alert alert-danger">
+                                        @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                        @endforeach
+                                    </div>
+                                    @endif --}}
+                                    <form action="{{ route('category.store') }}" method="POST"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <label for="category_name">Category Name<span
+                                                        class="text-danger">*</span></label>
+                                                <input type="text" value="{{ old('category_name') }}"
+                                                    name="category_name" id="category_name" class="form-control">
+
+                                                @error('category_name')
+                                                <small class="text-danger">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="category_photo">Category Photo<small
+                                                        class="text-warning">(Dimensions: 521 x 270 px)</small> <span
+                                                        class="text-danger">*</span></label>
+                                                <div class="mb-1 mr-1">
+                                                    <img src="" data-reset-src="" id="category_photo_upload_img"
+                                                        class="rounded uploadedAvatar object-fit--cover"
+                                                        alt="category photo" width="200" height="80">
+                                                </div>
+                                                <input type="file" value="" name="category_photo"
+                                                    id="category_photo_upload" class="form-control">
+
+                                                @error('category_photo')
+                                                <small class="text-danger">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger"
+                                                data-dismiss="modal">Cancle</button>
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
+                        </div>
 
                         @endpush
                         <!-- Add Category Modal End -->
@@ -206,7 +220,8 @@ active
                                     <div class="form-group">
                                         <label for="start_date">Start Date <span class="text-danger">*</span></label>
                                         <input type="date" name="start_date" @isset(request()->start_date) value="{{
-                                        \Carbon\Carbon::parse(request()->start_date)->format('Y-m-d') }}" @endisset id="start_date"
+                                        \Carbon\Carbon::parse(request()->start_date)->format('Y-m-d') }}" @endisset
+                                        id="start_date"
                                         class="form-control flatpickr-human-friendly" placeholder="dd/mm/yyyy">
                                     </div>
                                 </div>
@@ -214,13 +229,15 @@ active
                                     <div class="form-group">
                                         <label for="start_date">End Date <span class="text-danger">*</span></label>
                                         <input type="date" @isset(request()->start_date) value="{{
-                                        \Carbon\Carbon::parse(request()->end_date)->format('Y-m-d') }}" @endisset name="end_date" id="end_date"
+                                        \Carbon\Carbon::parse(request()->end_date)->format('Y-m-d') }}" @endisset
+                                        name="end_date" id="end_date"
                                         class="form-control flatpickr-human-friendly" placeholder="dd/mm/yyyy">
                                     </div>
                                 </div>
                                 <div class="col-md-auto">
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-success waves-effect w-100 w-sm-auto">Filter</button>
+                                        <button type="submit"
+                                            class="btn btn-success waves-effect w-100 w-sm-auto">Filter</button>
                                         @if(Route::is('category.date.filter'))
                                         <a href="{{ route('categories.index') }}"
                                             class="mt-1 btn btn-danger waves-effect mt-sm-0 w-100 w-sm-auto">Clear</a>
@@ -235,7 +252,8 @@ active
                                 <div class="col-md">
                                     <div class="form-group mb-md-0">
                                         <div class="input-group">
-                                            <input type="search" class="form-control table_search" placeholder="Search Here">
+                                            <input type="search" class="form-control table_search"
+                                                placeholder="Search Here">
                                             <div class="input-group-append">
                                                 <span class="input-group-text">
                                                     <i data-feather='search'></i>
@@ -244,8 +262,10 @@ active
                                         </div>
                                     </div>
                                 </div>
-                                {{-- @include( 'includes.pagination', ['variables' => $categories, 'pagination_col_class' => 'col-md-auto',
-                                'data_variables' => ['start_date' => request()->start_date,'end_date' => request()->end_date]]) --}}
+                                {{-- @include( 'includes.pagination', ['variables' => $categories,
+                                'pagination_col_class' => 'col-md-auto',
+                                'data_variables' => ['start_date' => request()->start_date,'end_date' =>
+                                request()->end_date]]) --}}
                             </div>
                         </form>
                         <div class="mt-2 table-responsive">
@@ -254,7 +274,8 @@ active
                                     <tr>
                                         <th>
                                             <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input main_checkbox" id="all-select">
+                                                <input type="checkbox" class="custom-control-input main_checkbox"
+                                                    id="all-select">
                                                 <label class="custom-control-label" for="all-select"></label>
                                             </div>
                                         </th>
@@ -268,125 +289,154 @@ active
                                 </thead>
                                 <tbody>
                                     @forelse ($categories as $category)
-                                        <tr id="tr_{{ $category->id }}">
-                                            <td>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input all_checkbox" name="select_individual[]"
-                                                        id="single-select-">
-                                                    <label class="custom-control-label" for="single-select-"></label>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="dropdown position-static">
-                                                    <button type="button" class="btn btn-icon btn-outline-secondary waves-effect dropdown-toggle hide-arrow"
-                                                        data-toggle="dropdown" data-boundary="viewport">
-                                                        <i data-feather="more-vertical"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        {{-- @if (havePermission('category','edit')) --}}
-                                                        <button data-toggle="modal" data-target="#edit_category_{{ $category->id }}" class="dropdown-item">
-                                                            <i data-feather='edit'></i>
-                                                            Edit
-                                                        </button>
-                                                        {{-- @endif --}}
-
-                                                        <a href="{{ route('category.show', $category->id) }}" class="dropdown-item">
-                                                            <i data-feather='eye'></i>
-                                                            Details
-                                                        </a>
-
-                                                        {{-- @if (havePermission('category','delete')) --}}
-                                                        {{-- <form action="" method="">
-                                                            <button type="submit" class="dropdown-item single-cat-delete" data-id ="{{ $category->id }}">
-                                                                <i data-feather="trash"></i>
-                                                                Delete
-                                                            </button>
-                                                        </form> --}}
-                                                            <a href="" data-id ="{{ $category->id }}" class="dropdown-item single-cat-delete">
-                                                                <i data-feather="trash"></i>
-                                                                Delete
-                                                            </a>
-                                                        {{-- @endif --}}
-                                                    </div>
-                                                </div>
-                                                {{-- Edit Modal Start --}}
-                                                    @push('all_modals')
-                                                    <!-- Modal -->
+                                    <tr id="tr_{{ $category->id }}">
+                                        <td>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input all_checkbox"
+                                                    name="select_individual[]" id="single-select-">
+                                                <label class="custom-control-label" for="single-select-"></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="dropdown position-static">
+                                                <button type="button"
+                                                    class="btn btn-icon btn-outline-secondary waves-effect dropdown-toggle hide-arrow"
+                                                    data-toggle="dropdown" data-boundary="viewport">
+                                                    <i data-feather="more-vertical"></i>
+                                                </button>
+                                                <div class="dropdown-menu">
                                                     {{-- @if (havePermission('category','edit')) --}}
-                                                    <div class="modal fade" id="edit_category_{{ $category->id }}" tabindex="-1" aria-hidden="true">
-                                                        <div class="modal-dialog modal-dialog-centered">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title">Edit Category</h5>
-                                                                    {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span>
-                                                                    </button> --}}
-                                                                </div>
-                                                                {{-- @if ($errors->any())
-                                                                <div class="p-1 alert alert-danger">
-                                                                    @foreach ($errors->all() as $error)
-                                                                    <li>{{ $error }}</li>
-                                                                    @endforeach
-                                                                </div>
-                                                                @endif --}}
-                                                                <form action="{{ route('category.update', $category->id) }}" method="POST" enctype="multipart/form-data">
-                                                                    @csrf
-                                                                    @method('PUT')
-                                                                    <div class="modal-body">
-                                                                        <input type="hidden" name="category_update_id" value="{{ $category->id }}">
-                                                                        <div class="form-group">
-                                                                            <label for="category_name">Category Name<span class="text-danger">*</span></label>
-                                                                            <input type="text" value="{{ $category->category_name}}" name="category_update_name" id="category_name"
-                                                                                class="form-control">
-
-                                                                            @error('category_update_name')
-                                                                            <small class="text-danger">{{ $message }}</small>
-                                                                            @enderror
-                                                                        </div>
-
-                                                                        <div class="form-group">
-                                                                            <label for="category_photo">Category Photo<small class="text-warning">(Dimensions: 521 x 270
-                                                                                    px)</small>
-                                                                                <span class="text-danger">*</span></label>
-                                                                            <div class="mb-1 mr-1">
-                                                                                <img src="{{ asset('uploads/category_photoes') }}/{{ $category->category_photo }}" data-reset-src="{{ asset('uploads/category_photoes') }}/{{ $category->category_photo }}" id="category_photo_upload_img"
-                                                                                    class="rounded uploadedAvatar object-fit--cover" alt="category photo" width="200"
-                                                                                    height="80">
-                                                                                    {{-- <img src="" data-reset-src="" id="category_photo_upload_img" class="rounded uploadedAvatar object-fit--cover"
-                                                                                        alt="category photo" width="200" height="80"> --}}
-                                                                            </div>
-                                                                            <input type="file" value="" name="category_update_photo" id="category_photo_upload"
-                                                                                class="form-control">
-
-                                                                            @error('category_update_photo')
-                                                                                <small class="text-danger">{{ $message }}</small>
-                                                                            @enderror
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancle</button>
-                                                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    <button data-toggle="modal"
+                                                        data-target="#edit_category_{{ $category->id }}"
+                                                        class="dropdown-item">
+                                                        <i data-feather='edit'></i>
+                                                        Edit
+                                                    </button>
                                                     {{-- @endif --}}
-                                                    @endpush
-                                                {{-- Edit Modal End --}}
-                                            </td>
-                                            <td>
-                                                {{-- <img src="../../../app-assets/images/icons/bootstrap.svg" class="mr-75" height="20" width="20" alt="Bootstrap"> --}}
-                                                <span class="font-weight-bold">{{ $category->category_name }}</span>
-                                            </td>
-                                            <td><img src="{{ asset('uploads/category_photoes') }}/{{ $category->category_photo }}" class="mr-75" height="70" width="150" alt="Bootstrap"></td>
-                                            <td><span class="font-weight-bold">{{ $category->created_at->diffForHumans() }}</span></td>
-                                            {{-- <td><span class="mr-1 badge badge-pill badge-light-warning">Pending</span></td> --}}
-                                        </tr>
+
+                                                    <a href="{{ route('category.show', $category->id) }}"
+                                                        class="dropdown-item">
+                                                        <i data-feather='eye'></i>
+                                                        Details
+                                                    </a>
+
+                                                    {{-- @if (havePermission('category','delete')) --}}
+                                                    {{-- <form action="" method="">
+                                                        <button type="submit" class="dropdown-item single-cat-delete"
+                                                            data-id="{{ $category->id }}">
+                                                            <i data-feather="trash"></i>
+                                                            Delete
+                                                        </button>
+                                                    </form> --}}
+                                                    <a href="" data-id="{{ $category->id }}"
+                                                        class="dropdown-item single-cat-delete">
+                                                        <i data-feather="trash"></i>
+                                                        Delete
+                                                    </a>
+                                                    {{-- @endif --}}
+                                                </div>
+                                            </div>
+                                            {{-- Edit Modal Start --}}
+                                            @push('all_modals')
+                                            <!-- Modal -->
+                                            {{-- @if (havePermission('category','edit')) --}}
+                                            <div class="modal fade" id="edit_category_{{ $category->id }}" tabindex="-1"
+                                                aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">Edit Category</h5>
+                                                            {{-- <button type="button" class="close"
+                                                                data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button> --}}
+                                                        </div>
+                                                        {{-- @if ($errors->any())
+                                                        <div class="p-1 alert alert-danger">
+                                                            @foreach ($errors->all() as $error)
+                                                            <li>{{ $error }}</li>
+                                                            @endforeach
+                                                        </div>
+                                                        @endif --}}
+                                                        <form action="{{ route('category.update', $category->id) }}"
+                                                            method="POST" enctype="multipart/form-data">
+                                                            @csrf
+                                                            @method('PUT')
+                                                            <div class="modal-body">
+                                                                <input type="hidden" name="category_update_id"
+                                                                    value="{{ $category->id }}">
+                                                                <div class="form-group">
+                                                                    <label for="category_name">Category Name<span
+                                                                            class="text-danger">*</span></label>
+                                                                    <input type="text"
+                                                                        value="{{ $category->category_name}}"
+                                                                        name="category_update_name" id="category_name"
+                                                                        class="form-control">
+
+                                                                    @error('category_update_name')
+                                                                    <small class="text-danger">{{ $message }}</small>
+                                                                    @enderror
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="category_photo">Category Photo<small
+                                                                            class="text-warning">(Dimensions: 521 x 270
+                                                                            px)</small>
+                                                                        <span class="text-danger">*</span></label>
+                                                                    <div class="mb-1 mr-1">
+                                                                        <img src="{{ asset('uploads/category_photoes') }}/{{ $category->category_photo }}"
+                                                                            data-reset-src="{{ asset('uploads/category_photoes') }}/{{ $category->category_photo }}"
+                                                                            id="category_photo_upload_img"
+                                                                            class="rounded uploadedAvatar object-fit--cover"
+                                                                            alt="category photo" width="200"
+                                                                            height="80">
+                                                                        {{-- <img src="" data-reset-src=""
+                                                                            id="category_photo_upload_img"
+                                                                            class="rounded uploadedAvatar object-fit--cover"
+                                                                            alt="category photo" width="200"
+                                                                            height="80"> --}}
+                                                                    </div>
+                                                                    <input type="file" value=""
+                                                                        name="category_update_photo"
+                                                                        id="category_photo_upload" class="form-control">
+
+                                                                    @error('category_update_photo')
+                                                                    <small class="text-danger">{{ $message }}</small>
+                                                                    @enderror
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-danger"
+                                                                    data-dismiss="modal">Cancle</button>
+                                                                <button type="submit"
+                                                                    class="btn btn-primary">Submit</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {{-- @endif --}}
+                                            @endpush
+                                            {{-- Edit Modal End --}}
+                                        </td>
+                                        <td>
+                                            {{-- <img src="../../../app-assets/images/icons/bootstrap.svg" class="mr-75"
+                                                height="20" width="20" alt="Bootstrap"> --}}
+                                            <span class="font-weight-bold">{{ $category->category_name }}</span>
+                                        </td>
+                                        <td><img src="{{ asset('uploads/category_photoes') }}/{{ $category->category_photo }}"
+                                                class="mr-75" height="70" width="150" alt="Bootstrap"></td>
+                                        <td><span class="font-weight-bold">{{ $category->created_at->diffForHumans()
+                                                }}</span></td>
+                                        {{-- <td><span class="mr-1 badge badge-pill badge-light-warning">Pending</span>
+                                        </td> --}}
+                                    </tr>
                                     @empty
-                                        <tr>
-                                            <td colspan="50" class="text-center"><span class="text-center text-danger font-weight-bold">No data to show</span></td>
-                                        </tr>
+                                    <tr>
+                                        <td colspan="50" class="text-center"><span
+                                                class="text-center text-danger font-weight-bold">No data to show</span>
+                                        </td>
+                                    </tr>
                                     @endforelse
 
                                     @push('all_modals')
@@ -397,7 +447,8 @@ active
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title">Edit Category</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
@@ -408,12 +459,15 @@ active
                                                     @endforeach
                                                 </div>
                                                 @endif --}}
-                                                <form action="{{ route('category.store') }}" method="POST" enctype="multipart/form-data">
+                                                <form action="{{ route('category.store') }}" method="POST"
+                                                    enctype="multipart/form-data">
                                                     @csrf
                                                     <div class="modal-body">
                                                         <div class="form-group">
-                                                            <label for="category_name">Category Name<span class="text-danger">*</span></label>
-                                                            <input type="text" value="{{ old('category_name') }}" name="category_name" id="category_name"
+                                                            <label for="category_name">Category Name<span
+                                                                    class="text-danger">*</span></label>
+                                                            <input type="text" value="{{ old('category_name') }}"
+                                                                name="category_name" id="category_name"
                                                                 class="form-control">
 
                                                             @error('category_name')
@@ -422,13 +476,18 @@ active
                                                         </div>
 
                                                         <div class="form-group">
-                                                            <label for="category_photo">Category Photo<small class="text-warning">(Dimensions: 521 x 270 px)</small>
+                                                            <label for="category_photo">Category Photo<small
+                                                                    class="text-warning">(Dimensions: 521 x 270
+                                                                    px)</small>
                                                                 <span class="text-danger">*</span></label>
                                                             <div class="mb-1 mr-1">
-                                                                <img src="" data-reset-src="" id="category_photo_upload_img"
-                                                                    class="rounded uploadedAvatar object-fit--cover" alt="category photo" width="200" height="80">
+                                                                <img src="" data-reset-src=""
+                                                                    id="category_photo_upload_img"
+                                                                    class="rounded uploadedAvatar object-fit--cover"
+                                                                    alt="category photo" width="200" height="80">
                                                             </div>
-                                                            <input type="file" value="" name="category_photo" id="category_photo_upload" class="form-control">
+                                                            <input type="file" value="" name="category_photo"
+                                                                id="category_photo_upload" class="form-control">
 
                                                             @error('category_photo')
                                                             <small class="text-danger">{{ $message }}</small>
@@ -436,7 +495,8 @@ active
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancle</button>
+                                                        <button type="button" class="btn btn-danger"
+                                                            data-dismiss="modal">Cancle</button>
                                                         <button type="submit" class="btn btn-primary">Submit</button>
                                                     </div>
                                                 </form>
