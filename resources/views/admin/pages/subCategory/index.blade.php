@@ -2,11 +2,11 @@
 
 @section('title')
 
-Dashboard Pustok | My Profile
+Dashboard Pustok | Sub Category
 
 @endsection
 
-@section('category-active')
+@section('subCategory-active')
 
 active
 
@@ -43,12 +43,12 @@ active
         <div class="mb-2 content-header-left col-md-9 col-12">
             <div class="row breadcrumbs-top">
                 <div class="col-12">
-                    <h2 class="float-left mb-0 content-header-title">Product Category</h2>
+                    <h2 class="float-left mb-0 content-header-title">Product Sub Category</h2>
                     <div class="breadcrumb-wrapper">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a>
                             </li>
-                            <li class="breadcrumb-item active">Category
+                            <li class="breadcrumb-item active">Sub Category
                             </li>
                         </ol>
                     </div>
@@ -70,7 +70,7 @@ active
                     </div>
                     @endif --}}
                     <div class="card-header d-block d-sm-flex">
-                        <h4 class="card-title">Total Category ({{ $categories->count() }})</h4>
+                        <h4 class="card-title">Total Sub Category ({{ $subCategories->count() }})</h4>
                         <div class="button-group-spacing d-flex">
                             {{-- @if (havePermission('category','import')) --}}
                             {{-- <button class="btn btn-success waves-effect w-100 w-sm-auto" data-toggle="modal"
@@ -79,7 +79,7 @@ active
 
                             {{-- @if (havePermission('category','create')) --}}
                             <button class="mr-1 btn btn-warning waves-effect w-100 w-sm-auto" data-toggle="modal"
-                                data-target="#add_category_modal">+ Add New Category</button>
+                                data-target="#add_sub_category_modal">+ Add New Sub Category</button>
                             {{-- @endif --}}
                             <div id="all_actions" class="dropdown w-sm-auto d-none">
                                 <button class="btn btn-info w-100 w-sm-auto dropdown-toggle" type="button"
@@ -149,11 +149,11 @@ active
                         <!-- Add Category Modal Start -->
                         @push('all_modals')
 
-                        <div class="modal fade" id="add_category_modal" tabindex="-1" aria-hidden="true">
+                        <div class="modal fade" id="add_sub_category_modal" tabindex="-1" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title">Add New Category</h5>
+                                        <h5 class="modal-title">Add New Sub Category</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
@@ -165,22 +165,37 @@ active
                                         @endforeach
                                     </div>
                                     @endif --}}
-                                    <form action="{{ route('category.store') }}" method="POST"
+                                    <form action="{{ route('subcategory.store') }}" method="POST"
                                         enctype="multipart/form-data">
                                         @csrf
                                         <div class="modal-body">
                                             <div class="form-group">
-                                                <label for="category_name">Category Name<span
+                                                <label for="sub_category_name">Sub Category Name<span
                                                         class="text-danger">*</span></label>
-                                                <input type="text" value="{{ old('category_name') }}"
-                                                    name="category_name" id="category_name" class="form-control">
+                                                <input type="text" value="{{ old('sub_category_name') }}"
+                                                    name="sub_category_name" id="sub_category_name" class="form-control">
 
-                                                @error('category_name')
+                                                @error('sub_category_name')
                                                 <small class="text-danger">{{ $message }}</small>
                                                 @enderror
                                             </div>
 
                                             <div class="form-group">
+                                                <label for="category_id">Select Category<span
+                                                        class="text-danger">*</span></label>
+                                                    <select name="category_id" class="select2 form-control" id="category_id">
+                                                        <option value>--Select Category--</option>
+                                                        @foreach ($categories as $category)
+                                                            <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                                                        @endforeach
+                                                    </select>
+
+                                                @error('category_id')
+                                                <small class="text-danger">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+
+                                            {{-- <div class="form-group">
                                                 <label for="category_photo">Category Photo<small
                                                         class="text-warning">(Dimensions: 521 x 270 px)</small> <span
                                                         class="text-danger">*</span></label>
@@ -195,7 +210,7 @@ active
                                                 @error('category_photo')
                                                 <small class="text-danger">{{ $message }}</small>
                                                 @enderror
-                                            </div>
+                                            </div> --}}
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-danger"
@@ -280,56 +295,51 @@ active
                                             </div>
                                         </th>
                                         <th>Actions</th>
+                                        <th>Sub Category Name</th>
                                         <th>Category Name</th>
-                                        <th>Category Photo</th>
                                         {{-- <th>Created By</th>
                                         <th>Updated By</th> --}}
                                         <th>Created At</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse ($categories as $category)
-                                    <tr id="tr_{{ $category->id }}">
+
+                                    @forelse ($subCategories as $subCategory)
+                                    <tr id="tr_{{ $subCategory->id }}">
                                         <td>
                                             <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input all_checkbox"
-                                                    name="select_individual[]" id="single-select-">
+                                                <input type="checkbox" class="custom-control-input all_checkbox" name="select_individual[]"
+                                                    id="single-select-">
                                                 <label class="custom-control-label" for="single-select-"></label>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="dropdown position-static">
-                                                <button type="button"
-                                                    class="btn btn-icon btn-outline-secondary waves-effect dropdown-toggle hide-arrow"
+                                                <button type="button" class="btn btn-icon btn-outline-secondary waves-effect dropdown-toggle hide-arrow"
                                                     data-toggle="dropdown" data-boundary="viewport">
                                                     <i data-feather="more-vertical"></i>
                                                 </button>
                                                 <div class="dropdown-menu">
                                                     {{-- @if (havePermission('category','edit')) --}}
-                                                    <button data-toggle="modal"
-                                                        data-target="#edit_category_{{ $category->id }}"
-                                                        class="dropdown-item">
+                                                    <button data-toggle="modal" data-target="#edit_sub_category_{{ $subCategory->id }}" class="dropdown-item">
                                                         <i data-feather='edit'></i>
                                                         Edit
                                                     </button>
                                                     {{-- @endif --}}
 
-                                                    <a href="{{ route('category.show', $category->id) }}"
-                                                        class="dropdown-item">
+                                                    <a href="{{ route('subcategory.show', $subCategory->id) }}" class="dropdown-item">
                                                         <i data-feather='eye'></i>
                                                         Details
                                                     </a>
 
                                                     {{-- @if (havePermission('category','delete')) --}}
                                                     {{-- <form action="" method="">
-                                                        <button type="submit" class="dropdown-item single-cat-delete"
-                                                            data-id="{{ $category->id }}">
+                                                        <button type="submit" class="dropdown-item single-cat-delete" data-id="{{ $category->id }}">
                                                             <i data-feather="trash"></i>
                                                             Delete
                                                         </button>
                                                     </form> --}}
-                                                    <a href="" data-id="{{ $category->id }}"
-                                                        class="dropdown-item single-cat-delete">
+                                                    <a href="" data-id="{{ $subCategory->id }}" class="dropdown-item single-cat-delete">
                                                         <i data-feather="trash"></i>
                                                         Delete
                                                     </a>
@@ -340,76 +350,51 @@ active
                                             @push('all_modals')
                                             <!-- Modal -->
                                             {{-- @if (havePermission('category','edit')) --}}
-                                            <div class="modal fade" id="edit_category_{{ $category->id }}" tabindex="-1"
-                                                aria-hidden="true">
+                                            <div class="modal fade" id="edit_sub_category_{{ $subCategory->id }}" tabindex="-1" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <h5 class="modal-title">Edit Category</h5>
-                                                            {{-- <button type="button" class="close"
-                                                                data-dismiss="modal" aria-label="Close">
+                                                            {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button> --}}
                                                         </div>
-                                                        {{-- @if ($errors->any())
-                                                        <div class="p-1 alert alert-danger">
-                                                            @foreach ($errors->all() as $error)
-                                                            <li>{{ $error }}</li>
-                                                            @endforeach
-                                                        </div>
-                                                        @endif --}}
-                                                        <form action="{{ route('category.update', $category->id) }}"
-                                                            method="POST" enctype="multipart/form-data">
+                                                        <form action="{{ route('subcategory.update', $subCategory->id) }}" method="POST"
+                                                            enctype="multipart/form-data">
                                                             @csrf
                                                             @method('PUT')
                                                             <div class="modal-body">
-                                                                <input type="hidden" name="category_update_id"
-                                                                    value="{{ $category->id }}">
+                                                                <input type="hidden" name="sub_category_update_id" value="{{ $subCategory->id }}">
                                                                 <div class="form-group">
-                                                                    <label for="category_name">Category Name<span
-                                                                            class="text-danger">*</span></label>
-                                                                    <input type="text"
-                                                                        value="{{ $category->category_name}}"
-                                                                        name="category_update_name" id="category_name"
-                                                                        class="form-control">
+                                                                    <label for="sub_category_update_name">Sub Category Name<span class="text-danger">*</span></label>
+                                                                    <input type="text" value="{{ $subCategory->sub_category_name}}" name="sub_category_update_name"
+                                                                        id="sub_category_update_name" class="form-control">
 
-                                                                    @error('category_update_name')
+                                                                    @error('sub_category_update_name')
                                                                     <small class="text-danger">{{ $message }}</small>
                                                                     @enderror
                                                                 </div>
 
                                                                 <div class="form-group">
-                                                                    <label for="category_photo">Category Photo<small
-                                                                            class="text-warning">(Dimensions: 521 x 270
-                                                                            px)</small>
-                                                                        <span class="text-danger">*</span></label>
-                                                                    <div class="mb-1 mr-1">
-                                                                        <img src="{{ asset('uploads/category_photoes') }}/{{ $category->category_photo }}"
-                                                                            data-reset-src="{{ asset('uploads/category_photoes') }}/{{ $category->category_photo }}"
-                                                                            id="category_photo_upload_img"
-                                                                            class="rounded uploadedAvatar object-fit--cover"
-                                                                            alt="category photo" width="200"
-                                                                            height="80">
-                                                                        {{-- <img src="" data-reset-src=""
-                                                                            id="category_photo_upload_img"
-                                                                            class="rounded uploadedAvatar object-fit--cover"
-                                                                            alt="category photo" width="200"
-                                                                            height="80"> --}}
-                                                                    </div>
-                                                                    <input type="file" value=""
-                                                                        name="category_update_photo"
-                                                                        id="category_photo_upload" class="form-control">
+                                                                    <label for="update_category_id">Select Category<span class="text-danger">*</span></label>
+                                                                    <select name="update_category_id" class="select2 form-control" id="update_category_id">
+                                                                        <option value="{{ $subCategory->category_id }}">
+                                                                            {{ $subCategory->relationWithCategory->category_name }}
+                                                                        </option>
+                                                                        @foreach ($categories as $category)
+                                                                        <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                                                                        @endforeach
+                                                                    </select>
 
-                                                                    @error('category_update_photo')
+                                                                    @error('update_category_id')
                                                                     <small class="text-danger">{{ $message }}</small>
                                                                     @enderror
                                                                 </div>
+
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="button" class="btn btn-danger"
-                                                                    data-dismiss="modal">Cancle</button>
-                                                                <button type="submit"
-                                                                    class="btn btn-primary">Submit</button>
+                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancle</button>
+                                                                <button type="submit" class="btn btn-primary">Submit</button>
                                                             </div>
                                                         </form>
                                                     </div>
@@ -420,98 +405,27 @@ active
                                             {{-- Edit Modal End --}}
                                         </td>
                                         <td>
-                                            {{-- <img src="../../../app-assets/images/icons/bootstrap.svg" class="mr-75"
-                                                height="20" width="20" alt="Bootstrap"> --}}
-                                            <span class="font-weight-bold">{{ $category->category_name }}</span>
+                                            {{-- <img src="../../../app-assets/images/icons/bootstrap.svg" class="mr-75" height="20" width="20"
+                                                alt="Bootstrap"> --}}
+                                            <span class="font-weight-bold">{{ $subCategory->sub_category_name }}</span>
                                         </td>
-                                        <td><img src="{{ asset('uploads/category_photoes') }}/{{ $category->category_photo }}"
-                                                class="mr-75" height="70" width="150" alt="Bootstrap"></td>
-                                        <td><span class="font-weight-bold">{{ $category->created_at->diffForHumans()
-                                                }}</span></td>
-                                        {{-- <td><span class="mr-1 badge badge-pill badge-light-warning">Pending</span>
-                                        </td> --}}
+                                        <td>{{ $subCategory->relationWithCategory->category_name }}</td>
+                                        <td><span class="font-weight-bold">{{ $subCategory->created_at->diffForHumans() }}</span></td>
+                                        {{-- <td><span class="mr-1 badge badge-pill badge-light-warning">Pending</span></td> --}}
                                     </tr>
                                     @empty
                                     <tr>
-                                        <td colspan="50" class="text-center"><span
-                                                class="text-center text-danger font-weight-bold">No data to show</span>
+                                        <td colspan="50" class="text-center"><span class="text-center text-danger font-weight-bold">No data to show</span>
                                         </td>
                                     </tr>
                                     @endforelse
-
-                                    @push('all_modals')
-                                    <!-- Modal -->
-                                    {{-- @if (havePermission('category','edit')) --}}
-                                    <div class="modal fade" id="add_category_modal" tabindex="-1" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title">Edit Category</h5>
-                                                    <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                {{-- @if ($errors->any())
-                                                <div class="p-1 alert alert-danger">
-                                                    @foreach ($errors->all() as $error)
-                                                    <li>{{ $error }}</li>
-                                                    @endforeach
-                                                </div>
-                                                @endif --}}
-                                                <form action="{{ route('category.store') }}" method="POST"
-                                                    enctype="multipart/form-data">
-                                                    @csrf
-                                                    <div class="modal-body">
-                                                        <div class="form-group">
-                                                            <label for="category_name">Category Name<span
-                                                                    class="text-danger">*</span></label>
-                                                            <input type="text" value="{{ old('category_name') }}"
-                                                                name="category_name" id="category_name"
-                                                                class="form-control">
-
-                                                            @error('category_name')
-                                                            <small class="text-danger">{{ $message }}</small>
-                                                            @enderror
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <label for="category_photo">Category Photo<small
-                                                                    class="text-warning">(Dimensions: 521 x 270
-                                                                    px)</small>
-                                                                <span class="text-danger">*</span></label>
-                                                            <div class="mb-1 mr-1">
-                                                                <img src="" data-reset-src=""
-                                                                    id="category_photo_upload_img"
-                                                                    class="rounded uploadedAvatar object-fit--cover"
-                                                                    alt="category photo" width="200" height="80">
-                                                            </div>
-                                                            <input type="file" value="" name="category_photo"
-                                                                id="category_photo_upload" class="form-control">
-
-                                                            @error('category_photo')
-                                                            <small class="text-danger">{{ $message }}</small>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-danger"
-                                                            data-dismiss="modal">Cancle</button>
-                                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {{-- @endif --}}
-                                    @endpush
                                 </tbody>
                             </table>
                         </div>
                     </div>
 
                     {{--........................ --}}
-                    {{ $categories->links('admin.pages.pagination.paginate') }}
+                    {{ $subCategories->links('admin.pages.pagination.paginate') }}
 
                 </div>
             </div>
@@ -526,111 +440,22 @@ active
 <script>
     $(document).ready(function () {
         var ids = [];
-        @error('category_name')
-        $('#add_category_modal').modal('show');
+        @error('sub_category_name')
+        $('#add_sub_category_modal').modal('show');
         @enderror
 
-        @error('category_photo')
-        $('#add_category_modal').modal('show');
+        @error('category_id')
+        $('#add_sub_category_modal').modal('show');
         @enderror
 
-        @error('category_update_name')
-        $('#edit_category_'+'{{ old('category_update_id') }}').modal('show');
+        @error('sub_category_update_name')
+        $('#edit_sub_category_'+'{{ old('sub_category_update_id') }}').modal('show');
         @enderror
 
         @error('category_update_photo')
         $('#edit_category_'+'{{ old('category_update_id') }}').modal('show');
         @enderror
 
-        // Select All Checkbox Features
-        // $('#all-select').change(function(){
-        //         ids = [];
-        //         // Get all the id
-        //     if($(this).is(":checked")){
-        //         $('.custom-control-input').prop('checked', true);
-
-
-        //         $('.all_checkbox').each(function(){
-        //             ids.push($(this).attr('id').split('-')[2]);
-        //         });
-
-        //         if(ids.length == 0){
-        //             $('#all_actions').removeClass('d-inline-block');
-        //             $('#all_actions').addClass('d-none');
-        //         }
-        //         else
-        //         {
-        //             $('#all_actions').removeClass(' d-none');
-        //             $('#all_actions').addClass('d-inline-block');
-        //             $('#export_all').val(ids);
-        //         }
-        //         // Delete all
-        //         $("#delete_all").on('click', function(){
-
-        //             $.ajax({
-        //             url: "{{ route('categories.mass_action') }}",
-        //             type: 'POST',
-        //             data: {
-        //                 ids: ids,
-        //             },
-        //             success: function(data){
-        //                 if(data.success == 'done'){
-        //                     window.location.reload();
-        //                 }
-        //                 if(data.error){
-        //                     $('#deleteModal').modal('hide');
-        //                     toastr.error(data.error);
-        //                 }
-        //             }
-        //         });
-
-        //     });
-
-        //     }else{
-        //         $('.custom-control-input').prop('checked', false);
-        //         $('#all_actions').addClass('d-none');
-        //         $('#all_actions').removeClass('d-inline-block');
-        //     }
-        // });
-
-        // Select Individual Checkbox Features
-        // $('.all_checkbox').change(function(){
-        //         ids = [];
-        //     $('.all_checkbox').each(function(){
-        //         if($(this).is(":checked")){
-        //             ids.push($(this).attr('id').split('-')[2]);
-        //         }
-        //     });
-        //     if(ids.length == 0){
-        //         $('#all_actions').removeClass('d-inline-block');
-        //         $('#all_actions').addClass('d-none');
-        //     }
-        //     else
-        //     {
-        //         $('#all_actions').removeClass(' d-none');
-        //         $('#all_actions').addClass('d-inline-block');
-        //         $('#export_all').val(ids);
-
-        //             // Delete trigger
-
-        //             $("#delete_all").on('click', function(){
-
-        //                 $.ajax({
-        //                         url: "{{ route('categories.mass_action') }}",
-        //                         type: 'POST',
-        //                         data: {
-        //                             ids: ids,
-        //                         },
-        //                         success: function(data){
-        //                             if(data.success == 'done'){
-        //                                 window.location.reload();
-        //                             }
-        //                         }
-        //                 });
-
-        //             });
-        //     }
-        // });
 
         // Table Search
 
@@ -658,7 +483,7 @@ active
             });
         }
 
-        // Tostr success
+        // Tostr & SweetAlert2 success start
 
         @if (session("success"))
             // toastr.success("{{ session('success') }}")
@@ -673,11 +498,11 @@ active
             });
         @endif
 
-        @if (session("imgUpdateSuccess"))
-            // toastr.success("{{ session('imgUpdateSuccess') }}")
+        @if (session("update_success"))
+            // toastr.success("{{ session('update_success') }}")
             Swal.fire({
                     title: 'Done!',
-                    text: '{{ session("imgUpdateSuccess") }}',
+                    text: '{{ session("update_success") }}',
                     icon: 'success',
                     customClass: {
                     confirmButton: 'btn btn-primary'
@@ -686,66 +511,68 @@ active
             });
         @endif
 
+        // Tostr & SweetAlert2 success end
+
     });
 
     //Sweet alert message single cat delete start
-        $(document).on('click', '.single-cat-delete', function (e) {
-                e.preventDefault();
-                const swalWithBootstrapButtons = Swal.mixin({
-                    customClass: {
-                        confirmButton: 'btn btn-success',
-                        cancelButton: 'btn btn-danger'
-                    },
-                    buttonsStyling: false
-                })
+        // $(document).on('click', '.single-cat-delete', function (e) {
+        //         e.preventDefault();
+        //         const swalWithBootstrapButtons = Swal.mixin({
+        //             customClass: {
+        //                 confirmButton: 'btn btn-success',
+        //                 cancelButton: 'btn btn-danger'
+        //             },
+        //             buttonsStyling: false
+        //         })
 
-                    swalWithBootstrapButtons.fire({
-                    title: 'Are you sure?',
-                    text: "You won't be able to recover this!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonText: 'Yes, delete it!',
-                    cancelButtonText: 'No, cancel!',
-                    reverseButtons: true
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        var single_delete = $(this).data('id');
-                        $.ajaxSetup({
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            }
-                        });
+        //             swalWithBootstrapButtons.fire({
+        //             title: 'Are you sure?',
+        //             text: "You won't be able to recover this!",
+        //             icon: 'warning',
+        //             showCancelButton: true,
+        //             confirmButtonText: 'Yes, delete it!',
+        //             cancelButtonText: 'No, cancel!',
+        //             reverseButtons: true
+        //         }).then((result) => {
+        //             if (result.isConfirmed) {
+        //                 var single_delete = $(this).data('id');
+        //                 $.ajaxSetup({
+        //                     headers: {
+        //                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //                     }
+        //                 });
 
-                        $.ajax({
-                            type: 'POST',
-                            url: "{{ route('category.single_cat_delete') }}",
-                            data: {single_delete:single_delete},
-                            success: function (response) {
-                                if (response.status=='success') {
-                                    $("#"+response['tr']).slideUp('slow');
-                                    swalWithBootstrapButtons.fire(
-                                    'Deleted!',
-                                    'Your file has been deleted Successfully.',
-                                    'success'
-                                    );
-                                    // $('.table').load(location.href+' .table');
-                                }
-                            }
-                        });
+        //                 $.ajax({
+        //                     type: 'POST',
+        //                     url: "{{ route('category.single_cat_delete') }}",
+        //                     data: {single_delete:single_delete},
+        //                     success: function (response) {
+        //                         if (response.status=='success') {
+        //                             $("#"+response['tr']).slideUp('slow');
+        //                             swalWithBootstrapButtons.fire(
+        //                             'Deleted!',
+        //                             'Your file has been deleted Successfully.',
+        //                             'success'
+        //                             );
+        //                             // $('.table').load(location.href+' .table');
+        //                         }
+        //                     }
+        //                 });
 
-                    }
-                    else if (
-                        /* Read more about handling dismissals below */
-                        result.dismiss === Swal.DismissReason.cancel
-                    ) {
-                        swalWithBootstrapButtons.fire(
-                        'Cancelled',
-                        'Your file is safe :)',
-                        'error'
-                        )
-                    }
-                })
-        });
+        //             }
+        //             else if (
+        //                 /* Read more about handling dismissals below */
+        //                 result.dismiss === Swal.DismissReason.cancel
+        //             ) {
+        //                 swalWithBootstrapButtons.fire(
+        //                 'Cancelled',
+        //                 'Your file is safe :)',
+        //                 'error'
+        //                 )
+        //             }
+        //         })
+        // });
     //Sweet alert message single cat delete end
 </script>
 

@@ -2,7 +2,7 @@
 
 @section('title')
 
-Dashboard Pustok | My Profile
+Dashboard Pustok | Category
 
 @endsection
 
@@ -482,95 +482,7 @@ active
         $('#edit_category_'+'{{ old('category_update_id') }}').modal('show');
         @enderror
 
-        // Select All Checkbox Features
-        // $('#all-select').change(function(){
-        //         ids = [];
-        //         // Get all the id
-        //     if($(this).is(":checked")){
-        //         $('.custom-control-input').prop('checked', true);
 
-
-        //         $('.all_checkbox').each(function(){
-        //             ids.push($(this).attr('id').split('-')[2]);
-        //         });
-
-        //         if(ids.length == 0){
-        //             $('#all_actions').removeClass('d-inline-block');
-        //             $('#all_actions').addClass('d-none');
-        //         }
-        //         else
-        //         {
-        //             $('#all_actions').removeClass(' d-none');
-        //             $('#all_actions').addClass('d-inline-block');
-        //             $('#export_all').val(ids);
-        //         }
-        //         // Delete all
-        //         $("#delete_all").on('click', function(){
-
-        //             $.ajax({
-        //             url: "{{ route('categories.mass_action') }}",
-        //             type: 'POST',
-        //             data: {
-        //                 ids: ids,
-        //             },
-        //             success: function(data){
-        //                 if(data.success == 'done'){
-        //                     window.location.reload();
-        //                 }
-        //                 if(data.error){
-        //                     $('#deleteModal').modal('hide');
-        //                     toastr.error(data.error);
-        //                 }
-        //             }
-        //         });
-
-        //     });
-
-        //     }else{
-        //         $('.custom-control-input').prop('checked', false);
-        //         $('#all_actions').addClass('d-none');
-        //         $('#all_actions').removeClass('d-inline-block');
-        //     }
-        // });
-
-        // Select Individual Checkbox Features
-        // $('.all_checkbox').change(function(){
-        //         ids = [];
-        //     $('.all_checkbox').each(function(){
-        //         if($(this).is(":checked")){
-        //             ids.push($(this).attr('id').split('-')[2]);
-        //         }
-        //     });
-        //     if(ids.length == 0){
-        //         $('#all_actions').removeClass('d-inline-block');
-        //         $('#all_actions').addClass('d-none');
-        //     }
-        //     else
-        //     {
-        //         $('#all_actions').removeClass(' d-none');
-        //         $('#all_actions').addClass('d-inline-block');
-        //         $('#export_all').val(ids);
-
-        //             // Delete trigger
-
-        //             $("#delete_all").on('click', function(){
-
-        //                 $.ajax({
-        //                         url: "{{ route('categories.mass_action') }}",
-        //                         type: 'POST',
-        //                         data: {
-        //                             ids: ids,
-        //                         },
-        //                         success: function(data){
-        //                             if(data.success == 'done'){
-        //                                 window.location.reload();
-        //                             }
-        //                         }
-        //                 });
-
-        //             });
-        //     }
-        // });
 
         // Table Search
 
@@ -598,7 +510,7 @@ active
             });
         }
 
-        // Tostr success
+        // Tostr & SweetAlert2 success start
 
         @if (session("success"))
             // toastr.success("{{ session('success') }}")
@@ -625,6 +537,8 @@ active
                     buttonsStyling: false
             });
         @endif
+
+        // Tostr & SweetAlert2 success end
 
     });
 

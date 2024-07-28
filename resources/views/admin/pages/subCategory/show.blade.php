@@ -2,7 +2,7 @@
 
 @section('title')
 
-Dashboard Pustok | {{ $single_cat->category_name }} Details
+Dashboard Pustok | {{ $single_sub_cat->sub_category_name }} Details
 
 @endsection
 
@@ -15,12 +15,12 @@ Dashboard Pustok | {{ $single_cat->category_name }} Details
         <div class="mb-2 content-header-left col-md-9 col-12">
             <div class="row breadcrumbs-top">
                 <div class="col-12">
-                    <h2 class="float-left mb-0 content-header-title">Product Category</h2>
+                    <h2 class="float-left mb-0 content-header-title">Product Sub Category</h2>
                     <div class="breadcrumb-wrapper">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a>
                             </li>
-                            <li class="breadcrumb-item "><a href="{{ route('category.index') }}">Category</a>
+                            <li class="breadcrumb-item "><a href="{{ route('subcategory.index') }}">Sub Category</a>
                             </li>
                             <li class="breadcrumb-item active"> Details
                             </li>
@@ -40,16 +40,8 @@ Dashboard Pustok | {{ $single_cat->category_name }} Details
         <div class="card">
             <div class="card-body">
                 <div class="my-2 row">
-                    <div class="mb-2 col-12 col-md-5 d-flex align-items-center justify-content-center mb-md-0">
-                        <div class="d-flex align-items-center justify-content-center">
-                            {{-- <img src="{{ asset('dashboard_assets') }}/app-assets/images/pages/eCommerce/1.png" class="img-fluid product-img"
-                                alt="product image" /> --}}
-                            <img src="{{ asset('uploads/category_photoes') }}/{{ $single_cat->category_photo }}" class="img-fluid product-img"
-                                alt="product image" />
-                        </div>
-                    </div>
                     <div class="col-12 col-md-7">
-                        <h4>{{ $single_cat->category_name }}</h4>
+                        <h4>{{ $single_sub_cat->sub_category_name }}</h4>
                         {{-- <div class="flex-wrap mt-1 ecommerce-details-price d-flex">
                             <h4 class="mr-1 item-price">$499.99</h4>
                             <ul class="pl-1 unstyled-list list-inline border-left">
@@ -65,8 +57,9 @@ Dashboard Pustok | {{ $single_cat->category_name }} Details
                         <div class="product-color-options">
                             <div class="flex-wrap mt-1 ecommerce-details-price d-flex">
                                 <h4 class="mr-1 item-price">Created At</h4>
-                                <ul class="pl-1 unstyled-list list-inline border-left">
-                                    <li class="ratings-list-item">{{ $single_cat->created_at->format('d M Y') }}</li>
+                                <ul class="pl-4 unstyled-list list-inline border-left">
+                                    <li class="ratings-list-item">{{ $single_sub_cat->created_at->format('d M Y') }}</li>
+                                    {{-- {{ $single_cat->created_at->format('d M Y') }} --}}
                                 </ul>
                             </div>
                         </div>
@@ -75,8 +68,9 @@ Dashboard Pustok | {{ $single_cat->category_name }} Details
                         <div class="product-color-options">
                             <div class="flex-wrap mt-1 ecommerce-details-price d-flex">
                                 <h4 class="mr-1 item-price">Updated At</h4>
-                                <ul class="pl-1 unstyled-list list-inline border-left">
-                                    <li class="ratings-list-item">{{ $single_cat->updated_at->format('d M Y') }}</li>
+                                <ul class="pl-3 unstyled-list list-inline border-left">
+                                    <li class="ratings-list-item">{{ $single_sub_cat->updated_at->format('d M Y') }}</li>
+                                    {{-- {{ $single_cat->updated_at->format('d M Y') }} --}}
                                 </ul>
                             </div>
                         </div>

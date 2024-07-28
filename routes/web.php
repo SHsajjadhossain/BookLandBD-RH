@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,10 +19,15 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified', 'roleche
     Route::get('/my-profile', [AdminController::class, 'myProfile'])->name('my-profile');
     Route::post('/my-profile/update', [AdminController::class, 'myProfileUpdate'])->name('my-profile.update');
     Route::post('/my-profile/update/password', [AdminController::class, 'myProfileUpdatePassword'])->name('my-profile.update.password');
+    
+    // category all routes start
     Route::resource('category', CategoryController::class);
     Route::post('/category/single/cat/delete', [CategoryController::class, 'single_cat_delete'])->name('category.single_cat_delete');
-    // Route::post('/categories/all/delete', [CategoryController::class, 'cat_mass_delete'])->name('categories.mass_action');
-    // Route::post('/categories-all-export', [CategoryController::class, 'mass_export'])->name('categories.mass_export');
+    // category all routes end
+
+    // subCategory all routes start
+    Route::resource('subcategory',SubCategoryController::class);
+    // subCategory all routes end
 });
 
 Route::middleware('auth', 'verified')->group(function () {
