@@ -542,6 +542,18 @@ active
 
     });
 
+    // @if (session("sub_cat_warn"))
+    //     Swal.fire({
+    //         title: 'Warning!',
+    //         text: ' {{session("sub_cat_warn")  }}',
+    //         icon: 'warning',
+    //         customClass: {
+    //         confirmButton: 'btn btn-primary'
+    //         },
+    //         buttonsStyling: false
+    //     });
+    // @endif
+
     //Sweet alert message single cat delete start
         $(document).on('click', '.single-cat-delete', function (e) {
                 e.preventDefault();
@@ -549,6 +561,13 @@ active
                     customClass: {
                         confirmButton: 'btn btn-success',
                         cancelButton: 'btn btn-danger'
+                    },
+                    buttonsStyling: false
+                })
+
+                const swalWithSubCatWarnButtons = Swal.mixin({
+                    customClass: {
+                        confirmButton: 'btn btn-primary'
                     },
                     buttonsStyling: false
                 })
@@ -582,7 +601,15 @@ active
                                     'Your file has been deleted Successfully.',
                                     'success'
                                     );
-                                    // $('.table').load(location.href+' .table');
+                                    $('.table').load(location.href+' .table');
+                                }
+                                else if(response.status=='sub_cat_warn'){
+                                    swalWithSubCatWarnButtons.fire({
+                                        title: 'Warning!',
+                                        text: "This category have sub category. You can't delete it!",
+                                        icon: 'warning',
+                                        
+                                    });
                                 }
                             }
                         });

@@ -71,6 +71,7 @@ Dashboard Pustok | {{ $single_cat->category_name }} Details
                             </div>
                         </div>
                         <hr />
+                        @if ($single_cat->updated_at)
                         <hr />
                         <div class="product-color-options">
                             <div class="flex-wrap mt-1 ecommerce-details-price d-flex">
@@ -81,6 +82,7 @@ Dashboard Pustok | {{ $single_cat->category_name }} Details
                             </div>
                         </div>
                         <hr />
+                        @endif
                     </div>
                 </div>
             </div>

@@ -17,7 +17,7 @@ Pustok - Book Store
     }
 
     .category-gallery-block .inner-block-wrapper .category-slider .category-single-slide .category-item{
-        width: 95%;
+        width: 96%;
         position: relative;
     }
 
@@ -126,7 +126,7 @@ Pustok - Book Store
 <!--=================================
         Home Features Section
 ===================================== -->
-    <section class="mb--30">
+    <section class="mt-3 mb--30">
         <h2 class="sr-only">Feature Section</h2>
         <div class="container">
             <div class="row">
@@ -4010,7 +4010,7 @@ Pustok - Book Store
     dots: true,
     arrows: false,
     infinite: true,
-    autoplay: false,
+    autoplay: true,
     speed: 300,
     slidesToShow: 2,
     slidesToScroll: 1,

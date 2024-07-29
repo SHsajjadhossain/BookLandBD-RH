@@ -72,7 +72,7 @@ class SubCategoryController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'sub_category_update_name' => 'required|unique:sub_categories,sub_category_name'
+            'sub_category_update_name' => 'required'
         ],[
             'sub_category_update_name.required' => 'The sub category name field is required'
         ]);
@@ -91,5 +91,17 @@ class SubCategoryController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    // custom method
+
+    public function single_sub_cat_delete(Request $request)
+    {
+        $sub_cat_del = SubCategory::findOrFail($request->single_delete);
+        $sub_cat_del->delete();
+        return response()->json([
+            'status' => 'success',
+            'tr' => 'tr_'.$request->single_delete,
+        ]);
     }
 }

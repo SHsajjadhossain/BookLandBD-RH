@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CategoryCreateRequest;
 use App\Http\Requests\CategoryUpdateRequest;
 use App\Models\Category;
+use App\Models\SubCategory;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -99,15 +100,25 @@ class CategoryController extends Controller
 
     // Custom methods
 
-    public function single_cat_delete(Request $request){
-        $location = public_path('uploads/category_photoes/');
-        $cat_del = Category::findOrFail($request->single_delete);
-        @unlink($location.$cat_del->category_photo);
-        $cat_del->delete();
-        return response()->json([
-            'status' => 'success',
-            'tr' => 'tr_'.$request->single_delete,
-        ]);
+    public function single_cat_delete(Request $request)
+    {
+        $sub_cat_count = SubCategory::where('category_id', $request->single_delete)->count();
+        if ($sub_cat_count > 0) {
+            // return back()->with('sub_cat_warn', "This category have sub category. You can't delete it!");
+            return response()->json([
+                'status' => 'sub_cat_warn'
+            ]);
+        }
+        else {
+            $location = public_path('uploads/category_photoes/');
+            $cat_del = Category::findOrFail($request->single_delete);
+            @unlink($location.$cat_del->category_photo);
+            $cat_del->delete();
+            return response()->json([
+                'status' => 'success',
+                'tr' => 'tr_'.$request->single_delete,
+            ]);
+        }
     }
 
     // public function cat_mass_delete(Request $request){

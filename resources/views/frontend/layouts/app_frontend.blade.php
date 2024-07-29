@@ -105,14 +105,13 @@
                     </div>
                 </div>
             </div>
-            <div class="header-bottom">
+            <div class="header-bottom bg-primary">
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-lg-3">
-                            <nav class="category-nav primary-nav {{ URL::current() == route('user.dashboard') ? '' : 'show' }}">
+                            <nav class="category-nav bg-white  {{ URL::current() == route('user.dashboard') ? '' : 'show' }}">
                                 <div>
-                                    <a href="javascript:void(0)" class="category-trigger"><i
-                                            class="fa fa-bars"></i>Browse
+                                    <a href="javascript:void(0)" class="category-trigger"><i class="fa fa-bars"></i>Browse
                                         categories</a>
                                     <ul class="category-menu">
                                         <li class="cat-item has-children">
@@ -210,8 +209,8 @@
                                                 <li><a href="#">Spools</a></li>
                                             </ul>
                                         </li>
-                                        <li class="cat-item hidden-menu-item"><a href="#">Accessories</a></li>
-                                        <li class="cat-item hidden-menu-item"><a href="#">Education</a></li>
+                                        <li class="cat-item "><a href="#">Accessories</a></li>
+                                        {{-- <li class="cat-item "><a href="#">Education</a></li> --}}
                                         <li class="cat-item hidden-menu-item"><a href="#">Indoor Living</a></li>
                                         <li class="cat-item"><a href="#" class="js-expand-hidden-menu">More
                                                 Categories</a></li>
@@ -220,7 +219,7 @@
                             </nav>
                         </div>
                         <div class="col-lg-3">
-                            <div class="header-phone ">
+                            <div class="header-phone color-white">
                                 <div class="icon">
                                     <i class="fas fa-headphones-alt"></i>
                                 </div>
@@ -232,14 +231,20 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="main-navigation flex-lg-right">
-                                <ul class="main-menu menu-right li-last-0">
+                                <ul class="main-menu menu-right main-menu--white li-last-0">
                                     <li class="menu-item has-children">
-                                        <a href="{{ route('frontend.home') }}">Home</a>
+                                        <a href="javascript:void(0)">Home <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                                        <ul class="sub-menu">
+                                            <li> <a href="index.html">Home One</a></li>
+                                            <li> <a href="index-2.html">Home Two</a></li>
+                                            <li> <a href="index-3.html">Home Three</a></li>
+                                            <li> <a href="index-4.html">Home Four</a></li>
+                                            <li> <a href="index-5.html">Home Five</a></li>
+                                        </ul>
                                     </li>
                                     <!-- Shop -->
                                     <li class="menu-item has-children mega-menu">
-                                        <a href="javascript:void(0)">shop <i
-                                                class="fas fa-chevron-down dropdown-arrow"></i></a>
+                                        <a href="javascript:void(0)">shop <i class="fas fa-chevron-down dropdown-arrow"></i></a>
                                         <ul class="sub-menu four-column">
                                             <li class="cus-col-25">
                                                 <h3 class="menu-title"><a href="javascript:void(0)">Shop Grid </a></h3>
@@ -288,8 +293,7 @@
                                     </li>
                                     <!-- Pages -->
                                     <li class="menu-item has-children">
-                                        <a href="javascript:void(0)">Pages <i
-                                                class="fas fa-chevron-down dropdown-arrow"></i></a>
+                                        <a href="javascript:void(0)">Pages <i class="fas fa-chevron-down dropdown-arrow"></i></a>
                                         <ul class="sub-menu">
                                             <li><a href="cart.html">Cart</a></li>
                                             <li><a href="checkout.html">Checkout</a></li>
@@ -304,8 +308,7 @@
                                     </li>
                                     <!-- Blog -->
                                     <li class="menu-item has-children mega-menu">
-                                        <a href="javascript:void(0)">Blog <i
-                                                class="fas fa-chevron-down dropdown-arrow"></i></a>
+                                        <a href="javascript:void(0)">Blog <i class="fas fa-chevron-down dropdown-arrow"></i></a>
                                         <ul class="sub-menu three-column">
                                             <li class="cus-col-33">
                                                 <h3 class="menu-title"><a href="javascript:void(0)">Blog Grid</a></h3>

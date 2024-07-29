@@ -297,8 +297,6 @@ active
                                         <th>Actions</th>
                                         <th>Sub Category Name</th>
                                         <th>Category Name</th>
-                                        {{-- <th>Created By</th>
-                                        <th>Updated By</th> --}}
                                         <th>Created At</th>
                                     </tr>
                                 </thead>
@@ -331,15 +329,7 @@ active
                                                         <i data-feather='eye'></i>
                                                         Details
                                                     </a>
-
-                                                    {{-- @if (havePermission('category','delete')) --}}
-                                                    {{-- <form action="" method="">
-                                                        <button type="submit" class="dropdown-item single-cat-delete" data-id="{{ $category->id }}">
-                                                            <i data-feather="trash"></i>
-                                                            Delete
-                                                        </button>
-                                                    </form> --}}
-                                                    <a href="" data-id="{{ $subCategory->id }}" class="dropdown-item single-cat-delete">
+                                                    <a href="" data-id="{{ $subCategory->id }}" class="dropdown-item single-sub-cat-delete">
                                                         <i data-feather="trash"></i>
                                                         Delete
                                                     </a>
@@ -349,15 +339,11 @@ active
                                             {{-- Edit Modal Start --}}
                                             @push('all_modals')
                                             <!-- Modal -->
-                                            {{-- @if (havePermission('category','edit')) --}}
                                             <div class="modal fade" id="edit_sub_category_{{ $subCategory->id }}" tabindex="-1" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <h5 class="modal-title">Edit Category</h5>
-                                                            {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button> --}}
                                                         </div>
                                                         <form action="{{ route('subcategory.update', $subCategory->id) }}" method="POST"
                                                             enctype="multipart/form-data">
@@ -405,13 +391,10 @@ active
                                             {{-- Edit Modal End --}}
                                         </td>
                                         <td>
-                                            {{-- <img src="../../../app-assets/images/icons/bootstrap.svg" class="mr-75" height="20" width="20"
-                                                alt="Bootstrap"> --}}
                                             <span class="font-weight-bold">{{ $subCategory->sub_category_name }}</span>
                                         </td>
                                         <td>{{ $subCategory->relationWithCategory->category_name }}</td>
                                         <td><span class="font-weight-bold">{{ $subCategory->created_at->diffForHumans() }}</span></td>
-                                        {{-- <td><span class="mr-1 badge badge-pill badge-light-warning">Pending</span></td> --}}
                                     </tr>
                                     @empty
                                     <tr>
@@ -516,63 +499,63 @@ active
     });
 
     //Sweet alert message single cat delete start
-        // $(document).on('click', '.single-cat-delete', function (e) {
-        //         e.preventDefault();
-        //         const swalWithBootstrapButtons = Swal.mixin({
-        //             customClass: {
-        //                 confirmButton: 'btn btn-success',
-        //                 cancelButton: 'btn btn-danger'
-        //             },
-        //             buttonsStyling: false
-        //         })
+         $(document).on('click', '.single-sub-cat-delete', function (e) {
+                e.preventDefault();
+                const swalWithBootstrapButtons = Swal.mixin({
+                    customClass: {
+                        confirmButton: 'btn btn-success',
+                        cancelButton: 'btn btn-danger'
+                    },
+                    buttonsStyling: false
+                })
 
-        //             swalWithBootstrapButtons.fire({
-        //             title: 'Are you sure?',
-        //             text: "You won't be able to recover this!",
-        //             icon: 'warning',
-        //             showCancelButton: true,
-        //             confirmButtonText: 'Yes, delete it!',
-        //             cancelButtonText: 'No, cancel!',
-        //             reverseButtons: true
-        //         }).then((result) => {
-        //             if (result.isConfirmed) {
-        //                 var single_delete = $(this).data('id');
-        //                 $.ajaxSetup({
-        //                     headers: {
-        //                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        //                     }
-        //                 });
+                    swalWithBootstrapButtons.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to recover this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, delete it!',
+                    cancelButtonText: 'No, cancel!',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var single_delete = $(this).data('id');
+                        $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            }
+                        });
 
-        //                 $.ajax({
-        //                     type: 'POST',
-        //                     url: "{{ route('category.single_cat_delete') }}",
-        //                     data: {single_delete:single_delete},
-        //                     success: function (response) {
-        //                         if (response.status=='success') {
-        //                             $("#"+response['tr']).slideUp('slow');
-        //                             swalWithBootstrapButtons.fire(
-        //                             'Deleted!',
-        //                             'Your file has been deleted Successfully.',
-        //                             'success'
-        //                             );
-        //                             // $('.table').load(location.href+' .table');
-        //                         }
-        //                     }
-        //                 });
+                        $.ajax({
+                            type: 'POST',
+                            url: "{{ route('subcategory.single_sub_cat_delete') }}",
+                            data: {single_delete:single_delete},
+                            success: function (response) {
+                                if (response.status=='success') {
+                                    $("#"+response['tr']).slideUp('slow');
+                                    swalWithBootstrapButtons.fire(
+                                    'Deleted!',
+                                    'Your file has been deleted Successfully.',
+                                    'success'
+                                    );
+                                    $('.table').load(location.href+' .table');
+                                }
+                            }
+                        });
 
-        //             }
-        //             else if (
-        //                 /* Read more about handling dismissals below */
-        //                 result.dismiss === Swal.DismissReason.cancel
-        //             ) {
-        //                 swalWithBootstrapButtons.fire(
-        //                 'Cancelled',
-        //                 'Your file is safe :)',
-        //                 'error'
-        //                 )
-        //             }
-        //         })
-        // });
+                    }
+                    else if (
+                        /* Read more about handling dismissals below */
+                        result.dismiss === Swal.DismissReason.cancel
+                    ) {
+                        swalWithBootstrapButtons.fire(
+                        'Cancelled',
+                        'Your file is safe :)',
+                        'error'
+                        )
+                    }
+                })
+         });
     //Sweet alert message single cat delete end
 </script>
 

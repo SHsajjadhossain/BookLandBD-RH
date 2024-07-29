@@ -19,7 +19,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified', 'roleche
     Route::get('/my-profile', [AdminController::class, 'myProfile'])->name('my-profile');
     Route::post('/my-profile/update', [AdminController::class, 'myProfileUpdate'])->name('my-profile.update');
     Route::post('/my-profile/update/password', [AdminController::class, 'myProfileUpdatePassword'])->name('my-profile.update.password');
-    
+
     // category all routes start
     Route::resource('category', CategoryController::class);
     Route::post('/category/single/cat/delete', [CategoryController::class, 'single_cat_delete'])->name('category.single_cat_delete');
@@ -27,6 +27,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified', 'roleche
 
     // subCategory all routes start
     Route::resource('subcategory',SubCategoryController::class);
+    Route::post('/subcategory/single/subcat/delete', [SubCategoryController::class, 'single_sub_cat_delete'])->name('subcategory.single_sub_cat_delete');
     // subCategory all routes end
 });
 
