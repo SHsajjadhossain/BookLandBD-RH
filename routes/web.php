@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\UserController;
@@ -29,6 +30,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified', 'roleche
     Route::resource('subcategory',SubCategoryController::class);
     Route::post('/subcategory/single/subcat/delete', [SubCategoryController::class, 'single_sub_cat_delete'])->name('subcategory.single_sub_cat_delete');
     // subCategory all routes end
+
+    // product all routes start
+    Route::resource('product', ProductController::class);
+    // product all routes end
 });
 
 Route::middleware('auth', 'verified')->group(function () {

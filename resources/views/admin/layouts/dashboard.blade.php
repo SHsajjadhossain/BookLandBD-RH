@@ -20,6 +20,7 @@
 
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_assets/app-assets/vendors/css/vendors.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_assets/app-assets/vendors/css/file-uploaders/dropzone.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_assetsapp-assets/vendors/css/animate/animate.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_assetsapp-assets/vendors/css/extensions/sweetalert2.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_assets/app-assets/vendors/css/charts/apexcharts.css') }}">
@@ -51,6 +52,7 @@
 
     <!-- BEGIN: Page CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_assets/app-assets/css/core/menu/menu-types/vertical-menu.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_assets/app-assets/css/plugins/forms/form-file-uploader.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_assets/app-assets/css/pages/dashboard-ecommerce.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_assets/app-assets/css/plugins/extensions/ext-component-toastr.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_assets/app-assets/css/plugins/extensions/ext-component-sweet-alerts.css') }}">
@@ -447,6 +449,27 @@
                         </li>
                     </ul>
                 </li>
+                <li class=" navigation-header"><span data-i18n="User Interface">Products</span><i
+                        data-feather="more-horizontal"></i>
+                </li>
+                <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i
+                            data-feather="shopping-cart"></i><span class="menu-title text-truncate"
+                            data-i18n="Card">Products</span></a>
+                    <ul class="menu-content">
+                        <li class="@yield('add-product-active')"><a class="d-flex align-items-center" href="{{ route('product.create') }}"><i
+                                    data-feather="circle"></i><span class="menu-item text-truncate"
+                                    data-i18n="Basic">Add Product</span></a>
+                        </li>
+                        <li><a class="d-flex align-items-center" href="card-advance.html"><i
+                                    data-feather="circle"></i><span class="menu-item text-truncate"
+                                    data-i18n="Advance">Edit Product</span></a>
+                        </li>
+                        <li><a class="d-flex align-items-center" href="card-statistics.html"><i
+                                    data-feather="circle"></i><span class="menu-item text-truncate"
+                                    data-i18n="Statistics">Product List</span></a>
+                        </li>
+                    </ul>
+                </li>
                 <li class=" navigation-header"><span data-i18n="User Interface">User Interface</span><i
                         data-feather="more-horizontal"></i>
                 </li>
@@ -506,7 +529,8 @@
 
     <!-- BEGIN: Page JS-->
     <script src="{{ asset('dashboard_assets/app-assets/js/scripts/pages/dashboard-ecommerce.js') }}"></script>
-    <script src="../../../app-assets/js/scripts/extensions/ext-component-sweet-alerts.js"></script>
+    <script src="{{ asset('dashboard_assets/app-assets/js/scripts/extensions/ext-component-sweet-alerts.js') }}"></script>
+    <script src="{{ asset('dashboard_assets/app-assets/js/scripts/forms/form-file-uploader.js') }}"></script>
     <!-- END: Page JS-->
 
     <!-- BEGIN: Vendor JS-->
@@ -537,6 +561,7 @@
     <!-- BEGIN: Page Vendor JS-->
     <script src="{{ asset('dashboard_assets/app-assets/vendors/js/extensions/sweetalert2.all.min.js') }}"></script>
     <script src="{{ asset('dashboard_assets/app-assets/vendors/js/extensions/polyfill.min.js') }}"></script>
+    <script src="{{ asset('dashboard_assets/app-assets/vendors/js/extensions/dropzone.min.js') }}"></script>
     <!-- END: Page Vendor JS-->
 
     <!-- BEGIN: Theme JS-->

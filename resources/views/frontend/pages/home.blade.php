@@ -189,6 +189,36 @@ Pustok - Book Store
             <div class="category-gallery-block">
                 <div class="single-block inner-block-wrapper">
                     <div class="category-slider category-slick-slider">
+                        @forelse ($categories as $category)
+                            <div class="category-single-slide">
+                                <div class="category-item">
+                                    <div class="img bg-overlay--dark">
+                                        <img src="{{ asset('uploads/category_photoes') }}/{{ $category->category_photo }}" alt="">
+                                    </div>
+                                    <div class="overlay">
+                                        <h4 class="home-sidebar-title">{{ $category->category_name }}</h4>
+                                        <a href="shop-grid.html" class="cat-btn btn--yellow">
+                                            Shop Now
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        @empty
+
+                        @endforelse
+                        {{-- <div class="category-single-slide">
+                            <div class="category-item">
+                                <div class="img bg-overlay--dark">
+                                    <img src="{{ asset('frontend_assets') }}/image/others/blog-img-big-2.jpg" alt="">
+                                </div>
+                                <div class="overlay">
+                                    <h4 class="home-sidebar-title">Children's Books</h4>
+                                    <a href="shop-grid.html" class="cat-btn btn--yellow">
+                                        Shop Now
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                         <div class="category-single-slide">
                             <div class="category-item">
                                 <div class="img bg-overlay--dark">
@@ -214,33 +244,7 @@ Pustok - Book Store
                                     </a>
                                 </div>
                             </div>
-                        </div>
-                        <div class="category-single-slide">
-                            <div class="category-item">
-                                <div class="img bg-overlay--dark">
-                                    <img src="{{ asset('frontend_assets') }}/image/others/blog-img-big-1.jpg" alt="">
-                                </div>
-                                <div class="overlay">
-                                    <h4 class="home-sidebar-title">Children's Books</h4>
-                                    <a href="shop-grid.html" class="cat-btn btn--yellow">
-                                        Shop Now
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="category-single-slide">
-                            <div class="category-item">
-                                <div class="img bg-overlay--dark">
-                                    <img src="{{ asset('frontend_assets') }}/image/others/blog-img-big-2.jpg" alt="">
-                                </div>
-                                <div class="overlay">
-                                    <h4 class="home-sidebar-title">Children's Books</h4>
-                                    <a href="shop-grid.html" class="cat-btn btn--yellow">
-                                        Shop Now
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -4007,8 +4011,8 @@ Pustok - Book Store
 
 <script>
     $('.category-slider').slick({
-    dots: true,
-    arrows: false,
+    dots: false,
+    arrows: true,
     infinite: true,
     autoplay: true,
     speed: 300,
