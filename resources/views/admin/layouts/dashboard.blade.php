@@ -39,6 +39,10 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_assets/app-assets/css/plugins/forms/pickers/form-flat-pickr.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_assets/app-assets/css/plugins/forms/pickers/form-pickadate.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_assets/app-assets/vendors/css/editors/trix/trix.min.css') }}">
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_assets/app-assets/vendors/css/editors/quill/katex.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_assets/app-assets/vendors/css/editors/quill/monokai-sublime.min.css') }}"> --}}
+    <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_assets/app-assets/vendors/css/editors/quill/quill.snow.css') }}">
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_assets/app-assets/vendors/css/editors/quill/quill.bubble.css') }}"> --}}
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
@@ -56,6 +60,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_assets/app-assets/css/pages/dashboard-ecommerce.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_assets/app-assets/css/plugins/extensions/ext-component-toastr.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_assets/app-assets/css/plugins/extensions/ext-component-sweet-alerts.css') }}">
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_assets/app-assets/css/plugins/forms/form-quill-editor.css') }}"> --}}
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
@@ -531,6 +536,7 @@
     <script src="{{ asset('dashboard_assets/app-assets/js/scripts/pages/dashboard-ecommerce.js') }}"></script>
     <script src="{{ asset('dashboard_assets/app-assets/js/scripts/extensions/ext-component-sweet-alerts.js') }}"></script>
     <script src="{{ asset('dashboard_assets/app-assets/js/scripts/forms/form-file-uploader.js') }}"></script>
+    {{-- <script src="{{ asset('dashboard_assets/app-assets/js/scripts/forms/form-quill-editor.js') }}"></script> --}}
     <!-- END: Page JS-->
 
     <!-- BEGIN: Vendor JS-->
@@ -556,6 +562,9 @@
     <script src="{{ asset('dashboard_assets/app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js') }}"></script>
     <script src="{{ asset('dashboard_assets/app-assets/js/scripts/forms/pickers/form-pickers.js') }}"></script>
     <script src="{{ asset('dashboard_assets/app-assets/vendors/js/editors/trix/trix.min.js') }}"></script>
+    {{-- <script src="{{ asset('dashboard_assets/app-assets/vendors/js/editors/quill/katex.min.js') }}"></script>
+    <script src="{{ asset('dashboard_assets/app-assets/vendors/js/editors/quill/highlight.min.js') }}"></script> --}}
+    <script src="{{ asset('dashboard_assets/app-assets/vendors/js/editors/quill/quill.min.js') }}"></script>
     <!-- END Vendor JS-->
 
     <!-- BEGIN: Page Vendor JS-->

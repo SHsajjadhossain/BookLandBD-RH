@@ -2,7 +2,7 @@
 
 @section('title')
 
-Dashboard Pustok | Product Add
+Dashboard Pustok | Add Product
 
 @endsection
 
@@ -59,16 +59,33 @@ active
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
+                                        <label for="first-name-vertical">Product Slug</label>
+                                        <input type="text" id="first-name-vertical" class="form-control" name="fname"
+                                            placeholder="Enter Product Name" />
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
                                         <label for="email-id-vertical">Product Category</label>
-                                        <input type="email" id="email-id-vertical" class="form-control" name="email-id"
-                                            placeholder="Email" />
+                                        <select name="" class="form-control" id="">
+                                            <option value="">--Select Category--</option>
+                                            <option value="">dadsf</option>
+                                            <option value="">wrws</option>
+                                            <option value="">wfggrrwt</option>
+                                            <option value="">vhfastr</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="contact-info-vertical">Product Sub Category</label>
-                                        <input type="number" id="contact-info-vertical" class="form-control" name="contact"
-                                            placeholder="Mobile" />
+                                        <select name="" class="form-control" id="">
+                                            <option value="">--Select Sub Category--</option>
+                                            <option value="">dadsf</option>
+                                            <option value="">wrws</option>
+                                            <option value="">wfggrrwt</option>
+                                            <option value="">vhfastr</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -80,16 +97,21 @@ active
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label for="password-vertical">Product Short Description</label>
-                                        <input type="password" id="password-vertical" class="form-control" name="contact"
-                                            placeholder="Write Product Short Description" />
+                                        <label class="form-label">Product Short Description<span class="text-danger"> *</span></label>
+                                        <div class="custom-editor-wrapper_1">
+                                            <div class="custom-editor_1"></div>
+                                            <input type="hidden" name="short_description" class="custom-editor-input_1">
+                                        </div>
                                     </div>
                                 </div>
+
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label for="password-vertical">Product Long Description</label>
-                                        <input type="password" id="password-vertical" class="form-control" name="contact"
-                                            placeholder="Write Product Long Description" />
+                                        <label class="form-label">Product Long Description<span class="text-danger"></span></label>
+                                        <div class="custom-editor-wrapper">
+                                            <div class="custom-editor"></div>
+                                            <input type="hidden" name="long_description" class="custom-editor-input">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -101,13 +123,15 @@ active
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label for="password-vertical">Product Photo</label>
-                                        <div action="#" class="dropzone dropzone-area" id="dpz-multiple-files">
-                                            <div class="dz-message">Drop files here or click to upload.</div>
+                                        <label for="custom-file">Product Photo</label>
+                                        <div class="mb-1 mr-1">
+                                            <img src="" data-reset-src="" id="product_photo_upload_img" class="rounded uploadedAvatar object-fit--cover"
+                                                alt="product photo" width="200" height="80">
                                         </div>
-                                        {{-- <form action="#" class="dropzone dropzone-area" id="dpz-multiple-files">
-                                            <div class="dz-message">Drop files here or click to upload.</div>
-                                        </form> --}}
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="product_photo_upload" />
+                                            <label class="custom-file-label" for="customFile">Choose photo</label>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -123,4 +147,113 @@ active
 </div>
 
 @endsection
+
+@push('js')
+
+<script>
+
+    // Update & Reset Category photo on click of button start
+        let productUploadImg = $('#product_photo_upload_img');
+        let productUploadInput = $('#product_photo_upload');
+        let accountResetBtn = $('#account-reset');
+        if (productUploadInput) {
+            productUploadInput.on('change', function (e) {
+                var reader = new FileReader(),
+                    files = e.target.files;
+                reader.onload = function () {
+                    if (productUploadImg) {
+                        productUploadImg.attr('src', reader.result);
+                    }
+                };
+                reader.readAsDataURL(files[0]);
+            });
+        }
+    // Update & Reset Category photo on click of button end
+
+    // quill editor js start
+
+    $(document).ready(function (){
+        (function(){
+            if($(".custom-editor-wrapper").length){
+                /* Initialize QUill editor */
+                let quillEditor = new Quill('.custom-editor', {
+                    modules: {
+                        // imageResize: {
+                        //     displaySize: true
+                        // },
+                        toolbar: [
+                            [{ header: [1, 2, 3, 4, 5, 6,  false] }],
+                            ['bold', 'italic', 'underline','strike'],
+                            ['blockquote', 'code-block'],
+                            // ['image', 'video'],
+                            ['link'],
+                            [{ 'script': 'sub'}, { 'script': 'super' }],
+                            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                            [{'color': []},{'background': []}],
+                            [{ 'align': [] }],
+                            ['clean']
+                        ]
+                    },
+                    theme: 'snow'
+                });
+
+                /* Set QUill editor data into closest input */
+                quillEditor.on('text-change', function(delta, source) {
+                    getQuillEditorData();
+                });
+
+                /* Get QUill editor data function */
+                function getQuillEditorData() {
+                    let quillEditorData = quillEditor.root.innerHTML;
+                    $(".custom-editor").closest(".custom-editor-wrapper").find(".custom-editor-input").val(quillEditorData);
+                };
+                getQuillEditorData();
+            }
+        })();
+    })
+
+    $(document).ready(function (){
+        (function(){
+            if($(".custom-editor-wrapper_1").length){
+                /* Initialize QUill editor */
+                let quillEditor = new Quill('.custom-editor_1', {
+                    modules: {
+                        // imageResize: {
+                        //     displaySize: true
+                        // },
+                        toolbar: [
+                            [{ header: [1, 2, 3, 4, 5, 6,  false] }],
+                            ['bold', 'italic', 'underline','strike'],
+                            ['blockquote', 'code-block'],
+                            // ['image', 'video'],
+                            ['link'],
+                            [{ 'script': 'sub'}, { 'script': 'super' }],
+                            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                            [{'color': []},{'background': []}],
+                            [{ 'align': [] }],
+                            ['clean']
+                        ]
+                    },
+                    theme: 'snow'
+                });
+
+                /* Set QUill editor data into closest input */
+                quillEditor.on('text-change', function(delta, source) {
+                    getQuillEditorData();
+                });
+
+                /* Get QUill editor data function */
+                function getQuillEditorData() {
+                    let quillEditorData = quillEditor.root.innerHTML;
+                    $(".custom-editor_1").closest(".custom-editor-wrapper_1").find(".custom-editor-input_1").val(quillEditorData);
+                };
+                getQuillEditorData();
+            }
+        })();
+    })
+
+    // quill editor js end
+</script>
+
+@endpush
 

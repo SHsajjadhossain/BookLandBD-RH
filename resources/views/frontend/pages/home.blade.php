@@ -16,8 +16,51 @@ Pustok - Book Store
         width: 100%;
     }
 
+    .category-gallery-block .inner-block-wrapper .category-slider .prev{
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+        background: #62ab00;
+        color: #ffffff;
+        border-radius: 50%;
+        border: 1px solid #62ab00;
+        line-height: 40px;
+        text-align: center;
+        cursor: pointer;
+        box-shadow: -6px 0px 30px 0px rgba(0, 0, 0, 0.1);
+        position: absolute;
+        top: 50%;
+        left: 5px;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+        transition: .4s;
+    }
+
+    .category-gallery-block .inner-block-wrapper .category-slider{
+        position: relative;
+    }
+
+    .category-gallery-block .inner-block-wrapper .category-slider .next{
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+        background: #62ab00;
+        color: #ffffff;
+        border-radius: 50%;
+        border: 1px solid #62ab00;
+        line-height: 40px;
+        text-align: center;
+        cursor: pointer;
+        box-shadow: -6px 0px 30px 0px rgba(0, 0, 0, 0.1);
+        position: absolute;
+        top: 50%;
+        right: 25px;
+        transform: translate(50%, -50%);
+        transition: .4s;
+    }
+
     .category-gallery-block .inner-block-wrapper .category-slider .category-single-slide .category-item{
-        width: 96%;
+        width: 97%;
         position: relative;
     }
 
@@ -60,11 +103,23 @@ Pustok - Book Store
     }
 
     .category-gallery-block .inner-block-wrapper .category-slider .category-single-slide .category-item .overlay .cat-btn{
-        padding: 8px 15px;
+        padding: 5px 12px;
         border-radius: 3px;
         font-weight: 600;
         margin-left: 35px;
         margin-top: 10px;
+    }
+
+    .category-gallery-block .inner-block-wrapper .category-slider .prev:hover{
+        background: #eccd00;
+        border-color: #eccd00;
+        color: #000000;
+    }
+
+    .category-gallery-block .inner-block-wrapper .category-slider .next:hover{
+        background: #eccd00;
+        border-color: #eccd00;
+        color: #000000;
     }
 
 </style>
@@ -969,17 +1024,17 @@ Pustok - Book Store
                                     <div class="tab-pane show active" id="shop" role="tabpanel" aria-labelledby="shop-tab">
                                         <div class="product-slider multiple-row slider-border-multiple-row sb-slick-slider"
                                             data-slick-setting='{
-                            "autoplay": true,
-                            "autoplaySpeed": 8000,
-                            "slidesToShow": 3,
-                            "rows":2,
-                            "dots":true
-                        }' data-slick-responsive='[
-                            {"breakpoint":992, "settings": {"slidesToShow": 3} },
-                            {"breakpoint":768, "settings": {"slidesToShow": 2} },
-                            {"breakpoint":480, "settings": {"slidesToShow": 1} },
-                            {"breakpoint":320, "settings": {"slidesToShow": 1} }
-                        ]'>
+                                                        "autoplay": true,
+                                                        "autoplaySpeed": 8000,
+                                                        "slidesToShow": 3,
+                                                        "rows":2,
+                                                        "dots":true
+                                                    }' data-slick-responsive='[
+                                                        {"breakpoint":992, "settings": {"slidesToShow": 3} },
+                                                        {"breakpoint":768, "settings": {"slidesToShow": 2} },
+                                                        {"breakpoint":480, "settings": {"slidesToShow": 1} },
+                                                        {"breakpoint":320, "settings": {"slidesToShow": 1} }
+                                                    ]'>
                                             <div class="single-slide">
                                                 <div class="product-card">
                                                     <div class="product-header">
@@ -4012,12 +4067,13 @@ Pustok - Book Store
 <script>
     $('.category-slider').slick({
     dots: false,
-    arrows: true,
     infinite: true,
-    autoplay: true,
+    autoplay: false,
     speed: 300,
     slidesToShow: 2,
     slidesToScroll: 1,
+    prevArrow: '<i class="bi bi-arrow-left prev"></i>',
+    nextArrow: '<i class="bi bi-arrow-right next"></i>',
     });
 </script>
 
