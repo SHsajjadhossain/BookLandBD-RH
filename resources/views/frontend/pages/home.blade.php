@@ -4068,7 +4068,7 @@ Pustok - Book Store
     $('.category-slider').slick({
     dots: false,
     infinite: true,
-    autoplay: false,
+    autoplay: true,
     speed: 300,
     slidesToShow: 2,
     slidesToScroll: 1,

@@ -52,34 +52,33 @@ active
                             <div class="row">
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label for="first-name-vertical">Product Name</label>
-                                        <input type="text" id="first-name-vertical" class="form-control" name="fname"
+                                        <label for="first-name-vertical">Product Name<span class="text-danger">*</span></label>
+                                        <input type="text" id="product_name" class="form-control" name="product_name"
                                             placeholder="Enter Product Name" />
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label for="first-name-vertical">Product Slug</label>
-                                        <input type="text" id="first-name-vertical" class="form-control" name="fname"
-                                            placeholder="Enter Product Name" />
+                                        <label for="first-name-vertical">Product Slug<span class="text-danger">*</span></label>
+                                        <input type="text" id="product_slug" class="form-control" name="product_slug"
+                                            placeholder="" />
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label for="email-id-vertical">Product Category</label>
-                                        <select name="" class="form-control" id="">
+                                        <label for="email-id-vertical">Product Category<span class="text-danger">*</span></label>
+                                        <select name="" class="select2 form-control" id="">
                                             <option value="">--Select Category--</option>
-                                            <option value="">dadsf</option>
-                                            <option value="">wrws</option>
-                                            <option value="">wfggrrwt</option>
-                                            <option value="">vhfastr</option>
+                                            @foreach ($product_categories as $product_category)
+                                            <option value="{{ $product_category->category_id }}">{{ $product_category->category_name }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label for="contact-info-vertical">Product Sub Category</label>
-                                        <select name="" class="form-control" id="">
+                                        <label for="contact-info-vertical">Product Sub Category<span class="text-danger">*</span></label>
+                                        <select name="" class="select2 form-control" id="">
                                             <option value="">--Select Sub Category--</option>
                                             <option value="">dadsf</option>
                                             <option value="">wrws</option>
@@ -90,14 +89,14 @@ active
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label for="password-vertical">Product Price</label>
+                                        <label for="password-vertical">Product Price<span class="text-danger">*</span></label>
                                         <input type="password" id="password-vertical" class="form-control" name="contact"
                                             placeholder="Enter Product Price" />
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label class="form-label">Product Short Description<span class="text-danger"> *</span></label>
+                                        <label class="form-label">Product Short Description<span class="text-danger">*</span></label>
                                         <div class="custom-editor-wrapper_1">
                                             <div class="custom-editor_1"></div>
                                             <input type="hidden" name="short_description" class="custom-editor-input_1">
@@ -107,7 +106,7 @@ active
 
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label class="form-label">Product Long Description<span class="text-danger"></span></label>
+                                        <label class="form-label">Product Long Description<span class="text-danger">*</span></label>
                                         <div class="custom-editor-wrapper">
                                             <div class="custom-editor"></div>
                                             <input type="hidden" name="long_description" class="custom-editor-input">
@@ -116,14 +115,14 @@ active
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label for="password-vertical">Product Code</label>
+                                        <label for="password-vertical">Product Code<span class="text-danger">*</span></label>
                                         <input type="password" id="password-vertical" class="form-control" name="contact"
                                             placeholder="Enter Product Code" />
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label for="custom-file">Product Photo</label>
+                                        <label for="custom-file">Product Photo<span class="text-danger">*</span></label>
                                         <div class="mb-1 mr-1">
                                             <img src="" data-reset-src="" id="product_photo_upload_img" class="rounded uploadedAvatar object-fit--cover"
                                                 alt="product photo" width="200" height="80">
@@ -151,6 +150,12 @@ active
 @push('js')
 
 <script>
+
+    // product-slug js start
+    $('#product_name').keyup(function() {
+        $('#product_slug').val($(this).val().toLowerCase().split(',').join('').replace(/\s/g, "-"));
+    });
+    // product-slug js end
 
     // Update & Reset Category photo on click of button start
         let productUploadImg = $('#product_photo_upload_img');
