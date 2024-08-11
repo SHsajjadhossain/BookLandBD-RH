@@ -48,7 +48,8 @@ active
                     <div class="card-header d-block d-sm-flex">
                     </div>
                     <div class="card-body">
-                        <form class="form form-vertical">
+                        <form class="form form-vertical" action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
                             <div class="row">
                                 <div class="col-12">
                                     <div class="form-group">
@@ -67,18 +68,18 @@ active
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="email-id-vertical">Product Category<span class="text-danger">*</span></label>
-                                        <select name="" class="select2 form-control" id="">
+                                        <select name="category_id" class="select2 form-control" id="product_category">
                                             <option value="">--Select Category--</option>
                                             @foreach ($product_categories as $product_category)
-                                            <option value="{{ $product_category->category_id }}">{{ $product_category->category_name }}</option>
+                                            <option value="{{ $product_category->id }}">{{ $product_category->category_name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <div class="form-group">
-                                        <label for="contact-info-vertical">Product Sub Category<span class="text-danger">*</span></label>
-                                        <select name="" class="select2 form-control" id="">
+                                    <div class="form-group" id="sub-cat-select">
+                                        <label for="contact-info-vertical">Product Sub Category</label>
+                                        <select name="sub_category_id" class="select2 form-control" id="">
                                             <option value="">--Select Sub Category--</option>
                                             <option value="">dadsf</option>
                                             <option value="">wrws</option>
@@ -90,7 +91,7 @@ active
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="password-vertical">Product Price<span class="text-danger">*</span></label>
-                                        <input type="password" id="password-vertical" class="form-control" name="contact"
+                                        <input type="number" id="password-vertical" class="form-control" name="product_price"
                                             placeholder="Enter Product Price" />
                                     </div>
                                 </div>
@@ -99,7 +100,7 @@ active
                                         <label class="form-label">Product Short Description<span class="text-danger">*</span></label>
                                         <div class="custom-editor-wrapper_1">
                                             <div class="custom-editor_1"></div>
-                                            <input type="hidden" name="short_description" class="custom-editor-input_1">
+                                            <input type="hidden" name="product_short_description" class="custom-editor-input_1">
                                         </div>
                                     </div>
                                 </div>
@@ -109,14 +110,14 @@ active
                                         <label class="form-label">Product Long Description<span class="text-danger">*</span></label>
                                         <div class="custom-editor-wrapper">
                                             <div class="custom-editor"></div>
-                                            <input type="hidden" name="long_description" class="custom-editor-input">
+                                            <input type="hidden" name="product_long_description" class="custom-editor-input">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="password-vertical">Product Code<span class="text-danger">*</span></label>
-                                        <input type="password" id="password-vertical" class="form-control" name="contact"
+                                        <input type="text" id="password-vertical" class="form-control" name="product_code"
                                             placeholder="Enter Product Code" />
                                     </div>
                                 </div>
@@ -128,13 +129,13 @@ active
                                                 alt="product photo" width="200" height="80">
                                         </div>
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="product_photo_upload" />
+                                            <input type="file" class="custom-file-input" id="product_photo_upload" name="product_photo" />
                                             <label class="custom-file-label" for="customFile">Choose photo</label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <button type="reset" class="btn btn-primary mr-1">Add Product</button>
+                                    <button type="submit" class="mr-1 btn btn-primary">Add Product</button>
                                 </div>
                             </div>
                         </form>
@@ -156,6 +157,15 @@ active
         $('#product_slug').val($(this).val().toLowerCase().split(',').join('').replace(/\s/g, "-"));
     });
     // product-slug js end
+
+    // product-categorywise-select-sub-cat js start
+    $(document).ready(function () {
+        $('#product_category').change(function (e) {
+            e.preventDefault();
+            var product_category_id = $(this).val();
+        });
+    });
+    // product-categorywise-select-sub-cat js end
 
     // Update & Reset Category photo on click of button start
         let productUploadImg = $('#product_photo_upload_img');
