@@ -465,10 +465,6 @@
                                     data-feather="circle"></i><span class="menu-item text-truncate"
                                     data-i18n="Basic">Add Product</span></a>
                         </li>
-                        <li><a class="d-flex align-items-center" href="card-advance.html"><i
-                                    data-feather="circle"></i><span class="menu-item text-truncate"
-                                    data-i18n="Advance">Edit Product</span></a>
-                        </li>
                         <li><a class="d-flex align-items-center" href="card-statistics.html"><i
                                     data-feather="circle"></i><span class="menu-item text-truncate"
                                     data-i18n="Statistics">Product List</span></a>
@@ -579,15 +575,15 @@
 
     <script>
 
-        //ajax setup start
-        // $(document).ready(function(){
-        //     $.ajaxSetup({
-        //         headers: {
-        //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        //         }
-        //     });
-        // })
-        //ajax setup end
+        // ajax setup start
+        $(document).ready(function(){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+        })
+        // ajax setup end
 
         $(window).on('load', function() {
             if (feather) {

@@ -608,7 +608,7 @@ active
                                         title: 'Warning!',
                                         text: "This category have sub category. You can't delete it!",
                                         icon: 'warning',
-                                        
+
                                     });
                                 }
                             }

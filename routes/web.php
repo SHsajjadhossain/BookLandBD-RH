@@ -34,6 +34,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified', 'roleche
     // product all routes start
     Route::resource('product', ProductController::class);
     // product all routes end
+
+    // product wise subcategory search route start
+    Route::post('product/subCategory/search', [ProductController::class, 'productSubCategorySearch'])->name('product.subCategory.search');
+    // product wise subcategory search route end
 });
 
 Route::middleware('auth', 'verified')->group(function () {

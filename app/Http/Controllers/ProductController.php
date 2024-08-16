@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -64,5 +65,14 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         //
+    }
+
+    // Custom methods
+
+    public function productSubCategorySearch(Request $request)
+    {
+        // echo SubCategory::where('category_id', $request->product_category_id)->get();
+        $data['subCategories'] = SubCategory::where('category_id', $request->product_category_id)->get(['id', 'sub_category_name']);
+        return response()->json($data);
     }
 }

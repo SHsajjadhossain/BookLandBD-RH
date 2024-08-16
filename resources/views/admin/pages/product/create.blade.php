@@ -69,7 +69,7 @@ active
                                     <div class="form-group">
                                         <label for="email-id-vertical">Product Category<span class="text-danger">*</span></label>
                                         <select name="category_id" class="select2 form-control" id="product_category">
-                                            <option value="">--Select Category--</option>
+                                            <option value="" disabled selected>--Select Category--</option>
                                             @foreach ($product_categories as $product_category)
                                             <option value="{{ $product_category->id }}">{{ $product_category->category_name }}</option>
                                             @endforeach
@@ -77,14 +77,10 @@ active
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <div class="form-group" id="sub-cat-select">
+                                    <div class="form-group" id="product_sub_category">
                                         <label for="contact-info-vertical">Product Sub Category</label>
-                                        <select name="sub_category_id" class="select2 form-control" id="">
-                                            <option value="">--Select Sub Category--</option>
-                                            <option value="">dadsf</option>
-                                            <option value="">wrws</option>
-                                            <option value="">wfggrrwt</option>
-                                            <option value="">vhfastr</option>
+                                        <select name="sub_category_id" class="select2 form-control" id="sub_category">
+
                                         </select>
                                     </div>
                                 </div>
@@ -160,9 +156,23 @@ active
 
     // product-categorywise-select-sub-cat js start
     $(document).ready(function () {
+        $('#product_sub_category').hide();
         $('#product_category').change(function (e) {
             e.preventDefault();
             var product_category_id = $(this).val();
+
+            $.ajax({
+                type: "POST",
+                url: "{{ route('product.subCategory.search') }}",
+                data: {product_category_id:product_category_id},
+                success: function (response) {
+                    $('#product_sub_category').show();
+                    $('#sub_category').html('<option value="" disabled selected>--Select Sub Category--</option>');
+                    $.each(response.subCategories, function (index, val) {
+                        $('#sub_category').append('<option value="'+val.id+'">'+val.sub_category_name+'</option>');
+                    });
+                }
+            });
         });
     });
     // product-categorywise-select-sub-cat js end
