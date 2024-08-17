@@ -54,7 +54,8 @@ class CategoryController extends Controller
     public function show(string $id)
     {
         return view('admin.pages.category.show',[
-            'single_cat' => Category::find($id)
+            'single_cat' => Category::find($id),
+            'sub_categories' => SubCategory::where('category_id', $id)->count()
         ]);
     }
 

@@ -71,6 +71,7 @@ Dashboard Pustok | {{ $single_cat->category_name }} Details
                             </div>
                         </div>
                         <hr />
+
                         @if ($single_cat->updated_at)
                         <hr />
                         <div class="product-color-options">
@@ -78,6 +79,19 @@ Dashboard Pustok | {{ $single_cat->category_name }} Details
                                 <h4 class="mr-1 item-price">Updated At</h4>
                                 <ul class="pl-1 unstyled-list list-inline border-left">
                                     <li class="ratings-list-item">{{ $single_cat->updated_at->format('d M Y') }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <hr />
+                        @endif
+
+                        @if ($sub_categories)
+                        <hr />
+                        <div class="product-color-options">
+                            <div class="flex-wrap mt-1 ecommerce-details-price d-flex">
+                                <h4 class="mr-1 item-price">Total Sub Category</h4>
+                                <ul class="pl-1 unstyled-list list-inline border-left">
+                                    <li class="ratings-list-item">{{ $sub_categories }}</li>
                                 </ul>
                             </div>
                         </div>

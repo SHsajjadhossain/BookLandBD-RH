@@ -432,7 +432,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i
+                {{-- <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i
                             data-feather="file-text"></i><span class="menu-title text-truncate"
                             data-i18n="Invoice">Invoice</span></a>
                     <ul class="menu-content">
@@ -453,7 +453,7 @@
                                     data-i18n="Add">Add</span></a>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
                 <li class=" navigation-header"><span data-i18n="User Interface">Products</span><i
                         data-feather="more-horizontal"></i>
                 </li>
@@ -465,16 +465,17 @@
                                     data-feather="circle"></i><span class="menu-item text-truncate"
                                     data-i18n="Basic">Add Product</span></a>
                         </li>
-                        <li><a class="d-flex align-items-center" href="card-statistics.html"><i
-                                    data-feather="circle"></i><span class="menu-item text-truncate"
-                                    data-i18n="Statistics">Product List</span></a>
+                        <li class="@yield('product-list-active')">
+                            <a class="d-flex align-items-center" href="{{ route('product.index') }}">
+                                <i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Statistics">Product List</span>
+                            </a>
                         </li>
                     </ul>
                 </li>
                 <li class=" navigation-header"><span data-i18n="User Interface">User Interface</span><i
                         data-feather="more-horizontal"></i>
                 </li>
-                <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i
+                {{-- <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i
                             data-feather="credit-card"></i><span class="menu-title text-truncate"
                             data-i18n="Card">Card</span><span
                             class="ml-auto mr-1 badge badge-light-success badge-pill">New</span></a>
@@ -500,7 +501,7 @@
                                     data-i18n="Card Actions">Card Actions</span></a>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
             </ul>
         </div>
     </div>
