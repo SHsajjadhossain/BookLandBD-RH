@@ -89,7 +89,7 @@ active
                                     <div class="form-group" id="product_sub_category">
                                         <label for="contact-info-vertical">Product Sub Category</label>
                                         <select name="sub_category_id" class="select2 form-control" id="sub_category">
-
+                                            <option value="" disabled selected>--Select Sub Category--</option>
                                         </select>
                                     </div>
                                 </div>
@@ -158,7 +158,7 @@ active
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <button type="submit" class="mr-1 btn btn-primary">Add Product</button>
+                                    <button type="submit" class="mt-1 mr-1 btn btn-primary">Add Product</button>
                                 </div>
                             </div>
                         </form>
@@ -193,11 +193,15 @@ active
                 url: "{{ route('product.subCategory.search') }}",
                 data: {product_category_id:product_category_id},
                 success: function (response) {
-                    $('#product_sub_category').show();
-                    $('#sub_category').html('<option value="" disabled selected>--Select Sub Category--</option>');
-                    $.each(response.subCategories, function (index, val) {
-                        $('#sub_category').append('<option value="'+val.id+'">'+val.sub_category_name+'</option>');
-                    });
+                    if (response['subCategories'].length > 0) {
+                        $('#product_sub_category').show();
+                        $.each(response.subCategories, function (index, val) {
+                            $('#sub_category').append('<option value="'+val.id+'">'+val.sub_category_name+'</option>');
+                        });
+                    }
+                    else{
+                        $('#product_sub_category').hide();
+                    }
                 }
             });
         });

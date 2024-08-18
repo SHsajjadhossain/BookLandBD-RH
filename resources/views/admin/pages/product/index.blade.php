@@ -194,7 +194,7 @@ active
                                                 </button>
                                                 <div class="dropdown-menu">
                                                     {{-- @if (havePermission('category','edit')) --}}
-                                                    <a href=""
+                                                    <a href="{{ route('product.edit', $product->id) }}"
                                                         class="dropdown-item">
                                                         <i data-feather='edit'></i>
                                                         Edit

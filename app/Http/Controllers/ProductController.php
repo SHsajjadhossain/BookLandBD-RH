@@ -72,7 +72,11 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        return view('admin.pages.product.edit',[
+            'product' => Product::find($product->id),
+            'product_categories' => Category::all(),
+            'subCategories' => SubCategory::where('category_id', $product->category_id)->get(),
+        ]);
     }
 
     /**
@@ -80,7 +84,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        return $request;
     }
 
     /**
