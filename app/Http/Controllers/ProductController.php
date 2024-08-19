@@ -84,7 +84,31 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        return $request;
+
+        if ($request->hasFile('product_photo')) {
+            $image = $request->file('product_photo');
+            $imageName = uniqid() . time() .'.'.$image->getClientOriginalExtension();
+            $location = public_path('uploads/product_photoes/');
+            // delete old photo
+            if (file_exists($location)) {
+                @unlink($location.Product::find($product->id)->product_photo);
+            }
+            $image->move($location, $imageName);
+        }
+
+        Product::find($product->id)->update([
+            'product_name' => $request->product_name,
+            'product_slug' => $request->product_slug,
+            'category_id' => $request->category_id,
+            'sub_category_id' => $request->sub_category_id,
+            'product_price' => $request->product_price,
+            'product_short_description' => $request->product_short_description,
+            'product_long_description' => $request->product_long_description,
+            'product_code' => $request->product_code,
+            'product_photo' => $imageName,
+        ]);
+
+        return redirect(route('product.index'))->with('product_update_success', 'Product updated successfully!!');
     }
 
     /**
@@ -92,7 +116,14 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $location = public_path('uploads/product_photoes/');
+        $product_del = Product::findOrFail($product->id);
+        @unlink($location.$product_del->product_photo);
+        $product_del->delete();
+        return response()->json([
+            'status' => 'success',
+            'tr' => 'tr_'.$product->id,
+        ]);
     }
 
     // Custom methods

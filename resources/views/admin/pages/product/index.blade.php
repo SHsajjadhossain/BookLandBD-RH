@@ -206,16 +206,8 @@ active
                                                         Details
                                                     </a>
 
-                                                    {{-- @if (havePermission('category','delete')) --}}
-                                                    {{-- <form action="" method="">
-                                                        <button type="submit" class="dropdown-item single-cat-delete"
-                                                            data-id="{{ $category->id }}">
-                                                            <i data-feather="trash"></i>
-                                                            Delete
-                                                        </button>
-                                                    </form> --}}
-                                                    <a href="" data-id=""
-                                                        class="dropdown-item single-cat-delete">
+                                                    <a href="" data-id="{{ $product->id }}"
+                                                        class="dropdown-item single-product-delete">
                                                         <i data-feather="trash"></i>
                                                         Delete
                                                     </a>
@@ -321,6 +313,19 @@ active
             });
         @endif
 
+        @if (session("product_update_success"))
+            // toastr.success("{{ session('success') }}")
+            Swal.fire({
+                title: 'Done!',
+                text: '{{ session("product_update_success") }}',
+                icon: 'success',
+                customClass: {
+                confirmButton: 'btn btn-primary'
+                },
+                buttonsStyling: false
+            });
+        @endif
+
         @if (session("imgUpdateSuccess"))
             // toastr.success("{{ session('imgUpdateSuccess') }}")
             Swal.fire({
@@ -351,7 +356,7 @@ active
     // @endif
 
     //Sweet alert message single cat delete start
-        $(document).on('click', '.single-cat-delete', function (e) {
+        $(document).on('click', '.single-product-delete', function (e) {
                 e.preventDefault();
                 const swalWithBootstrapButtons = Swal.mixin({
                     customClass: {
@@ -378,7 +383,7 @@ active
                     reverseButtons: true
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        var single_delete = $(this).data('id');
+                        var single_product_delete = $(this).data('id');
                         $.ajaxSetup({
                             headers: {
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -386,9 +391,9 @@ active
                         });
 
                         $.ajax({
-                            type: 'POST',
-                            url: "{{ route('category.single_cat_delete') }}",
-                            data: {single_delete:single_delete},
+                            type: 'DELETE',
+                            url: "{{ route('product.destroy', '') }}/"+single_product_delete,
+                            data: {single_product_delete:single_product_delete},
                             success: function (response) {
                                 if (response.status=='success') {
                                     $("#"+response['tr']).slideUp('slow');
@@ -398,14 +403,6 @@ active
                                     'success'
                                     );
                                     $('.table').load(location.href+' .table');
-                                }
-                                else if(response.status=='sub_cat_warn'){
-                                    swalWithSubCatWarnButtons.fire({
-                                        title: 'Warning!',
-                                        text: "This category have sub category. You can't delete it!",
-                                        icon: 'warning',
-
-                                    });
                                 }
                             }
                         });

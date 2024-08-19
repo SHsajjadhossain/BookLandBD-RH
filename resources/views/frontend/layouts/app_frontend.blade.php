@@ -358,14 +358,15 @@
                             <div class="main-navigation flex-lg-right">
                                 <ul class="main-menu menu-right main-menu--white li-last-0">
                                     <li class="menu-item has-children">
-                                        <a href="javascript:void(0)">Home <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                                        <a href="javascript:void(0)">Home </a>
+                                        {{-- <i class="fas fa-chevron-down dropdown-arrow"></i>
                                         <ul class="sub-menu">
                                             <li> <a href="index.html">Home One</a></li>
                                             <li> <a href="index-2.html">Home Two</a></li>
                                             <li> <a href="index-3.html">Home Three</a></li>
                                             <li> <a href="index-4.html">Home Four</a></li>
                                             <li> <a href="index-5.html">Home Five</a></li>
-                                        </ul>
+                                        </ul> --}}
                                     </li>
                                     <!-- Shop -->
                                     <li class="menu-item has-children mega-menu">

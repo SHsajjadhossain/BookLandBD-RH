@@ -27,7 +27,7 @@ active
                             </li>
                             <li class="breadcrumb-item"><a href="{{ route('product.index') }}">Product List</a>
                             </li>
-                            <li class="breadcrumb-item active">Edit Product</li>
+                            <li class="breadcrumb-item active">Product Edit</li>
                         </ol>
                     </div>
                 </div>
@@ -50,8 +50,9 @@ active
                     <div class="card-header d-block d-sm-flex">
                     </div>
                     <div class="card-body">
-                        <form class="form form-vertical" action="" enctype="multipart/form-data">
+                        <form class="form form-vertical" action="{{ route('product.update', $product->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
+                            @method('PUT')
                             <div class="row">
                                 <div class="col-12">
                                     <div class="form-group">
