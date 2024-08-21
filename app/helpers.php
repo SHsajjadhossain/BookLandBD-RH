@@ -1,5 +1,5 @@
 <?php
 
 function allCategories(){
-    return App\Models\Category::limit('9')->get();
+    return App\Models\Category::paginate(9);
 }
