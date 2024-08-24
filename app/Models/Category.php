@@ -13,4 +13,8 @@ class Category extends Model
         'category_name',
         'category_photo',
     ];
+
+    function relationWithSubCategory(){
+        return $this->hasMany(SubCategory::class, 'category_id');
+    }
 }
