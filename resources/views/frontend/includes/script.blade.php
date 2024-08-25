@@ -8,12 +8,6 @@
     //     $('#cat-item').addClass('mega-menu');
     //     @endif
     // });
-
-    // $(document).ready(function () {
-    //     @if (allCategories()->count() > 9)
-    //         $('.cat-item').addClass('hidden-menu-item');
-    //     @endif
-    // });
 </script>
 
 @stack('custom-js')

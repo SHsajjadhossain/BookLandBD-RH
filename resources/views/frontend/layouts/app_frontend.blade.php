@@ -142,12 +142,11 @@
                                             </ul>
                                         </li> --}}
                                         @foreach (allCategories() as $category)
-                                        <li class="cat-item has-children" id="cat-item"><a href="#">{{ $category->category_name }}</a>
+                                        <li class="cat-item {{ ($category->relationWithSubCategory->count() > 0) ? 'has-children' : '' }}" id="cat-item"><a href="#">{{ $category->category_name }}</a>
                                             @if ($category->relationWithSubCategory->count() > 0)
                                             <ul class="sub-menu">
                                                 @foreach ($category->relationWithSubCategory as $sub_cat)
                                                 <li class="single-block">
-                                                    {{-- <h3 class="title">WHEEL SIMULATORS</h3> --}}
                                                     <ul>
                                                         <li><a href="#">{{ $sub_cat->sub_category_name }}</a></li>
                                                     </ul>
