@@ -156,9 +156,11 @@
                                             @endif
                                         </li>
                                         @endforeach
-                                        <li class="cat-item hidden-menu-item"><a href="#">Indoor Living</a></li>
-                                        <li class="cat-item"><a href="#" class="js-expand-hidden-menu">More
+                                        <li class="cat-item"><a href="#">More
                                                 Categories</a></li>
+                                        {{-- <li class="cat-item hidden-menu-item"><a href="#">Indoor Living</a></li> --}}
+                                        {{-- <li class="cat-item"><a href="#" class="js-expand-hidden-menu">More
+                                                Categories</a></li> --}}
                                     </ul>
                                 </div>
                             </nav>
