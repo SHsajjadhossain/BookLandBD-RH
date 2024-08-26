@@ -125,10 +125,10 @@
             <div class="header-bottom bg-primary">
                 <div class="container">
                     <div class="row align-items-center">
-                        <div class="col-lg-3 mt-2">
-                            <nav class="category-nav bg-white  {{ URL::current() == route('user.dashboard') ? '' : 'show' }}">
+                        <div class="mt-2 col-lg-3">
+                            <nav class="category-nav bg-white  {{ (URL::current() == route('frontend.home') || URL::current() == route('register') || URL::current() == route('login')) ? 'show' : '' }}">
                                 <div>
-                                    <a href="javascript:void(0)" class="category-trigger"><i class="fa fa-bars"></i>Browse
+                                    <a href="#" class="category-trigger"><i class="fa fa-bars"></i>Browse
                                         categories</a>
                                     <ul class="category-menu">
                                         {{-- <li class="cat-item has-children">
@@ -142,19 +142,24 @@
                                             </ul>
                                         </li> --}}
                                         @foreach (allCategories() as $category)
-                                        <li class="cat-item {{ ($category->relationWithSubCategory->count() > 0) ? 'has-children' : '' }}" id="cat-item"><a href="#">{{ $category->category_name }}</a>
                                             @if ($category->relationWithSubCategory->count() > 0)
-                                            <ul class="sub-menu">
-                                                @foreach ($category->relationWithSubCategory as $sub_cat)
-                                                <li class="single-block">
-                                                    <ul>
-                                                        <li><a href="#">{{ $sub_cat->sub_category_name }}</a></li>
+                                                <li class="cat-item has-children" id="cat-item">
+                                                    <a href="javascript:void(0)">{{ $category->category_name }}</a>
+                                                    <ul class="sub-menu">
+                                                        @foreach ($category->relationWithSubCategory as $sub_cat)
+                                                        <li class="single-block">
+                                                            <ul>
+                                                                <li><a href="{{ route('subcatwiseproducts', $sub_cat->id) }}">{{ $sub_cat->sub_category_name }}</a></li>
+                                                            </ul>
+                                                        </li>
+                                                        @endforeach
                                                     </ul>
-                                                    @endforeach
                                                 </li>
-                                            </ul>
+                                            @else
+                                                <li class="cat-item">
+                                                    <a href="{{ route('catwiseproducts', $category->id) }}">{{ $category->category_name }}</a>
+                                                </li>
                                             @endif
-                                        </li>
                                         @endforeach
                                         <li class="cat-item"><a href="#">More
                                                 Categories</a></li>

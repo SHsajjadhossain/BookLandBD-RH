@@ -34,8 +34,38 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ProductCreateRequest $request)
+    public function store(Request $request)
     {
+        $has_sub_cat = SubCategory::where('category_id', $request->category_id)->count();
+        // ProductCreateRequest
+        if ($has_sub_cat)
+        {
+            $request->validate([
+                'product_name' => 'required',
+                'product_slug' => 'required',
+                'category_id' => 'required',
+                'sub_category_id' => 'required',
+                'product_price' => 'required',
+                'product_short_description' => 'required',
+                'product_long_description' => 'required',
+                'product_code' => 'required',
+                'product_photo' => 'required|image|mimes:png,jpg,jpeg|dimensions:width=700, height=700'
+            ]);
+        }
+        else
+        {
+            $request->validate([
+                'product_name' => 'required',
+                'product_slug' => 'required',
+                'category_id' => 'required',
+                'product_price' => 'required',
+                'product_short_description' => 'required',
+                'product_long_description' => 'required',
+                'product_code' => 'required',
+                'product_photo' => 'required|image|mimes:png,jpg,jpeg|dimensions:width=700, height=700'
+            ]);
+        }
+
         $image = $request->file('product_photo');
         $imageName = $request->product_slug.'-'.uniqid().'-'.time().'.'.$image->getClientOriginalExtension();
         $location = public_path('uploads/product_photoes/');

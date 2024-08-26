@@ -87,10 +87,13 @@ active
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group" id="product_sub_category">
-                                        <label for="contact-info-vertical">Product Sub Category</label>
+                                        <label for="contact-info-vertical">Product Sub Category<span class="text-danger">*</span></label>
                                         <select name="sub_category_id" class="select2 form-control" id="sub_category">
                                             <option value="" disabled selected>--Select Sub Category--</option>
                                         </select>
+                                        @error('sub_category_id')
+                                        <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -184,6 +187,9 @@ active
     // product-categorywise-select-sub-cat js start
     $(document).ready(function () {
         $('#product_sub_category').hide();
+            @error('sub_category_id')
+                $('#product_sub_category').show();
+            @enderror
         $('#product_category').change(function (e) {
             e.preventDefault();
             var product_category_id = $(this).val();
