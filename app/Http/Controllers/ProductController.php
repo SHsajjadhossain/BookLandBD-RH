@@ -124,6 +124,9 @@ class ProductController extends Controller
                 @unlink($location.Product::find($product->id)->product_photo);
             }
             $image->move($location, $imageName);
+            Product::find($product->id)->update([
+                'product_photo' => $imageName,
+            ]);
         }
 
         Product::find($product->id)->update([
@@ -135,7 +138,6 @@ class ProductController extends Controller
             'product_short_description' => $request->product_short_description,
             'product_long_description' => $request->product_long_description,
             'product_code' => $request->product_code,
-            'product_photo' => $imageName,
         ]);
 
         return redirect(route('product.index'))->with('product_update_success', 'Product updated successfully!!');
@@ -162,5 +164,11 @@ class ProductController extends Controller
     {
         $data['subCategories'] = SubCategory::where('category_id', $request->product_category_id)->get(['id', 'sub_category_name']);
         return response()->json($data);
+    }
+
+    public function productDetails($id){
+        return view('frontend.pages.productDetails',[
+            'single_product_info' => Product::find($id),
+        ]);
     }
 }

@@ -27,7 +27,7 @@ class FrontendController extends Controller
     {
         return view('frontend.pages.subCatWiseProducts',[
            'all_categories' => Category::limit('20')->get(),
-           'sub_catwise_products' => Product::where('sub_category_id', $sub_cat_id)->get()
+           'sub_catwise_products' => Product::where('sub_category_id', $sub_cat_id)->paginate(),
         ]);
     }
 }
