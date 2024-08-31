@@ -2,14 +2,42 @@
 
 @section('title')
 
-Pustok - Shop
+Pustok - {{ $cat_info->category_name }}
 
 @endsection
 
 @section('content')
 
+{{-- <section class="breadcrumb-section">
+    <h2 class="sr-only">Site Breadcrumb</h2>
+    <div class="container">
+        <div class="breadcrumb-contents">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item active">Shop</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</section> --}}
+
 <main class="inner-page-sec-padding-bottom">
     <div class="container">
+        <section class="breadcrumb-section">
+            <h2 class="sr-only">Site Breadcrumb</h2>
+            <div class="container">
+                <div class="breadcrumb-contents">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                            <li class="breadcrumb-item">Shop</li>
+                            <li class="breadcrumb-item active"></li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </section>
         <div class="row">
             <div class="col-lg-9 order-lg-2">
                 <div class="shop-toolbar with-sidebar mb--30">
@@ -458,6 +486,32 @@ Pustok - Shop
             <div class="col-lg-3 mt--40 mt-lg--0">
                 <div class="inner-page-sidebar">
                     <!-- Accordion -->
+                    <div class="single-block">
+                        <h3 class="sidebar-title">Categories</h3>
+                        <ul class="sidebar-menu--shop">
+                            {{-- @foreach ($all_categories as $single_category)
+                                @if ($single_category->relationWithSubCategory->count() > 0) --}}
+                                    <li><a href="#">{{ $cat_info->category_name }}</a>
+                                        <ul class="inner-cat-items">
+                                            @foreach ($cat_info->relationWithSubCategory as $single_sub_cat)
+                                                <li><a href="#">{{ $single_sub_cat->sub_category_name }} ({{ $sub_catwise_products->count() }})</a></li>
+                                            @endforeach
+                                        </ul>
+                                    </li>
+                                {{-- @else
+                                    <li><a href="#">{{ $single_category->category_name }} (5)</a></li>
+                                @endif --}}
+                            {{-- <li><a href="#">More Categories</a></li>
+                            <li><a href="#">Shop (16)</a>
+                                <ul class="inner-cat-items">
+                                    <li><a href="#">Saws (0)</a></li>
+                                    <li><a href="#">Concrete Tools (7)</a></li>
+                                    <li><a href="#">Drills (2)</a></li>
+                                    <li><a href="#">Sanders (1)</a></li>
+                                </ul>
+                            </li> --}}
+                        </ul>
+                    </div>
                     {{-- <div class="single-block">
                         <h3 class="sidebar-title">Categories</h3>
                         <ul class="sidebar-menu--shop">

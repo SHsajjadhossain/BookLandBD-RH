@@ -78,7 +78,7 @@ jQuery(document).ready(function($) {
             });
         }
         /**********************
-         *Expand Category Mobile Menu 
+         *Expand Category Mobile Menu
          ***********************/
 
         function categoryMenuExpandInMobile() {
@@ -100,7 +100,7 @@ jQuery(document).ready(function($) {
             $(".search-dismiss,body").on('click', function(e) {
                 $(".search-wrapper").removeClass('open')
             })
-            // $("body").on('click', function () { 
+            // $("body").on('click', function () {
             // 	$(".search-wrapper").removeClass('open')
             // })
             $(".search-box,.search-trigger").on('click', function(e) {
@@ -273,11 +273,11 @@ jQuery(document).ready(function($) {
                 max: 753,
                 values: [80, 320],
                 slide: function(event, ui) {
-                    $("#amount").val("£" + ui.values[0] + " - £" + ui.values[1]);
+                    $("#amount").val("৳" + ui.values[0] + " - ৳" + ui.values[1]);
                 }
             });
-            $("#amount").val("£" + $(".sb-range-slider").slider("values", 0) +
-                " - £" + $(".sb-range-slider").slider("values", 1));
+            $("#amount").val("৳" + $(".sb-range-slider").slider("values", 0) +
+                " - ৳" + $(".sb-range-slider").slider("values", 1));
         });
 
         /*-------------------------------------
@@ -359,7 +359,7 @@ jQuery(document).ready(function($) {
         	--> NIce Select
         ---------------------------------------*/
         $('.nice-select').niceSelect()
-        
+
 
         /*-------------------------------------
         	--> Product Sorting

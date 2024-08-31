@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
 
 class FrontendController extends Controller
@@ -25,9 +26,11 @@ class FrontendController extends Controller
 
     public function subcatWiseProducts($sub_cat_id)
     {
+        $cat_id = SubCategory::find($sub_cat_id)->category_id;
         return view('frontend.pages.subCatWiseProducts',[
-           'all_categories' => Category::limit('20')->get(),
-           'sub_catwise_products' => Product::where('sub_category_id', $sub_cat_id)->paginate(),
+            'single_sub_cat' => SubCategory::find($sub_cat_id),
+            'cat_info' => Category::find($cat_id),
+            'sub_catwise_products' => Product::where('sub_category_id', $sub_cat_id)->paginate(),
         ]);
     }
 }
