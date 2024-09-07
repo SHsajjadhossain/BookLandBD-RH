@@ -12,10 +12,11 @@ use Illuminate\Support\Facades\Route;
 // All Frontend Views Routes Start
 
 Route::get('/', [FrontendController::class, 'index'])->name('frontend.home');
+Route::get('/shop', [FrontendController::class, 'shop'])->name('frontend.shop');
 
 Route::get('/category/allCategories', [FrontendController::class, 'allCategories'])->name('category.allCategories');
-Route::get('/catwise/{cat_id}', [FrontendController::class, 'catWiseProducts'])->name('catwiseproducts');
-Route::get('/subcatwise/{sub_cat_id}', [FrontendController::class, 'subcatWiseProducts'])->name('subcatwiseproducts');
+Route::get('/catwise/{cat_id}/{random}', [FrontendController::class, 'catWiseProducts'])->name('catwiseproducts');
+Route::get('/subcatwise/{sub_cat_id}/{random}', [FrontendController::class, 'subcatWiseProducts'])->name('subcatwiseproducts');
 Route::get('/product/productetails/{id}', [ProductController::class, 'productDetails'])->name('product.productDetails');
 
 // All Frontend Views Routes End

@@ -23,241 +23,47 @@ Pustok - Category
     <section class="inner-page-sec-padding-bottom space-db--30">
         <div class="container">
             <div class="row space-db-lg--60 space-db--30">
+                @forelse ($all_categories as $category)
                 <div class="col-lg-4 col-md-6 mb-lg--60 mb--30">
                     <div class="blog-card card-style-grid">
                         <a href="blog-details.html" class="image d-block">
-                            <img src="{{ asset('frontend_assets') }}/image/others/blog-grid-1.jpg" alt="">
+                            <img src="{{ asset('uploads/category_photoes') }}/{{ $category->category_photo }}" alt="">
                         </a>
+                        @if ($category->relationWithSubCategory->count() > 0)
                         <div class="card-content">
-                            <h3 class="title"><a href="blog-details.html">Use BLOG TITLE To Make Someone Fall In Love</a>
+                            <h3 class="title mb-3">Category : <a href="javascript:void(0)">{{ $category->category_name }}</a>
                             </h3>
-                            <p class="post-meta"><span>13/08/2017 </span> | <a href="#">Hastech</a></p>
+                            <strong>Sub Category</strong>
                             <article>
-                                <h2 class="sr-only">
-                                    Blog Article
-                                </h2>
-                                <p>Maria Denardo is the Fashion Director theFashion Spot at. Prior to joining tFS, she
-                                    worked as...
-
-
-
-
-
-
-                                </p>
-                                <a href="blog-details.html" class="blog-link">Read More</a>
+                                <ul class="order-details-list">
+                                    @foreach ($category->relationWithSubCategory as $sub_cat)
+                                    <li>
+                                        <a href="{{ route('subcatwiseproducts', $sub_cat->id) }}">{{ $sub_cat->sub_category_name }}</a>
+                                    </li>
+                                    @endforeach
+                                </ul>
                             </article>
                         </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-lg--60 mb--30">
-                    <div class="blog-card card-style-grid">
-                        <a href="blog-details.html" class="image d-block">
-                            <img src="{{ asset('frontend_assets') }}/image/others/blog-grid-2.jpg" alt="">
-                        </a>
+                        @else
                         <div class="card-content">
-                            <h3 class="title"><a href="blog-details.html">Ho To (Do) BLOG TITLE Without Your
-                                    Office(House).</a></h3>
-                            <p class="post-meta"><span>28/10/2017 </span> | <a href="#">Hastech</a></p>
-                            <article>
-                                <h2 class="sr-only">
-                                    Blog Article
-                                </h2>
-                                <p>Maria Denardo is the Fashion Director theFashion Spot at. Prior to joining tFS, she
-                                    worked as...
-
-
-
-
-
-
-                                </p>
-                                <a href="blog-details.html" class="blog-link">Read More</a>
-                            </article>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-lg--60 mb--30">
-                    <div class="blog-card card-style-grid">
-                        <a href="blog-details.html" class="image d-block">
-                            <img src="{{ asset('frontend_assets') }}/image/others/blog-grid-3.jpg" alt="">
-                        </a>
-                        <div class="card-content">
-                            <h3 class="title"><a href="blog-details.html">How to Grow Epiphytic Tropical Plants</a></h3>
-                            <p class="post-meta"><span>30/10/2017 </span> | <a href="#">Hastech</a></p>
-                            <article>
-                                <h2 class="sr-only">
-                                    Blog Article
-                                </h2>
-                                <p>Maria Denardo is the Fashion Director theFashion Spot at. Prior to joining tFS, she
-                                    worked as...
-
-
-
-
-
-
-                                </p>
-                                <a href="blog-details.html" class="blog-link">Read More</a>
-                            </article>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-lg--60 mb--30">
-                    <div class="blog-card card-style-grid">
-                        <a href="blog-details.html" class="image d-block">
-                            <img src="{{ asset('frontend_assets') }}/image/others/blog-grid-2.jpg" alt="">
-                        </a>
-                        <div class="card-content">
-                            <h3 class="title"><a href="blog-details.html">Want A Thriving Business? Focus On BLOG TITLE!</a>
+                            <h3 class="title">Category : <a href="{{ route('catwiseproducts', $category->id) }}">{{ $category->category_name }}</a>
                             </h3>
-                            <p class="post-meta"><span>22/01/2017 </span> | <a href="#">Hastech</a></p>
-                            <article>
-                                <h2 class="sr-only">
-                                    Blog Article
-                                </h2>
-                                <p>Maria Denardo is the Fashion Director theFashion Spot at. Prior to joining tFS, she
-                                    worked as...
-
-
-
-
-
-
-                                </p>
-                                <a href="blog-details.html" class="blog-link">Read More</a>
-                            </article>
                         </div>
+                        @endif
+
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 mb-lg--60 mb--30">
-                    <div class="blog-card card-style-grid">
-                        <a href="blog-details.html" class="image d-block">
-                            <img src="{{ asset('frontend_assets') }}/image/others/blog-grid-4.jpg" alt="">
-                        </a>
-                        <div class="card-content">
-                            <h3 class="title"><a href="blog-details.html">Grow to Epiphytic Tropical Plants</a></h3>
-                            <p class="post-meta"><span>30/10/2017 </span> | <a href="#">Hastech</a></p>
-                            <article>
-                                <h2 class="sr-only">
-                                    Blog Article
-                                </h2>
-                                <p>Maria Denardo is the Fashion Director theFashion Spot at. Prior to joining tFS, she
-                                    worked as...
-
-
-
-
-
-
-                                </p>
-                                <a href="blog-details.html" class="blog-link">Read More</a>
-                            </article>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-lg--60 mb--30">
-                    <div class="blog-card card-style-grid">
-                        <a href="blog-details.html" class="image d-block">
-                            <img src="{{ asset('frontend_assets') }}/image/others/blog-grid-1.jpg" alt="">
-                        </a>
-                        <div class="card-content">
-                            <h3 class="title"><a href="blog-details.html">Want More Money? Start BLOG TITLE</a></h3>
-                            <p class="post-meta"><span>30/10/2017 </span> | <a href="#">Hastech</a></p>
-                            <article>
-                                <h2 class="sr-only">
-                                    Blog Article
-                                </h2>
-                                <p>Maria Denardo is the Fashion Director theFashion Spot at. Prior to joining tFS, she
-                                    worked as...
-
-
-
-
-
-
-                                </p>
-                                <a href="blog-details.html" class="blog-link">Read More</a>
-                            </article>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-lg--60 mb--30">
-                    <div class="blog-card card-style-grid">
-                        <a href="blog-details.html" class="image d-block">
-                            <img src="{{ asset('frontend_assets') }}/image/others/blog-grid-3.jpg" alt="">
-                        </a>
-                        <div class="card-content">
-                            <h3 class="title"><a href="blog-details.html">Beware The BLOG TITLE Scam</a></h3>
-                            <p class="post-meta"><span>30/10/2017 </span> | <a href="#">Hastech</a></p>
-                            <article>
-                                <h2 class="sr-only">
-                                    Blog Article
-                                </h2>
-                                <p>Maria Denardo is the Fashion Director theFashion Spot at. Prior to joining tFS, she
-                                    worked as...
-
-
-
-
-
-
-                                </p>
-                                <a href="blog-details.html" class="blog-link">Read More</a>
-                            </article>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-lg--60 mb--30">
-                    <div class="blog-card card-style-grid">
-                        <a href="blog-details.html" class="image d-block">
-                            <img src="{{ asset('frontend_assets') }}/image/others/blog-grid-1.jpg" alt="">
-                        </a>
-                        <div class="card-content">
-                            <h3 class="title"><a href="blog-details.html">9 Ways BLOG TITLE Can Make You Invincible</a></h3>
-                            <p class="post-meta"><span>30/10/2017 </span> | <a href="#">Hastech</a></p>
-                            <article>
-                                <h2 class="sr-only">
-                                    Blog Article
-                                </h2>
-                                <p>Maria Denardo is the Fashion Director theFashion Spot at. Prior to joining tFS, she
-                                    worked as...
-
-
-
-
-
-
-                                </p>
-                                <a href="blog-details.html" class="blog-link">Read More</a>
-                            </article>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-lg--60 mb--30">
-                    <div class="blog-card card-style-grid">
-                        <a href="blog-details.html" class="image d-block">
-                            <img src="{{ asset('frontend_assets') }}/image/others/blog-grid-2.jpg" alt="">
-                        </a>
-                        <div class="card-content">
-                            <h3 class="title"><a href="blog-details.html">Want More Money? Start BLOG TITLE</a></h3>
-                            <p class="post-meta"><span>30/10/2017 </span> | <a href="#">Hastech</a></p>
-                            <article>
-                                <h2 class="sr-only">
-                                    Blog Article
-                                </h2>
-                                <p>Maria Denardo is the Fashion Director theFashion Spot at. Prior to joining tFS, she
-                                    worked as...
-
-
-
-
-
-
-                                </p>
-                                <a href="blog-details.html" class="blog-link">Read More</a>
-                            </article>
-                        </div>
+                @empty
+                    <span class="mb-4 text-center text-danger">No Product To Show</span>
+                @endforelse
+            </div>
+            <!-- Pagination Block -->
+            <div class="row pt--30">
+                <div class="col-md-12">
+                    <div class="pagination-block">
+                        {{--........................ --}}
+                        {{ $all_categories->links('frontend.pages.paginate') }}
+                        {{--........................ --}}
                     </div>
                 </div>
             </div>

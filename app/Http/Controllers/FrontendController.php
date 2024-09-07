@@ -35,6 +35,14 @@ class FrontendController extends Controller
     }
 
     public function allCategories() {
-        return view('frontend.pages.allCategory');
+        return view('frontend.pages.allCategory',[
+            'all_categories' => Category::paginate()
+        ]);
+    }
+
+    public function shop() {
+        return view('frontend.pages.shop',[
+            'all_products' => Product::paginate()
+        ]);
     }
 }

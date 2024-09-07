@@ -39,7 +39,15 @@
                                         wishlist (0)</a>
                                 </li>
                                 <li class="dropdown-trigger language-dropdown">
-                                    <a href="#"><i class="icons-left fas fa-user"></i>My Account</a>
+                                    @auth
+                                        @if (Auth::user()->role == '1' || Auth::user()->role == '3')
+                                            {{-- <a href="" class="font-weight-bold">{{ Auth::user()->name }}</a> --}}
+                                            <a href="{{ route('dashboard') }}"><i class="icons-left fas fa-user"></i>My Account</a>
+                                        @else
+                                        {{-- <a href="" class="font-weight-bold">{{ Auth::user()->name }}</a> --}}
+                                            <a href="{{ route('user.dashboard') }}"><i class="icons-left fas fa-user"></i>My Account</a>
+                                        @endif
+                                    @endauth
                                 </li>
                                 <li><a href="#"><i class="icons-left fas fa-phone"></i> Contact</a>
                                 </li>
@@ -149,7 +157,7 @@
                                                         @foreach ($category->relationWithSubCategory as $sub_cat)
                                                         <li class="single-block">
                                                             <ul>
-                                                                <li><a href="{{ route('subcatwiseproducts', $sub_cat->id) }}">{{ $sub_cat->sub_category_name }}</a></li>
+                                                                <li><a href="{{ route('subcatwiseproducts', [$sub_cat->id, Str::random(5)]) }}">{{ $sub_cat->sub_category_name }}</a></li>
                                                             </ul>
                                                         </li>
                                                         @endforeach
@@ -157,7 +165,7 @@
                                                 </li>
                                             @else
                                                 <li class="cat-item">
-                                                    <a href="{{ route('catwiseproducts', $category->id) }}">{{ $category->category_name }}</a>
+                                                    <a href="{{ route('catwiseproducts', [$category->id, Str::random(5)]) }}">{{ $category->category_name }}</a>
                                                 </li>
                                             @endif
                                         @endforeach
@@ -294,63 +302,10 @@
                                 <ul class="main-menu menu-right main-menu--white li-last-0">
                                     <li class="menu-item">
                                         <a href="{{ route('frontend.home') }}">Home </a>
-                                        {{-- <i class="fas fa-chevron-down dropdown-arrow"></i>
-                                        <ul class="sub-menu">
-                                            <li> <a href="index.html">Home One</a></li>
-                                            <li> <a href="index-2.html">Home Two</a></li>
-                                            <li> <a href="index-3.html">Home Three</a></li>
-                                            <li> <a href="index-4.html">Home Four</a></li>
-                                            <li> <a href="index-5.html">Home Five</a></li>
-                                        </ul> --}}
                                     </li>
                                     <!-- Shop -->
-                                    <li class="menu-item has-children mega-menu">
-                                        <a href="javascript:void(0)">shop <i class="fas fa-chevron-down dropdown-arrow"></i></a>
-                                        <ul class="sub-menu four-column">
-                                            <li class="cus-col-25">
-                                                <h3 class="menu-title"><a href="javascript:void(0)">Shop Grid </a></h3>
-                                                <ul class="mega-single-block">
-                                                    <li><a href="shop-grid.html">Fullwidth</a></li>
-                                                    <li><a href="shop-grid-left-sidebar.html">left Sidebar</a></li>
-                                                    <li><a href="shop-grid-right-sidebar.html">Right Sidebar</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="cus-col-25">
-                                                <h3 class="menu-title"> <a href="javascript:void(0)">Shop List</a></h3>
-                                                <ul class="mega-single-block">
-                                                    <li><a href="shop-list.html">Fullwidth</a></li>
-                                                    <li><a href="shop-list-left-sidebar.html">left Sidebar</a></li>
-                                                    <li><a href="shop-list-right-sidebar.html">Right Sidebar</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="cus-col-25">
-                                                <h3 class="menu-title"> <a href="javascript:void(0)">Product Details
-                                                        1</a></h3>
-                                                <ul class="mega-single-block">
-                                                    <li><a href="product-details.html">Product Details Page</a></li>
-                                                    <li><a href="product-details-affiliate.html">Product Details
-                                                            Affiliate</a></li>
-                                                    <li><a href="product-details-group.html">Product Details Group</a>
-                                                    </li>
-                                                    <li><a href="product-details-variable.html">Product Details
-                                                            Variables</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="cus-col-25">
-                                                <h3 class="menu-title"><a href="javascript:void(0)">Product Details
-                                                        2</a></h3>
-                                                <ul class="mega-single-block">
-                                                    <li><a href="product-details-left-thumbnail.html">left Thumbnail</a>
-                                                    </li>
-                                                    <li><a href="product-details-right-thumbnail.html">Right
-                                                            Thumbnail</a></li>
-                                                    <li><a href="product-details-left-gallery.html">Left Gallery</a>
-                                                    </li>
-                                                    <li><a href="product-details-right-gallery.html">Right Gallery</a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>
+                                    <li class="menu-item">
+                                        <a href="{{ route('frontend.shop') }}">shop</a>
                                     </li>
                                     <!-- Pages -->
                                     <li class="menu-item has-children">

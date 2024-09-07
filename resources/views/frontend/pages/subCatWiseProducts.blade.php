@@ -2,7 +2,7 @@
 
 @section('title')
 
-Pustok - {{ $cat_info->category_name }}
+Pustok - {{ $single_sub_cat->sub_category_name }}
 
 @endsection
 
@@ -27,7 +27,7 @@ Pustok - {{ $cat_info->category_name }}
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('frontend.home') }}">Home</a></li>
-                            <li class="breadcrumb-item"><a href="#">Shop</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('frontend.shop') }}">Shop</a></li>
                             <li class="breadcrumb-item bread-active active">{{ $cat_info->category_name }}</li>
                         </ol>
                     </nav>
@@ -201,9 +201,7 @@ Pustok - {{ $cat_info->category_name }}
                                         </div>
                                         <article>
                                             {{-- <h2 class="sr-only">Card List Article</h2> --}}
-                                            <p>More room to move. With 80GB or 160GB of storage and up to 40 hours
-                                                of battery life, the new iPod classic lets you enjoy
-                                                up to 40,000 songs or..</p>
+                                            <p>{{ Str::limit($single_product->product_short_description, 140, '...') }}</p>
                                         </article>
                                         <div class="price-block">
                                             <span class="price">৳{{ $single_product->product_price }}</span>
@@ -240,7 +238,7 @@ Pustok - {{ $cat_info->category_name }}
                                                 <!-- Product Details Slider Big Image-->
                                                 <div class="product-details-slider sb-slick-slider arrow-type-two">
                                                     <div class="single-slide">
-                                                        <img src="{{ asset('uploads/product_photoes') }}/{{ $single_product->product_photo }}" alt="">
+                                                        <img src="{{ asset('uploads/product_photoes') }}/{{ $single_product->product_photo }}" alt="Product photo not found">
                                                     </div>
                                                 </div>
                                             </div>
