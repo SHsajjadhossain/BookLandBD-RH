@@ -81,11 +81,13 @@ class CategoryController extends Controller
                 @unlink($location.Category::find($id)->category_photo);
             }
             $image->move($location, $imageName);
+            Category::find($id)->update([
+            'category_photo' => $imageName
+        ]);
         }
 
         Category::find($id)->update([
             'category_name' => $request->category_update_name,
-            'category_photo' => $imageName
         ]);
 
         return back()->with('imgUpdateSuccess', 'Category photo updated successfully!!');

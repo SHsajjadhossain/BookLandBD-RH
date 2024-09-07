@@ -28,7 +28,7 @@ Pustok - Shop
                         </div>
                         <div class="col-xl-4 col-md-4 col-sm-6 mt--10 mt-sm--0">
                             <span class="toolbar-status">
-                                Showing 1 to 9 of 14 (2 Pages)
+                                {{ $catwise_products->links('frontend.pages.paginateNumberOfPagesShowing') }}
                             </span>
                         </div>
                         <div class="col-lg-2 col-md-2 col-sm-6 mt--10 mt-md--0">
@@ -218,20 +218,9 @@ Pustok - Shop
                 <div class="row pt--30">
                     <div class="col-md-12">
                         <div class="pagination-block">
-                            <ul class="pagination-btns flex-center">
-                                <li><a href="#" class="single-btn prev-btn ">|<i class="zmdi zmdi-chevron-left"></i>
-                                    </a></li>
-                                <li><a href="#" class="single-btn prev-btn "><i class="zmdi zmdi-chevron-left"></i> </a>
-                                </li>
-                                <li class="active"><a href="#" class="single-btn">1</a></li>
-                                <li><a href="#" class="single-btn">2</a></li>
-                                <li><a href="#" class="single-btn">3</a></li>
-                                <li><a href="#" class="single-btn">4</a></li>
-                                <li><a href="#" class="single-btn next-btn"><i class="zmdi zmdi-chevron-right"></i></a>
-                                </li>
-                                <li><a href="#" class="single-btn next-btn"><i class="zmdi zmdi-chevron-right"></i>|</a>
-                                </li>
-                            </ul>
+                            {{--........................ --}}
+                            {{ $catwise_products->links('frontend.pages.paginate') }}
+                            {{--........................ --}}
                         </div>
                     </div>
                 </div>
@@ -386,33 +375,12 @@ Pustok - Shop
             <div class="col-lg-3 mt--40 mt-lg--0">
                 <div class="inner-page-sidebar">
                     <!-- Accordion -->
-                    {{-- <div class="single-block">
+                    <div class="single-block">
                         <h3 class="sidebar-title">Categories</h3>
                         <ul class="sidebar-menu--shop">
-                            @foreach ($all_categories as $single_category)
-                            @if ($single_category->relationWithSubCategory->count() > 0)
-                            <li><a href="#">{{ $single_category->category_name }} (16)</a>
-                                <ul class="inner-cat-items">
-                                    @foreach ($single_category->relationWithSubCategory as $single_sub_cat)
-                                    <li><a href="#">{{ $single_sub_cat->sub_category_name }} (0)</a></li>
-                                    @endforeach
-                                </ul>
-                            </li>
-                            @else
-                            <li><a href="#">{{ $single_category->category_name }} (5)</a></li>
-                            @endif
-                            @endforeach
-                            <li><a href="#">More Categories</a></li>
-                            <li><a href="#">Shop (16)</a>
-                                <ul class="inner-cat-items">
-                                    <li><a href="#">Saws (0)</a></li>
-                                    <li><a href="#">Concrete Tools (7)</a></li>
-                                    <li><a href="#">Drills (2)</a></li>
-                                    <li><a href="#">Sanders (1)</a></li>
-                                </ul>
-                            </li>
+                            <li><a href="">{{ $single_cat->category_name }} ({{ $catwise_products->count() }})</a></li>
                         </ul>
-                    </div> --}}
+                    </div>
                     <!-- Price -->
                     <div class="single-block">
                         <h3 class="sidebar-title">Fillter By Price</h3>

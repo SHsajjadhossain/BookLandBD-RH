@@ -161,7 +161,7 @@
                                                 </li>
                                             @endif
                                         @endforeach
-                                        <li class="cat-item"><a href="#">More
+                                        <li class="cat-item"><a href="{{ route('category.allCategories') }}">More
                                                 Categories</a></li>
                                         {{-- <li class="cat-item hidden-menu-item"><a href="#">Indoor Living</a></li> --}}
                                         {{-- <li class="cat-item"><a href="#" class="js-expand-hidden-menu">More
@@ -292,8 +292,8 @@
                         <div class="col-lg-6">
                             <div class="main-navigation flex-lg-right">
                                 <ul class="main-menu menu-right main-menu--white li-last-0">
-                                    <li class="menu-item has-children">
-                                        <a href="javascript:void(0)">Home </a>
+                                    <li class="menu-item">
+                                        <a href="{{ route('frontend.home') }}">Home </a>
                                         {{-- <i class="fas fa-chevron-down dropdown-arrow"></i>
                                         <ul class="sub-menu">
                                             <li> <a href="index.html">Home One</a></li>
@@ -718,15 +718,15 @@
             <div class="container d-none d-lg-block">
                 <div class="row align-items-center">
                     <div class="col-lg-4">
-                        <a href="index.html" class="site-brand">
+                        <a href="{{ route('frontend.home') }}" class="site-brand">
                             <img src="{{ asset('frontend_assets') }}/image/logo.png" alt="">
                         </a>
                     </div>
                     <div class="col-lg-8">
                         <div class="main-navigation flex-lg-right">
                             <ul class="main-menu menu-right ">
-                                <li class="menu-item has-children">
-                                    <a href="javascript:void(0)">Home</a>
+                                <li class="menu-item">
+                                    <a href="{{ route('frontend.home') }}">Home</a>
                                 </li>
                                 <!-- Shop -->
                                 <li class="menu-item has-children mega-menu">

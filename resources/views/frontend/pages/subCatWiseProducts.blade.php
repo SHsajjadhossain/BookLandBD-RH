@@ -6,21 +6,17 @@ Pustok - {{ $cat_info->category_name }}
 
 @endsection
 
-@section('content')
+@push('custom-css')
 
-{{-- <section class="breadcrumb-section">
-    <h2 class="sr-only">Site Breadcrumb</h2>
-    <div class="container">
-        <div class="breadcrumb-contents">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item active">Shop</li>
-                </ol>
-            </nav>
-        </div>
-    </div>
-</section> --}}
+<style>
+    .bread-active{
+        font-weight: 700;
+    }
+</style>
+
+@endpush
+
+@section('content')
 
 <main class="inner-page-sec-padding-bottom">
     <div class="container">
@@ -30,9 +26,9 @@ Pustok - {{ $cat_info->category_name }}
                 <div class="breadcrumb-contents">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                            <li class="breadcrumb-item">Shop</li>
-                            <li class="breadcrumb-item active"></li>
+                            <li class="breadcrumb-item"><a href="{{ route('frontend.home') }}">Home</a></li>
+                            <li class="breadcrumb-item"><a href="#">Shop</a></li>
+                            <li class="breadcrumb-item bread-active active">{{ $cat_info->category_name }}</li>
                         </ol>
                     </nav>
                 </div>
@@ -56,7 +52,6 @@ Pustok - {{ $cat_info->category_name }}
                         </div>
                         <div class="col-xl-4 col-md-4 col-sm-6 mt--10 mt-sm--0">
                             <span class="toolbar-status">
-
                                 {{ $sub_catwise_products->links('frontend.pages.paginateNumberOfPagesShowing') }}
                             </span>
                         </div>
@@ -195,26 +190,25 @@ Pustok - {{ $cat_info->category_name }}
                                 </div>
                                 <div class="product-list-content">
                                     <div class="card-image">
-                                        <img src="{{ asset('frontend_assets') }}/image/products/product-3.jpg" alt="">
+                                        <img src="{{ asset('uploads/product_photoes') }}/{{ $single_product->product_photo }}" alt="Product photo not found">
                                     </div>
                                     <div class="product-card--body">
                                         <div class="product-header">
-                                            <a href="#" class="author">
+                                            {{-- <a href="#" class="author">
                                                 Gpple
-                                            </a>
-                                            <h3><a href="product-details.html" tabindex="0">Qpple cPad with Retina
-                                                    Display MD510LL/A</a></h3>
+                                            </a> --}}
+                                            <h3><a href="{{ route('product.productDetails', $single_product->id) }}" tabindex="0">{{ $single_product->product_name }}</a></h3>
                                         </div>
                                         <article>
-                                            <h2 class="sr-only">Card List Article</h2>
+                                            {{-- <h2 class="sr-only">Card List Article</h2> --}}
                                             <p>More room to move. With 80GB or 160GB of storage and up to 40 hours
                                                 of battery life, the new iPod classic lets you enjoy
                                                 up to 40,000 songs or..</p>
                                         </article>
                                         <div class="price-block">
-                                            <span class="price">£51.20</span>
-                                            <del class="price-old">£51.20</del>
-                                            <span class="price-discount">20%</span>
+                                            <span class="price">৳{{ $single_product->product_price }}</span>
+                                            {{-- <del class="price-old">£51.20</del>
+                                            <span class="price-discount">20%</span> --}}
                                         </div>
                                         <div class="rating-block">
                                             <span class="fas fa-star star_on"></span>
@@ -227,8 +221,8 @@ Pustok - {{ $cat_info->category_name }}
                                             <a href="#" class="btn btn-outlined">Add To Cart</a>
                                             <a href="#" class="card-link"><i class="fas fa-heart"></i> Add To
                                                 Wishlist</a>
-                                            <a href="#" class="card-link"><i class="fas fa-random"></i> Add To
-                                                Cart</a>
+                                            {{-- <a href="#" class="card-link"><i class="fas fa-random"></i> Add To
+                                                Cart</a> --}}
                                         </div>
                                     </div>
                                 </div>
@@ -325,23 +319,9 @@ Pustok - {{ $cat_info->category_name }}
                 <div class="row pt--30">
                     <div class="col-md-12">
                         <div class="pagination-block">
-
                             {{--........................ --}}
                             {{ $sub_catwise_products->links('frontend.pages.paginate') }}
-                            {{-- <ul class="pagination-btns flex-center">
-                                <li><a href="#" class="single-btn prev-btn ">|<i class="zmdi zmdi-chevron-left"></i>
-                                    </a></li>
-                                <li><a href="#" class="single-btn prev-btn "><i class="zmdi zmdi-chevron-left"></i> </a>
-                                </li>
-                                <li class="active"><a href="#" class="single-btn">1</a></li>
-                                <li><a href="#" class="single-btn">2</a></li>
-                                <li><a href="#" class="single-btn">3</a></li>
-                                <li><a href="#" class="single-btn">4</a></li>
-                                <li><a href="#" class="single-btn next-btn"><i class="zmdi zmdi-chevron-right"></i></a>
-                                </li>
-                                <li><a href="#" class="single-btn next-btn"><i class="zmdi zmdi-chevron-right"></i>|</a>
-                                </li>
-                            </ul> --}}
+                            {{--........................ --}}
                         </div>
                     </div>
                 </div>

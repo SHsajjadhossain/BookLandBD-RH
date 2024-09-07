@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [FrontendController::class, 'index'])->name('frontend.home');
 
+Route::get('/category/allCategories', [FrontendController::class, 'allCategories'])->name('category.allCategories');
 Route::get('/catwise/{cat_id}', [FrontendController::class, 'catWiseProducts'])->name('catwiseproducts');
 Route::get('/subcatwise/{sub_cat_id}', [FrontendController::class, 'subcatWiseProducts'])->name('subcatwiseproducts');
 Route::get('/product/productetails/{id}', [ProductController::class, 'productDetails'])->name('product.productDetails');

@@ -19,8 +19,8 @@ class FrontendController extends Controller
     public function catWiseProducts($cat_id)
     {
         return view('frontend.pages.catWiseProducts',[
-           'all_categories' => Category::limit('20')->get(),
-           'catwise_products' => Product::where('category_id', $cat_id)->get()
+           'single_cat' => Category::find($cat_id),
+           'catwise_products' => Product::where('category_id', $cat_id)->paginate()
         ]);
     }
 
@@ -32,5 +32,9 @@ class FrontendController extends Controller
             'cat_info' => Category::find($cat_id),
             'sub_catwise_products' => Product::where('sub_category_id', $sub_cat_id)->paginate(),
         ]);
+    }
+
+    public function allCategories() {
+        return view('frontend.pages.allCategory');
     }
 }
