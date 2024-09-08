@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\SubCategory;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -37,12 +38,12 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $has_sub_cat = SubCategory::where('category_id', $request->category_id)->count();
+        $slug = Str::slug($request->product_name)."-".Str::random(5);
         // ProductCreateRequest
         if ($has_sub_cat)
         {
             $request->validate([
                 'product_name' => 'required',
-                'product_slug' => 'required',
                 'category_id' => 'required',
                 'sub_category_id' => 'required',
                 'product_price' => 'required',
@@ -56,7 +57,6 @@ class ProductController extends Controller
         {
             $request->validate([
                 'product_name' => 'required',
-                'product_slug' => 'required',
                 'category_id' => 'required',
                 'product_price' => 'required',
                 'product_short_description' => 'required',
@@ -73,7 +73,7 @@ class ProductController extends Controller
 
         Product::create([
             'product_name' => $request->product_name,
-            'product_slug' => $request->product_slug,
+            'product_slug' => $slug,
             'category_id' => $request->category_id,
             'sub_category_id' => $request->sub_category_id,
             'product_price' => $request->product_price,
@@ -131,7 +131,6 @@ class ProductController extends Controller
 
         Product::find($product->id)->update([
             'product_name' => $request->product_name,
-            'product_slug' => $request->product_slug,
             'category_id' => $request->category_id,
             'sub_category_id' => $request->sub_category_id,
             'product_price' => $request->product_price,
@@ -166,9 +165,9 @@ class ProductController extends Controller
         return response()->json($data);
     }
 
-    public function productDetails($id){
+    public function productDetails($slug){
         return view('frontend.pages.productDetails',[
-            'single_product_info' => Product::find($id),
+            'single_product_info' => Product::where('product_slug', $slug)->first(),
         ]);
     }
 }

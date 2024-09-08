@@ -23,7 +23,6 @@ class ProductUpdateRequest extends FormRequest
     {
         return [
             'product_name' => 'required',
-            'product_slug' => 'required',
             'category_id' => 'required',
             'product_price' => 'required',
             'product_short_description' => 'required',

@@ -135,7 +135,7 @@ Pustok - {{ $single_cat->category_name }}
                                         {{-- <a href="#" class="author">
                                             Epple
                                         </a> --}}
-                                        <h3><a href="{{ route('product.productDetails', $single_product->id) }}">{{ $single_product->product_name }}</a></h3>
+                                        <h3><a href="{{ route('product.productDetails', $single_product->product_slug) }}">{{ $single_product->product_name }}</a></h3>
                                     </div>
                                     <div class="product-card--body">
                                         <div class="card-image">
@@ -173,7 +173,7 @@ Pustok - {{ $single_cat->category_name }}
                                             {{-- <a href="#" class="author">
                                                 Gpple
                                             </a> --}}
-                                            <h3><a href="{{ route('product.productDetails', $single_product->id) }}" tabindex="0">{{ $single_product->product_name }}</a></h3>
+                                            <h3><a href="{{ route('product.productDetails', $single_product->product_slug) }}" tabindex="0">{{ $single_product->product_name }}</a></h3>
                                         </div>
                                         <article>
                                             {{-- <h2 class="sr-only">Card List Article</h2> --}}

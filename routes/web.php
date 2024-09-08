@@ -17,7 +17,7 @@ Route::get('/shop', [FrontendController::class, 'shop'])->name('frontend.shop');
 Route::get('/category/allCategories', [FrontendController::class, 'allCategories'])->name('category.allCategories');
 Route::get('/catwise/{cat_id}/{random}', [FrontendController::class, 'catWiseProducts'])->name('catwiseproducts');
 Route::get('/subcatwise/{sub_cat_id}/{random}', [FrontendController::class, 'subcatWiseProducts'])->name('subcatwiseproducts');
-Route::get('/product/productetails/{id}', [ProductController::class, 'productDetails'])->name('product.productDetails');
+Route::get('/product/productetails/{slug}', [ProductController::class, 'productDetails'])->name('product.productDetails');
 
 // All Frontend Views Routes End
 

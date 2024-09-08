@@ -37,12 +37,12 @@ Pustok - Shop
                         <a href="#" class="sorting-btn" data-target="list "><i class="fas fa-list"></i></a>
                     </div>
                 </div>
-                <div class="col-xl-5 col-md-4 col-sm-6  mt--10 mt-sm--0">
+                <div class="col-xl-5 col-md-4 col-sm-6 mt--10 mt-sm--0">
                     <span class="toolbar-status">
                         {{ $all_products->links('frontend.pages.paginateNumberOfPagesShowing') }}
                     </span>
                 </div>
-                <div class="col-lg-2 col-md-2 col-sm-6  mt--10 mt-md--0">
+                <div class="col-lg-2 col-md-2 col-sm-6 mt--10 mt-md--0">
                     <div class="sorting-selection">
                         <span>Show:</span>
                         <select class="form-control nice-select sort-select">
@@ -57,7 +57,7 @@ Pustok - Shop
                 <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 mt--10 mt-md--0 ">
                     <div class="sorting-selection">
                         <span>Sort By:</span>
-                        <select class="form-control nice-select sort-select mr-0">
+                        <select class="mr-0 form-control nice-select sort-select">
                             <option value="" selected="selected">Default Sorting</option>
                             <option value="">Sort
                                 By:Name (A - Z)</option>
@@ -94,12 +94,12 @@ Pustok - Shop
                         <a href="#" class="sorting-btn" data-target="list "><i class="fas fa-list"></i></a>
                     </div>
                 </div>
-                <div class="col-xl-5 col-md-4 col-sm-6  mt--10 mt-sm--0">
+                <div class="col-xl-5 col-md-4 col-sm-6 mt--10 mt-sm--0">
                     <span class="toolbar-status">
                         Showing 1 to 9 of 14 (2 Pages)
                     </span>
                 </div>
-                <div class="col-lg-2 col-md-2 col-sm-6  mt--10 mt-md--0">
+                <div class="col-lg-2 col-md-2 col-sm-6 mt--10 mt-md--0">
                     <div class="sorting-selection">
                         <span>Show:</span>
                         <select class="form-control nice-select sort-select">
@@ -114,7 +114,7 @@ Pustok - Shop
                 <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 mt--10 mt-md--0 ">
                     <div class="sorting-selection">
                         <span>Sort By:</span>
-                        <select class="form-control nice-select sort-select mr-0">
+                        <select class="mr-0 form-control nice-select sort-select">
                             <option value="" selected="selected">Default Sorting</option>
                             <option value="">Sort
                                 By:Name (A - Z)</option>
@@ -137,7 +137,7 @@ Pustok - Shop
                 </div>
             </div>
         </div>
-        <div class="shop-product-wrap grid with-pagination row space-db--30 shop-border">
+        <div class="grid shop-product-wrap with-pagination row space-db--30 shop-border">
             @forelse ($all_products as $single_product)
             <div class="col-lg-4 col-sm-6">
                 <div class="product-card">
@@ -146,7 +146,7 @@ Pustok - Shop
                             {{-- <a href="#" class="author">
                                 Epple
                             </a> --}}
-                            <h3><a href="{{ route('product.productDetails', $single_product->id) }}">{{ $single_product->product_name }}</a></h3>
+                            <h3><a href="{{ route('product.productDetails', $single_product->product_slug) }}">{{ $single_product->product_name }}</a></h3>
                         </div>
                         <div class="product-card--body">
                             <div class="card-image">
@@ -184,7 +184,7 @@ Pustok - Shop
                                 {{-- <a href="#" class="author">
                                     Gpple
                                 </a> --}}
-                                <h3><a href="{{ route('product.productDetails', $single_product->id) }}" tabindex="0">{{ $single_product->product_name }}</a></h3>
+                                <h3><a href="{{ route('product.productDetails', $single_product->product_slug) }}" tabindex="0">{{ $single_product->product_name }}</a></h3>
                             </div>
                             <article>
                                 {{-- <h2 class="sr-only">Card List Article</h2> --}}

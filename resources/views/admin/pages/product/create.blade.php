@@ -61,7 +61,7 @@ active
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-12">
+                                {{-- <div class="col-12">
                                     <div class="form-group">
                                         <label for="first-name-vertical">Product Slug<span class="text-danger">*</span></label>
                                         <input type="text" id="product_slug" class="form-control" name="product_slug"
@@ -70,7 +70,7 @@ active
                                         <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="email-id-vertical">Product Category<span class="text-danger">*</span></label>
