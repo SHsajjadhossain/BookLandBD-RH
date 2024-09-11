@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Route;
 
 // All Frontend Views Routes Start
@@ -17,7 +18,14 @@ Route::get('/shop', [FrontendController::class, 'shop'])->name('frontend.shop');
 Route::get('/category/allCategories', [FrontendController::class, 'allCategories'])->name('category.allCategories');
 Route::get('/catwise/{cat_id}/{random}', [FrontendController::class, 'catWiseProducts'])->name('catwiseproducts');
 Route::get('/subcatwise/{sub_cat_id}/{random}', [FrontendController::class, 'subcatWiseProducts'])->name('subcatwiseproducts');
-Route::get('/product/productetails/{slug}', [ProductController::class, 'productDetails'])->name('product.productDetails');
+Route::get('/product/details/{slug}', [ProductController::class, 'productDetails'])->name('product.productDetails');
+
+// Wishlist Routes Start
+
+Route::resource('wishlist', WishlistController::class);
+Route::get('/wishlist/insert/{product_id}', [WishlistController::class, 'insert'])->name('wishlist.insert');
+
+// Wishlist Routes end
 
 // All Frontend Views Routes End
 

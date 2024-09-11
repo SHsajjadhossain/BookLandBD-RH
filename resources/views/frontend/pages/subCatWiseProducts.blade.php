@@ -472,7 +472,7 @@ Pustok - {{ $single_sub_cat->sub_category_name }}
                                     <li><a href="#">{{ $cat_info->category_name }}</a>
                                         <ul class="inner-cat-items">
                                             @foreach ($cat_info->relationWithSubCategory as $single_sub_cat)
-                                                <li><a href="#">{{ $single_sub_cat->sub_category_name }} ({{ $sub_catwise_products->count() }})</a></li>
+                                                <li><a href="{{ route('subcatwiseproducts', [$single_sub_cat->id, Str::random(5)]) }}">{{ $single_sub_cat->sub_category_name }} ({{ $sub_catwise_products->count() }})</a></li>
                                             @endforeach
                                         </ul>
                                     </li>

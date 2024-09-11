@@ -38,7 +38,7 @@ Pustok - Category
                                 <ul class="order-details-list">
                                     @foreach ($category->relationWithSubCategory as $sub_cat)
                                     <li>
-                                        <a href="{{ route('subcatwiseproducts', $sub_cat->id) }}">{{ $sub_cat->sub_category_name }}</a>
+                                        <a href="{{ route('subcatwiseproducts', $sub_cat->id) }}">{{ $sub_cat->sub_category_name }} ({{ $sub_cat->relationWithProduct->count() }})</a>
                                     </li>
                                     @endforeach
                                 </ul>
@@ -46,7 +46,7 @@ Pustok - Category
                         </div>
                         @else
                         <div class="card-content">
-                            <h3 class="title">Category : <a href="{{ route('catwiseproducts', $category->id) }}">{{ $category->category_name }}</a>
+                            <h3 class="title">Category : <a href="{{ route('catwiseproducts', $category->id) }}">{{ $category->category_name }} ({{ $category->relationWithProduct->count() }})</a>
                             </h3>
                         </div>
                         @endif

@@ -252,9 +252,12 @@ Pustok - Book Store
                                     </div>
                                     <div class="overlay">
                                         <h4 class="home-sidebar-title">{{ $category->category_name }}</h4>
-                                        <a href="shop-grid.html" class="cat-btn btn--yellow">
+                                            <a href="{{ route('catwiseproducts', [$category->id, Str::random(5)]) }}" class="cat-btn btn--yellow">
+                                                Shop Now
+                                            </a>
+                                        {{-- <a href="#" class="cat-btn btn--yellow">
                                             Shop Now
-                                        </a>
+                                        </a> --}}
                                     </div>
                                 </div>
                             </div>
@@ -4024,7 +4027,7 @@ Pustok - Book Store
     $('.category-slider').slick({
     dots: false,
     infinite: true,
-    autoplay: true,
+    autoplay: false,
     speed: 300,
     slidesToShow: 2,
     slidesToScroll: 1,

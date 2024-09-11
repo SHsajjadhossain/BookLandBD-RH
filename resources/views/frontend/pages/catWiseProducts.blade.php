@@ -305,9 +305,23 @@ Pustok - {{ $single_cat->category_name }}
                     <!-- Accordion -->
                     <div class="single-block">
                         <h3 class="sidebar-title">Categories</h3>
+                        @if ($single_cat->relationWithSubCategory->count() <= 0)
                         <ul class="sidebar-menu--shop">
                             <li><a href="">{{ $single_cat->category_name }} ({{ $catwise_products->count() }})</a></li>
                         </ul>
+                        @else
+                        <ul class="sidebar-menu--shop">
+                            <li><a href="#">{{ $single_cat->category_name }}</a>
+                            <ul class="inner-cat-items">
+                                @foreach ($single_cat->relationWithSubCategory as $single_sub_cat)
+                                <li><a href="{{ route('subcatwiseproducts', [$single_sub_cat->id, Str::random(5)]) }}">{{
+                                        $single_sub_cat->sub_category_name }} ({{ $single_sub_cat->relationWithProduct->count() }})</a></li>
+                                @endforeach
+                            </ul>
+                            </li>
+                        </ul>
+                        @endif
+
                     </div>
                     <!-- Price -->
                     <div class="single-block">
