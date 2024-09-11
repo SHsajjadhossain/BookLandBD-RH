@@ -166,8 +166,10 @@ class ProductController extends Controller
     }
 
     public function productDetails($slug){
+        $related_products = Product::where('product_slug', '!=', $slug)->where('category_id', Product::where('product_slug', $slug)->firstOrFail()->category_id)->get();
         return view('frontend.pages.productDetails',[
-            'single_product_info' => Product::where('product_slug', $slug)->first(),
+            'single_product_info' => Product::where('product_slug', $slug)->firstOrFail(),
+            'related_products' => $related_products
         ]);
     }
 }

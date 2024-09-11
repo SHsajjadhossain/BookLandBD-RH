@@ -30,7 +30,7 @@ class FrontendController extends Controller
         return view('frontend.pages.subCatWiseProducts',[
             'single_sub_cat' => SubCategory::find($sub_cat_id),
             'cat_info' => Category::find($cat_id),
-            'sub_catwise_products' => Product::where('sub_category_id', $sub_cat_id)->paginate(),
+            'sub_catwise_products' => Product::where('sub_category_id', $sub_cat_id)->OrderBy('id', 'desc')->paginate(),
         ]);
     }
 

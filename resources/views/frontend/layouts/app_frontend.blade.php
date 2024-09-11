@@ -149,6 +149,7 @@
                                                 <li><a href="#">Lighting & Studio</a></li>
                                             </ul>
                                         </li> --}}
+                                        
                                         @foreach (allCategories() as $category)
                                             @if ($category->relationWithSubCategory->count() > 0)
                                                 <li class="cat-item has-children" id="cat-item">
