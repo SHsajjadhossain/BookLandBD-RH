@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Wishlist;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class WishlistController extends Controller
@@ -12,7 +13,9 @@ class WishlistController extends Controller
      */
     public function index()
     {
-        //
+        return view('frontend.pages.wishlist_index',[
+            'all_wishlist' => Wishlist::all()
+        ]);
     }
 
     /**
@@ -68,6 +71,17 @@ class WishlistController extends Controller
      */
 
      public function insert($product_id){
-        return $product_id;
+        Wishlist::insert([
+            'user_id' => auth()->id(),
+            'product_id' => $product_id,
+            'created_at' => Carbon::now()
+        ]);
+
+        return back();
+     }
+
+     public function remove($wishlist_id){
+        Wishlist::find($wishlist_id)->delete();
+        return back();
      }
 }

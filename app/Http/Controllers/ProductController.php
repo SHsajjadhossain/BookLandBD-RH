@@ -6,6 +6,7 @@ use App\Http\Requests\ProductCreateRequest;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\SubCategory;
+use App\Models\Wishlist;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -166,10 +167,19 @@ class ProductController extends Controller
     }
 
     public function productDetails($slug){
+        $wishlist_status = Wishlist::where('user_id', auth()->id())->where('product_id', Product::where('product_slug', $slug)->first()->id)->exists();
+        if ($wishlist_status) {
+            $wishlist_id = Wishlist::where('user_id', auth()->id())->where('product_id', Product::where('product_slug', $slug)->first()->id)->first()->id;
+        }
+        else {
+            $wishlist_id = "";
+        }
         $related_products = Product::where('product_slug', '!=', $slug)->where('category_id', Product::where('product_slug', $slug)->firstOrFail()->category_id)->get();
         return view('frontend.pages.productDetails',[
             'single_product_info' => Product::where('product_slug', $slug)->firstOrFail(),
-            'related_products' => $related_products
+            'related_products' => $related_products,
+            'wishlist_status' => $wishlist_status,
+            'wishlist_id' => $wishlist_id
         ]);
     }
 }

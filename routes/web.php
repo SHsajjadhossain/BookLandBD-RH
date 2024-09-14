@@ -24,6 +24,7 @@ Route::get('/product/details/{slug}', [ProductController::class, 'productDetails
 
 Route::resource('wishlist', WishlistController::class);
 Route::get('/wishlist/insert/{product_id}', [WishlistController::class, 'insert'])->name('wishlist.insert');
+Route::get('/wishlist/remove/{wishlist_id}', [WishlistController::class, 'remove'])->name('wishlist.remove');
 
 // Wishlist Routes end
 

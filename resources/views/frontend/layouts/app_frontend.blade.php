@@ -34,9 +34,9 @@
                         <div class="col-lg-8 flex-lg-right">
                             <ul class="header-top-list">
                                 </li>
-                                <li class="dropdown-trigger language-dropdown"><a href="#"><i
+                                <li class="dropdown-trigger language-dropdown"><a href="{{ route('wishlist.index') }}"><i
                                             class="icons-left fas fa-heart"></i>
-                                        wishlist (0)</a>
+                                        wishlist ({{ allWishlists()->count() }})</a>
                                 </li>
                                 <li class="dropdown-trigger language-dropdown">
                                     @auth

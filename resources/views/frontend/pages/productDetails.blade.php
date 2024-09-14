@@ -62,8 +62,12 @@ Pustok - {{ $single_product_info->product_name }}
                     </div>
                     @auth
                         <div class="compare-wishlist-row">
-                            <a href="{{ route('wishlist.insert', $single_product_info->id) }}" class="add-link"><i class="fas fa-heart"></i>Add to Wish List</a>
-                            {{-- style="color: #62ab00 !important; font-size: 15px; margin-right: 10px;" --}}
+                            @if ($wishlist_status)
+                            <a href="{{ route('wishlist.remove', $wishlist_id) }}" class="add-link"><i class="fas fa-heart" style="color: #62ab00 !important; font-size: 15px; margin-right: 10px;"></i>Remove from
+                                Wish List</a>
+                            @else
+                                <a href="{{ route('wishlist.insert', $single_product_info->id) }}" class="add-link"><i class="fas fa-heart"></i>Add to Wish List</a>
+                            @endif
                         </div>
                     @endauth
 
