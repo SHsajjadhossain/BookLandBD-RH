@@ -14,7 +14,7 @@ class WishlistController extends Controller
     public function index()
     {
         return view('frontend.pages.wishlist_index',[
-            'all_wishlist' => Wishlist::all()
+            'all_wishlist' => Wishlist::paginate()
         ]);
     }
 

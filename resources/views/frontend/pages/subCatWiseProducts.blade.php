@@ -165,7 +165,7 @@ Pustok - {{ $single_sub_cat->sub_category_name }}
                                         <div class="card-image">
                                             <img src="{{ asset('uploads/product_photoes') }}/{{ $single_product->product_photo }}" alt="Product photo not found">
                                             <div class="hover-contents">
-                                                <a href="{{ route('product.productDetails', $single_product->id) }}" class="hover-image">
+                                                <a href="{{ route('product.productDetails', $single_product->product_slug) }}" class="hover-image">
                                                     <img src="{{ asset('uploads/product_photoes') }}/{{ $single_product->product_photo }}" alt="Product photo not found">
                                                 </a>
                                                 <div class="hover-btns">

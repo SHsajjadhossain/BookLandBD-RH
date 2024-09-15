@@ -54,54 +54,24 @@ Pustok - Wishlist
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="pro-thumbnail"><a href="#"><img src="image/products/product-1.jpg"
-                                                alt="Product"></a></td>
-                                    <td class="pro-title"><a href="#">Rinosin Glasses</a></td>
-                                    <td class="pro-price"><span>$395.00</span></td>
-                                    <td class="pro-remove"><a href="#"><i class="far fa-trash-alt"></i></a></td>
-                                    <td>
-                                        <div class="add-cart-btn">
-                                            <a href="cart.html" class="btn btn-outlined--primary"><span class="plus-icon">+</span>Add to Cart</a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="pro-thumbnail"><a href="#"><img src="image/products/product-2.jpg"
-                                                alt="Product"></a></td>
-                                    <td class="pro-title"><a href="#">Silacon Glasses</a></td>
-                                    <td class="pro-price"><span>$275.00</span></td>
-                                    <td class="pro-remove"><a href="#"><i class="far fa-trash-alt"></i></a></td>
-                                    <td>
-                                        <div class="add-cart-btn">
-                                            <a href="cart.html" class="btn btn-outlined--primary"><span class="plus-icon">+</span>Add to Cart</a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="pro-thumbnail"><a href="#"><img src="image/products/product-3.jpg"
-                                                alt="Product"></a></td>
-                                    <td class="pro-title"><a href="#">Easin Glasses</a></td>
-                                    <td class="pro-price"><span>$295.00</span></td>
-                                    <td class="pro-remove"><a href="#"><i class="far fa-trash-alt"></i></a></td>
-                                    <td>
-                                        <div class="add-cart-btn">
-                                            <a href="cart.html" class="btn btn-outlined--primary"><span class="plus-icon">+</span>Add to Cart</a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="pro-thumbnail"><a href="#"><img src="image/products/product-4.jpg"
-                                                alt="Product"></a></td>
-                                    <td class="pro-title"><a href="#">Macrox Glasses</a></td>
-                                    <td class="pro-price"><span>$220.00</span></td>
-                                    <td class="pro-remove"><a href="#"><i class="far fa-trash-alt"></i></a></td>
-                                    <td>
-                                        <div class="add-cart-btn">
-											<a href="cart.html" class="btn btn-outlined--primary"><span class="plus-icon">+</span>Add to Cart</a>
-										</div>
-                                    </td>
-                                </tr>
+                                @forelse ($all_wishlist as $single_wishlist)
+                                    <tr>
+                                        <td class="pro-thumbnail"><a href="#"><img class="w-100" src="{{ asset('uploads/product_photoes') }}/{{ $single_wishlist->relationWithProduct->product_photo }}" alt="Product"></a></td>
+                                        <td class="pro-title"><a href="#">{{ $single_wishlist->relationWithProduct->product_name }}</a></td>
+                                        <td class="pro-price"><span>৳{{ $single_wishlist->relationWithProduct->product_price }}</span></td>
+                                        <td class="pro-remove"><a href="{{ route('wishlist.remove', $single_wishlist->id) }}"><i class="far fa-trash-alt"></i></a></td>
+                                        <td>
+                                            <div class="add-cart-btn">
+                                                <a href="cart.html" class="btn btn-outlined--primary"><span class="plus-icon">+</span>Add to Cart</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="50" class="text-center"><span class="text-center text-danger font-weight-bold">No data to show</span>
+                                        </td>
+                                    </tr>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>

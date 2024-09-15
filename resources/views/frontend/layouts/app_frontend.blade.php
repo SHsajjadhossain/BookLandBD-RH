@@ -34,10 +34,12 @@
                         <div class="col-lg-8 flex-lg-right">
                             <ul class="header-top-list">
                                 </li>
-                                <li class="dropdown-trigger language-dropdown"><a href="{{ route('wishlist.index') }}"><i
-                                            class="icons-left fas fa-heart"></i>
-                                        wishlist ({{ allWishlists()->count() }})</a>
+                                @auth
+                                    <li class="dropdown-trigger language-dropdown"><a href="{{ route('wishlist.index') }}"><i
+                                                class="icons-left fas fa-heart"></i>
+                                            wishlist ({{ allWishlists()->count() }})</a>
                                 </li>
+                                @endauth
                                 <li class="dropdown-trigger language-dropdown">
                                     @auth
                                         @if (Auth::user()->role == '1' || Auth::user()->role == '3')
@@ -66,10 +68,13 @@
                             </a>
                         </div>
                         <div class="col-lg-5">
-                            <div class="header-search-block">
-                                <input type="text" placeholder="Search entire store here">
-                                <button>Search</button>
-                            </div>
+                            {{-- <form action="{{ route('product.search') }}" method="POST">
+                                @csrf --}}
+                                <div class="header-search-block">
+                                    <input type="text" name="search_product" placeholder="Search by book name here">
+                                    <button>Search</button>
+                                </div>
+                            </form>
                         </div>
                         <div class="col-lg-4">
                             <div class="main-navigation flex-lg-right">

@@ -45,4 +45,8 @@ class FrontendController extends Controller
             'all_products' => Product::paginate()
         ]);
     }
+
+    // public function productSearch(Request $request){
+    //     return $request;
+    // }
 }
