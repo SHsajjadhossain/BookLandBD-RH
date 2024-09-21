@@ -19,7 +19,8 @@ Route::get('/category/allCategories', [FrontendController::class, 'allCategories
 Route::get('/catwise/{cat_id}/{random}', [FrontendController::class, 'catWiseProducts'])->name('catwiseproducts');
 Route::get('/subcatwise/{sub_cat_id}/{random}', [FrontendController::class, 'subcatWiseProducts'])->name('subcatwiseproducts');
 Route::get('/product/details/{slug}', [ProductController::class, 'productDetails'])->name('product.productDetails');
-// Route::post('/product/search', [FrontendController::class, 'productSearch'])->name('product.search');
+Route::get('/search/productAjax', [FrontendController::class, 'productSearchAutocomplete'])->name('searchProductAjax');
+Route::post('/product/search', [FrontendController::class, 'productSearch'])->name('product.search');
 
 // Wishlist Routes Start
 

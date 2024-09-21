@@ -11,7 +11,7 @@ class FrontendController extends Controller
 {
     public function index()
     {
-        return view('frontend.pages.home', [
+        return view('frontend.pages.home',[
             'categories' => Category::all(),
         ]);
     }
@@ -34,19 +34,43 @@ class FrontendController extends Controller
         ]);
     }
 
-    public function allCategories() {
+    public function allCategories()
+    {
         return view('frontend.pages.allCategory',[
             'all_categories' => Category::paginate()
         ]);
     }
 
-    public function shop() {
+    public function shop()
+    {
         return view('frontend.pages.shop',[
             'all_products' => Product::paginate()
         ]);
     }
 
-    // public function productSearch(Request $request){
-    //     return $request;
-    // }
+    public function productSearchAutocomplete(Request $request){
+        $query = $request->term;
+        $products = Product::where('product_name', 'Like', '%'.$query.'%')->get();
+
+        $data = [];
+
+        foreach ($products as $items) {
+            $data [] = [
+                'value' => $items->product_name,
+                'id' => $items->id,
+            ];
+        }
+
+        if (count($data)) {
+            return $data;
+        } else {
+            return ['value' => 'No rResult Found', 'id' => ''];
+        }
+
+    }
+
+    public function productSearch(Request $request){
+        $products = Product::where('product_name', 'Like', '%'.$request->search_product.'%')->first();
+        return $products;
+    }
 }

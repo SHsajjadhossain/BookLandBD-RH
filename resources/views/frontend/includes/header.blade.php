@@ -8,6 +8,7 @@
 <link rel="shortcut icon" type="image/x-icon" href="{{ asset('frontend_assets/image/favicon.ico') }}">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
     integrity="sha384-4LISF5TTJX/fLmGSxO53rV4miRxdg84mZsxmO8Rx5jGtp/LbrixFETvWa5a6sESd" crossorigin="anonymous">
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.14.0/themes/base/jquery-ui.css">
 {{-- <link rel="stylesheet" href="{{ asset('frontend_assets/css/bootstrap.min.css') }}"> --}}
 
 @stack('custom-css')
