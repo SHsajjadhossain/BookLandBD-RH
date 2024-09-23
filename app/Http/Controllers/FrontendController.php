@@ -64,13 +64,13 @@ class FrontendController extends Controller
         if (count($data)) {
             return $data;
         } else {
-            return ['value' => 'No rResult Found', 'id' => ''];
+            return ['value' => 'No Result Found', 'id' => ''];
         }
 
     }
 
     public function productSearch(Request $request){
-        $products = Product::where('product_name', 'Like', '%'.$request->search_product.'%')->first();
-        return $products;
+        $search_products = Product::where('product_name', 'Like', '%'.$request->search_product.'%')->paginate();
+        return view('frontend.pages.search_product', compact('search_products'));
     }
 }

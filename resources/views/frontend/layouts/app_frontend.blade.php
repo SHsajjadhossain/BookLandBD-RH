@@ -68,10 +68,10 @@
                             </a>
                         </div>
                         <div class="col-lg-5">
-                            <form id="search-form" action="{{ route('product.search') }}" method="POST">
+                            <form id="search-form" action="{{ route('product.search') }}" method="GET">
                                 @csrf
                                 <div class="header-search-block">
-                                    <input type="text" name="search_product" id="search_text" placeholder="Search your book here">
+                                    <input type="text" name="search_product" id="search_text" value="" placeholder="Search by book name here">
                                     <button type="submit" name="searchbtn">Search</button>
                                 </div>
                             </form>
