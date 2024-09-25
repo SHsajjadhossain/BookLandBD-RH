@@ -33,13 +33,20 @@
                     <div class="row flex-lg-right">
                         <div class="col-lg-8 flex-lg-right">
                             <ul class="header-top-list">
-                                </li>
                                 @auth
                                     <li class="dropdown-trigger language-dropdown"><a href="{{ route('wishlist.index') }}"><i
                                                 class="icons-left fas fa-heart"></i>
                                             wishlist ({{ allWishlists()->count() }})</a>
-                                </li>
+                                    </li>
                                 @endauth
+
+                                @guest
+                                    <li class="dropdown-trigger language-dropdown"><a href="#"><i
+                                                class="icons-left fas fa-heart"></i>
+                                            wishlist (0)</a>
+                                    </li>
+                                @endguest
+
                                 <li class="dropdown-trigger language-dropdown">
                                     @auth
                                         @if (Auth::user()->role == '1' || Auth::user()->role == '3')
@@ -686,6 +693,7 @@
                     <div class="col-lg-8">
                         <div class="main-navigation flex-lg-right">
                             <ul class="main-menu menu-right ">
+
                                 <li class="menu-item">
                                     <a href="{{ route('frontend.home') }}">Home</a>
                                 </li>
