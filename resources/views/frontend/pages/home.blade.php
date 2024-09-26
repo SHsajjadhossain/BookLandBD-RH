@@ -166,9 +166,6 @@ Pustok - Book Store
                                     <a href="wishlist.html" class="single-btn">
                                         <i class="fas fa-heart"></i>
                                     </a>
-                                    <a href="compare.html" class="single-btn">
-                                        <i class="fas fa-random"></i>
-                                    </a>
                                     <a href="#" data-bs-toggle="modal" data-bs-target="#quickModal" class="single-btn">
                                         <i class="fas fa-eye"></i>
                                     </a>
@@ -208,9 +205,6 @@ Pustok - Book Store
                                     <a href="wishlist.html" class="single-btn">
                                         <i class="fas fa-heart"></i>
                                     </a>
-                                    <a href="compare.html" class="single-btn">
-                                        <i class="fas fa-random"></i>
-                                    </a>
                                     <a href="#" data-bs-toggle="modal" data-bs-target="#quickModal" class="single-btn">
                                         <i class="fas fa-eye"></i>
                                     </a>
@@ -249,9 +243,6 @@ Pustok - Book Store
                                     </a>
                                     <a href="wishlist.html" class="single-btn">
                                         <i class="fas fa-heart"></i>
-                                    </a>
-                                    <a href="compare.html" class="single-btn">
-                                        <i class="fas fa-random"></i>
                                     </a>
                                     <a href="#" data-bs-toggle="modal" data-bs-target="#quickModal" class="single-btn">
                                         <i class="fas fa-eye"></i>
@@ -293,9 +284,6 @@ Pustok - Book Store
                                     <a href="wishlist.html" class="single-btn">
                                         <i class="fas fa-heart"></i>
                                     </a>
-                                    <a href="compare.html" class="single-btn">
-                                        <i class="fas fa-random"></i>
-                                    </a>
                                     <a href="#" data-bs-toggle="modal" data-bs-target="#quickModal" class="single-btn">
                                         <i class="fas fa-eye"></i>
                                     </a>
@@ -334,9 +322,6 @@ Pustok - Book Store
                                     </a>
                                     <a href="wishlist.html" class="single-btn">
                                         <i class="fas fa-heart"></i>
-                                    </a>
-                                    <a href="compare.html" class="single-btn">
-                                        <i class="fas fa-random"></i>
                                     </a>
                                     <a href="#" data-bs-toggle="modal" data-bs-target="#quickModal" class="single-btn">
                                         <i class="fas fa-eye"></i>
@@ -378,9 +363,6 @@ Pustok - Book Store
                                     <a href="wishlist.html" class="single-btn">
                                         <i class="fas fa-heart"></i>
                                     </a>
-                                    <a href="compare.html" class="single-btn">
-                                        <i class="fas fa-random"></i>
-                                    </a>
                                     <a href="#" data-bs-toggle="modal" data-bs-target="#quickModal" class="single-btn">
                                         <i class="fas fa-eye"></i>
                                     </a>
@@ -420,9 +402,6 @@ Pustok - Book Store
                                     </a>
                                     <a href="wishlist.html" class="single-btn">
                                         <i class="fas fa-heart"></i>
-                                    </a>
-                                    <a href="compare.html" class="single-btn">
-                                        <i class="fas fa-random"></i>
                                     </a>
                                     <a href="#" data-bs-toggle="modal" data-bs-target="#quickModal" class="single-btn">
                                         <i class="fas fa-eye"></i>

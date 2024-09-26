@@ -56,8 +56,8 @@ Pustok - Wishlist
                             <tbody>
                                 @forelse ($all_wishlist as $single_wishlist)
                                     <tr>
-                                        <td class="pro-thumbnail"><a href="#"><img class="w-100" src="{{ asset('uploads/product_photoes') }}/{{ $single_wishlist->relationWithProduct->product_photo }}" alt="Product"></a></td>
-                                        <td class="pro-title"><a href="#">{{ $single_wishlist->relationWithProduct->product_name }}</a></td>
+                                        <td class="pro-thumbnail"><a href="{{ route('product.productDetails', $single_wishlist->relationWithProduct->product_slug) }}"><img class="w-100" src="{{ asset('uploads/product_photoes') }}/{{ $single_wishlist->relationWithProduct->product_photo }}" alt="Product"></a></td>
+                                        <td class="pro-title"><a href="{{ route('product.productDetails', $single_wishlist->relationWithProduct->product_slug) }}">{{ $single_wishlist->relationWithProduct->product_name }}</a></td>
                                         <td class="pro-price"><span>৳{{ $single_wishlist->relationWithProduct->product_price }}</span></td>
                                         <td class="pro-remove"><a href="{{ route('wishlist.remove', $single_wishlist->id) }}"><i class="far fa-trash-alt"></i></a></td>
                                         <td>
@@ -76,6 +76,16 @@ Pustok - Wishlist
                         </table>
                     </div>
                 </form>
+            </div>
+        </div>
+        <!-- Pagination Block -->
+        <div class="row pt--30">
+            <div class="col-md-12">
+                <div class="pagination-block">
+                    {{--........................ --}}
+                    {{ $all_wishlist->links('frontend.pages.paginate') }}
+                    {{--........................ --}}
+                </div>
             </div>
         </div>
     </div>

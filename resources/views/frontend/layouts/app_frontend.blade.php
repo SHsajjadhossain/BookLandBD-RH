@@ -38,14 +38,11 @@
                                                 class="icons-left fas fa-heart"></i>
                                             wishlist ({{ allWishlists()->count() }})</a>
                                     </li>
-                                @endauth
-
-                                @guest
-                                    <li class="dropdown-trigger language-dropdown"><a href="#"><i
-                                                class="icons-left fas fa-heart"></i>
+                                @else
+                                    <li class="dropdown-trigger language-dropdown"><a href="{{ route('login') }}"><i class="icons-left fas fa-heart"></i>
                                             wishlist (0)</a>
                                     </li>
-                                @endguest
+                                @endauth
 
                                 <li class="dropdown-trigger language-dropdown">
                                     @auth

@@ -152,16 +152,22 @@ Pustok - Shop
                             <div class="card-image">
                                 <img src="{{ asset('uploads/product_photoes') }}/{{ $single_product->product_photo }}" alt="Product photo not found">
                                 <div class="hover-contents">
-                                    <a href="{{ route('product.productDetails', $single_product->id) }}" class="hover-image">
+                                    <a href="{{ route('product.productDetails', $single_product->product_slug) }}" class="hover-image">
                                         <img src="{{ asset('uploads/product_photoes') }}/{{ $single_product->product_photo }}" alt="Product photo not found">
                                     </a>
                                     <div class="hover-btns">
                                         <a href="cart.html" class="single-btn">
                                             <i class="fas fa-shopping-basket"></i>
                                         </a>
-                                        <a href="wishlist.html" class="single-btn">
+                                        @if (wishlistCheck($single_product->id))
+                                        <a href="{{ route('wishlist.remove', wishlist_id($single_product->id)) }}" class="single-btn">
+                                            <i class="fas fa-heart" style="color: #62ab00 !important; font-size: 15px; margin-right: 10px;"></i>
+                                        </a>
+                                        @else
+                                        <a href="{{ route('wishlist.insert', $single_product->id) }}" class="single-btn">
                                             <i class="fas fa-heart"></i>
                                         </a>
+                                        @endif
                                         <a href="#" data-bs-toggle="modal" data-bs-target="#quickModal{{ $single_product->id }}" class="single-btn">
                                             <i class="fas fa-eye"></i>
                                         </a>
@@ -204,7 +210,14 @@ Pustok - Shop
                             </div>
                             <div class="btn-block">
                                 <a href="#" class="btn btn-outlined">Add To Cart</a>
-                                <a href="#" class="card-link"><i class="fas fa-heart"></i> Add To Wishlist</a>
+                                @if (wishlistCheck($single_product->id))
+                                <a href="{{ route('wishlist.remove', wishlist_id($single_product->id)) }}" class="add-link"><i class="fas fa-heart"
+                                        style="color: #62ab00 !important; font-size: 15px; margin-right: 10px;"></i>Remove from
+                                    Wish List</a>
+                                @else
+                                <a href="{{ route('wishlist.insert', $single_product->id) }}" class="add-link"><i class="fas fa-heart"></i>Add to
+                                    Wish List</a>
+                                @endif
                                 {{-- <a href="#" class="card-link"><i class="fas fa-random"></i> Add To Cart</a> --}}
                             </div>
                         </div>
@@ -273,10 +286,14 @@ Pustok - Shop
                                             </div>
                                         </div>
                                         <div class="compare-wishlist-row">
-                                            <a href="#" class="add-link"><i class="fas fa-heart"></i>Add to Wish
-                                                List</a>
-                                            {{-- <a href="#" class="add-link"><i class="fas fa-random"></i>Add to
-                                                Compare</a> --}}
+                                            @if (wishlistCheck($single_product->id))
+                                            <a href="{{ route('wishlist.remove', wishlist_id($single_product->id)) }}" class="add-link"><i class="fas fa-heart"
+                                                    style="color: #62ab00 !important; font-size: 15px; margin-right: 10px;"></i>Remove from
+                                                Wish List</a>
+                                            @else
+                                            <a href="{{ route('wishlist.insert', $single_product->id) }}" class="add-link"><i class="fas fa-heart"></i>Add to
+                                                Wish List</a>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
