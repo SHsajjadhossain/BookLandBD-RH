@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\ProductController;
@@ -10,7 +11,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Route;
 
-// All Frontend Views Routes Start
+// all frontend views routes start
 
 Route::get('/', [FrontendController::class, 'index'])->name('frontend.home');
 Route::get('/shop', [FrontendController::class, 'shop'])->name('frontend.shop');
@@ -22,15 +23,19 @@ Route::get('/product/details/{slug}', [ProductController::class, 'productDetails
 Route::get('/search/productAjax', [FrontendController::class, 'productSearchAutocomplete'])->name('searchProductAjax');
 Route::get('/product/search', [FrontendController::class, 'productSearch'])->name('product.search');
 
-// Wishlist Routes Start
+// wishlist routes start
 
 Route::resource('wishlist', WishlistController::class);
 Route::get('/wishlist/insert/{product_id}', [WishlistController::class, 'insert'])->name('wishlist.insert');
 Route::get('/wishlist/remove/{wishlist_id}', [WishlistController::class, 'remove'])->name('wishlist.remove');
 
-// Wishlist Routes end
+// wishlist routes end
 
-// All Frontend Views Routes End
+// cart routes start
+Route::get('wishlist/cart/{wishlist_id}', [CartController::class, 'wishlistCart'])->name('wishlist.cart');
+// cart routes end
+
+// all frontend views routes end
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');

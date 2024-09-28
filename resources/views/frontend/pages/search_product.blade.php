@@ -6,6 +6,25 @@ Pustok - Search Results
 
 @endsection
 
+@push('custom-css')
+
+<style>
+    .bread-active {
+        font-weight: 700;
+    }
+
+    .add-cart-btn .btn:hover {
+        color: #fff !important;
+        background: #62ab00 !important;
+    }
+
+    .custom-edit-cart-btn {
+        margin-right: 30px;
+    }
+</style>
+
+@endpush
+
 @section('content')
 
 {{-- {{ $search_products }} --}}
@@ -17,7 +36,7 @@ Pustok - Search Results
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('frontend.home') }}">Home</a></li>
-                    <li class="breadcrumb-item active">Shop</li>
+                    <li class="breadcrumb-item bread-active active">Shop</li>
                 </ol>
             </nav>
         </div>
@@ -165,9 +184,23 @@ Pustok - Search Results
                                         <a href="cart.html" class="single-btn">
                                             <i class="fas fa-shopping-basket"></i>
                                         </a>
-                                        <a href="wishlist.html" class="single-btn">
-                                            <i class="fas fa-heart"></i>
-                                        </a>
+                                        @auth
+                                            @if (wishlistCheck($single_product->id))
+                                            <a href="{{ route('wishlist.remove', wishlist_id($single_product->id)) }}" class="single-btn">
+                                                <i class="fas fa-heart" style="color: #62ab00 !important; font-size: 15px; margin-right: 10px;"></i>
+                                            </a>
+                                            @else
+                                            <a href="{{ route('wishlist.insert', $single_product->id) }}" class="single-btn">
+                                                <i class="fas fa-heart"></i>
+                                            </a>
+                                            @endif
+                                        @endauth
+
+                                        @guest
+                                            <a href="{{ route('login') }}" class="single-btn">
+                                                <i class="fas fa-heart"></i>
+                                            </a>
+                                        @endguest
                                         <a href="#" data-bs-toggle="modal"
                                             data-bs-target="#quickModal{{ $single_product->id }}" class="single-btn">
                                             <i class="fas fa-eye"></i>
@@ -212,9 +245,24 @@ Pustok - Search Results
                                 <span class="fas fa-star "></span>
                             </div>
                             <div class="btn-block">
-                                <a href="#" class="btn btn-outlined">Add To Cart</a>
-                                <a href="#" class="card-link"><i class="fas fa-heart"></i> Add To Wishlist</a>
-                                {{-- <a href="#" class="card-link"><i class="fas fa-random"></i> Add To Cart</a> --}}
+                                {{-- <a href="#" class="card-link"><i class="fas fa-random"></i> Add To
+                                    Cart</a> --}}
+                                <div class="add-cart-btn custom-edit-cart-btn">
+                                    <a href="cart.html" class="btn btn-outlined--primary"><span class="plus-icon">+</span>Add to Cart</a>
+                                </div>
+                                @auth
+                                    @if (wishlistCheck($single_product->id))
+                                    <a href="{{ route('wishlist.remove', wishlist_id($single_product->id)) }}" class="add-link"><i class="fas fa-heart"
+                                            style="color: #62ab00 !important; font-size: 15px; margin-right: 10px;"></i>Remove from
+                                        Wish List</a>
+                                    @else
+                                    <a href="{{ route('wishlist.insert', $single_product->id) }}" class="add-link"><i class="fas fa-heart"></i>Add to
+                                        Wish List</a>
+                                    @endif
+                                @else
+                                    <a href="{{ route('login') }}" class="add-link"><i class="fas fa-heart"></i>Add to
+                                        Wish List</a>
+                                @endauth
                             </div>
                         </div>
                     </div>
@@ -285,10 +333,19 @@ Pustok - Search Results
                                             </div>
                                         </div>
                                         <div class="compare-wishlist-row">
-                                            <a href="#" class="add-link"><i class="fas fa-heart"></i>Add to Wish
-                                                List</a>
-                                            {{-- <a href="#" class="add-link"><i class="fas fa-random"></i>Add to
-                                                Compare</a> --}}
+                                            @auth
+                                                @if (wishlistCheck($single_product->id))
+                                                <a href="{{ route('wishlist.remove', wishlist_id($single_product->id)) }}" class="add-link"><i class="fas fa-heart"
+                                                        style="color: #62ab00 !important; font-size: 15px; margin-right: 10px;"></i>Remove from
+                                                    Wish List</a>
+                                                @else
+                                                <a href="{{ route('wishlist.insert', $single_product->id) }}" class="add-link"><i class="fas fa-heart"></i>Add to
+                                                    Wish List</a>
+                                                @endif
+                                            @else
+                                                <a href="{{ route('login') }}" class="add-link"><i class="fas fa-heart"></i>Add to
+                                                    Wish List</a>
+                                            @endauth
                                         </div>
                                     </div>
                                 </div>

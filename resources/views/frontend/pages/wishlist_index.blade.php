@@ -62,7 +62,7 @@ Pustok - Wishlist
                                         <td class="pro-remove"><a href="{{ route('wishlist.remove', $single_wishlist->id) }}"><i class="far fa-trash-alt"></i></a></td>
                                         <td>
                                             <div class="add-cart-btn">
-                                                <a href="cart.html" class="btn btn-outlined--primary"><span class="plus-icon">+</span>Add to Cart</a>
+                                                <a href="{{ route('wishlist.cart', $single_wishlist->id) }}" class="btn btn-outlined--primary"><span class="plus-icon">+</span>Add to Cart</a>
                                             </div>
                                         </td>
                                     </tr>
