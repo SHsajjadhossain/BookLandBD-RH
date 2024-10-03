@@ -22,6 +22,14 @@
         .category-menu .cat-item .sub-menu .single-block ul li:hover a{
             color: #62ab00 ;
         }
+
+        .icon-shopping-bag{
+            font-size: 40px;
+        }
+        .cart-total .text-number{
+            right: 14px;
+            top : -8px;
+        }
     </style>
 </head>
 
@@ -97,28 +105,34 @@
                                     </div>
                                     <div class="cart-block">
                                         <div class="cart-total">
-                                            <span class="text-number">
-                                                40
-                                            </span>
+                                            @auth
+                                                @if (totalCarts()->count() > 0)
+                                                    <span class="text-number">
+                                                        {{ totalCarts()->count() }}
+                                                    </span>
+                                                @endif
+                                            @endauth
                                             <span class="text-item">
-                                                Shopping Cart
+                                                <i class="fas fa-shopping-cart icon-shopping-bag"></i>
                                             </span>
-                                            <span class="price">
-                                                ৳0.00
+                                            {{-- <span class="price">
+                                                ৳{{ $cart_total }}
                                                 <i class="fas fa-chevron-down"></i>
-                                            </span>
+                                            </span> --}}
                                         </div>
                                         <div class="cart-dropdown-block">
                                             <div class=" single-cart-block">
                                                 @forelse (allCarts() as $cart)
                                                     <div class="cart-product">
                                                         <a href="product-details.html" class="image">
-                                                            <img src="{{ asset('frontend_assets') }}/image/products/cart-product-1.jpg" alt="">
+                                                            <img src="{{ asset('uploads/product_photoes') }}/{{ $cart->relationWithProduct->product_photo }}" alt="Product photo not found">
                                                         </a>
                                                         <div class="content">
-                                                            <h3 class="title"><a href="product-details.html">{{ $cart->product_id }}</a>
+                                                            <h3 class="title"><a href="product-details.html">{{ Str::limit($cart->relationWithProduct->product_name, 40, '...') }}</a>
                                                             </h3>
-                                                            <p class="price"><span class="qty">1 ×</span> ৳87.34</p>
+                                                            <p class="price"><span class="qty">{{ $cart->quantity }} ×</span>
+                                                                ৳{{ $cart->quantity * $cart->relationWithProduct->product_price }}
+                                                            </p>
                                                             <button class="cross-btn"><i class="fas fa-times"></i></button>
                                                         </div>
                                                     </div>

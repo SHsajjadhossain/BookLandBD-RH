@@ -175,7 +175,7 @@ Pustok - Search Results
                                 <img src="{{ asset('uploads/product_photoes') }}/{{ $single_product->product_photo }}"
                                     alt="Product photo not found">
                                 <div class="hover-contents">
-                                    <a href="{{ route('product.productDetails', $single_product->id) }}"
+                                    <a href="{{ route('product.productDetails', $single_product->product_slug) }}"
                                         class="hover-image">
                                         <img src="{{ asset('uploads/product_photoes') }}/{{ $single_product->product_photo }}"
                                             alt="Product photo not found">

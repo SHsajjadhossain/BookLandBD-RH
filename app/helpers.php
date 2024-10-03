@@ -24,5 +24,10 @@ function wishlist_id($single_product)
 
 function allCarts()
 {
-    return App\Models\Cart::OrderBy('id', 'desc')->where('user_id', auth()->id())->take(4)->get();
+    return App\Models\Cart::OrderBy('id', 'desc')->where('user_id', auth()->id())->take(3)->get();
+}
+
+function totalCarts()
+{
+    return App\Models\Cart::where('user_id', auth()->id())->get();
 }
