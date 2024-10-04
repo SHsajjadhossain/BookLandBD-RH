@@ -9,6 +9,13 @@ use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
+    public function index()
+    {
+        return view('frontend.pages.cart',[
+            'all_carts' => Cart::all()
+        ]);
+    }
+
     public function wishlistCart($wishlist_id)
     {
         $product_id = Wishlist::find($wishlist_id)->product_id;

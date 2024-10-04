@@ -33,6 +33,7 @@ Route::get('/wishlist/remove/{wishlist_id}', [WishlistController::class, 'remove
 
 // cart routes start
 Route::get('wishlist/cart/{wishlist_id}', [CartController::class, 'wishlistCart'])->name('wishlist.cart');
+Route::get('/cart', [CartController::class, 'index'])->name('cart');
 // cart routes end
 
 // all frontend views routes end

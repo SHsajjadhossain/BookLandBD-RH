@@ -137,17 +137,19 @@
                                                         </div>
                                                     </div>
                                                 @empty
-
+                                                    <span class="mb-2 text-center text-danger d-block">No product in cart</span>
                                                 @endforelse
                                             </div>
+                                            @auth
                                             <div class=" single-cart-block">
                                                 <div class="btn-block">
-                                                    <a href="cart.html" class="btn">View All Cart <i
+                                                    <a href="{{ route('cart') }}" class="btn">View All Cart <i
                                                             class="fas fa-chevron-right"></i></a>
                                                     <a href="checkout.html" class="btn btn--primary">Check Out <i
                                                             class="fas fa-chevron-right"></i></a>
                                                 </div>
                                             </div>
+                                            @endauth
                                         </div>
                                     </div>
                                 </div>

@@ -6,6 +6,16 @@ Pustok - Shop
 
 @endsection
 
+@push('custom-css')
+
+<style>
+    .bread-active{
+        font-weight: 700;
+    }
+</style>
+
+@endpush
+
 @section('content')
 
 <section class="breadcrumb-section">
@@ -15,12 +25,13 @@ Pustok - Shop
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('frontend.home') }}">Home</a></li>
-                    <li class="breadcrumb-item active">Shop</li>
+                    <li class="breadcrumb-item bread-active active">Shop</li>
                 </ol>
             </nav>
         </div>
     </div>
 </section>
+
 <main class="inner-page-sec-padding-bottom">
     <div class="container">
         <div class="shop-toolbar mb--30">
