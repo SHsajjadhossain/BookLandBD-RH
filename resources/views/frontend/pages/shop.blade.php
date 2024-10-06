@@ -12,6 +12,19 @@ Pustok - Shop
     .bread-active{
         font-weight: 700;
     }
+
+    .add-cart-btn .btn:hover {
+        color: #fff !important;
+        background: #62ab00 !important;
+    }
+
+    .custom-edit-cart-btn{
+        margin-right: 30px;
+    }
+
+    .product-card .hover-contents .hover-btns .single-btn{
+        border-right: 1px solid #e5e5e5 !important;
+    }
 </style>
 
 @endpush
@@ -167,9 +180,12 @@ Pustok - Shop
                                         <img src="{{ asset('uploads/product_photoes') }}/{{ $single_product->product_photo }}" alt="Product photo not found">
                                     </a>
                                     <div class="hover-btns">
-                                        <a href="cart.html" class="single-btn">
-                                            <i class="fas fa-shopping-basket"></i>
-                                        </a>
+                                        <form action="{{ route('addToCart', $single_product->id) }}" method="POST">
+                                            @csrf
+                                            <button type="submit" class="single-btn">
+                                                <i class="fas fa-shopping-basket"></i>
+                                            </button>
+                                        </form>
                                         @auth
                                             @if (wishlistCheck($single_product->id))
                                             <a href="{{ route('wishlist.remove', wishlist_id($single_product->id)) }}" class="single-btn">
@@ -226,7 +242,13 @@ Pustok - Shop
                                 <span class="fas fa-star "></span>
                             </div>
                             <div class="btn-block">
-                                <a href="#" class="btn btn-outlined">Add To Cart</a>
+                                {{-- <a href="#" class="btn btn-outlined">Add To Cart</a> --}}
+                                <form action="{{ route('addToCart', $single_product->id) }}" method="POST">
+                                    @csrf
+                                    <div class="add-cart-btn custom-edit-cart-btn">
+                                        <button type="submit" class="btn btn-outlined--primary"><span class="plus-icon">+</span>Add to Cart</button>
+                                    </div>
+                                </form>
                                 @auth
                                     @if (wishlistCheck($single_product->id))
                                     <a href="{{ route('wishlist.remove', wishlist_id($single_product->id)) }}" class="add-link"><i class="fas fa-heart"

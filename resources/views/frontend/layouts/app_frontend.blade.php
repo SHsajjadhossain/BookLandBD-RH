@@ -133,7 +133,7 @@
                                                             <p class="price"><span class="qty">{{ $cart->quantity }} ×</span>
                                                                 ৳{{ $cart->quantity * $cart->relationWithProduct->product_price }}
                                                             </p>
-                                                            <button class="cross-btn"><i class="fas fa-times"></i></button>
+                                                            <a href="{{ route('cart.remove', $cart->id) }}" class="cross-btn"><i class="fas fa-times"></i></a>
                                                         </div>
                                                     </div>
                                                 @empty

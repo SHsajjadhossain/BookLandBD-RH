@@ -34,7 +34,8 @@ Route::get('/wishlist/remove/{wishlist_id}', [WishlistController::class, 'remove
 // cart routes start
 Route::get('wishlist/cart/{wishlist_id}', [CartController::class, 'wishlistCart'])->name('wishlist.cart');
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
-Route::post('/add/to/cart', [CartController::class, 'addToCart'])->name('addToCart');
+Route::post('/add/to/cart/{product_id}', [CartController::class, 'addToCart'])->name('addToCart');
+Route::get('/cart/remove/{id}', [CartController::class, 'cartRemove'])->name('cart.remove');
 // cart routes end
 
 // all frontend views routes end

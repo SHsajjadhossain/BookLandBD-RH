@@ -50,7 +50,7 @@ Pustok - {{ $single_product_info->product_name }}
                         <h4 class="sr-only">Product Summery</h4>
                         <p>{{ $single_product_info->product_short_description }}</p>
                     </article>
-                    <form action="{{ route('addToCart') }}" method="POST">
+                    <form action="{{ route('addToCart', $single_product_info->id) }}" method="POST">
                         @csrf
                         <div class="add-to-cart-row">
                             <div class="count-input-block">

@@ -130,7 +130,7 @@ Pustok - Cart
                                             @endphp
                                         </td>
                                         <td class="pro-remove">
-                                            <a href="#"><i class="far fa-trash-alt"></i></a>
+                                            <a href="{{ route('cart.remove', $single_cart->id) }}"><i class="far fa-trash-alt"></i></a>
                                         </td>
                                     </tr>
                                     @empty

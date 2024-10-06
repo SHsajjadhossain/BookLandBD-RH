@@ -45,8 +45,8 @@ Pustok - Book Store | Dashboard
                                 <div class="tab-pane fade show active" id="dashboad" role="tabpanel">
                                     <div class="myaccount-content">
                                         <h3>Dashboard</h3>
-                                        <div class="welcome mb-20">
-                                            <p>Hello, <strong>Alex Tuntuni</strong> (If Not <strong>Tuntuni
+                                        <div class="mb-20 welcome">
+                                            <p>Hello, <strong>{{ $customer_info->name }}</strong> (If Not <strong>{{ $customer_info->name }}
                                                     !</strong><a href="login-register.html" class="logout">
                                                     Logout</a>)</p>
                                         </div>
@@ -61,7 +61,7 @@ Pustok - Book Store | Dashboard
                                 <div class="tab-pane fade" id="orders" role="tabpanel">
                                     <div class="myaccount-content">
                                         <h3>Orders</h3>
-                                        <div class="myaccount-table table-responsive text-center">
+                                        <div class="text-center myaccount-table table-responsive">
                                             <table class="table table-bordered">
                                                 <thead class="thead-light">
                                                     <tr>
@@ -108,7 +108,7 @@ Pustok - Book Store | Dashboard
                                 <div class="tab-pane fade" id="download" role="tabpanel">
                                     <div class="myaccount-content">
                                         <h3>Downloads</h3>
-                                        <div class="myaccount-table table-responsive text-center">
+                                        <div class="text-center myaccount-table table-responsive">
                                             <table class="table table-bordered">
                                                 <thead class="thead-light">
                                                     <tr>
@@ -167,29 +167,29 @@ Pustok - Book Store | Dashboard
                                         <div class="account-details-form">
                                             <form action="#">
                                                 <div class="row">
-                                                    <div class="col-lg-6 col-12  mb--30">
+                                                    <div class="col-lg-6 col-12 mb--30">
                                                         <input id="first-name" placeholder="First Name" type="text">
                                                     </div>
-                                                    <div class="col-lg-6 col-12  mb--30">
+                                                    <div class="col-lg-6 col-12 mb--30">
                                                         <input id="last-name" placeholder="Last Name" type="text">
                                                     </div>
-                                                    <div class="col-12  mb--30">
+                                                    <div class="col-12 mb--30">
                                                         <input id="display-name" placeholder="Display Name" type="text">
                                                     </div>
-                                                    <div class="col-12  mb--30">
+                                                    <div class="col-12 mb--30">
                                                         <input id="email" placeholder="Email Address" type="email">
                                                     </div>
-                                                    <div class="col-12  mb--30">
+                                                    <div class="col-12 mb--30">
                                                         <h4>Password change</h4>
                                                     </div>
-                                                    <div class="col-12  mb--30">
+                                                    <div class="col-12 mb--30">
                                                         <input id="current-pwd" placeholder="Current Password"
                                                             type="password">
                                                     </div>
-                                                    <div class="col-lg-6 col-12  mb--30">
+                                                    <div class="col-lg-6 col-12 mb--30">
                                                         <input id="new-pwd" placeholder="New Password" type="password">
                                                     </div>
-                                                    <div class="col-lg-6 col-12  mb--30">
+                                                    <div class="col-lg-6 col-12 mb--30">
                                                         <input id="confirm-pwd" placeholder="Confirm Password"
                                                             type="password">
                                                     </div>

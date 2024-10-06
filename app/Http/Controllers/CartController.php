@@ -35,7 +35,46 @@ class CartController extends Controller
         return back();
     }
 
-    public function addToCart(Request $request){
-        return $request->quantity;
+    public function addToCart(Request $request, $product_id)
+    {
+        $cart_status = Cart::where('user_id', auth()->id())->where('product_id', $product_id)->exists();
+        if ($request->quantity) {
+            if ($cart_status)
+            {
+                Cart::where('user_id', auth()->id())->where('product_id', $product_id)->increment('quantity', $request->quantity);
+            }
+            else
+            {
+                Cart::insert([
+                    'user_id' => auth()->id(),
+                    'product_id' => $product_id,
+                    'quantity' => $request->quantity,
+                    'created_at' => Carbon::now(),
+                ]);
+            }
+        }
+        else
+        {
+            if ($cart_status)
+            {
+                Cart::where('user_id', auth()->id())->where('product_id', $product_id)->increment('quantity', 1);
+            }
+            else
+            {
+                Cart::insert([
+                    'user_id' => auth()->id(),
+                    'product_id' => $product_id,
+                    'created_at' => Carbon::now(),
+                ]);
+            }
+        }
+
+        return back();
+    }
+
+    public function cartRemove($id)
+    {
+        Cart::find($id)->delete();
+        return back();
     }
 }
