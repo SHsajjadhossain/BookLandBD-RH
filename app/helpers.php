@@ -22,12 +22,12 @@ function wishlist_id($single_product)
     return App\Models\Wishlist::where('user_id', auth()->id())->where('product_id', $single_product)->first()->id;
 }
 
-function allCarts()
+function cartList()
 {
     return App\Models\Cart::OrderBy('id', 'desc')->where('user_id', auth()->id())->take(3)->get();
 }
 
-function totalCarts()
+function allCarts()
 {
     return App\Models\Cart::where('user_id', auth()->id())->get();
 }

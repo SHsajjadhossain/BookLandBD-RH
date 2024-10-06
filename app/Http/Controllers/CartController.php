@@ -11,9 +11,7 @@ class CartController extends Controller
 {
     public function index()
     {
-        return view('frontend.pages.cart',[
-            'all_carts' => Cart::all()
-        ]);
+        return view('frontend.pages.cart');
     }
 
     public function wishlistCart($wishlist_id)
@@ -35,5 +33,9 @@ class CartController extends Controller
 
         Wishlist::find($wishlist_id)->delete();
         return back();
+    }
+
+    public function addToCart(Request $request){
+        return $request->quantity;
     }
 }

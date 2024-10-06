@@ -13,9 +13,39 @@ Pustok - Cart
         font-weight: 700;
     }
 
+    .update-block .btn{
+        width: 90%;
+        background: #62ab00;
+        color: #ffffff;
+        border-color: #62ab00;
+        transition: .4s;
+    }
+
+    .update-block .btn:hover{
+        background: #000000;
+        border-color: #000000;
+    }
+
     .cart-summary .cart-summary-button .c-btn{
         width: 100%;
         padding: 25px 20px;
+    }
+
+    .cart-summary{
+        padding-left: 0;
+    }
+
+    .cart-table .table tbody tr td .coupon-block .coupon-text input{
+        width: 50%;
+        padding: 6px 10px 5px;
+    }
+
+    .cart-table td.pro-thumbnail a img{
+        width: 110px;
+    }
+
+    .cart-table td.pro-quantity .pro-qty{
+        margin-right: 30px;
     }
 </style>
 
@@ -66,19 +96,26 @@ Pustok - Cart
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @php
+                                        $cart_total = 0;
+                                    @endphp
                                     <!-- Product Row -->
+                                    @forelse (allCarts() as $single_cart)
                                     <tr>
-                                        <td class="pro-thumbnail"><a href="#"><img src="image/products/product-1.jpg"
-                                                    alt="Product"></a></td>
-                                        <td class="pro-title"><a href="#">Rinosin Glasses</a></td>
-                                        <td class="pro-price"><span>$395.00</span></td>
+                                        <td class="pro-thumbnail">
+                                            <a href="#">
+                                                <img src="{{ asset('uploads/product_photoes') }}/{{ $single_cart->relationWithProduct->product_photo }}" alt="Product photo not found">
+                                            </a>
+                                        </td>
+                                        <td class="pro-title"><a href="#">{{ $single_cart->relationWithProduct->product_name }}</a></td>
+                                        <td class="pro-price"><span>৳{{ $single_cart->relationWithProduct->product_price }}</span></td>
                                         <td class="pro-quantity">
                                             <div class="pro-qty">
                                                 {{-- <div class="count-input-block">
                                                     <input type="number" class="text-center form-control" value="1">
                                                 </div> --}}
                                                 <div class="count-input-block">
-                                                    <input type="number" class="text-center form-control" value="1">
+                                                    <input type="number" class="text-center form-control" value="{{ $single_cart->quantity }}">
                                                     <div class="count-input-btns">
                                                         <button class="inc-ammount count-btn"><i class="zmdi zmdi-chevron-up"></i></button>
                                                         <button class="dec-ammount count-btn"><i class="zmdi zmdi-chevron-down"></i></button>
@@ -86,36 +123,31 @@ Pustok - Cart
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="pro-subtotal"><span>$395.00</span></td>
+                                        <td class="pro-subtotal">
+                                            <span>৳{{ $single_cart->quantity * $single_cart->relationWithProduct->product_price }}</span>
+                                            @php
+                                                $cart_total += $single_cart->quantity * $single_cart->relationWithProduct->product_price
+                                            @endphp
+                                        </td>
                                         <td class="pro-remove">
                                             <a href="#"><i class="far fa-trash-alt"></i></a>
                                         </td>
                                     </tr>
-                                    <!-- Product Row -->
+                                    @empty
                                     <tr>
-                                        <td class="pro-thumbnail"><a href="#"><img src="image/products/product-2.jpg"
-                                                    alt="Product"></a></td>
-                                        <td class="pro-title"><a href="#">Rinosin Glasses</a></td>
-                                        <td class="pro-price"><span>$395.00</span></td>
-                                        <td class="pro-quantity">
-                                            <div class="pro-qty">
-                                                {{-- <div class="count-input-block">
-                                                    <input type="number" class="text-center form-control" value="1">
-                                                </div> --}}
-                                                <div class="count-input-block">
-                                                    <input type="number" class="text-center form-control" value="1">
-                                                    <div class="count-input-btns">
-                                                        <button class="inc-ammount count-btn"><i class="zmdi zmdi-chevron-up"></i></button>
-                                                        <button class="dec-ammount count-btn"><i class="zmdi zmdi-chevron-down"></i></button>
-                                                    </div>
-                                                </div>
+                                        <td><span>No Product In Cart</span></td>
+                                    </tr>
+                                    @endforelse
+                                    <!-- Discount Row  -->
+                                    <tr>
+                                        <td colspan="6">
+                                            <div class="text-right update-block">
+                                                <input type="submit" class="btn btn-outlined" name="update_cart" value="Update cart">
+                                                <input type="hidden" id="_wpnonce" name="_wpnonce" value="05741b501f"><input type="hidden" name="_wp_http_referer"
+                                                    value="/petmark/cart/">
                                             </div>
                                         </td>
-                                        <td class="pro-subtotal"><span>$395.00</span></td>
-                                        <td class="pro-remove"><a href="#"><i class="far fa-trash-alt"></i></a>
-                                        </td>
                                     </tr>
-                                    <!-- Discount Row  -->
                                     <tr>
                                         <td colspan="6" class="actions">
                                             <div class="coupon-block">
@@ -128,13 +160,6 @@ Pustok - Cart
                                                     <input type="submit" class="btn btn-outlined" name="apply_coupon"
                                                         value="Apply coupon">
                                                 </div>
-                                            </div>
-                                            <div class="text-right update-block">
-                                                <input type="submit" class="btn btn-outlined" name="update_cart"
-                                                    value="Update cart">
-                                                <input type="hidden" id="_wpnonce" name="_wpnonce"
-                                                    value="05741b501f"><input type="hidden" name="_wp_http_referer"
-                                                    value="/petmark/cart/">
                                             </div>
                                         </td>
                                     </tr>
@@ -178,7 +203,7 @@ Pustok - Cart
                     <div class="cart-summary">
                         <div class="cart-summary-wrap">
                             <h4><span>Cart Summary</span></h4>
-                            <p>Sub Total <span class="text-primary">$1250.00</span></p>
+                            <p>Sub Total <span class="text-primary">৳{{ $cart_total }}</span></p>
                             <p>Shipping Cost <span class="text-primary">$00.00</span></p>
                             <h2>Grand Total <span class="text-primary">$1250.00</span></h2>
                         </div>

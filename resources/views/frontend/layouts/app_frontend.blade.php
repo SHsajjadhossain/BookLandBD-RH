@@ -106,9 +106,9 @@
                                     <div class="cart-block">
                                         <div class="cart-total">
                                             @auth
-                                                @if (totalCarts()->count() > 0)
+                                                @if (allCarts()->count() > 0)
                                                     <span class="text-number">
-                                                        {{ totalCarts()->count() }}
+                                                        {{ allCarts()->count() }}
                                                     </span>
                                                 @endif
                                             @endauth
@@ -122,7 +122,7 @@
                                         </div>
                                         <div class="cart-dropdown-block">
                                             <div class=" single-cart-block">
-                                                @forelse (allCarts() as $cart)
+                                                @forelse (cartList() as $cart)
                                                     <div class="cart-product">
                                                         <a href="product-details.html" class="image">
                                                             <img src="{{ asset('uploads/product_photoes') }}/{{ $cart->relationWithProduct->product_photo }}" alt="Product photo not found">

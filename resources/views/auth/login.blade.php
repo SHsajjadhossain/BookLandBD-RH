@@ -21,6 +21,7 @@ Pustok - Book Store | Login
 
 .password-flex a{
     font-size: 13px;
+    margin-top: 14px;
 }
 
 .remember_me{
@@ -56,9 +57,8 @@ Pustok - Book Store | Login
                                 @enderror
                             </div>
                             <div class="col-12 mb--20">
-                                <div class="mt-2 password-flex">
+                                <div class="mt-2">
                                     <label for="password">Password</label>
-                                    <a href="#">Forget Password?</a>
                                 </div>
                                 <input class="mb-0 form-control" type="password" id="login-password" name="password"
                                     placeholder="Enter your password">
@@ -67,11 +67,12 @@ Pustok - Book Store | Login
                                 @enderror
                             </div>
                             <!-- Remember Me -->
-                            <div class="block mt-2 mb-2">
+                            <div class="block mt-2 mb-2 password-flex">
                                 <label for="remember_me" class="inline-flex items-center">
                                     <input id="remember_me" type="checkbox" name="remember">
                                     <span class="text-sm text-gray-600 ms-4 remember_me">{{ __('Remember me') }}</span>
                                 </label>
+                                <a href="#">Forget Password?</a>
                             </div>
                             <div class="col-md-12">
                                 <button type="submit" class="btn btn-outlined">Login</button>
