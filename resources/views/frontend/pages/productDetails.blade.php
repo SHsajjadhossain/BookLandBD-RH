@@ -6,6 +6,16 @@ Pustok - {{ $single_product_info->product_name }}
 
 @endsection
 
+@push('custom-css')
+
+<style>
+    .count-arrow{
+        cursor: pointer;
+    }
+</style>
+
+@endpush
+
 @section('content')
 
 <main class="inner-page-sec-padding-bottom">
@@ -22,12 +32,17 @@ Pustok - {{ $single_product_info->product_name }}
             <div class="col-lg-7">
                 <div class="product-details-info pl-lg--30 ">
                     {{-- <p class="tag-block">Tags: <a href="#">Movado</a>, <a href="#">Omega</a></p> --}}
+                    @if (session('stockout'))
+                        <div class="alert alert-danger stockout-error">
+                            {{ session('stockout') }}
+                        </div>
+                    @endif
                     <h3 class="product-title">{{ $single_product_info->product_name }}</h3>
                     <ul class="list-unstyled">
                         {{-- <li>Brands: <a href="#" class="list-value font-weight-bold"> Canon</a></li> --}}
                         <li>Product Code: <span class="list-value"> {{ $single_product_info->product_code }}</span></li>
-                        <li>Reward Points: <span class="list-value"> 200</span></li>
-                        <li>Availability: <span class="list-value"> In Stock</span></li>
+                        {{-- <li>Reward Points: <span class="list-value"> 200</span></li> --}}
+                        <li>Availability: <span class="list-value"> {{ $single_product_info->product_quantity == 0 ? 'Stock Out' : 'In Stock' }}</span></li>
                     </ul>
                     <div class="price-block">
                         <span class="price-new">৳{{ $single_product_info->product_price }}</span>
@@ -56,6 +71,10 @@ Pustok - {{ $single_product_info->product_name }}
                             <div class="count-input-block">
                                 <span class="widget-label">Qty</span>
                                 <input type="number" class="text-center form-control" name="quantity" value="1">
+                                <div class="count-input-btns">
+                                    <a class="inc-ammount count-btn count-arrow"><i class="zmdi zmdi-chevron-up"></i></a>
+                                    <a class="dec-ammount count-btn count-arrow"><i class="zmdi zmdi-chevron-down"></i></a>
+                                </div>
                             </div>
                             <div class="add-cart-btn">
                                 <button type="submit" class="btn btn-outlined--primary"><span class="plus-icon">+</span>Add to
@@ -270,3 +289,15 @@ Pustok - {{ $single_product_info->product_name }}
 </main>
 
 @endsection
+
+@push('custom-js')
+
+<script>
+    $(document).ready(function () {
+        setTimeout(() => {
+            $('.stockout-error').fadeOut('slow');
+        }, 3500);
+    });
+</script>
+
+@endpush

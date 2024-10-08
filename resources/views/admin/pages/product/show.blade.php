@@ -125,7 +125,7 @@ Dashboard Pustok | {{ $single_product->product_name }} Details
                             <div class="flex-wrap mt-1 ecommerce-details-price d-flex">
                                 <h4 class="mr-1 item-price">Product Quantity</h4>
                                 <ul class="pl-1 unstyled-list list-inline border-left">
-                                    <li class="ratings-list-item">{{ $single_product->product_quantity }} ({{ ($single_product->product_quantity = 0) ? 'Stock Out' : 'In Stock' }})</li>
+                                    <li class="ratings-list-item">{{ $single_product->product_quantity }} ({{ ($single_product->product_quantity == 0) ? 'Stock Out' : 'In Stock' }})</li>
                                 </ul>
                             </div>
                         </div>

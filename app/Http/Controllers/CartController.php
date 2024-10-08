@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Product;
 use App\Models\Wishlist;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -38,6 +39,11 @@ class CartController extends Controller
     public function addToCart(Request $request, $product_id)
     {
         $cart_status = Cart::where('user_id', auth()->id())->where('product_id', $product_id)->exists();
+
+        if (Product::find($product_id)->product_quantity < $request->quantity) {
+            return back()->with('stockout', 'Stock not available');
+        }
+
         if ($request->quantity) {
             if ($cart_status)
             {
