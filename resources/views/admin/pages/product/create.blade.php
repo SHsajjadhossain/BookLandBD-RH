@@ -136,6 +136,16 @@ active
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
+                                        <label for="password-vertical">Product Quantity<span class="text-danger">*</span></label>
+                                        <input type="number" id="password-vertical" class="form-control" name="product_quantity"
+                                            placeholder="Enter Product Quantity" />
+                                        @error('product_quantity')
+                                        <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
                                         <label for="password-vertical">Product Code<span class="text-danger">*</span></label>
                                         <input type="text" id="password-vertical" class="form-control" name="product_code"
                                             placeholder="Enter Product Code" />

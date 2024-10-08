@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('product_price');
             $table->text('product_short_description');
             $table->longText('product_long_description');
+            $table->integer('product_quantity');
             $table->string('product_code');
             $table->string('product_photo');
             $table->timestamps();

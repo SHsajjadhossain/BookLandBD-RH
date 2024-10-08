@@ -50,6 +50,7 @@ class ProductController extends Controller
                 'product_price' => 'required',
                 'product_short_description' => 'required',
                 'product_long_description' => 'required',
+                'product_quantity' => 'required',
                 'product_code' => 'required',
                 'product_photo' => 'required|image|mimes:png,jpg,jpeg|dimensions:width=700, height=700'
             ]);
@@ -62,6 +63,7 @@ class ProductController extends Controller
                 'product_price' => 'required',
                 'product_short_description' => 'required',
                 'product_long_description' => 'required',
+                'product_quantity' => 'required',
                 'product_code' => 'required',
                 'product_photo' => 'required|image|mimes:png,jpg,jpeg|dimensions:width=700, height=700'
             ]);
@@ -80,6 +82,7 @@ class ProductController extends Controller
             'product_price' => $request->product_price,
             'product_short_description' => $request->product_short_description,
             'product_long_description' => $request->product_long_description,
+            'product_quantity' => $request->product_quantity,
             'product_code' => $request->product_code,
             'product_photo' => $imageName,
             'created_at' => Carbon::now()
@@ -137,6 +140,7 @@ class ProductController extends Controller
             'product_price' => $request->product_price,
             'product_short_description' => $request->product_short_description,
             'product_long_description' => $request->product_long_description,
+            'product_quantity' => $request->product_quantity,
             'product_code' => $request->product_code,
         ]);
 

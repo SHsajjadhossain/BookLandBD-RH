@@ -120,7 +120,7 @@ active
                                         <label for="exampleFormControlTextarea1">Product Short Description<span
                                                 class="text-danger">*</span></label>
                                         <textarea class="form-control" name="product_short_description"
-                                            id="exampleFormControlTextarea1" style="resize:none" rows="3">{{ $product->product_long_description }}</textarea>
+                                            id="exampleFormControlTextarea1" style="resize:none" rows="3">{{ $product->product_short_description }}</textarea>
                                         {{-- <div class="custom-editor-wrapper_1">
                                             <div class="custom-editor_1"></div>
                                             <input type="hidden" name="product_short_description"
@@ -144,6 +144,17 @@ active
                                                 class="custom-editor-input">
                                         </div> --}}
                                         @error('product_long_description')
+                                        <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="password-vertical">Product Quantity<span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" id="password-vertical" class="form-control"
+                                            name="product_quantity" value="{{ $product->product_quantity }}" placeholder="Enter Product Quantity" />
+                                        @error('product_code')
                                         <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
