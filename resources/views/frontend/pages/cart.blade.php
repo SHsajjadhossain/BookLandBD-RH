@@ -103,11 +103,17 @@ Pustok - Cart
                                     @forelse (allCarts() as $single_cart)
                                     <tr>
                                         <td class="pro-thumbnail">
-                                            <a href="#">
+                                            <a>
                                                 <img src="{{ asset('uploads/product_photoes') }}/{{ $single_cart->relationWithProduct->product_photo }}" alt="Product photo not found">
                                             </a>
                                         </td>
-                                        <td class="pro-title"><a href="#">{{ $single_cart->relationWithProduct->product_name }}</a></td>
+                                        <td class="pro-title">
+                                            <a>{{ $single_cart->relationWithProduct->product_name }}</a>
+                                            <br>
+                                            @if ($single_cart->quantity > available_quantity($single_cart->product_id))
+                                            Availability : <span class="text-danger">Stock Out</span>
+                                            @endif
+                                        </td>
                                         <td class="pro-price"><span>৳{{ $single_cart->relationWithProduct->product_price }}</span></td>
                                         <td class="pro-quantity">
                                             <div class="pro-qty">

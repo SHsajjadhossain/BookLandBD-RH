@@ -31,3 +31,8 @@ function allCarts()
 {
     return App\Models\Cart::where('user_id', auth()->id())->get();
 }
+
+function available_quantity($product_id)
+{
+    return App\Models\Product::find($product_id)->product_quantity;
+}

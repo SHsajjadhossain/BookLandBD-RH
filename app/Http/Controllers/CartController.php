@@ -43,11 +43,15 @@ class CartController extends Controller
         if (Product::find($product_id)->product_quantity < $request->quantity) {
             return back()->with('stockout', 'Stock not available');
         }
-
-        if ($request->quantity) {
+        else {
             if ($cart_status)
             {
-                Cart::where('user_id', auth()->id())->where('product_id', $product_id)->increment('quantity', $request->quantity);
+                if (Product::find($product_id)->product_quantity < (Cart::where('user_id', auth()->id())->where('product_id', $product_id)->first()->quantity +  $request->quantity)) {
+                    return back()->with('stockout', 'Already in the cart');
+                }
+                else {
+                    Cart::where('user_id', auth()->id())->where('product_id', $product_id)->increment('quantity', $request->quantity);
+                }
             }
             else
             {
@@ -55,21 +59,6 @@ class CartController extends Controller
                     'user_id' => auth()->id(),
                     'product_id' => $product_id,
                     'quantity' => $request->quantity,
-                    'created_at' => Carbon::now(),
-                ]);
-            }
-        }
-        else
-        {
-            if ($cart_status)
-            {
-                Cart::where('user_id', auth()->id())->where('product_id', $product_id)->increment('quantity', 1);
-            }
-            else
-            {
-                Cart::insert([
-                    'user_id' => auth()->id(),
-                    'product_id' => $product_id,
                     'created_at' => Carbon::now(),
                 ]);
             }

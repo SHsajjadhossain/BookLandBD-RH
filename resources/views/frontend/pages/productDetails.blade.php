@@ -65,6 +65,7 @@ Pustok - {{ $single_product_info->product_name }}
                         <h4 class="sr-only">Product Summery</h4>
                         <p>{{ $single_product_info->product_short_description }}</p>
                     </article>
+                    @auth
                     <form action="{{ route('addToCart', $single_product_info->id) }}" method="POST">
                         @csrf
                         <div class="add-to-cart-row">
@@ -82,6 +83,22 @@ Pustok - {{ $single_product_info->product_name }}
                             </div>
                         </div>
                     </form>
+                    @else
+                    <div class="add-to-cart-row">
+                        <div class="count-input-block">
+                            <span class="widget-label">Qty</span>
+                            <input type="number" class="text-center form-control" name="quantity" value="1">
+                            <div class="count-input-btns">
+                                <a class="inc-ammount count-btn count-arrow"><i class="zmdi zmdi-chevron-up"></i></a>
+                                <a class="dec-ammount count-btn count-arrow"><i class="zmdi zmdi-chevron-down"></i></a>
+                            </div>
+                        </div>
+                        <div class="add-cart-btn">
+                            <a href="{{ route('login') }}" class="btn btn-outlined--primary"><span class="plus-icon">+</span>Add to
+                                Cart</a>
+                        </div>
+                    </div>
+                    @endauth
                     @auth
                         <div class="compare-wishlist-row">
                             @if ($wishlist_status)
