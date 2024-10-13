@@ -80,99 +80,102 @@ Pustok - Cart
             </div>
             <div class="row">
                 <div class="col-12">
-                    <form action="#" class="">
-                        <!-- Cart Table -->
-                        <div class="cart-table table-responsive mb--40">
-                            <table class="table">
-                                <!-- Head Row -->
-                                <thead>
-                                    <tr>
-                                        <th class="pro-thumbnail">Image</th>
-                                        <th class="pro-title">Product</th>
-                                        <th class="pro-price">Price</th>
-                                        <th class="pro-quantity">Quantity</th>
-                                        <th class="pro-subtotal">Total</th>
-                                        <th class="pro-remove">Aciton</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @php
-                                        $cart_total = 0;
-                                    @endphp
-                                    <!-- Product Row -->
-                                    @forelse (allCarts() as $single_cart)
-                                    <tr>
-                                        <td class="pro-thumbnail">
-                                            <a>
-                                                <img src="{{ asset('uploads/product_photoes') }}/{{ $single_cart->relationWithProduct->product_photo }}" alt="Product photo not found">
-                                            </a>
-                                        </td>
-                                        <td class="pro-title">
-                                            <a>{{ $single_cart->relationWithProduct->product_name }}</a>
-                                            <br>
-                                            @if ($single_cart->quantity > available_quantity($single_cart->product_id))
-                                            Availability : <span class="text-danger">Stock Out</span>
-                                            @endif
-                                        </td>
-                                        <td class="pro-price"><span>৳{{ $single_cart->relationWithProduct->product_price }}</span></td>
-                                        <td class="pro-quantity">
-                                            <div class="pro-qty">
-                                                {{-- <div class="count-input-block">
-                                                    <input type="number" class="text-center form-control" value="1">
-                                                </div> --}}
-                                                <div class="count-input-block">
-                                                    <input type="number" class="text-center form-control" value="{{ $single_cart->quantity }}">
-                                                    <div class="count-input-btns">
-                                                        <button class="inc-ammount count-btn"><i class="zmdi zmdi-chevron-up"></i></button>
-                                                        <button class="dec-ammount count-btn"><i class="zmdi zmdi-chevron-down"></i></button>
-                                                    </div>
+                    <!-- Cart Table -->
+                    <div class="cart-table table-responsive mb--40">
+                        <table class="table">
+                            <!-- Head Row -->
+                            <thead>
+                                <tr>
+                                    <th class="pro-thumbnail">Image</th>
+                                    <th class="pro-title">Product</th>
+                                    <th class="pro-price">Price</th>
+                                    <th class="pro-quantity">Quantity</th>
+                                    <th class="pro-subtotal">Total</th>
+                                    <th class="pro-remove">Aciton</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <form action="{{ route('cart.update') }}" method="POST">
+                                    @csrf
+                                @php
+                                    $cart_total = 0;
+                                    $flag = false;
+                                @endphp
+                                <!-- Product Row -->
+                                @forelse (allCarts() as $single_cart)
+                                <tr>
+                                    <td class="pro-thumbnail">
+                                        <a>
+                                            <img src="{{ asset('uploads/product_photoes') }}/{{ $single_cart->relationWithProduct->product_photo }}" alt="Product photo not found">
+                                        </a>
+                                    </td>
+                                    <td class="pro-title">
+                                        <a>{{ $single_cart->relationWithProduct->product_name }}</a>
+                                        <br>
+                                        @if ($single_cart->quantity > available_quantity($single_cart->product_id))
+                                        @php
+                                            $flag = true;
+                                        @endphp
+                                        Availability : <span class="text-danger">Stock Out</span>
+                                        @endif
+                                    </td>
+                                    <td class="pro-price"><span>৳{{ $single_cart->relationWithProduct->product_price }}</span></td>
+                                    <td class="pro-quantity">
+                                        <div class="pro-qty">
+                                            {{-- <div class="count-input-block">
+                                                <input type="number" class="text-center form-control" value="1">
+                                            </div> --}}
+                                            <div class="count-input-block">
+                                                <input type="number" class="text-center form-control" name="quantity[{{ $single_cart->id }}]" value="{{ $single_cart->quantity }}">
+                                                <div class="count-input-btns">
+                                                    <div class="inc-ammount count-btn" style="cursor: pointer;"><i class="zmdi zmdi-chevron-up"></i></div>
+                                                    <div class="dec-ammount count-btn" style="cursor: pointer;"><i class="zmdi zmdi-chevron-down"></i></div>
                                                 </div>
                                             </div>
-                                        </td>
-                                        <td class="pro-subtotal">
-                                            <span>৳{{ $single_cart->quantity * $single_cart->relationWithProduct->product_price }}</span>
-                                            @php
-                                                $cart_total += $single_cart->quantity * $single_cart->relationWithProduct->product_price
-                                            @endphp
-                                        </td>
-                                        <td class="pro-remove">
-                                            <a href="{{ route('cart.remove', $single_cart->id) }}"><i class="far fa-trash-alt"></i></a>
-                                        </td>
-                                    </tr>
-                                    @empty
-                                    <tr>
-                                        <td><span>No Product In Cart</span></td>
-                                    </tr>
-                                    @endforelse
-                                    <!-- Discount Row  -->
-                                    <tr>
-                                        <td colspan="6">
-                                            <div class="text-right update-block">
-                                                <input type="submit" class="btn btn-outlined" name="update_cart" value="Update cart">
-                                                <input type="hidden" id="_wpnonce" name="_wpnonce" value="05741b501f"><input type="hidden" name="_wp_http_referer"
-                                                    value="/petmark/cart/">
+                                        </div>
+                                    </td>
+                                    <td class="pro-subtotal">
+                                        <span>৳{{ $single_cart->quantity * $single_cart->relationWithProduct->product_price }}</span>
+                                        @php
+                                            $cart_total += $single_cart->quantity * $single_cart->relationWithProduct->product_price
+                                        @endphp
+                                    </td>
+                                    <td class="pro-remove">
+                                        <a href="{{ route('cart.remove', $single_cart->id) }}"><i class="far fa-trash-alt"></i></a>
+                                    </td>
+                                </tr>
+                                @empty
+                                <tr>
+                                    <td><span>No Product In Cart</span></td>
+                                </tr>
+                                @endforelse
+                                <!-- Discount Row  -->
+                                <tr>
+                                    <td colspan="6">
+                                        <div class="text-right update-block">
+                                            <button type="submit" class="btn btn-outlined">Update cart</button>
+                                </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6" class="actions">
+                                        <div class="coupon-block">
+                                            <div class="coupon-text">
+                                                <label for="coupon_code">Coupon:</label>
+                                                <input type="text" name="coupon_code" class="input-text"
+                                                    id="coupon_code" value="" placeholder="Coupon code">
                                             </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="6" class="actions">
-                                            <div class="coupon-block">
-                                                <div class="coupon-text">
-                                                    <label for="coupon_code">Coupon:</label>
-                                                    <input type="text" name="coupon_code" class="input-text"
-                                                        id="coupon_code" value="" placeholder="Coupon code">
-                                                </div>
-                                                <div class="coupon-btn">
-                                                    <input type="submit" class="btn btn-outlined" name="apply_coupon"
-                                                        value="Apply coupon">
-                                                </div>
+                                            <div class="coupon-btn">
+                                                <input type="submit" class="btn btn-outlined" name="apply_coupon"
+                                                    value="Apply coupon">
                                             </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -213,10 +216,16 @@ Pustok - Cart
                             <p>Shipping Cost <span class="text-primary">$00.00</span></p>
                             <h2>Grand Total <span class="text-primary">$1250.00</span></h2>
                         </div>
+                        @if ($flag)
+                        <div class="text-center alert alert-danger" style="border-radius: 50px;">
+                            <span class="checkout-btn" style="text-transform: uppercase;">Please Remove Stock Out Product First</span>
+                        </div>
+                        @else
                         <div class="cart-summary-button">
                             <a href="checkout.html" class="checkout-btn c-btn btn--primary">Proceed To Checkout</a>
                             {{-- <button class="update-btn c-btn btn-outlined">Update Cart</button> --}}
                         </div>
+                        @endif
                     </div>
                 </div>
             </div>

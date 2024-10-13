@@ -36,6 +36,7 @@ Route::get('wishlist/cart/{wishlist_id}', [CartController::class, 'wishlistCart'
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::post('/add/to/cart/{product_id}', [CartController::class, 'addToCart'])->name('addToCart');
 Route::get('/cart/remove/{id}', [CartController::class, 'cartRemove'])->name('cart.remove');
+Route::post('/cart/update', [CartController::class, 'cartUpdate'])->name('cart.update');
 // cart routes end
 
 // all frontend views routes end

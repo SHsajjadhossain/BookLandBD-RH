@@ -72,4 +72,9 @@ class CartController extends Controller
         Cart::find($id)->delete();
         return back();
     }
+
+    public function cartUpdate(Request $request)
+    {
+        return $request->quantity;
+    }
 }
