@@ -77,6 +77,16 @@ Pustok - Cart
         <div class="container">
             <div class="page-section-title">
                 <h1>Shopping Cart</h1>
+                @if (session('cart_update_success'))
+                <div class="alert alert-success cart_update_success">
+                    {{ session('cart_update_success') }}
+                </div>
+                @endif
+                @if (session('cart_remove_success'))
+                <div class="alert alert-danger cart_remove_success">
+                    {{ session('cart_remove_success') }}
+                </div>
+                @endif
             </div>
             <div class="row">
                 <div class="col-12">
@@ -117,6 +127,12 @@ Pustok - Cart
                                             $flag = true;
                                         @endphp
                                         Availability : <span class="text-danger">Stock Out</span>
+                                        @endif
+
+                                        @if (session('cart_id') == $single_cart->id)
+                                            @if (session('stockout'))
+                                            Availability : <span class="text-danger">{{ session('stockout') }}</span>
+                                            @endif
                                         @endif
                                     </td>
                                     <td class="pro-price"><span>৳{{ $single_cart->relationWithProduct->product_price }}</span></td>
@@ -235,3 +251,17 @@ Pustok - Cart
 <!-- Cart Page End -->
 
 @endsection
+
+@push('custom-js')
+<script>
+    $(document).ready(function () {
+        setTimeout(() => {
+            $('.cart_update_success').fadeOut('slow');
+        }, 3000);
+
+        setTimeout(() => {
+            $('.cart_remove_success').fadeOut('slow');
+        }, 3000);
+    });
+</script>
+@endpush

@@ -70,11 +70,24 @@ class CartController extends Controller
     public function cartRemove($id)
     {
         Cart::find($id)->delete();
-        return back();
+        return back()->with('cart_remove_success', 'Cart Removed Successfully !!');
     }
 
     public function cartUpdate(Request $request)
     {
-        return $request->quantity;
+        foreach ($request->quantity as $cart_id => $updated_quantity) {
+            if (Product::find(Cart::find($cart_id)->product_id)->product_quantity < $updated_quantity) {
+                return back()->with([
+                    'stockout' => 'Stock not available',
+                    'cart_id' => $cart_id,
+                ]);
+            }
+            else{
+                Cart::find($cart_id)->update([
+                    'quantity' => $updated_quantity
+                ]);
+            }
+            return back()->with('cart_update_success', 'Cart Updated Successfully !!');
+        }
     }
 }

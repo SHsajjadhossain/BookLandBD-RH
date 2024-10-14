@@ -27,7 +27,7 @@
                     }
                 });
             }
-            
+
         });
 
         $(document).on('click', '.ui-menu-item', function () {
@@ -35,5 +35,4 @@
         });
     });
 </script>
-
 @stack('custom-js')
