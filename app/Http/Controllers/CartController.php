@@ -83,11 +83,11 @@ class CartController extends Controller
                 ]);
             }
             else{
-                Cart::find($cart_id)->update([
+                    Cart::find($cart_id)->update([
                     'quantity' => $updated_quantity
                 ]);
             }
-            return back()->with('cart_update_success', 'Cart Updated Successfully !!');
         }
+        return back()->with('cart_update_success', 'Cart Updated Successfully !!');
     }
 }

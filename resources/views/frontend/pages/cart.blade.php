@@ -13,6 +13,33 @@ Pustok - Cart
         font-weight: 700;
     }
 
+    .cart-shoping-update-wrapper{
+        display: flex;
+    }
+
+    .cart-continue-shopping{
+        flex: 25%;
+    }
+
+    .cart-continue-shopping .btn-outlined{
+        background: #62ab00;
+        color: #ffffff;
+        transition: .4s;
+    }
+
+    .cart-continue-shopping .btn-outlined:hover{
+        background: #000000;
+        border-color: #000000;
+    }
+
+    .cart-update{
+        flex: 45%;
+    }
+
+    .cart-clear{
+        flex: 25%;
+    }
+
     .update-block .btn{
         width: 90%;
         background: #62ab00;
@@ -167,10 +194,18 @@ Pustok - Cart
                                 @endforelse
                                 <!-- Discount Row  -->
                                 <tr>
-                                    <td colspan="6">
-                                        <div class="text-right update-block">
-                                            <button type="submit" class="btn btn-outlined">Update cart</button>
-                                </form>
+                                    <td colspan="6" class="actions">
+                                        <div class="cart-shoping-update-wrapper">
+                                            <div class="cart-continue-shopping">
+                                                <a href="{{ route('frontend.shop') }}" class="btn btn-outlined">Continue Shopping</a>
+                                            </div>
+                                            <div class="cart-update">
+                                                <button type="submit" class="btn btn-outlined">Update cart</button>
+                                                </form>
+                                            </div>
+                                            <div class="cart-clear">
+                                                <a href="#" class="btn btn-outlined">Clear Shopping Cart</a>
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>

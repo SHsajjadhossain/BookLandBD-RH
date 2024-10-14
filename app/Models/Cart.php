@@ -9,6 +9,7 @@ class Cart extends Model
 {
     use HasFactory;
     protected $guarded =['id'];
+    // protected $fillable = ['quantity'];
 
     function relationWithProduct(){
         return $this->belongsTo(Product::class, 'product_id');
