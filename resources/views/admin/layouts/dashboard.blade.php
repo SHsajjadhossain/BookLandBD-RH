@@ -472,6 +472,24 @@
                         </li>
                     </ul>
                 </li>
+                <li class=" navigation-header"><span data-i18n="User Interface">Coupons</span><i
+                        data-feather="more-horizontal"></i>
+                </li>
+                <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i
+                            data-feather="trello"></i><span class="menu-title text-truncate"
+                            data-i18n="Card">Coupons</span></a>
+                    <ul class="menu-content">
+                        <li class="@yield('add-coupon-active')"><a class="d-flex align-items-center" href="{{ route('coupon.create') }}"><i
+                                    data-feather="circle"></i><span class="menu-item text-truncate"
+                                    data-i18n="Basic">Add Coupon</span></a>
+                        </li>
+                        <li class="@yield('coupon-list-active')">
+                            <a class="d-flex align-items-center" href="{{ route('coupon.index') }}">
+                                <i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Statistics">Coupon List</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <li class=" navigation-header"><span data-i18n="User Interface">User Interface</span><i
                         data-feather="more-horizontal"></i>
                 </li>

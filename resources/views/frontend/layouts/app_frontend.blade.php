@@ -30,6 +30,25 @@
             right: 14px;
             top : -8px;
         }
+
+        .home-log-out-icon{
+            color: #666;
+            margin-right: 5px;
+            transition: .4s;
+        }
+
+        .home-log-out{
+            color: #666 !important;
+            transition: .4s;
+        }
+
+        .home-log-out:hover{
+            color: #62ab00 !important;
+        }
+
+        .home-log-out:hover .home-log-out-icon{
+            color: #62ab00;
+        }
     </style>
 </head>
 
@@ -52,17 +71,28 @@
                                     </li>
                                 @endauth
 
-                                <li class="dropdown-trigger language-dropdown">
-                                    @auth
+                                @auth
+                                <li class="dropdown-trigger language-dropdown"><a href="#"><i class="icons-left fas fa-user"></i>
+                                        My Account</a><i class="fas fa-chevron-down dropdown-arrow"></i>
+                                    <ul class="dropdown-box">
                                         @if (Auth::user()->role == '1' || Auth::user()->role == '3')
-                                            {{-- <a href="" class="font-weight-bold">{{ Auth::user()->name }}</a> --}}
-                                            <a href="{{ route('dashboard') }}"><i class="icons-left fas fa-user"></i>My Account</a>
+                                        <li> <a href="{{ route('dashboard') }}">My Dashboard</a></li>
                                         @else
-                                        {{-- <a href="" class="font-weight-bold">{{ Auth::user()->name }}</a> --}}
-                                            <a href="{{ route('user.dashboard') }}"><i class="icons-left fas fa-user"></i>My Account</a>
+                                        <li> <a href="{{ route('user.dashboard') }}">My Dashboard</a></li>
                                         @endif
-                                    @endauth
+                                        <li>
+                                            <form action="{{ route('logout') }}" method="POST">
+                                                @csrf
+                                                <a href="{{ route('logout') }}" class="home-log-out" onclick="event.preventDefault();
+                                                                                                this.closest('form').submit();">
+                                                    <i class="fas fa-sign-out-alt home-log-out-icon"></i>
+                                                    Logout
+                                                </a>
+                                            </form>
+                                        </li>
+                                    </ul>
                                 </li>
+                                @endauth
                                 <li><a href="#"><i class="icons-left fas fa-phone"></i> Contact</a>
                                 </li>
                                 </li>

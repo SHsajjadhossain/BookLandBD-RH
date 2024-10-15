@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CouponController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -32,12 +33,19 @@ Route::get('/wishlist/remove/{wishlist_id}', [WishlistController::class, 'remove
 // wishlist routes end
 
 // cart routes start
+
 Route::get('wishlist/cart/{wishlist_id}', [CartController::class, 'wishlistCart'])->name('wishlist.cart');
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::post('/add/to/cart/{product_id}', [CartController::class, 'addToCart'])->name('addToCart');
 Route::get('/cart/remove/{id}', [CartController::class, 'cartRemove'])->name('cart.remove');
 Route::post('/cart/update', [CartController::class, 'cartUpdate'])->name('cart.update');
+Route::get('/cart/clear/{user_id}', [CartController::class, 'cartClear'])->name('cart.clear');
+
 // cart routes end
+
+// coupon routes start
+Route::resource('coupon', CouponController::class);
+// coupon routes end
 
 // all frontend views routes end
 

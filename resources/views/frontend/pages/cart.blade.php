@@ -204,7 +204,7 @@ Pustok - Cart
                                                 </form>
                                             </div>
                                             <div class="cart-clear">
-                                                <a href="#" class="btn btn-outlined">Clear Shopping Cart</a>
+                                                <a href="{{ route('cart.clear', auth()->id()) }}" class="btn btn-outlined">Clear Shopping Cart</a>
                                             </div>
                                         </div>
                                     </td>

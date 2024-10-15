@@ -90,4 +90,10 @@ class CartController extends Controller
         }
         return back()->with('cart_update_success', 'Cart Updated Successfully !!');
     }
+
+    public function cartClear($user_id)
+    {
+        // Cart::where('user_id', $user_id)->delete();
+        // return back();
+    }
 }
