@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CouponFormRequest;
 use App\Models\Coupon;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class CouponController extends Controller
@@ -26,9 +28,12 @@ class CouponController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CouponFormRequest $request)
     {
-        return $request;
+        Coupon::insert($request->except('_token') + [
+            'created_at' => Carbon::now(),
+        ]);
+        return back()->with('success', 'Coupon Created Successfully !!');
     }
 
     /**

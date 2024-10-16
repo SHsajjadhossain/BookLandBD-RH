@@ -20,7 +20,7 @@ active
         <div class="mb-2 content-header-left col-md-9 col-12">
             <div class="row breadcrumbs-top">
                 <div class="col-12">
-                    <h2 class="float-left mb-0 content-header-title">Product</h2>
+                    <h2 class="float-left mb-0 content-header-title">Coupon</h2>
                     <div class="breadcrumb-wrapper">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a>
@@ -80,7 +80,7 @@ active
                                                 class="text-danger">*</span></label>
                                         <input type="date" id="password-vertical" class="form-control"
                                             name="coupon_validity" placeholder="Enter Coupon Validity" />
-                                        @error('product_quantity')
+                                        @error('coupon_validity')
                                         <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
@@ -91,7 +91,7 @@ active
                                                 class="text-danger">*</span></label>
                                         <input type="number" id="password-vertical" class="form-control"
                                             name="coupon_limit" placeholder="Enter Coupon Limit" />
-                                        @error('product_code')
+                                        @error('coupon_limit')
                                         <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
