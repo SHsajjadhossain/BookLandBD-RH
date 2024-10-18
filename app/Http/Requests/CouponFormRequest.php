@@ -32,11 +32,8 @@ class CouponFormRequest extends FormRequest
     public function messages()
     {
         return [
-            // 'coupon_name.required' => 'The coupon name field is required',
             'coupon_name.unique' => 'The coupon name has already been taken.',
-            // 'discount_percentage.required' => 'The coupon discount percentage field is required.',
             'discount_percentage.numeric' => 'The coupon discount percentage field must be a number.',
-            // 'coupon_validity.required' => 'The coupon validity field is required.',
         ];
     }
 }

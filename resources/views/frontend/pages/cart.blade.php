@@ -165,9 +165,6 @@ Pustok - Cart
                                     <td class="pro-price"><span>৳{{ $single_cart->relationWithProduct->product_price }}</span></td>
                                     <td class="pro-quantity">
                                         <div class="pro-qty">
-                                            {{-- <div class="count-input-block">
-                                                <input type="number" class="text-center form-control" value="1">
-                                            </div> --}}
                                             <div class="count-input-block">
                                                 <input type="number" class="text-center form-control" name="quantity[{{ $single_cart->id }}]" value="{{ $single_cart->quantity }}">
                                                 <div class="count-input-btns">
@@ -211,17 +208,23 @@ Pustok - Cart
                                 </tr>
                                 <tr>
                                     <td colspan="6" class="actions">
-                                        <div class="coupon-block">
-                                            <div class="coupon-text">
-                                                <label for="coupon_code">Coupon:</label>
-                                                <input type="text" name="coupon_code" class="input-text"
-                                                    id="coupon_code" value="" placeholder="Coupon code">
+                                        <form action="">
+                                            <div class="coupon-block">
+                                                <div class="coupon-text">
+                                                    <label for="coupon_code">Coupon:</label>
+                                                    <input type="text" name="coupon_code" class="input-text"
+                                                        id="coupon_code" value="{{ ($coupon_name)?$coupon_name:'' }}" placeholder="Coupon code">
+                                                        @if (session('coupon_error'))
+                                                        <div class="alert alert-danger coupon-error mt-2">
+                                                            {{ session('coupon_error') }}
+                                                        </div>
+                                                        @endif
+                                                    </div>
+                                                <div class="coupon-btn">
+                                                    <button type="submit" class="btn btn-outlined">Apply coupon</button>
+                                                </div>
                                             </div>
-                                            <div class="coupon-btn">
-                                                <input type="submit" class="btn btn-outlined" name="apply_coupon"
-                                                    value="Apply coupon">
-                                            </div>
-                                        </div>
+                                        </form>
                                     </td>
                                 </tr>
                             </tbody>
@@ -234,38 +237,21 @@ Pustok - Cart
     <div class="cart-section-2">
         <div class="container">
             <div class="row">
-                {{-- <div class="col-lg-6 col-12 mb--30 mb-lg--0">
-                    <table class="table">
-                        <tbody>
-                            <tr>
-                                <td colspan="5" class="actions">
-                                    <div class="coupon-block">
-                                        <div class="coupon-text">
-                                            <label for="coupon_code">Coupon:</label>
-                                            <input type="text" name="coupon_code" class="input-text" id="coupon_code" value="" placeholder="Coupon code">
-                                        </div>
-                                        <div class="coupon-btn">
-                                            <input type="submit" class="btn btn-outlined" name="apply_coupon" value="Apply coupon">
-                                        </div>
-                                    </div>
-                                    <div class="text-right update-block">
-                                        <input type="submit" class="btn btn-outlined" name="update_cart" value="Update cart">
-                                        <input type="hidden" id="_wpnonce" name="_wpnonce" value="05741b501f"><input type="hidden" name="_wp_http_referer"
-                                            value="/petmark/cart/">
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div> --}}
                 <!-- Cart Summary -->
                 <div class="col-lg-12 col-12 d-flex">
                     <div class="cart-summary">
                         <div class="cart-summary-wrap">
                             <h4><span>Cart Summary</span></h4>
-                            <p>Sub Total <span class="text-primary">৳{{ $cart_total }}</span></p>
-                            <p>Shipping Cost <span class="text-primary">$00.00</span></p>
-                            <h2>Grand Total <span class="text-primary">$1250.00</span></h2>
+                            <p>Cart Total <span class="text-primary">৳{{ $cart_total }}</span></p>
+                            <p>Discount Total
+                                @if ($coupon_name)
+                                ({{ ($coupon_name)?'Used coupon : '.$coupon_name:'' }})
+                                @endif
+                            <span class="text-primary">৳{{ $discount_total }}</span>
+                            </p>
+                            <p>Sub Total <span class="text-primary">৳{{ $cart_total - $discount_total}}</span></p>
+                            <p>Shipping Cost <span class="text-primary">৳00.00</span></p>
+                            <h2>Grand Total <span class="text-primary">৳1250.00</span></h2>
                         </div>
                         @if ($flag)
                         <div class="text-center alert alert-danger" style="border-radius: 50px;">
@@ -274,7 +260,6 @@ Pustok - Cart
                         @else
                         <div class="cart-summary-button">
                             <a href="checkout.html" class="checkout-btn c-btn btn--primary">Proceed To Checkout</a>
-                            {{-- <button class="update-btn c-btn btn-outlined">Update Cart</button> --}}
                         </div>
                         @endif
                     </div>
@@ -292,6 +277,7 @@ Pustok - Cart
     $(document).ready(function () {
         setTimeout(() => {
             $('.cart_update_success').fadeOut('slow');
+            $('.coupon-error').fadeOut('slow');
         }, 3000);
 
         setTimeout(() => {

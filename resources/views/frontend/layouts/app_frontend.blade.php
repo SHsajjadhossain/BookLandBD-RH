@@ -83,7 +83,7 @@
                                         <li>
                                             <form action="{{ route('logout') }}" method="POST">
                                                 @csrf
-                                                <a href="{{ route('logout') }}" class="home-log-out" onclick="event.preventDefault();
+                                                <a href="{{ route('logout') }}" class="home-log-out mt-2 mb-2" onclick="event.preventDefault();
                                                                                                 this.closest('form').submit();">
                                                     <i class="fas fa-sign-out-alt home-log-out-icon"></i>
                                                     Logout

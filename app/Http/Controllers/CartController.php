@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Coupon;
 use App\Models\Product;
 use App\Models\Wishlist;
 use Carbon\Carbon;
@@ -12,7 +13,43 @@ class CartController extends Controller
 {
     public function index()
     {
-        return view('frontend.pages.cart');
+        if (isset($_GET['coupon_code'])) {
+            if ($_GET['coupon_code']) {
+                $coupon_name = $_GET['coupon_code'];
+                if (Coupon::where('coupon_name', $coupon_name)->exists()) {
+                    $coupon_info = Coupon::where('coupon_name', $coupon_name)->first();
+                    if ($coupon_info->coupon_limit != 0) {
+                        if ($coupon_info->coupon_validity < Carbon::today()->format('Y-m-d')) {
+                            $discount_total = 0;
+                            return redirect('cart')->with('coupon_error', $coupon_name .' coupon date is over');
+                        }
+                        else {
+                            $discount_total = 150;
+                            $coupon_name;
+                        }
+
+                    }
+                    else {
+                        $discount_total = 0;
+                        return redirect('cart')->with('coupon_error', $coupon_name .' coupon limit is over');
+                    }
+
+                }
+                else {
+                    $discount_total = 0;
+                    return redirect('cart')->with('coupon_error', $coupon_name.' coupon is invalid');
+                }
+            }
+            else {
+                $discount_total = 0;
+                $coupon_name = "";
+            }
+        }
+        else {
+            $discount_total = 0;
+            $coupon_name = "";
+        }
+        return view('frontend.pages.cart', compact('discount_total', 'coupon_name'));
     }
 
     public function wishlistCart($wishlist_id)
