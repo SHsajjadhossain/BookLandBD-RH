@@ -24,8 +24,8 @@ class CartController extends Controller
                             return redirect('cart')->with('coupon_error', $coupon_name .' coupon date is over');
                         }
                         else {
-                            $discount_total = 150;
-                            $coupon_name;
+                            $discount_total = (session('s_cart_total') * $coupon_info->discount_percentage) / 100;
+                            $coupon_name = $_GET['coupon_code'];
                         }
 
                     }

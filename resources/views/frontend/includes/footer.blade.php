@@ -23,7 +23,7 @@
                     <ul class="footer-list normal-list">
                         <li><a href="#">New products</a></li>
                         <li><a href="#">Best sales</a></li>
-                        <li><a href="#">Stores</a></li>
+                        <li><a href="{{ route('frontend.shop') }}">Stores</a></li>
                         <li><a href="#">Contact us</a></li>
                     </ul>
                 </div>
