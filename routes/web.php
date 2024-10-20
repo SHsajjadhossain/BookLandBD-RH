@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BannerController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CouponController;
@@ -58,6 +59,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified', 'roleche
     Route::get('/my-profile', [AdminController::class, 'myProfile'])->name('my-profile');
     Route::post('/my-profile/update', [AdminController::class, 'myProfileUpdate'])->name('my-profile.update');
     Route::post('/my-profile/update/password', [AdminController::class, 'myProfileUpdatePassword'])->name('my-profile.update.password');
+
+    // category all routes start
+    Route::get('/banner/index', [BannerController::class, 'index'])->name('banner.index');
+    // category all routes end
 
     // category all routes start
     Route::resource('category', CategoryController::class);

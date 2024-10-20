@@ -285,24 +285,6 @@ Pustok - Cart
                             </form>
                         </div>
                     </div>
-                    {{-- <form action="">
-                        <div class="coupon-block">
-                            <p>Enter your coupon code if you have one.</p>
-                            <div class="coupon-text">
-                                <label for="coupon_code">Coupon:</label>
-                                <input type="text" name="coupon_code" class="input-text" id="coupon_code"
-                                    value="{{ ($coupon_name)?$coupon_name:'' }}" placeholder="Coupon code">
-                                @if (session('coupon_error'))
-                                <div class="mt-2 alert alert-danger coupon-error">
-                                    {{ session('coupon_error') }}
-                                </div>
-                                @endif
-                            </div>
-                            <div class="coupon-btn">
-                                <button type="submit" class="btn btn-outlined">Apply coupon</button>
-                            </div>
-                        </div>
-                    </form> --}}
                 </div>
                 <div class="col-lg-6 col-12 d-flex">
                     <div class="cart-summary">

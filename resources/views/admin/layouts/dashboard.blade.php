@@ -411,6 +411,32 @@
                 {{-- <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Apps &amp; Pages</span><i
                         data-feather="more-horizontal"></i>
                 </li> --}}
+                <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Frontend Banner</span><i
+                        data-feather="more-horizontal"></i>
+                </li>
+                {{-- <li class="nav-item @yield('category-active')"><a class="d-flex align-items-center" href="{{ route('category.index') }}"><i
+                            data-feather="grid"></i><span class="menu-title text-truncate"
+                            data-i18n="Kanban">Product Category</span></a>
+                </li> --}}
+                <li class="nav-item @yield('banner-active')">
+                    <a class="d-flex align-items-center" href="{{ route('banner.index') }}">
+                        <i data-feather="airplay"></i>
+                        <span class="menu-title text-truncate" data-i18n="web">Banner</span></a>
+                </li>
+                {{-- <li class=" nav-item"><a class="d-flex align-items-center" href="#">
+                    <i data-feather="airplay"></i>
+                    <span class="menu-title text-truncate" data-i18n="Kanban">Banner</span></a>
+                    <ul class="menu-content">
+                        <li class="@yield('add-banner-active')"><a class="d-flex align-items-center" href="{{ route('category.index') }}"><i
+                                    data-feather="circle"></i><span class="menu-item text-truncate"
+                                    data-i18n="List">Add Banner</span></a>
+                        </li>
+                        <li class="@yield('list-banner-active')"><a class="d-flex align-items-center" href="{{ route('subcategory.index') }}"><i
+                                    data-feather="circle"></i><span class="menu-item text-truncate"
+                                    data-i18n="Preview">List Banner</span></a>
+                        </li>
+                    </ul>
+                </li> --}}
                 <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Categories</span><i
                         data-feather="more-horizontal"></i>
                 </li>
