@@ -84,7 +84,7 @@ active
                                     @forelse ($banners as $banner)
                                         <tr id="tr_">
                                             <td>
-                                                <a href="" class="btn btn-secondary">
+                                                <a href="{{ route('banner.edit', $banner->id) }}" class="btn btn-secondary">
                                                     <i data-feather="edit" class="mr-25"></i>
                                                     <span>Edit</span>
                                                 </a>

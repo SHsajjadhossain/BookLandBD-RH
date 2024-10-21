@@ -49,7 +49,13 @@ class CartController extends Controller
             $discount_total = 0;
             $coupon_name = "";
         }
-        return view('frontend.pages.cart', compact('discount_total', 'coupon_name'));
+
+        if (Cart::where('user_id', auth()->id())->count() != 0) {
+            return view('frontend.pages.cart', compact('discount_total', 'coupon_name'));
+        }
+        else {
+            return redirect(route('frontend.home'));
+        }
     }
 
     public function wishlistCart($wishlist_id)

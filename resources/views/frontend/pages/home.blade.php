@@ -93,36 +93,25 @@ Pustok - Book Store
                                                                         "slidesToShow": 1,
                                                                         "dots":true
                                                                         }'>
+                        @forelse ($banners as $banner)
                         <div class="single-slide bg-image bg-overlay--white"
-                            data-bg="{{ asset('frontend_assets') }}/image/bg-images/home-4-slider-1.jpg">
+                            data-bg="{{ asset('uploads/banner_photoes') }}/{{ $banner->banner_photo }}">
                             <div class="text-left home-content pl--30">
                                 <div class="row">
                                     <div class="col-lg-5">
-                                        <span class="title-small">Magazine Cover</span>
-                                        <h1>Mockup.</h1>
-                                        <p>Cover up front of book and leave summary</p>
-                                        <a href="shop-grid.html" class="btn btn-outlined banner-shop-btn">
+                                        <span class="title-small">{{ $banner->banner_title_small }}</span>
+                                        <h1>{{ $banner->banner_title_big }}</h1>
+                                        <p>{{ $banner->banner_text }}</p>
+                                        <a href="{{ route('frontend.shop') }}" class="btn btn-outlined banner-shop-btn">
                                             Shop Now
                                         </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="single-slide bg-image bg-overlay--dark"
-                            data-bg="{{ asset('frontend_assets') }}/image/bg-images/home-4-slider-2.jpg">
-                            <div class="text-center home-content">
-                                <div class="row justify-content-end">
-                                    <div class="col-lg-8">
-                                        <h1 class="v2">I Love This Idea!</h1>
-                                        <h2>Cover up front of book and
-                                            leave summary</h2>
-                                        <a href="shop-grid.html" class="btn btn--yellow">
-                                            Shop Now
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @empty
+                        <span class="text-center text-danger">Nothing To Show</span>
+                        @endforelse
                     </div>
                 </div>
             </div>

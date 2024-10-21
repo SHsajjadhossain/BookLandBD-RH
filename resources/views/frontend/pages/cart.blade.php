@@ -236,7 +236,7 @@ Pustok - Cart
                                 </tr>
                                 @empty
                                 <tr>
-                                    <td><span>No Product In Cart</span></td>
+                                    <td colspan="50" class="text-center text-danger"><span>No Product In Cart</span></td>
                                 </tr>
                                 @endforelse
                                 <!-- Discount Row  -->

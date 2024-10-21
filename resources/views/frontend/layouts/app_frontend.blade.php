@@ -83,7 +83,7 @@
                                         <li>
                                             <form action="{{ route('logout') }}" method="POST">
                                                 @csrf
-                                                <a href="{{ route('logout') }}" class="home-log-out mt-2 mb-2" onclick="event.preventDefault();
+                                                <a href="{{ route('logout') }}" class="mt-2 mb-2 home-log-out" onclick="event.preventDefault();
                                                                                                 this.closest('form').submit();">
                                                     <i class="fas fa-sign-out-alt home-log-out-icon"></i>
                                                     Logout
@@ -171,14 +171,14 @@
                                                 @endforelse
                                             </div>
                                             @auth
+                                            @if (allCarts()->count() != 0)
                                             <div class=" single-cart-block">
                                                 <div class="btn-block">
-                                                    <a href="{{ route('cart') }}" class="btn">View All Cart <i
-                                                            class="fas fa-chevron-right"></i></a>
-                                                    <a href="checkout.html" class="btn btn--primary">Check Out <i
-                                                            class="fas fa-chevron-right"></i></a>
+                                                    <a href="{{ route('cart') }}" class="btn">View All Cart <i class="fas fa-chevron-right"></i></a>
+                                                    <a href="checkout.html" class="btn btn--primary">Check Out <i class="fas fa-chevron-right"></i></a>
                                                 </div>
                                             </div>
+                                            @endif
                                             @endauth
                                         </div>
                                     </div>
@@ -366,23 +366,15 @@
                                     <li class="menu-item">
                                         <a href="{{ route('frontend.shop') }}">shop</a>
                                     </li>
-                                    <!-- Pages -->
-                                    <li class="menu-item has-children">
-                                        <a href="javascript:void(0)">Pages <i class="fas fa-chevron-down dropdown-arrow"></i></a>
-                                        <ul class="sub-menu">
-                                            <li><a href="cart.html">Cart</a></li>
-                                            <li><a href="checkout.html">Checkout</a></li>
-                                            <li><a href="compare.html">Compare</a></li>
-                                            <li><a href="wishlist.html">Wishlist</a></li>
-                                            <li><a href="login-register.html">Login Register</a></li>
-                                            <li><a href="my-account.html">My Account</a></li>
-                                            <li><a href="order-complete.html">Order Complete</a></li>
-                                            <li><a href="faq.html">Faq</a></li>
-                                            <li><a href="contact-2.html">contact 02</a></li>
-                                        </ul>
+                                    <!-- Book Category -->
+                                    <li class="menu-item">
+                                        <a href="{{ route('category.allCategories') }}">Categories</a>
                                     </li>
                                     <!-- Blog -->
-                                    <li class="menu-item has-children mega-menu">
+                                    <li class="menu-item">
+                                        <a href="#">Blog</a>
+                                    </li>
+                                    {{-- <li class="menu-item has-children mega-menu">
                                         <a href="javascript:void(0)">Blog <i class="fas fa-chevron-down dropdown-arrow"></i></a>
                                         <ul class="sub-menu three-column">
                                             <li class="cus-col-33">
@@ -413,7 +405,8 @@
                                                 </ul>
                                             </li>
                                         </ul>
-                                    </li>
+                                    </li> --}}
+                                    <!-- Contact -->
                                     <li class="menu-item">
                                         <a href="contact.html">Contact</a>
                                     </li>

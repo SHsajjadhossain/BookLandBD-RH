@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Banner;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\SubCategory;
@@ -14,6 +15,7 @@ class FrontendController extends Controller
     {
         return view('frontend.pages.home',[
             'categories' => Category::all(),
+            'banners' => Banner::all(),
         ]);
     }
 

@@ -60,9 +60,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified', 'roleche
     Route::post('/my-profile/update', [AdminController::class, 'myProfileUpdate'])->name('my-profile.update');
     Route::post('/my-profile/update/password', [AdminController::class, 'myProfileUpdatePassword'])->name('my-profile.update.password');
 
-    // category all routes start
+    // banner all routes start
     Route::get('/banner/index', [BannerController::class, 'index'])->name('banner.index');
-    // category all routes end
+    Route::get('/banner/edit/{banner_id}', [BannerController::class, 'edit'])->name('banner.edit');
+    Route::post('/banner/update/{banner_id}', [BannerController::class, 'update'])->name('banner.update');
+    // banner all routes end
 
     // category all routes start
     Route::resource('category', CategoryController::class);
