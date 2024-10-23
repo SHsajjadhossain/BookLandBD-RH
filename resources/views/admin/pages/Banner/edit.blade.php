@@ -50,8 +50,7 @@ active
                     <div class="card-header d-block d-sm-flex">
                     </div>
                     <div class="card-body">
-                        <form class="form form-vertical" action="{{ route('banner.update', $single_banner->id) }}"
-                            method="POST" enctype="multipart/form-data">
+                        <form class="form form-vertical" action="{{ route('banner.update', $single_banner->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="col-12">

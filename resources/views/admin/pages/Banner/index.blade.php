@@ -123,3 +123,28 @@ active
 
 @endsection
 
+@push('js')
+
+<script>
+    $(document).ready(function () {
+        // Tostr & SweetAlert2 success start
+
+        @if (session("banner_update_success"))
+            // toastr.success("{{ session('success') }}")
+            Swal.fire({
+                title: 'Done!',
+                text: '{{ session("banner_update_success") }}',
+                icon: 'success',
+                customClass: {
+                confirmButton: 'btn btn-primary'
+                },
+                buttonsStyling: false
+            });
+        @endif
+
+        // Tostr & SweetAlert2 success end
+    });
+</script>
+
+@endpush
+
