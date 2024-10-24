@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CategorySectionOne;
+use App\Models\CategorySectionTwo;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -10,17 +12,20 @@ use Illuminate\Support\Str;
 
 class AdminController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         return view('admin.pages.home.home');
     }
 
-    public function myProfile(){
+    public function myProfile()
+    {
         $my_info = Auth::user();
 
         return view('admin.pages.myProfile',compact('my_info'));
     }
 
-    public function myProfileUpdate(Request $request){
+    public function myProfileUpdate(Request $request)
+    {
         $request->validate([
             'name'  => 'required',
             'email' => 'required|email',
@@ -56,7 +61,8 @@ class AdminController extends Controller
         return back()->with('success', 'Profile Updated Successfully!!');
     }
 
-    public function myProfileUpdatePassword(Request $request){
+    public function myProfileUpdatePassword(Request $request)
+    {
         $request->validate([
             'password' => 'required',
             'new_password' => 'required|min:8',
@@ -78,5 +84,29 @@ class AdminController extends Controller
         else {
             return back()->with('errorpass', 'The current password does not match');
         }
+    }
+
+    public function catSectionOneIndex()
+    {
+        return view('admin.pages.manageWebsite.categorySection.sectionOne.index',[
+            'sectionOne_info' => CategorySectionOne::all(),
+        ]);
+    }
+
+    public function catSectionTwoIndex()
+    {
+        return view('admin.pages.manageWebsite.categorySection.sectionTwo.index',[
+            'sectionTwo_info' => CategorySectionTwo::all(),
+        ]);
+    }
+
+    public function catSectionOneUpdate(Request $request, $id)
+    {
+        return $id;
+    }
+
+    public function catSectionTwoUpdate(Request $request, $id)
+    {
+        return $id;
     }
 }

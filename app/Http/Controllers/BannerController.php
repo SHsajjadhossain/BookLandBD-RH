@@ -9,14 +9,14 @@ class BannerController extends Controller
 {
     public function index()
     {
-        return view('admin.pages.Banner.index',[
+        return view('admin.pages.manageWebsite.banner.index',[
             'banners' => Banner::all()
         ]);
     }
 
     public function edit($banner_id)
     {
-        return view('admin.pages.Banner.edit', [
+        return view('admin.pages.banner.edit', [
             'single_banner' => Banner::find($banner_id),
         ]);
     }

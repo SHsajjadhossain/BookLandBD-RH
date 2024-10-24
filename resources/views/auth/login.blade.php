@@ -72,7 +72,9 @@ Pustok - Book Store | Login
                                     <input id="remember_me" type="checkbox" name="remember">
                                     <span class="text-sm text-gray-600 ms-4 remember_me">{{ __('Remember me') }}</span>
                                 </label>
-                                <a href="#">Forget Password?</a>
+                                @if (Route::has('password.request'))
+                                <a href="{{ route('password.request') }}">Forget Password?</a>
+                                @endif
                             </div>
                             <div class="col-md-12">
                                 <button type="submit" class="btn btn-outlined">Login</button>

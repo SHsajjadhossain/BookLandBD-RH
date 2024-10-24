@@ -411,18 +411,10 @@
                 {{-- <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Apps &amp; Pages</span><i
                         data-feather="more-horizontal"></i>
                 </li> --}}
-                <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Frontend Banner</span><i
-                        data-feather="more-horizontal"></i>
-                </li>
                 {{-- <li class="nav-item @yield('category-active')"><a class="d-flex align-items-center" href="{{ route('category.index') }}"><i
                             data-feather="grid"></i><span class="menu-title text-truncate"
                             data-i18n="Kanban">Product Category</span></a>
                 </li> --}}
-                <li class="nav-item @yield('banner-active')">
-                    <a class="d-flex align-items-center" href="{{ route('banner.index') }}">
-                        <i data-feather="airplay"></i>
-                        <span class="menu-title text-truncate" data-i18n="web">Banner</span></a>
-                </li>
                 {{-- <li class=" nav-item"><a class="d-flex align-items-center" href="#">
                     <i data-feather="airplay"></i>
                     <span class="menu-title text-truncate" data-i18n="Kanban">Banner</span></a>
@@ -516,8 +508,27 @@
                         </li>
                     </ul>
                 </li>
-                <li class=" navigation-header"><span data-i18n="User Interface">User Interface</span><i
+                <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Manage Website</span><i
                         data-feather="more-horizontal"></i>
+                </li>
+                <li class="nav-item @yield('banner-active')">
+                    <a class="d-flex align-items-center" href="{{ route('banner.index') }}">
+                        <i data-feather="airplay"></i>
+                        <span class="menu-title text-truncate" data-i18n="web">Banner</span></a>
+                </li>
+                <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="cpu"></i><span
+                            class="menu-title text-truncate" data-i18n="Card">Category Section</span></a>
+                    <ul class="menu-content">
+                        <li class="@yield('cat-section-one-active')"><a class="d-flex align-items-center"
+                                href="{{ route('catSectionOne.index') }}"><i data-feather="circle"></i><span class="menu-item text-truncate"
+                                    data-i18n="Basic">Section One</span></a>
+                        </li>
+                        <li class="@yield('cat-section-two-active')">
+                            <a class="d-flex align-items-center" href="{{ route('catSectionTwo.index') }}">
+                                <i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Statistics">Section Two</span>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 {{-- <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i
                             data-feather="credit-card"></i><span class="menu-title text-truncate"

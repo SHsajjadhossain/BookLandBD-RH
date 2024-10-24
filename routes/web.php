@@ -60,11 +60,22 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified', 'roleche
     Route::post('/my-profile/update', [AdminController::class, 'myProfileUpdate'])->name('my-profile.update');
     Route::post('/my-profile/update/password', [AdminController::class, 'myProfileUpdatePassword'])->name('my-profile.update.password');
 
+// website manage routes start
+
     // banner all routes start
     Route::get('/banner/index', [BannerController::class, 'index'])->name('banner.index');
     Route::get('/banner/edit/{banner_id}', [BannerController::class, 'edit'])->name('banner.edit');
     Route::post('/banner/update/{banner_id}', [BannerController::class, 'update'])->name('banner.update');
     // banner all routes end
+
+    // category all routes start
+    Route::get('/cat/section/one/index', [AdminController::class, 'catSectionOneIndex'])->name('catSectionOne.index');
+    Route::get('/cat/section/one/update/{id}', [AdminController::class, 'catSectionOneUpdate'])->name('catSectionOne.update');
+    Route::get('/cat/section/two/index', [AdminController::class, 'catSectionTwoIndex'])->name('catSectionTwo.index');
+    Route::get('/cat/section/two/update/{id}', [AdminController::class, 'catSectionTwoUpdate'])->name('catSectionTwo.update');
+    // category all routes end
+
+// website manage routes end
 
     // category all routes start
     Route::resource('category', CategoryController::class);

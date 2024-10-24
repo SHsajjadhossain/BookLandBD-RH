@@ -2078,28 +2078,51 @@ Pustok - Book Store
         <div class="section-title section-title--bordered">
             <h2>CHILDREN’S BOOKS</h2>
         </div>
-        <div class="product-slider product-list-slider slider-border-single-row sb-slick-slider" data-slick-setting='{
+        <div class="product-list-slider slider-two-column product-slider multiple-row sb-slick-slider slider-border-multiple-row"
+            data-slick-setting='{
                                             "autoplay": true,
                                             "autoplaySpeed": 8000,
                                             "slidesToShow":3,
+                                            "rows":2,
                                             "dots":true
                                         }' data-slick-responsive='[
                                             {"breakpoint":1200, "settings": {"slidesToShow": 2} },
                                             {"breakpoint":992, "settings": {"slidesToShow": 2} },
+                                            {"breakpoint":768, "settings": {"slidesToShow": 1} },
                                             {"breakpoint":575, "settings": {"slidesToShow": 1} },
                                             {"breakpoint":490, "settings": {"slidesToShow": 1} }
                                         ]'>
             <div class="single-slide">
                 <div class="product-card card-style-list">
                     <div class="card-image">
-                        <img src="{{ asset('frontend_assets') }}/image/products/product-2.jpg" alt="">
+                        <img src="image/products/product-2.jpg" alt="">
                     </div>
                     <div class="product-card--body">
                         <div class="product-header">
                             <a href="#" class="author">
-                                Bpple
+                                Rpple
                             </a>
-                            <h3><a href="product-details.html">3 Ways To Have (A) More Appealing BOOK</a>
+                            <h3><a href="product-details.html">Revolutionize Your BOOK With</a></h3>
+                        </div>
+                        <div class="price-block">
+                            <span class="price">£51.20</span>
+                            <del class="price-old">£51.20</del>
+                            <span class="price-discount">20%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="single-slide">
+                <div class="product-card card-style-list">
+                    <div class="card-image">
+                        <img src="image/products/product-1.jpg" alt="">
+                    </div>
+                    <div class="product-card--body">
+                        <div class="product-header">
+                            <a href="#" class="author">
+                                Dpple
+                            </a>
+                            <h3><a href="product-details.html">Turn Your BOOK Into High Machine</a>
                             </h3>
                         </div>
                         <div class="price-block">
@@ -2113,57 +2136,14 @@ Pustok - Book Store
             <div class="single-slide">
                 <div class="product-card card-style-list">
                     <div class="card-image">
-                        <img src="{{ asset('frontend_assets') }}/image/products/product-1.jpg" alt="">
-                    </div>
-                    <div class="product-card--body">
-                        <div class="product-header">
-                            <a href="#" class="author">
-                                Lpple
-                            </a>
-                            <h3><a href="product-details.html">Koss KPH7 Lightweight Portable Headphone</a>
-                            </h3>
-                        </div>
-                        <div class="price-block">
-                            <span class="price">£51.20</span>
-                            <del class="price-old">£51.20</del>
-                            <span class="price-discount">20%</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="single-slide">
-                <div class="product-card card-style-list">
-                    <div class="card-image">
-                        <img src="{{ asset('frontend_assets') }}/image/products/product-3.jpg" alt="">
-                    </div>
-                    <div class="product-card--body">
-                        <div class="product-header">
-                            <a href="#" class="author">
-                                Cpple
-                            </a>
-                            <h3><a href="product-details.html">Beats Solo3 Wireless On-Ear Headphones 2</a>
-                            </h3>
-                        </div>
-                        <div class="price-block">
-                            <span class="price">£51.20</span>
-                            <del class="price-old">£51.20</del>
-                            <span class="price-discount">20%</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="single-slide">
-                <div class="product-card card-style-list">
-                    <div class="card-image">
-                        <img src="{{ asset('frontend_assets') }}/image/products/product-4.jpg" alt="">
+                        <img src="image/products/product-3.jpg" alt="">
                     </div>
                     <div class="product-card--body">
                         <div class="product-header">
                             <a href="#" class="author">
                                 Epple
                             </a>
-                            <h3><a href="product-details.html">In 10 Minutes, I'll Give You The Truth
-                                    About</a></h3>
+                            <h3><a href="product-details.html">BOOK: Do You Really Need It? This </a></h3>
                         </div>
                         <div class="price-block">
                             <span class="price">£51.20</span>
@@ -2176,14 +2156,15 @@ Pustok - Book Store
             <div class="single-slide">
                 <div class="product-card card-style-list">
                     <div class="card-image">
-                        <img src="{{ asset('frontend_assets') }}/image/products/product-5.jpg" alt="">
+                        <img src="image/products/product-4.jpg" alt="">
                     </div>
                     <div class="product-card--body">
                         <div class="product-header">
                             <a href="#" class="author">
-                                Fpple
+                                Ppple
                             </a>
-                            <h3><a href="product-details.html">5 Ways To Get Through To Your BOOK</a></h3>
+                            <h3><a href="product-details.html">Here Is A Quick Cure For Book</a>
+                            </h3>
                         </div>
                         <div class="price-block">
                             <span class="price">£51.20</span>
@@ -2196,14 +2177,35 @@ Pustok - Book Store
             <div class="single-slide">
                 <div class="product-card card-style-list">
                     <div class="card-image">
-                        <img src="{{ asset('frontend_assets') }}/image/products/product-6.jpg" alt="">
+                        <img src="image/products/product-5.jpg" alt="">
                     </div>
                     <div class="product-card--body">
                         <div class="product-header">
                             <a href="#" class="author">
-                                Gpple
+                                Ypple
                             </a>
-                            <h3><a href="product-details.html">What Can You Do To Save Your BOOK</a></h3>
+                            <h3><a href="product-details.html">What You Can Learn From Bill Gates</a>
+                            </h3>
+                        </div>
+                        <div class="price-block">
+                            <span class="price">£51.20</span>
+                            <del class="price-old">£51.20</del>
+                            <span class="price-discount">20%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="single-slide">
+                <div class="product-card card-style-list">
+                    <div class="card-image">
+                        <img src="image/products/product-6.jpg" alt="">
+                    </div>
+                    <div class="product-card--body">
+                        <div class="product-header">
+                            <a href="#" class="author">
+                                Wpple
+                            </a>
+                            <h3><a href="product-details.html">3 Ways Create Better BOOK With</a></h3>
                         </div>
                         <div class="price-block">
                             <span class="price">£51.20</span>
