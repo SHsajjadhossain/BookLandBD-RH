@@ -81,10 +81,49 @@ active
                                     @forelse ($sectionOne_info as $info)
                                     <tr id="tr_">
                                         <td>
-                                            <a href="{{ route('catSectionOne.update', $info->id) }}" class="btn btn-secondary">
-                                                <i data-feather="edit" class="mr-25"></i>
-                                                <span>Edit</span>
-                                            </a>
+                                            <button data-toggle="modal" data-target="#edit_category_{{ $info->id }}" class="btn btn-secondary">
+                                                <i data-feather='edit'></i>
+                                                Edit
+                                            </button>
+                                            {{-- Edit Modal Start --}}
+                                            @push('all_modals')
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="edit_category_{{ $info->id }}" tabindex="-1" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">Edit Category Section One</h5>
+                                                        </div>
+                                                        <form action="{{ route('catSectionOne.update', $info->id) }}" method="POST">
+                                                            @csrf
+                                                            <div class="modal-body">
+                                                                <input type="hidden" name="category_update_id" value="{{ $info->id }}">
+                                                                <div class="form-group">
+                                                                    <label for="category_id">Select Category<span class="text-danger">*</span></label>
+                                                                    <select name="category_id" class="select2 form-control" id="category_id">
+                                                                        <option value="{{ $info->category_id }}">
+                                                                            {{ $info->relationWithCategory->category_name }}
+                                                                        </option>
+                                                                        @foreach ($categories as $category)
+                                                                        <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                                                                        @endforeach
+                                                                    </select>
+
+                                                                    @error('category_id')
+                                                                    <small class="text-danger">{{ $message }}</small>
+                                                                    @enderror
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancle</button>
+                                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @endpush
+                                            {{-- Edit Modal End --}}
                                         </td>
                                         <td>
                                             <span class="font-weight-bold">{{ $info->relationWithCategory->category_name }}</span>
@@ -117,11 +156,11 @@ active
     $(document).ready(function () {
         // Tostr & SweetAlert2 success start
 
-        @if (session("banner_update_success"))
+        @if (session("section_update_success"))
             // toastr.success("{{ session('success') }}")
             Swal.fire({
                 title: 'Done!',
-                text: '{{ session("banner_update_success") }}',
+                text: '{{ session("section_update_success") }}',
                 icon: 'success',
                 customClass: {
                 confirmButton: 'btn btn-primary'
@@ -131,6 +170,10 @@ active
         @endif
 
         // Tostr & SweetAlert2 success end
+
+        @error('category_id')
+        $('#edit_category_'+'{{ old('category_update_id') }}').modal('show');
+        @enderror
     });
 </script>
 

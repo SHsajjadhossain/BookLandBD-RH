@@ -26,6 +26,20 @@ Pustok - Book Store
     color: #ffffff;
 }
 
+.all-products-shop-btn{
+    background: #62ab00;
+    border: 1px solid #62ab00;
+    color: #ffffff;
+    margin-top: 50px;
+    transition: .4s;
+}
+
+.all-products-shop-btn:hover{
+    background: #eccd00;
+    border: 1px solid #eccd00;
+    color: #000000;
+}
+
 </style>
 
 @endpush
@@ -120,7 +134,7 @@ Pustok - Book Store
 <!--=================================
         Home Features Section
 ===================================== -->
-    <section class="mt-3 mb--30">
+    <section class="mt-3 section-padding">
         <h2 class="sr-only">Feature Section</h2>
         <div class="container">
             <div class="row">
@@ -472,6 +486,76 @@ Pustok - Book Store
         </div>
     </div>
 </section>
+
+<!--=================================
+        Home Slider Tab
+===================================== -->
+<section class="section-padding">
+    <h2 class="sr-only">Home Tab Slider Section</h2>
+    <div class="container">
+        <div class="sb-custom-tab">
+            <div class="section-title section-title--bordered">
+                <h2>All Products</h2>
+            </div>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane show active" id="shop" role="tabpanel" aria-labelledby="shop-tab">
+                    <div class="product-slider multiple-row slider-border-multiple-row sb-slick-slider"
+                        data-slick-setting='{
+                            "autoplay": true,
+                            "autoplaySpeed": 8000,
+                            "slidesToShow": 5,
+                            "rows":2,
+                            "dots":false
+                        }' data-slick-responsive='[
+                            {"breakpoint":1200, "settings": {"slidesToShow": 3} },
+                            {"breakpoint":768, "settings": {"slidesToShow": 2} },
+                            {"breakpoint":480, "settings": {"slidesToShow": 1} },
+                            {"breakpoint":320, "settings": {"slidesToShow": 1} }
+                        ]'>
+                        @forelse ($all_products as $product)
+                        <div class="single-slide">
+                            <div class="product-card">
+                                <div class="product-header">
+                                    <h3><a href="product-details.html">{{ $product->product_name }}</a></h3>
+                                </div>
+                                <div class="product-card--body">
+                                    <div class="card-image">
+                                        <img src="{{ asset('uploads/product_photoes') }}/{{ $product->product_photo }}" alt="Product photo not found">
+                                        <div class="hover-contents">
+                                            <a href="product-details.html" class="hover-image">
+                                                <img src="{{ asset('uploads/product_photoes') }}/{{ $product->product_photo }}" alt="Product photo not found">
+                                            </a>
+                                            <div class="hover-btns">
+                                                <a href="cart.html" class="single-btn">
+                                                    <i class="fas fa-shopping-basket"></i>
+                                                </a>
+                                                <a href="wishlist.html" class="single-btn">
+                                                    <i class="fas fa-heart"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="price-block">
+                                        <span class="price">৳{{ $product->product_price }}</span>
+                                        {{-- <del class="price-old">£51.20</del>
+                                        <span class="price-discount">20%</span> --}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @empty
+                        <span class="text-center text-danger">No Product To Show</span>
+                        @endforelse
+                    </div>
+                </div>
+            </div>
+            <a href="{{ route('frontend.shop') }}" class="btn btn-outlined all-products-shop-btn">
+                View More
+            </a>
+        </div>
+    </div>
+</section>
+
 <!--=================================
         Promotion Section One
 ===================================== -->
@@ -503,21 +587,21 @@ Pustok - Book Store
                 <li class="nav-item">
                     <a class="nav-link active" id="shop-tab" data-bs-toggle="tab" href="#shop" role="tab"
                         aria-controls="shop" aria-selected="true">
-                        Best Seller Products
+                        New Arrivals
                     </a>
                     <span class="arrow-icon"></span>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="men-tab" data-bs-toggle="tab" href="#men" role="tab" aria-controls="men"
                         aria-selected="true">
-                        New Arrivals
+                        Featured products
                     </a>
                     <span class="arrow-icon"></span>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="woman-tab" data-bs-toggle="tab" href="#woman" role="tab"
                         aria-controls="woman" aria-selected="false">
-                        Featured products
+                        Best Seller Products
                     </a>
                     <span class="arrow-icon"></span>
                 </li>
@@ -2071,12 +2155,12 @@ Pustok - Book Store
     </div>
 </section>
 <!--=================================
-        CHILDREN’S BOOKS SECTION
+        SINGLE CATEGORY SECTION
         ===================================== -->
 <section class="section-margin">
     <div class="container">
         <div class="section-title section-title--bordered">
-            <h2>CHILDREN’S BOOKS</h2>
+            <h2>{{ $cat_section_one_title }}</h2>
         </div>
         <div class="product-list-slider slider-two-column product-slider multiple-row sb-slick-slider slider-border-multiple-row"
             data-slick-setting='{
@@ -2092,275 +2176,88 @@ Pustok - Book Store
                                             {"breakpoint":575, "settings": {"slidesToShow": 1} },
                                             {"breakpoint":490, "settings": {"slidesToShow": 1} }
                                         ]'>
+            @forelse ($cat_section_one_products as $section_one_product)
             <div class="single-slide">
                 <div class="product-card card-style-list">
                     <div class="card-image">
-                        <img src="image/products/product-2.jpg" alt="">
+                        <img src="{{ asset('uploads/product_photoes') }}/{{ $section_one_product->product_photo }}" alt="Product photo not found">
                     </div>
                     <div class="product-card--body">
                         <div class="product-header">
-                            <a href="#" class="author">
-                                Rpple
-                            </a>
-                            <h3><a href="product-details.html">Revolutionize Your BOOK With</a></h3>
+                            <h3><a href="product-details.html">{{ $section_one_product->product_name }}</a></h3>
                         </div>
                         <div class="price-block">
-                            <span class="price">£51.20</span>
-                            <del class="price-old">£51.20</del>
-                            <span class="price-discount">20%</span>
+                            <span class="price">৳{{ $section_one_product->product_price }}</span>
+                            {{-- <del class="price-old">£51.20</del>
+                            <span class="price-discount">20%</span> --}}
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="single-slide">
-                <div class="product-card card-style-list">
-                    <div class="card-image">
-                        <img src="image/products/product-1.jpg" alt="">
-                    </div>
-                    <div class="product-card--body">
-                        <div class="product-header">
-                            <a href="#" class="author">
-                                Dpple
-                            </a>
-                            <h3><a href="product-details.html">Turn Your BOOK Into High Machine</a>
-                            </h3>
-                        </div>
-                        <div class="price-block">
-                            <span class="price">£51.20</span>
-                            <del class="price-old">£51.20</del>
-                            <span class="price-discount">20%</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="single-slide">
-                <div class="product-card card-style-list">
-                    <div class="card-image">
-                        <img src="image/products/product-3.jpg" alt="">
-                    </div>
-                    <div class="product-card--body">
-                        <div class="product-header">
-                            <a href="#" class="author">
-                                Epple
-                            </a>
-                            <h3><a href="product-details.html">BOOK: Do You Really Need It? This </a></h3>
-                        </div>
-                        <div class="price-block">
-                            <span class="price">£51.20</span>
-                            <del class="price-old">£51.20</del>
-                            <span class="price-discount">20%</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="single-slide">
-                <div class="product-card card-style-list">
-                    <div class="card-image">
-                        <img src="image/products/product-4.jpg" alt="">
-                    </div>
-                    <div class="product-card--body">
-                        <div class="product-header">
-                            <a href="#" class="author">
-                                Ppple
-                            </a>
-                            <h3><a href="product-details.html">Here Is A Quick Cure For Book</a>
-                            </h3>
-                        </div>
-                        <div class="price-block">
-                            <span class="price">£51.20</span>
-                            <del class="price-old">£51.20</del>
-                            <span class="price-discount">20%</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="single-slide">
-                <div class="product-card card-style-list">
-                    <div class="card-image">
-                        <img src="image/products/product-5.jpg" alt="">
-                    </div>
-                    <div class="product-card--body">
-                        <div class="product-header">
-                            <a href="#" class="author">
-                                Ypple
-                            </a>
-                            <h3><a href="product-details.html">What You Can Learn From Bill Gates</a>
-                            </h3>
-                        </div>
-                        <div class="price-block">
-                            <span class="price">£51.20</span>
-                            <del class="price-old">£51.20</del>
-                            <span class="price-discount">20%</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="single-slide">
-                <div class="product-card card-style-list">
-                    <div class="card-image">
-                        <img src="image/products/product-6.jpg" alt="">
-                    </div>
-                    <div class="product-card--body">
-                        <div class="product-header">
-                            <a href="#" class="author">
-                                Wpple
-                            </a>
-                            <h3><a href="product-details.html">3 Ways Create Better BOOK With</a></h3>
-                        </div>
-                        <div class="price-block">
-                            <span class="price">£51.20</span>
-                            <del class="price-old">£51.20</del>
-                            <span class="price-discount">20%</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @empty
+            <span class="text-center text-danger">No Product To Show</span>
+            @endforelse
         </div>
     </div>
 </section>
 <!--=================================
-        CHILDREN’S BOOKS SECTION
+        SINGLE CATEGORY SECTION
+===================================== -->
+<!--=================================
+        SINGLE CATEGORY SECTION
 ===================================== -->
 <section class="section-margin">
     <div class="container">
         <div class="section-title section-title--bordered">
-            <h2>CHILDREN’S BOOKS</h2>
+            <h2>{{ $cat_section_two_title }}</h2>
         </div>
-        <div class="product-slider product-list-slider slider-border-single-row sb-slick-slider" data-slick-setting='{
-                                            "autoplay": true,
-                                            "autoplaySpeed": 8000,
-                                            "slidesToShow":3,
-                                            "dots":true
-                                        }' data-slick-responsive='[
-                                            {"breakpoint":1200, "settings": {"slidesToShow": 2} },
-                                            {"breakpoint":992, "settings": {"slidesToShow": 2} },
-                                            {"breakpoint":575, "settings": {"slidesToShow": 1} },
-                                            {"breakpoint":490, "settings": {"slidesToShow": 1} }
-                                        ]'>
+        <div class="product-slider sb-slick-slider slider-border-single-row" data-slick-setting='{
+                "autoplay": true,
+                "autoplaySpeed": 8000,
+                "slidesToShow": 5,
+                "dots":true
+            }' data-slick-responsive='[
+                {"breakpoint":1500, "settings": {"slidesToShow": 4} },
+                {"breakpoint":992, "settings": {"slidesToShow": 3} },
+                {"breakpoint":768, "settings": {"slidesToShow": 2} },
+                {"breakpoint":480, "settings": {"slidesToShow": 1} },
+                {"breakpoint":320, "settings": {"slidesToShow": 1} }
+            ]'>
+
+            @forelse ($cat_section_two_products as $section_two_product)
             <div class="single-slide">
-                <div class="product-card card-style-list">
-                    <div class="card-image">
-                        <img src="{{ asset('frontend_assets') }}/image/products/product-2.jpg" alt="">
+                <div class="product-card">
+                    <div class="product-header">
+                        <h3><a href="product-details.html">{{ $section_two_product->product_name }}</a></h3>
                     </div>
                     <div class="product-card--body">
-                        <div class="product-header">
-                            <a href="#" class="author">
-                                Bpple
-                            </a>
-                            <h3><a href="product-details.html">3 Ways To Have (A) More Appealing BOOK</a>
-                            </h3>
+                        <div class="card-image">
+                            <img src="{{ asset('uploads/product_photoes') }}/{{ $section_two_product->product_photo }}" alt="Product photo not found">
+                            <div class="hover-contents">
+                                <a href="product-details.html" class="hover-image">
+                                    <img src="{{ asset('uploads/product_photoes') }}/{{ $section_two_product->product_photo }}" alt="Product photo not found">
+                                </a>
+                                <div class="hover-btns">
+                                    <a href="cart.html" class="single-btn">
+                                        <i class="fas fa-shopping-basket"></i>
+                                    </a>
+                                    <a href="wishlist.html" class="single-btn">
+                                        <i class="fas fa-heart"></i>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                         <div class="price-block">
-                            <span class="price">£51.20</span>
-                            <del class="price-old">£51.20</del>
-                            <span class="price-discount">20%</span>
+                            <span class="price">৳{{ $section_two_product->product_price }}</span>
+                            {{-- <del class="price-old">£51.20</del>
+                            <span class="price-discount">20%</span> --}}
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="single-slide">
-                <div class="product-card card-style-list">
-                    <div class="card-image">
-                        <img src="{{ asset('frontend_assets') }}/image/products/product-1.jpg" alt="">
-                    </div>
-                    <div class="product-card--body">
-                        <div class="product-header">
-                            <a href="#" class="author">
-                                Lpple
-                            </a>
-                            <h3><a href="product-details.html">Koss KPH7 Lightweight Portable Headphone</a>
-                            </h3>
-                        </div>
-                        <div class="price-block">
-                            <span class="price">£51.20</span>
-                            <del class="price-old">£51.20</del>
-                            <span class="price-discount">20%</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="single-slide">
-                <div class="product-card card-style-list">
-                    <div class="card-image">
-                        <img src="{{ asset('frontend_assets') }}/image/products/product-3.jpg" alt="">
-                    </div>
-                    <div class="product-card--body">
-                        <div class="product-header">
-                            <a href="#" class="author">
-                                Cpple
-                            </a>
-                            <h3><a href="product-details.html">Beats Solo3 Wireless On-Ear Headphones 2</a>
-                            </h3>
-                        </div>
-                        <div class="price-block">
-                            <span class="price">£51.20</span>
-                            <del class="price-old">£51.20</del>
-                            <span class="price-discount">20%</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="single-slide">
-                <div class="product-card card-style-list">
-                    <div class="card-image">
-                        <img src="{{ asset('frontend_assets') }}/image/products/product-4.jpg" alt="">
-                    </div>
-                    <div class="product-card--body">
-                        <div class="product-header">
-                            <a href="#" class="author">
-                                Epple
-                            </a>
-                            <h3><a href="product-details.html">In 10 Minutes, I'll Give You The Truth
-                                    About</a></h3>
-                        </div>
-                        <div class="price-block">
-                            <span class="price">£51.20</span>
-                            <del class="price-old">£51.20</del>
-                            <span class="price-discount">20%</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="single-slide">
-                <div class="product-card card-style-list">
-                    <div class="card-image">
-                        <img src="{{ asset('frontend_assets') }}/image/products/product-5.jpg" alt="">
-                    </div>
-                    <div class="product-card--body">
-                        <div class="product-header">
-                            <a href="#" class="author">
-                                Fpple
-                            </a>
-                            <h3><a href="product-details.html">5 Ways To Get Through To Your BOOK</a></h3>
-                        </div>
-                        <div class="price-block">
-                            <span class="price">£51.20</span>
-                            <del class="price-old">£51.20</del>
-                            <span class="price-discount">20%</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="single-slide">
-                <div class="product-card card-style-list">
-                    <div class="card-image">
-                        <img src="{{ asset('frontend_assets') }}/image/products/product-6.jpg" alt="">
-                    </div>
-                    <div class="product-card--body">
-                        <div class="product-header">
-                            <a href="#" class="author">
-                                Gpple
-                            </a>
-                            <h3><a href="product-details.html">What Can You Do To Save Your BOOK</a></h3>
-                        </div>
-                        <div class="price-block">
-                            <span class="price">£51.20</span>
-                            <del class="price-old">£51.20</del>
-                            <span class="price-discount">20%</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @empty
+            <span class="text-center text-danger">No Product To Show</span>
+            @endforelse
         </div>
     </div>
 </section>

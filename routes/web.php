@@ -70,9 +70,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified', 'roleche
 
     // category all routes start
     Route::get('/cat/section/one/index', [AdminController::class, 'catSectionOneIndex'])->name('catSectionOne.index');
-    Route::get('/cat/section/one/update/{id}', [AdminController::class, 'catSectionOneUpdate'])->name('catSectionOne.update');
+    Route::post('/cat/section/one/update/{id}', [AdminController::class, 'catSectionOneUpdate'])->name('catSectionOne.update');
     Route::get('/cat/section/two/index', [AdminController::class, 'catSectionTwoIndex'])->name('catSectionTwo.index');
-    Route::get('/cat/section/two/update/{id}', [AdminController::class, 'catSectionTwoUpdate'])->name('catSectionTwo.update');
+    Route::post('/cat/section/two/update/{id}', [AdminController::class, 'catSectionTwoUpdate'])->name('catSectionTwo.update');
     // category all routes end
 
 // website manage routes end

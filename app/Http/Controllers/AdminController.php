@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\CategorySectionOne;
 use App\Models\CategorySectionTwo;
 use App\Models\User;
@@ -90,6 +91,7 @@ class AdminController extends Controller
     {
         return view('admin.pages.manageWebsite.categorySection.sectionOne.index',[
             'sectionOne_info' => CategorySectionOne::all(),
+            'categories' => Category::orderBy('category_name', 'asc')->get(),
         ]);
     }
 
@@ -97,16 +99,35 @@ class AdminController extends Controller
     {
         return view('admin.pages.manageWebsite.categorySection.sectionTwo.index',[
             'sectionTwo_info' => CategorySectionTwo::all(),
+            'categories' => Category::orderBy('category_name', 'asc')->get(),
         ]);
     }
 
     public function catSectionOneUpdate(Request $request, $id)
     {
-        return $id;
+        $request->validate([
+            'category_id' => 'required'
+        ]);
+
+        CategorySectionOne::find($id)->update([
+            'category_id' => $request->category_id,
+            'status' => 1,
+        ]);
+
+        return back()->with('section_update_success', 'Category Section One Updated Successfully !!');
     }
 
     public function catSectionTwoUpdate(Request $request, $id)
     {
-        return $id;
+        $request->validate([
+            'category_id' => 'required'
+        ]);
+
+        CategorySectionTwo::find($id)->update([
+            'category_id' => $request->category_id,
+            'status' => 1,
+        ]);
+
+        return back()->with('section_update_success', 'Category Section Two Updated Successfully !!');
     }
 }
