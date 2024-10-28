@@ -21,6 +21,7 @@ class FrontendController extends Controller
             'categories' => Category::all(),
             'banners' => Banner::all(),
             'all_products' => Product::OrderBy('id', 'asc')->get(),
+            'new_products' => Product::latest()->limit('20')->get(),
             'cat_section_one_title' => Category::find($cat_section_one_id)->category_name,
             'cat_section_two_title' => Category::find($cat_section_two_id)->category_name,
             'cat_section_one_products' => Product::where('category_id', $cat_section_one_id)->get(),
@@ -84,5 +85,10 @@ class FrontendController extends Controller
     public function productSearch(Request $request){
         $search_products = Product::where('product_name', 'Like', '%'.$request->search_product.'%')->paginate();
         return view('frontend.pages.search_product', compact('search_products'));
+    }
+
+    public function contact()
+    {
+        return view('frontend.pages.contact');
     }
 }

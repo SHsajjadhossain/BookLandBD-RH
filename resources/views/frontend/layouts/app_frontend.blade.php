@@ -408,7 +408,7 @@
                                     </li> --}}
                                     <!-- Contact -->
                                     <li class="menu-item">
-                                        <a href="contact.html">Contact</a>
+                                        <a href="{{ route('frontend.contact') }}">Contact</a>
                                     </li>
                                 </ul>
                             </div>

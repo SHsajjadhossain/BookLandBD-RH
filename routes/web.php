@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [FrontendController::class, 'index'])->name('frontend.home');
 Route::get('/shop', [FrontendController::class, 'shop'])->name('frontend.shop');
+Route::get('/contact', [FrontendController::class, 'contact'])->name('frontend.contact');
 
 Route::get('/category/allCategories', [FrontendController::class, 'allCategories'])->name('category.allCategories');
 Route::get('/catwise/{cat_id}/{random}', [FrontendController::class, 'catWiseProducts'])->name('catwiseproducts');
