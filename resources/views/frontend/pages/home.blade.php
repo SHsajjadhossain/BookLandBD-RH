@@ -516,13 +516,13 @@ Pustok - Book Store
                         <div class="single-slide">
                             <div class="product-card">
                                 <div class="product-header">
-                                    <h3><a href="product-details.html">{{ $product->product_name }}</a></h3>
+                                    <h3><a href="{{ route('product.productDetails', $product->product_slug) }}">{{ $product->product_name }}</a></h3>
                                 </div>
                                 <div class="product-card--body">
                                     <div class="card-image">
                                         <img src="{{ asset('uploads/product_photoes') }}/{{ $product->product_photo }}" alt="Product photo not found">
                                         <div class="hover-contents">
-                                            <a href="product-details.html" class="hover-image">
+                                            <a href="{{ route('product.productDetails', $product->product_slug) }}" class="hover-image">
                                                 <img src="{{ asset('uploads/product_photoes') }}/{{ $product->product_photo }}" alt="Product photo not found">
                                             </a>
                                             <div class="hover-btns">
@@ -625,13 +625,13 @@ Pustok - Book Store
                         <div class="single-slide">
                             <div class="product-card">
                                 <div class="product-header">
-                                    <h3><a href="product-details.html">{{ $new_product->product_name }}</a></h3>
+                                    <h3><a href="{{ route('product.productDetails', $new_product->product_slug) }}">{{ $new_product->product_name }}</a></h3>
                                 </div>
                                 <div class="product-card--body">
                                     <div class="card-image">
                                         <img src="{{ asset('uploads/product_photoes') }}/{{ $new_product->product_photo }}" alt="Product photo not found">
                                         <div class="hover-contents">
-                                            <a href="product-details.html" class="hover-image">
+                                            <a href="{{ route('product.productDetails', $new_product->product_slug) }}" class="hover-image">
                                                 <img src="{{ asset('uploads/product_photoes') }}/{{ $new_product->product_photo }}" alt="Product photo not found">
                                             </a>
                                             <div class="hover-btns">
@@ -1720,7 +1720,7 @@ Pustok - Book Store
                     </div>
                     <div class="product-card--body">
                         <div class="product-header">
-                            <h3><a href="product-details.html">{{ $section_one_product->product_name }}</a></h3>
+                            <h3><a href="{{ route('product.productDetails', $section_one_product->product_slug) }}">{{ $section_one_product->product_name }}</a></h3>
                         </div>
                         <div class="price-block">
                             <span class="price">৳{{ $section_one_product->product_price }}</span>
@@ -1764,13 +1764,13 @@ Pustok - Book Store
             <div class="single-slide">
                 <div class="product-card">
                     <div class="product-header">
-                        <h3><a href="product-details.html">{{ $section_two_product->product_name }}</a></h3>
+                        <h3><a href="{{ route('product.productDetails', $section_two_product->product_slug) }}">{{ $section_two_product->product_name }}</a></h3>
                     </div>
                     <div class="product-card--body">
                         <div class="card-image">
                             <img src="{{ asset('uploads/product_photoes') }}/{{ $section_two_product->product_photo }}" alt="Product photo not found">
                             <div class="hover-contents">
-                                <a href="product-details.html" class="hover-image">
+                                <a href="{{ route('product.productDetails', $section_two_product->product_slug) }}" class="hover-image">
                                     <img src="{{ asset('uploads/product_photoes') }}/{{ $section_two_product->product_photo }}" alt="Product photo not found">
                                 </a>
                                 <div class="hover-btns">

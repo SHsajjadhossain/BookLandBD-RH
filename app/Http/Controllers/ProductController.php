@@ -52,7 +52,8 @@ class ProductController extends Controller
                 'product_long_description' => 'required',
                 'product_quantity' => 'required',
                 'product_code' => 'required',
-                'product_photo' => 'required|image|mimes:png,jpg,jpeg|dimensions:width=700, height=700'
+                'product_photo' => 'required|image|mimes:png,jpg,jpeg|dimensions:width=700, height=700',
+                'product_featured' => 'required'
             ]);
         }
         else
@@ -65,7 +66,8 @@ class ProductController extends Controller
                 'product_long_description' => 'required',
                 'product_quantity' => 'required',
                 'product_code' => 'required',
-                'product_photo' => 'required|image|mimes:png,jpg,jpeg|dimensions:width=700, height=700'
+                'product_photo' => 'required|image|mimes:png,jpg,jpeg|dimensions:width=700, height=700',
+                'product_featured' => 'required'
             ]);
         }
 
@@ -85,6 +87,7 @@ class ProductController extends Controller
             'product_quantity' => $request->product_quantity,
             'product_code' => $request->product_code,
             'product_photo' => $imageName,
+            'product_featured' => $request->product_featured,
             'created_at' => Carbon::now()
         ]);
 
@@ -142,6 +145,7 @@ class ProductController extends Controller
             'product_long_description' => $request->product_long_description,
             'product_quantity' => $request->product_quantity,
             'product_code' => $request->product_code,
+            'product_featured' => $request->product_featured,
         ]);
 
         return redirect(route('product.index'))->with('product_update_success', 'Product updated successfully!!');

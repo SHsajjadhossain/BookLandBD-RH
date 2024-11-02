@@ -117,3 +117,9 @@ Pustok - Contact
 <!-- Contact Page End -->
 
 @endsection
+
+@push('custom-js')
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2D8wrWMY3XZnuHO6C31uq90JiuaFzGws"></script>
+
+@endpush

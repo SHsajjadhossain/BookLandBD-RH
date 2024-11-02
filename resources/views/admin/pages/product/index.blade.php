@@ -172,7 +172,9 @@ active
                                         <th>Actions</th>
                                         <th>Product Name</th>
                                         <th>Product Photo</th>
-                                        <th>Created At</th>
+                                        <th>Product Category</th>
+                                        <th>Product Quantity</th>
+                                        <th>Featured Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -221,9 +223,23 @@ active
                                             <span class="font-weight-bold">{{ $product->product_name }}</span>
                                         </td>
                                         <td><img src="{{ asset('uploads/product_photoes') }}/{{ $product->product_photo }}"
-                                                class="mr-75" height="140" width="130" alt="Product Photo"></td>
+                                                class="" height="120" width="130" alt="Product Photo"></td>
                                         <td>
-                                            <span class="font-weight-bold">{{ $product->created_at->diffForHumans()}}</span>
+                                            <span class="font-weight-bold">{{ $product->relationWithCategory->category_name}}</span>
+                                        </td>
+                                        <td>
+                                            @if ($product->product_quantity != 0)
+                                            <span class="font-weight-bold">{{ $product->product_quantity}}</span>
+                                            @else
+                                            <span class="badge badge-glow badge-danger">Stock Out</span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($product->product_featured == 1)
+                                            <span class="badge badge-glow badge-primary">Featured</span>
+                                            @elseif ($product->product_featured == 2)
+                                            <span class="badge badge-glow badge-danger">Not Featured</span>
+                                            @endif
                                         </td>
                                     </tr>
                                     @empty

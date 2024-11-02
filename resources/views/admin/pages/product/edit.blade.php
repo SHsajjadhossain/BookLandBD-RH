@@ -190,6 +190,24 @@ active
                                     </div>
                                 </div>
                                 <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="password-vertical">Do You Want To Feature This Product? <span class="text-danger"> *</span></label>
+                                        {{-- <input type="text" id="password-vertical" class="form-control" name="product_code"
+                                            placeholder="Enter Product Code" /> --}}
+                                        <div class="custom-control custom-radio" style="margin-bottom: 5px;">
+                                            <input type="radio" id="customRadio1" name="product_featured" class="custom-control-input" value="1" {{ $product->product_featured == 1 ? 'checked' : "" }} />
+                                            <label class="custom-control-label" for="customRadio1">Yes</label>
+                                        </div>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="customRadio2" name="product_featured" class="custom-control-input" value="2" {{ $product->product_featured == 2 ? 'checked' : "" }}/>
+                                            <label class="custom-control-label" for="customRadio2">No</label>
+                                        </div>
+                                        @error('product_code')
+                                        <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-12">
                                     <button type="submit" class="mt-1 mr-1 btn btn-primary">Update Product</button>
                                 </div>
                             </div>

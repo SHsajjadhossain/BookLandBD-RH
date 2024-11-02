@@ -61,29 +61,8 @@ Dashboard Pustok | {{ $single_product->product_name }} Details
                             </ul>
                         </div>
                         <p class="card-text">Available - <span class="text-success">In stock</span></p> --}}
-                        <hr />
-                        <div class="product-color-options">
-                            <div class="flex-wrap mt-1 ecommerce-details-price d-flex">
-                                <h4 class="mr-1 item-price">Created At</h4>
-                                <ul class="pl-1 unstyled-list list-inline border-left">
-                                    <li class="ratings-list-item">{{ $single_product->created_at->format('d M Y') }}</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <hr />
+                        {{-- <hr /> --}}
 
-                        @if ($single_product->updated_at)
-                        <hr />
-                        <div class="product-color-options">
-                            <div class="flex-wrap mt-1 ecommerce-details-price d-flex">
-                                <h4 class="mr-1 item-price">Updated At</h4>
-                                <ul class="pl-1 unstyled-list list-inline border-left">
-                                    <li class="ratings-list-item">{{ $single_product->updated_at->format('d M Y') }}</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <hr />
-                        @endif
 
                         <hr />
                         <div class="product-color-options">
@@ -125,7 +104,7 @@ Dashboard Pustok | {{ $single_product->product_name }} Details
                             <div class="flex-wrap mt-1 ecommerce-details-price d-flex">
                                 <h4 class="mr-1 item-price">Product Quantity</h4>
                                 <ul class="pl-1 unstyled-list list-inline border-left">
-                                    <li class="ratings-list-item">{{ $single_product->product_quantity }} ({{ ($single_product->product_quantity == 0) ? 'Stock Out' : 'In Stock' }})</li>
+                                    <li class="ratings-list-item">{{ $single_product->product_quantity }} <span class="badge badge-glow badge-success" style="margin-left: 5px;">{{ ($single_product->product_quantity == 0) ? 'Stock Out' : 'In Stock' }}</span></li>
                                 </ul>
                             </div>
                         </div>
@@ -174,6 +153,41 @@ Dashboard Pustok | {{ $single_product->product_name }} Details
                             </div>
                         </div>
                         <hr />
+                        <div class="product-color-options">
+                            <div class="flex-wrap mt-1 ecommerce-details-price d-flex">
+                                <h4 class="mr-1 item-price">Product Featured Status</h4>
+                                <ul class="pl-1 unstyled-list list-inline border-left">
+                                    @if ($single_product->product_featured == 1)
+                                    <li class="ratings-list-item badge badge-glow badge-success">Featured</li>
+                                    @elseif ($single_product->product_featured == 2)
+                                    <li class="ratings-list-item badge badge-glow badge-danger">Not Featured</li>
+                                    @endif
+                                </ul>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="product-color-options">
+                            <div class="flex-wrap mt-1 ecommerce-details-price d-flex">
+                                <h4 class="mr-1 item-price">Created At</h4>
+                                <ul class="pl-1 unstyled-list list-inline border-left">
+                                    <li class="ratings-list-item">{{ $single_product->created_at->format('d M Y') }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <hr />
+
+                        @if ($single_product->updated_at)
+                        <hr />
+                        <div class="product-color-options">
+                            <div class="flex-wrap mt-1 ecommerce-details-price d-flex">
+                                <h4 class="mr-1 item-price">Updated At</h4>
+                                <ul class="pl-1 unstyled-list list-inline border-left">
+                                    <li class="ratings-list-item">{{ $single_product->updated_at->format('d M Y') }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <hr />
+                        @endif
                     </div>
                 </div>
             </div>
