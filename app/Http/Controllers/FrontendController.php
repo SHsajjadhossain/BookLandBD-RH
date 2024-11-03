@@ -22,6 +22,7 @@ class FrontendController extends Controller
             'banners' => Banner::all(),
             'all_products' => Product::OrderBy('id', 'asc')->get(),
             'new_products' => Product::latest()->limit('20')->get(),
+            'featured_products' => Product::where('product_featured', 1)->limit('20')->get(),
             'cat_section_one_title' => Category::find($cat_section_one_id)->category_name,
             'cat_section_two_title' => Category::find($cat_section_two_id)->category_name,
             'cat_section_one_products' => Product::where('category_id', $cat_section_one_id)->get(),

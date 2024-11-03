@@ -178,13 +178,13 @@ Pustok - {{ $single_cat->category_name }}
                                                     <img src="{{ asset('uploads/product_photoes') }}/{{ $single_product->product_photo }}" alt="Product photo not found">
                                                 </a>
                                                 <div class="hover-btns">
-                                                    <form action="{{ route('addToCart', $single_product->id) }}" method="POST">
-                                                        @csrf
-                                                        <button type="submit" class="single-btn">
-                                                            <i class="fas fa-shopping-basket"></i>
-                                                        </button>
-                                                    </form>
                                                     @auth
+                                                        <form action="{{ route('addToCart', $single_product->id) }}" method="POST">
+                                                            @csrf
+                                                            <button type="submit" class="single-btn">
+                                                                <i class="fas fa-shopping-basket"></i>
+                                                            </button>
+                                                        </form>
                                                         @if (wishlistCheck($single_product->id))
                                                         <a href="{{ route('wishlist.remove', wishlist_id($single_product->id)) }}" class="single-btn">
                                                             <i class="fas fa-heart" style="color: #62ab00 !important; font-size: 15px; margin-right: 10px;"></i>
@@ -196,12 +196,15 @@ Pustok - {{ $single_cat->category_name }}
                                                         @endif
                                                     @else
                                                         <a href="{{ route('login') }}" class="single-btn">
+                                                            <i class="fas fa-shopping-basket"></i>
+                                                        </a>
+                                                        <a href="{{ route('login') }}" class="single-btn">
                                                             <i class="fas fa-heart"></i>
                                                         </a>
                                                     @endauth
-                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#quickModal{{ $single_product->id }}" class="single-btn">
+                                                    {{-- <a href="#" data-bs-toggle="modal" data-bs-target="#quickModal{{ $single_product->id }}" class="single-btn">
                                                         <i class="fas fa-eye"></i>
-                                                    </a>
+                                                    </a> --}}
                                                 </div>
                                             </div>
                                         </div>
