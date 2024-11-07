@@ -84,8 +84,9 @@ class FrontendController extends Controller
     }
 
     public function productSearch(Request $request){
+        $search_product_name = $request->search_product;
         $search_products = Product::where('product_name', 'Like', '%'.$request->search_product.'%')->paginate();
-        return view('frontend.pages.search_product', compact('search_products'));
+        return view('frontend.pages.search_product', compact('search_products', 'search_product_name'));
     }
 
     public function contact()

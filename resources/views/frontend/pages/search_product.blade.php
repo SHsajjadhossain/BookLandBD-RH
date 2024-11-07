@@ -29,7 +29,8 @@ Pustok - Search Results
 
 {{-- {{ $search_products }} --}}
 
-<section class="breadcrumb-section">
+<section class="container breadcrumb-section">
+    <h2>Search result for "<span class="bread-active">{{ $search_product_name }}</span>"</h2>
     <h2 class="sr-only">Site Breadcrumb</h2>
     <div class="container">
         <div class="breadcrumb-contents">

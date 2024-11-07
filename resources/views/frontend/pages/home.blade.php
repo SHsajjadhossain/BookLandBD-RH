@@ -241,7 +241,24 @@ Pustok - Book Store
                             <span class="price-discount">20%</span>
                         </div>
                         <div class="count-down-block">
-                            <div class="product-countdown" data-countdown="10/10/2023"></div>
+                            <div class="product-countdown" id="countdown-clock" data-countdown="10/12/2024">
+                                <div class="single-countdown">
+                                    <span class="single-countdown__time days" id="days"></span>
+                                    <span class="single-countdown__text">Days</span>
+                                </div>
+                                <div class="single-countdown">
+                                    <span class="single-countdown__time hours" id="hours"></span>
+                                    <span class="single-countdown__text">Hours</span>
+                                </div>
+                                <div class="single-countdown">
+                                    <span class="single-countdown__time minutes" id="minutes"></span>
+                                    <span class="single-countdown__text">mins</span>
+                                </div>
+                                <div class="single-countdown">
+                                    <span class="single-countdown__time seconds" id="seconds"></span>
+                                    <span class="single-countdown__text">Secs</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -478,21 +495,21 @@ Pustok - Book Store
                             <span class="price-discount">20%</span>
                         </div>
                         <div class="count-down-block">
-                            <div class="product-countdown" data-countdown="10/10/2023">
+                            <div class="product-countdown" id="countdown-clock" data-countdown="10/12/2024">
                                 <div class="single-countdown">
-                                    <span class="single-countdown__time">%D</span>
+                                    <span class="single-countdown__time days" id="days"></span>
                                     <span class="single-countdown__text">Days</span>
                                 </div>
                                 <div class="single-countdown">
-                                    <span class="single-countdown__time">%H</span>
+                                    <span class="single-countdown__time hours" id="hours"></span>
                                     <span class="single-countdown__text">Hours</span>
                                 </div>
                                 <div class="single-countdown">
-                                    <span class="single-countdown__time">%M</span>
+                                    <span class="single-countdown__time minutes" id="minutes"></span>
                                     <span class="single-countdown__text">mins</span>
                                 </div>
                                 <div class="single-countdown">
-                                    <span class="single-countdown__time">%S</span>
+                                    <span class="single-countdown__time seconds" id="seconds"></span>
                                     <span class="single-countdown__text">Secs</span>
                                 </div>
                             </div>
@@ -1438,13 +1455,31 @@ $(document).ready(function () {
     	--> Countdown Activation
     ---------------------------------------*/
 
-    $('[data-countdown]').each(function() {
-        var $this = $(this),
-            finalDate = $(this).data('countdown');
-        $this.countdown(finalDate, function(event) {
-            $this.html(event.strftime('<div class="single-countdown"><span class="single-countdown__time">%D</span><span class="single-countdown__text">Days</span></div><div class="single-countdown"><span class="single-countdown__time">%H</span><span class="single-countdown__text">Hours</span></div><div class="single-countdown"><span class="single-countdown__time">%M</span><span class="single-countdown__text">mins</span></div><div class="single-countdown"><span class="single-countdown__time">%S</span><span class="single-countdown__text">Secs</span></div>'));
-        });
-    });
+    // $('[data-countdown]').each(function() {
+    //     var $this = $(this),
+    //         finalDate = $(this).data('countdown');
+    //     $this.countdown(finalDate, function(event) {
+    //         $this.html(event.strftime('<div class="single-countdown"><span class="single-countdown__time">%D</span><span class="single-countdown__text">Days</span></div><div class="single-countdown"><span class="single-countdown__time">%H</span><span class="single-countdown__text">Hours</span></div><div class="single-countdown"><span class="single-countdown__time">%M</span><span class="single-countdown__text">mins</span></div><div class="single-countdown"><span class="single-countdown__time">%S</span><span class="single-countdown__text">Secs</span></div>'));
+    //     });
+    // });
+
+    var deadline = new Date("2024-12-10 11:59:00").getTime();
+    setInterval( function() {
+        var currentTime = new Date().getTime();
+        var t =  deadline - currentTime;
+
+        var days = Math.floor(t / (1000*60*60*24));
+        var hours = Math.floor((t % (1000*60*60*24))/(1000*60*60));
+        var minutes = Math.floor((t % (1000*60*60))/(1000*60));
+        var seconds = Math.floor((t % (1000*60))/(1000));
+
+        document.getElementById("days").innerHTML = days;
+        document.getElementById("hours").innerHTML = hours;
+        document.getElementById("minutes").innerHTML = minutes;
+        document.getElementById("seconds").innerHTML = seconds;
+
+    }, 1000);
+
 });
 
 </script>
