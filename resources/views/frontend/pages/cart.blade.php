@@ -308,7 +308,7 @@ Pustok - Cart
                         <div class="text-center alert alert-danger" style="border-radius: 50px;">
                             <span class="checkout-btn" style="text-transform: uppercase;">Please Remove Stock Out Product First</span>
                         </div>
-                        @else
+                        @elseif (allCarts()->count() > 0)
                         <div class="cart-summary-button">
                             <a href="checkout.html" class="checkout-btn c-btn btn--primary">Proceed To Checkout</a>
                         </div>
