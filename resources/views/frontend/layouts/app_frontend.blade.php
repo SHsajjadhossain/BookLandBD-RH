@@ -175,7 +175,7 @@
                                             <div class=" single-cart-block">
                                                 <div class="btn-block">
                                                     <a href="{{ route('cart') }}" class="btn">View All Cart <i class="fas fa-chevron-right"></i></a>
-                                                    <a href="checkout.html" class="btn btn--primary">Check Out <i class="fas fa-chevron-right"></i></a>
+                                                    <a href="{{ route('checkout') }}" class="btn btn--primary">Check Out <i class="fas fa-chevron-right"></i></a>
                                                 </div>
                                             </div>
                                             @endif

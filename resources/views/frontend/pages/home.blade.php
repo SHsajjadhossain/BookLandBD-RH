@@ -188,7 +188,7 @@ Pustok - Book Store
 <!--=================================
         Deal of the day
 ===================================== -->
-<section class="section-margin">
+{{-- <section class="section-margin">
     <div class="container">
         <div class="promo-section-heading">
             <h2>Deal of the day up to 20% off Special offer</h2>
@@ -519,7 +519,7 @@ Pustok - Book Store
             </div>
         </div>
     </div>
-</section>
+</section> --}}
 
 <!--=================================
         Home Slider Tab

@@ -310,7 +310,7 @@ Pustok - Cart
                         </div>
                         @elseif (allCarts()->count() > 0)
                         <div class="cart-summary-button">
-                            <a href="checkout.html" class="checkout-btn c-btn btn--primary">Proceed To Checkout</a>
+                            <a href="{{ route('checkout') }}" class="checkout-btn c-btn btn--primary">Proceed To Checkout</a>
                         </div>
                         @endif
                     </div>

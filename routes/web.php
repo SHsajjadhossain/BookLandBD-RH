@@ -11,6 +11,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\CheckOutController;
 use Illuminate\Support\Facades\Route;
 
 // all frontend views routes start
@@ -48,6 +49,10 @@ Route::get('/cart/clear/{user_id}', [CartController::class, 'cartClear'])->name(
 // coupon routes start
 Route::resource('coupon', CouponController::class);
 // coupon routes end
+
+// checkout routes start
+Route::get('/checkout', [CheckOutController::class, 'index'])->name('checkout');
+// checkout routes end
 
 // all frontend views routes end
 
