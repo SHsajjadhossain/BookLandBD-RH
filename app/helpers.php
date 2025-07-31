@@ -9,7 +9,7 @@ function allCategories()
 
 function allWishlists()
 {
-    return App\Models\Wishlist::all();
+    return App\Models\Wishlist::where('user_id', auth()->id())->get();
 }
 
 function wishlistCheck($single_product)
