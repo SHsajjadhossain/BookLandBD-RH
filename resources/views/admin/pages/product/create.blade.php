@@ -51,12 +51,22 @@ active
                         <form class="form form-vertical" action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
-                                <div class="col-12">
+                                <div class="col-6">
                                     <div class="form-group">
                                         <label for="first-name-vertical">Product Name<span class="text-danger">*</span></label>
                                         <input type="text" id="product_name" class="form-control" name="product_name"
                                             placeholder="Enter Product Name" />
                                         @error('product_name')
+                                        <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="password-vertical">Product Price<span class="text-danger">*</span></label>
+                                        <input type="number" id="password-vertical" class="form-control" name="product_price"
+                                            placeholder="Enter Product Price" />
+                                        @error('product_price')
                                         <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
@@ -96,16 +106,7 @@ active
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <label for="password-vertical">Product Price<span class="text-danger">*</span></label>
-                                        <input type="number" id="password-vertical" class="form-control" name="product_price"
-                                            placeholder="Enter Product Price" />
-                                        @error('product_price')
-                                        <small class="text-danger">{{ $message }}</small>
-                                        @enderror
-                                    </div>
-                                </div>
+
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="exampleFormControlTextarea1">Product Short Description<span class="text-danger">*</span></label>
@@ -134,7 +135,7 @@ active
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-12">
+                                <div class="col-4">
                                     <div class="form-group">
                                         <label for="password-vertical">Product Quantity<span class="text-danger">*</span></label>
                                         <input type="number" id="password-vertical" class="form-control" name="product_quantity"
@@ -144,7 +145,7 @@ active
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-12">
+                                <div class="col-4">
                                     <div class="form-group">
                                         <label for="password-vertical">Product Code<span class="text-danger">*</span></label>
                                         <input type="text" id="password-vertical" class="form-control" name="product_code"
@@ -152,6 +153,31 @@ active
                                         @error('product_code')
                                         <small class="text-danger">{{ $message }}</small>
                                         @enderror
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="email-id-vertical">Do You Want To Feature This Product? <span class="text-danger">*</span></label>
+                                        <select name="product_featured" class="select2 form-control">
+                                            <option value="" disabled selected>--Select Option--</option>
+                                            <option value="1">Yes</option>
+                                            <option value="2">No</option>
+                                        </select>
+                                        @error('category_id')
+                                        <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                        {{-- <label for="password-vertical">Do You Want To Feature This Product? <span class="text-danger"> *</span></label>
+                                        <div class="custom-control custom-radio" style="margin-bottom: 5px;">
+                                            <input type="radio" id="customRadio1" name="product_featured" class="custom-control-input" value="1" />
+                                            <label class="custom-control-label" for="customRadio1">Yes</label>
+                                        </div>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="customRadio2" name="product_featured" class="custom-control-input" value="2" />
+                                            <label class="custom-control-label" for="customRadio2">No</label>
+                                        </div>
+                                        @error('product_code')
+                                        <small class="text-danger">{{ $message }}</small>
+                                        @enderror --}}
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -168,24 +194,6 @@ active
                                             <small class="text-danger">{{ $message }}</small>
                                             @enderror
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <label for="password-vertical">Do You Want To Feature This Product? <span class="text-danger"> *</span></label>
-                                        {{-- <input type="text" id="password-vertical" class="form-control" name="product_code"
-                                            placeholder="Enter Product Code" /> --}}
-                                        <div class="custom-control custom-radio" style="margin-bottom: 5px;">
-                                            <input type="radio" id="customRadio1" name="product_featured" class="custom-control-input" value="1" />
-                                            <label class="custom-control-label" for="customRadio1">Yes</label>
-                                        </div>
-                                        <div class="custom-control custom-radio">
-                                            <input type="radio" id="customRadio2" name="product_featured" class="custom-control-input" value="2" />
-                                            <label class="custom-control-label" for="customRadio2">No</label>
-                                        </div>
-                                        @error('product_code')
-                                        <small class="text-danger">{{ $message }}</small>
-                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-12">
