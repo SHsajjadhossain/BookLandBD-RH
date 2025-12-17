@@ -23,7 +23,7 @@ return new class extends Migration
             $table->integer('product_quantity');
             $table->string('product_code');
             $table->string('product_photo');
-            $table->int('product_featured')->comment('1= Yes, 2= No');
+            $table->integer('product_featured')->comment('1= Yes, 2= No');
             $table->timestamps();
         });
     }
