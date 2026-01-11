@@ -46,6 +46,7 @@ active
                     </div>
                     @endif --}}
                     <div class="card-header d-block d-sm-flex">
+                        <h4 class="card-title">Product Information</h4>
                     </div>
                     <div class="card-body">
                         <form class="form form-vertical" action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
@@ -81,7 +82,7 @@ active
                                         @enderror
                                     </div>
                                 </div> --}}
-                                <div class="col-12">
+                                <div class="col-12 category-col">
                                     <div class="form-group">
                                         <label for="email-id-vertical">Product Category<span class="text-danger">*</span></label>
                                         <select name="category_id" class="select2 form-control" id="product_category">
@@ -95,7 +96,7 @@ active
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-12">
+                                <div class="col-12 sub-category-col">
                                     <div class="form-group" id="product_sub_category">
                                         <label for="contact-info-vertical">Product Sub Category<span class="text-danger">*</span></label>
                                         <select name="sub_category_id" class="select2 form-control" id="sub_category">
@@ -228,7 +229,15 @@ active
             @enderror
         $('#product_category').change(function (e) {
             e.preventDefault();
-            var product_category_id = $(this).val();
+            let product_category_id = $(this).val();
+
+            // Clear old sub categories first
+            $('#sub_category').empty().append('<option value="">Select Sub Category</option>');
+
+            if (!product_category_id) {
+                resetLayout();
+                return;
+            }
 
             $.ajax({
                 type: "POST",
@@ -237,16 +246,27 @@ active
                 success: function (response) {
                     if (response['subCategories'].length > 0) {
                         $('#product_sub_category').show();
+                        // Change layout to col-6
+                        $('.category-col').removeClass('col-12').addClass('col-6');
+                        $('.sub-category-col').removeClass('col-12').addClass('col-6');
                         $.each(response.subCategories, function (index, val) {
                             $('#sub_category').append('<option value="'+val.id+'">'+val.sub_category_name+'</option>');
                         });
                     }
                     else{
-                        $('#product_sub_category').hide();
+                        resetLayout();
                     }
                 }
             });
         });
+
+        // reusable function
+        function resetLayout() {
+            $('#product_sub_category').hide();
+
+            $('.category-col').removeClass('col-6').addClass('col-12');
+            $('.sub-category-col').removeClass('col-6').addClass('col-12');
+        }
     });
     // product-categorywise-select-sub-cat js end
 
