@@ -25,7 +25,7 @@ Pustok - {{ $single_product_info->product_name }}
                 <!-- Product Details Slider Big Image-->
                 <div class="product-details-slider sb-slick-slider arrow-type-two">
                     <div class="single-slide">
-                        <img src="{{ asset('uploads/product_photoes') }}/{{ $single_product_info->product_photo }}" alt="product-image">
+                        <img src="{{ asset('uploads/product_photoes') }}/{{ $single_product_info->product_photo ?? '' }}" alt="product-image">
                     </div>
                 </div>
             </div>
@@ -37,15 +37,15 @@ Pustok - {{ $single_product_info->product_name }}
                             {{ session('stockout') }}
                         </div>
                     @endif
-                    <h3 class="product-title">{{ $single_product_info->product_name }}</h3>
+                    <h3 class="product-title">{{ $single_product_info->product_name ?? '' }}</h3>
                     <ul class="list-unstyled">
                         {{-- <li>Brands: <a href="#" class="list-value font-weight-bold"> Canon</a></li> --}}
-                        <li>Product Code: <span class="list-value"> {{ $single_product_info->product_code }}</span></li>
+                        <li>Product Code: <span class="list-value"> {{ $single_product_info->product_code ?? '' }}</span></li>
                         {{-- <li>Reward Points: <span class="list-value"> 200</span></li> --}}
                         <li>Availability: <span class="list-value"> {{ $single_product_info->product_quantity == 0 ? 'Stock Out' : 'In Stock' }}</span></li>
                     </ul>
                     <div class="price-block">
-                        <span class="price-new">৳{{ $single_product_info->product_price }}</span>
+                        <span class="price-new">৳{{ $single_product_info->product_price ?? '' }}</span>
                         <del class="price-old">£91.86</del>
                     </div>
                     <div class="rating-widget">
@@ -260,14 +260,14 @@ Pustok - {{ $single_product_info->product_name }}
                                 {{-- <a href="#" class="author">
                                     Lpple
                                 </a> --}}
-                                <h3><a href="{{ route('product.productDetails', $related_product->product_slug) }}">{{ $related_product->product_name }}</a></h3>
+                                <h3><a href="{{ route('product.productDetails', $related_product->product_slug) }}">{{ $related_product->product_name ?? '' }}</a></h3>
                             </div>
                             <div class="product-card--body">
                                 <div class="card-image">
-                                    <img src="{{ asset('uploads/product_photoes') }}/{{ $related_product->product_photo }}" alt="Product photo not found">
+                                    <img src="{{ asset('uploads/product_photoes') }}/{{ $related_product->product_photo ?? '' }}" alt="Product photo not found">
                                     <div class="hover-contents">
                                         <a href="{{ route('product.productDetails', $related_product->product_slug) }}" class="hover-image">
-                                            <img src="{{ asset('uploads/product_photoes') }}/{{ $related_product->product_photo }}" alt="Product photo not found">
+                                            <img src="{{ asset('uploads/product_photoes') }}/{{ $related_product->product_photo ?? '' }}" alt="Product photo not found">
                                         </a>
                                         <div class="hover-btns">
                                             <a href="cart.html" class="single-btn">
@@ -289,7 +289,7 @@ Pustok - {{ $single_product_info->product_name }}
                                     </div>
                                 </div>
                                 <div class="price-block">
-                                    <span class="price">৳{{ $related_product->product_price }}</span>
+                                    <span class="price">৳{{ $related_product->product_price ?? '' }}</span>
                                     {{-- <del class="price-old">£51.20</del>
                                     <span class="price-discount">20%</span> --}}
                                 </div>

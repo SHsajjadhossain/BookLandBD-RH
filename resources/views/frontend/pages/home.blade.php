@@ -109,13 +109,13 @@ Pustok - Book Store
                                                                         }'>
                         @forelse ($banners as $banner)
                         <div class="single-slide bg-image bg-overlay--white"
-                            data-bg="{{ asset('uploads/banner_photoes') }}/{{ $banner->banner_photo }}">
+                            data-bg="{{ asset('uploads/banner_photoes') }}/{{ $banner->banner_photo ?? '' }}">
                             <div class="text-left home-content pl--30">
                                 <div class="row">
                                     <div class="col-lg-5">
-                                        <span class="title-small">{{ $banner->banner_title_small }}</span>
-                                        <h1>{{ $banner->banner_title_big }}</h1>
-                                        <p>{{ $banner->banner_text }}</p>
+                                        <span class="title-small">{{ $banner->banner_title_small ?? '' }}</span>
+                                        <h1>{{ $banner->banner_title_big ?? '' }}</h1>
+                                        <p>{{ $banner->banner_text ?? '' }}</p>
                                         <a href="{{ route('frontend.shop') }}" class="btn btn-outlined banner-shop-btn">
                                             Shop Now
                                         </a>
@@ -677,14 +677,14 @@ Pustok - Book Store
                             <div class="single-slide">
                                 <div class="product-card">
                                     <div class="product-header">
-                                        <h3><a href="{{ route('product.productDetails', $new_product->product_slug) }}">{{ $new_product->product_name }}</a></h3>
+                                        <h3><a href="{{ route('product.productDetails', $new_product->product_slug) }}">{{ $new_product->product_name ?? '' }}</a></h3>
                                     </div>
                                     <div class="product-card--body">
                                         <div class="card-image">
-                                            <img src="{{ asset('uploads/product_photoes') }}/{{ $new_product->product_photo }}" alt="Product photo not found">
+                                            <img src="{{ asset('uploads/product_photoes') }}/{{ $new_product->product_photo ?? '' }}" alt="Product photo not found">
                                             <div class="hover-contents">
                                                 <a href="{{ route('product.productDetails', $new_product->product_slug) }}" class="hover-image">
-                                                    <img src="{{ asset('uploads/product_photoes') }}/{{ $new_product->product_photo }}" alt="Product photo not found">
+                                                    <img src="{{ asset('uploads/product_photoes') }}/{{ $new_product->product_photo ?? '' }}" alt="Product photo not found">
                                                 </a>
                                                 <div class="hover-btns">
                                                     @auth
@@ -715,7 +715,7 @@ Pustok - Book Store
                                             </div>
                                         </div>
                                         <div class="price-block">
-                                            <span class="price">৳{{ $new_product->product_price }}</span>
+                                            <span class="price">৳{{ $new_product->product_price ?? '' }}</span>
                                             {{-- <del class="price-old">£51.20</del>
                                             <span class="price-discount">20%</span> --}}
                                         </div>
@@ -745,14 +745,14 @@ Pustok - Book Store
                             <div class="single-slide">
                                 <div class="product-card">
                                     <div class="product-header">
-                                        <h3><a href="{{ route('product.productDetails', $featured_product->product_slug) }}">{{ $featured_product->product_name }}</a></h3>
+                                        <h3><a href="{{ route('product.productDetails', $featured_product->product_slug) }}">{{ $featured_product->product_name ?? '' }}</a></h3>
                                     </div>
                                     <div class="product-card--body">
                                         <div class="card-image">
-                                            <img src="{{ asset('uploads/product_photoes') }}/{{ $featured_product->product_photo }}" alt="Product photo not found">
+                                            <img src="{{ asset('uploads/product_photoes') }}/{{ $featured_product->product_photo ?? '' }}" alt="Product photo not found">
                                             <div class="hover-contents">
                                                 <a href="{{ route('product.productDetails', $featured_product->product_slug) }}" class="hover-image">
-                                                    <img src="{{ asset('uploads/product_photoes') }}/{{ $featured_product->product_photo }}" alt="Product photo not found">
+                                                    <img src="{{ asset('uploads/product_photoes') }}/{{ $featured_product->product_photo ?? '' }}" alt="Product photo not found">
                                                 </a>
                                                 <div class="hover-btns">
                                                     @auth
@@ -783,7 +783,7 @@ Pustok - Book Store
                                             </div>
                                         </div>
                                         <div class="price-block">
-                                            <span class="price">৳{{ $featured_product->product_price }}</span>
+                                            <span class="price">৳{{ $featured_product->product_price ?? '' }}</span>
                                             {{-- <del class="price-old">£51.20</del>
                                             <span class="price-discount">20%</span> --}}
                                         </div>
@@ -1340,14 +1340,14 @@ Pustok - Book Store
             <div class="single-slide">
                 <div class="product-card card-style-list">
                     <div class="card-image">
-                        <img src="{{ asset('uploads/product_photoes') }}/{{ $section_one_product->product_photo }}" alt="Product photo not found">
+                        <img src="{{ asset('uploads/product_photoes') }}/{{ $section_one_product->product_photo ?? '' }}" alt="Product photo not found">
                     </div>
                     <div class="product-card--body">
                         <div class="product-header">
-                            <h3><a href="{{ route('product.productDetails', $section_one_product->product_slug) }}">{{ $section_one_product->product_name }}</a></h3>
+                            <h3><a href="{{ route('product.productDetails', $section_one_product->product_slug) }}">{{ $section_one_product->product_name ?? '' }}</a></h3>
                         </div>
                         <div class="price-block">
-                            <span class="price">৳{{ $section_one_product->product_price }}</span>
+                            <span class="price">৳{{ $section_one_product->product_price ?? '' }}</span>
                             {{-- <del class="price-old">£51.20</del>
                             <span class="price-discount">20%</span> --}}
                         </div>
@@ -1388,14 +1388,14 @@ Pustok - Book Store
             <div class="single-slide">
                 <div class="product-card">
                     <div class="product-header">
-                        <h3><a href="{{ route('product.productDetails', $section_two_product->product_slug) }}">{{ $section_two_product->product_name }}</a></h3>
+                        <h3><a href="{{ route('product.productDetails', $section_two_product->product_slug) }}">{{ $section_two_product->product_name ?? '' }}</a></h3>
                     </div>
                     <div class="product-card--body">
                         <div class="card-image">
-                            <img src="{{ asset('uploads/product_photoes') }}/{{ $section_two_product->product_photo }}" alt="Product photo not found">
+                            <img src="{{ asset('uploads/product_photoes') }}/{{ $section_two_product->product_photo ?? '' }}" alt="Product photo not found">
                             <div class="hover-contents">
                                 <a href="{{ route('product.productDetails', $section_two_product->product_slug) }}" class="hover-image">
-                                    <img src="{{ asset('uploads/product_photoes') }}/{{ $section_two_product->product_photo }}" alt="Product photo not found">
+                                    <img src="{{ asset('uploads/product_photoes') }}/{{ $section_two_product->product_photo ?? '' }}" alt="Product photo not found">
                                 </a>
                                 <div class="hover-btns">
                                     @auth
@@ -1426,7 +1426,7 @@ Pustok - Book Store
                             </div>
                         </div>
                         <div class="price-block">
-                            <span class="price">৳{{ $section_two_product->product_price }}</span>
+                            <span class="price">৳{{ $section_two_product->product_price ?? '' }}</span>
                             {{-- <del class="price-old">£51.20</del>
                             <span class="price-discount">20%</span> --}}
                         </div>

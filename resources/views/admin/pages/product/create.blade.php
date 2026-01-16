@@ -12,6 +12,20 @@ active
 
 @endsection
 
+@push('custom-css')
+
+<style>
+    .uploadedAvatar {
+        width: 130px;
+        height: 140px;
+        object-fit: cover;
+        border: 1px solid #e5e5e5;
+        display: block;
+    }
+</style>
+
+@endpush
+
 @section('content')
 
 <div class="content-wrapper">
@@ -112,10 +126,6 @@ active
                                     <div class="form-group">
                                         <label for="exampleFormControlTextarea1">Product Short Description<span class="text-danger">*</span></label>
                                         <textarea class="form-control" name="product_short_description" id="exampleFormControlTextarea1" style="resize:none" rows="3" placeholder="Enter short description"></textarea>
-                                        {{-- <div class="custom-editor-wrapper_1">
-                                            <div class="custom-editor_1"></div>
-                                            <input type="hidden" name="product_short_description" class="custom-editor-input_1">
-                                        </div> --}}
                                         @error('product_short_description')
                                         <small class="text-danger">{{ $message }}</small>
                                         @enderror
@@ -127,10 +137,6 @@ active
                                         <label for="exampleFormControlTextarea2">Product Long Description<span class="text-danger">*</span></label>
                                         <textarea class="form-control" name="product_long_description" id="exampleFormControlTextarea2" style="resize:none"
                                             rows="5" placeholder="Enter long description"></textarea>
-                                        {{-- <div class="custom-editor-wrapper">
-                                            <div class="custom-editor"></div>
-                                            <input type="hidden" name="product_long_description" class="custom-editor-input">
-                                        </div> --}}
                                         @error('product_long_description')
                                         <small class="text-danger">{{ $message }}</small>
                                         @enderror
@@ -167,26 +173,14 @@ active
                                         @error('category_id')
                                         <small class="text-danger">{{ $message }}</small>
                                         @enderror
-                                        {{-- <label for="password-vertical">Do You Want To Feature This Product? <span class="text-danger"> *</span></label>
-                                        <div class="custom-control custom-radio" style="margin-bottom: 5px;">
-                                            <input type="radio" id="customRadio1" name="product_featured" class="custom-control-input" value="1" />
-                                            <label class="custom-control-label" for="customRadio1">Yes</label>
-                                        </div>
-                                        <div class="custom-control custom-radio">
-                                            <input type="radio" id="customRadio2" name="product_featured" class="custom-control-input" value="2" />
-                                            <label class="custom-control-label" for="customRadio2">No</label>
-                                        </div>
-                                        @error('product_code')
-                                        <small class="text-danger">{{ $message }}</small>
-                                        @enderror --}}
                                     </div>
                                 </div>
-                                <div class="col-12">
+                                <div class="col-lg-12 col-md-12">
                                     <div class="form-group">
-                                        <label for="custom-file">Product Photo<small class="text-warning"> (Dimensions: 700 x 700 px)</small> <span class="text-danger">*</span></label>
+                                        <label for="customFile">Product Photo<small class="text-warning"> (Dimensions: 700 x 700 px)</small> <span class="text-danger">*</span></label>
                                         <div class="mb-1 mr-1">
-                                            <img src="" data-reset-src="" id="product_photo_upload_img" class="rounded uploadedAvatar object-fit--cover"
-                                                alt="product photo" width="130" height="140">
+                                            <img src="" data-reset-src="" id="product_photo_upload_img" class="rounded uploadedAvatar"
+                                                alt="product photo">
                                         </div>
                                         <div class="custom-file">
                                             <input type="file" class="custom-file-input" id="product_photo_upload" name="product_photo" />
@@ -245,7 +239,9 @@ active
                 data: {product_category_id:product_category_id},
                 success: function (response) {
                     if (response['subCategories'].length > 0) {
+
                         $('#product_sub_category').show();
+
                         // Change layout to col-6
                         $('.category-col').removeClass('col-12').addClass('col-6');
                         $('.sub-category-col').removeClass('col-12').addClass('col-6');

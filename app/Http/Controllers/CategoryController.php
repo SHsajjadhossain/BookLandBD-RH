@@ -107,7 +107,6 @@ class CategoryController extends Controller
     {
         $sub_cat_count = SubCategory::where('category_id', $request->single_delete)->count();
         if ($sub_cat_count > 0) {
-            // return back()->with('sub_cat_warn', "This category have sub category. You can't delete it!");
             return response()->json([
                 'status' => 'sub_cat_warn'
             ]);

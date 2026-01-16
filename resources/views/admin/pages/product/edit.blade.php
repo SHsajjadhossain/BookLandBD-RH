@@ -2,7 +2,7 @@
 
 @section('title')
 
-Dashboard Pustok | Add Product
+Dashboard Pustok | Edit Product
 
 @endsection
 
@@ -48,19 +48,30 @@ active
                     </div>
                     @endif --}}
                     <div class="card-header d-block d-sm-flex">
+                        <h4 class="card-title">Edit Product Information</h4>
                     </div>
                     <div class="card-body">
                         <form class="form form-vertical" action="{{ route('product.update', $product->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="row">
-                                <div class="col-12">
+                                <div class="col-6">
                                     <div class="form-group">
                                         <label for="first-name-vertical">Product Name<span
                                                 class="text-danger">*</span></label>
                                         <input type="text" id="product_name" class="form-control" name="product_name" value="{{ $product->product_name }}"
                                             placeholder="Enter Product Name" />
                                         @error('product_name')
+                                        <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="password-vertical">Product Price<span class="text-danger">*</span></label>
+                                        <input type="number" id="password-vertical" class="form-control" name="product_price"
+                                            value="{{ $product->product_price }}" placeholder="Enter Product Price" />
+                                        @error('product_price')
                                         <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
@@ -76,7 +87,7 @@ active
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-12">
+                                <div class="col-12 category-col">
                                     <div class="form-group">
                                         <label for="email-id-vertical">Product Category<span
                                                 class="text-danger">*</span></label>
@@ -92,40 +103,24 @@ active
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-12">
-                                    <div class="form-group" id="product_sub_category">
-                                        <label for="contact-info-vertical">Product Sub Category</label>
-                                        <select name="sub_category_id" class="select2 form-control" id="sub_category">
-                                            <option value="">--Select Sub Category--</option>
-                                            @foreach ($subCategories as $sub_category)
-                                            <option {{ ($product->sub_category_id == $sub_category->id) ? 'selected' : '' }} value="{{ $sub_category->id }}">{{
-                                                $sub_category->sub_category_name }}</option>
-                                            @endforeach
-                                        </select>
+                                    <div class="col-12 sub-category-col">
+                                        <div class="form-group" id="product_sub_category">
+                                            <label for="contact-info-vertical">Product Sub Category</label>
+                                            <select name="sub_category_id" class="select2 form-control" id="sub_category">
+                                                <option value="">--Select Sub Category--</option>
+                                                @foreach ($subCategories as $sub_category)
+                                                <option {{ ($product->sub_category_id == $sub_category->id) ? 'selected' : '' }} value="{{ $sub_category->id }}">{{
+                                                    $sub_category->sub_category_name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <label for="password-vertical">Product Price<span
-                                                class="text-danger">*</span></label>
-                                        <input type="number" id="password-vertical" class="form-control"
-                                            name="product_price" value="{{ $product->product_price }}" placeholder="Enter Product Price" />
-                                        @error('product_price')
-                                        <small class="text-danger">{{ $message }}</small>
-                                        @enderror
-                                    </div>
-                                </div>
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="exampleFormControlTextarea1">Product Short Description<span
                                                 class="text-danger">*</span></label>
                                         <textarea class="form-control" name="product_short_description"
                                             id="exampleFormControlTextarea1" style="resize:none" rows="3">{{ $product->product_short_description }}</textarea>
-                                        {{-- <div class="custom-editor-wrapper_1">
-                                            <div class="custom-editor_1"></div>
-                                            <input type="hidden" name="product_short_description"
-                                                class="custom-editor-input_1">
-                                        </div> --}}
                                         @error('product_short_description')
                                         <small class="text-danger">{{ $message }}</small>
                                         @enderror
@@ -138,17 +133,12 @@ active
                                                 class="text-danger">*</span></label>
                                         <textarea class="form-control" name="product_long_description"
                                             id="exampleFormControlTextarea2" style="resize:none" rows="5">{{ $product->product_long_description }}</textarea>
-                                        {{-- <div class="custom-editor-wrapper">
-                                            <div class="custom-editor"></div>
-                                            <input type="hidden" name="product_long_description"
-                                                class="custom-editor-input">
-                                        </div> --}}
                                         @error('product_long_description')
                                         <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-12">
+                                <div class="col-4">
                                     <div class="form-group">
                                         <label for="password-vertical">Product Quantity<span
                                                 class="text-danger">*</span></label>
@@ -159,13 +149,26 @@ active
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-12">
+                                <div class="col-4">
                                     <div class="form-group">
                                         <label for="password-vertical">Product Code<span
                                                 class="text-danger">*</span></label>
                                         <input type="text" id="password-vertical" class="form-control"
                                             name="product_code" value="{{ $product->product_code }}" placeholder="Enter Product Code" />
                                         @error('product_code')
+                                        <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="email-id-vertical">Do You Want To Feature This Product? <span class="text-danger">*</span></label>
+                                        <select name="product_featured" class="select2 form-control">
+                                            <option value="" disabled selected>--Select Option--</option>
+                                            <option value="1" {{ $product->product_featured == 1 ? 'selected' : "" }}>Yes</option>
+                                            <option value="2" {{ $product->product_featured == 2 ? 'selected' : "" }}>No</option>
+                                        </select>
+                                        @error('product_featured')
                                         <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
@@ -187,24 +190,6 @@ active
                                             <small class="text-danger">{{ $message }}</small>
                                             @enderror
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <label for="password-vertical">Do You Want To Feature This Product? <span class="text-danger"> *</span></label>
-                                        {{-- <input type="text" id="password-vertical" class="form-control" name="product_code"
-                                            placeholder="Enter Product Code" /> --}}
-                                        <div class="custom-control custom-radio" style="margin-bottom: 5px;">
-                                            <input type="radio" id="customRadio1" name="product_featured" class="custom-control-input" value="1" {{ $product->product_featured == 1 ? 'checked' : "" }} />
-                                            <label class="custom-control-label" for="customRadio1">Yes</label>
-                                        </div>
-                                        <div class="custom-control custom-radio">
-                                            <input type="radio" id="customRadio2" name="product_featured" class="custom-control-input" value="2" {{ $product->product_featured == 2 ? 'checked' : "" }}/>
-                                            <label class="custom-control-label" for="customRadio2">No</label>
-                                        </div>
-                                        @error('product_code')
-                                        <small class="text-danger">{{ $message }}</small>
-                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -232,29 +217,79 @@ active
 
     // product-categorywise-select-sub-cat js start
     $(document).ready(function () {
-        $('#product_category').change(function (e) {
-            e.preventDefault();
-            var product_category_id = $(this).val();
+
+        // ===== Page load (Edit form) =====
+        let initialCategoryId = $('#product_category').val();
+
+        if (initialCategoryId) {
+            loadSubCategories(initialCategoryId, true);
+        } else {
+            resetLayout();
+        }
+
+        // ===== On change =====
+        $('#product_category').on('change', function () {
+            let product_category_id = $(this).val();
+            loadSubCategories(product_category_id, false);
+        });
+
+        // ===== Reusable AJAX function =====
+        function loadSubCategories(categoryId, isInitialLoad = false) {
+
+            $('#sub_category').empty().append('<option value="">--Select Sub Category--</option>');
+
+            if (!categoryId) {
+                resetLayout();
+                return;
+            }
 
             $.ajax({
                 type: "POST",
                 url: "{{ route('product.subCategory.search') }}",
-                data: {product_category_id:product_category_id},
+                data: {
+                    product_category_id: categoryId,
+                    _token: "{{ csrf_token() }}"
+                },
                 success: function (response) {
-                    if (response['subCategories'].length > 0) {
+
+                    if (response.subCategories && response.subCategories.length > 0) {
+
+                        // Show sub category
                         $('#product_sub_category').show();
-                        $('#sub_category').html('<option value="">--Select Sub Category--</option>');
+
+                        // col-6 layout
+                        $('.category-col').removeClass('col-12').addClass('col-6');
+                        $('.sub-category-col').removeClass('col-12').addClass('col-6');
+
+                        // Populate options
                         $.each(response.subCategories, function (index, val) {
-                            $('#sub_category').append('<option value="'+val.id+'">'+val.sub_category_name+'</option>');
+                            $('#sub_category').append(
+                            `<option value="${val.id}">${val.sub_category_name}</option>`
+                            );
                         });
-                    }
-                    else{
-                        $('#product_sub_category').hide();
+
+                        // Edit page: keep selected sub category
+                        if (isInitialLoad) {
+                            $('#sub_category').val("{{ $product->sub_category_id }}").trigger('change');
+                        }
+
+                    } else {
+                        resetLayout();
                     }
                 }
             });
-        });
+        }
+
+        // ===== Reset layout =====
+        function resetLayout() {
+            $('#product_sub_category').hide();
+            $('.category-col').removeClass('col-6').addClass('col-12');
+            $('.sub-category-col').removeClass('col-6').addClass('col-12');
+            $('#sub_category').empty().append('<option value="">--Select Sub Category--</option>');
+        }
+
     });
+    
     // product-categorywise-select-sub-cat js end
 
     // Update & Reset Category photo on click of button start

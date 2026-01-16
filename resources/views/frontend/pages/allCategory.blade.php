@@ -27,18 +27,18 @@ Pustok - Category
                 <div class="col-lg-4 col-md-6 mb-lg--60 mb--30">
                     <div class="blog-card card-style-grid">
                         <a href="{{ route('catwiseproducts', [$category->id, Str::random(5)]) }}" class="image d-block">
-                            <img src="{{ asset('uploads/category_photoes') }}/{{ $category->category_photo }}" alt="">
+                            <img src="{{ asset('uploads/category_photoes') }}/{{ $category->category_photo ?? '' }}" alt="Category Image Not Found">
                         </a>
                         @if ($category->relationWithSubCategory->count() > 0)
                         <div class="card-content">
-                            <h3 class="mb-3 title">Category : <a href="javascript:void(0)">{{ $category->category_name }}</a>
+                            <h3 class="mb-3 title">Category : <a href="javascript:void(0)">{{ $category->category_name ?? '' }}</a>
                             </h3>
                             <strong>Sub Category</strong>
                             <article>
                                 <ul class="order-details-list">
                                     @foreach ($category->relationWithSubCategory as $sub_cat)
                                     <li>
-                                        <a href="{{ route('subcatwiseproducts', [$sub_cat->id, Str::random(5)]) }}">{{ $sub_cat->sub_category_name }} ({{ $sub_cat->relationWithProduct->count() }})</a>
+                                        <a href="{{ route('subcatwiseproducts', [$sub_cat->id, Str::random(5)]) }}">{{ $sub_cat->sub_category_name ?? '' }} ({{ optional($sub_cat->relationWithProduct)->count() ?? 0 }})</a>
                                     </li>
                                     @endforeach
                                 </ul>
@@ -46,7 +46,7 @@ Pustok - Category
                         </div>
                         @else
                         <div class="card-content">
-                            <h3 class="title">Category : <a href="{{ route('catwiseproducts', [$category->id, Str::random(5)]) }}">{{ $category->category_name }} ({{ $category->relationWithProduct->count() }})</a>
+                            <h3 class="title">Category : <a href="{{ route('catwiseproducts', [$category->id, Str::random(5)]) }}">{{ $category->category_name ?? '' }} ({{ optional($category->relationWithProduct)->count() ?? 0 }})</a>
                             </h3>
                         </div>
                         @endif
