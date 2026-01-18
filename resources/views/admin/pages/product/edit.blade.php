@@ -81,7 +81,7 @@ active
                                         <label for="first-name-vertical">Product Slug<span
                                                 class="text-danger">*</span></label>
                                         <input type="text" id="product_slug" class="form-control" name="product_slug" value="{{ $product->product_slug }}"
-                                            placeholder="" />
+                                            placeholder="" readonly />
                                         @error('product_slug')
                                         <small class="text-danger">{{ $message }}</small>
                                         @enderror
@@ -289,7 +289,7 @@ active
         }
 
     });
-    
+
     // product-categorywise-select-sub-cat js end
 
     // Update & Reset Category photo on click of button start

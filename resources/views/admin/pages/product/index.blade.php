@@ -208,7 +208,7 @@ active
                                                         Details
                                                     </a>
 
-                                                    <a href="" data-id="{{ $product->id }}"
+                                                    <a href="" data-id="{{ $product->id }}" data-url="{{ route('product.destroy', $product->id) }}"
                                                         class="dropdown-item single-product-delete">
                                                         <i data-feather="trash"></i>
                                                         Delete
@@ -218,8 +218,6 @@ active
                                             </div>
                                         </td>
                                         <td>
-                                            {{-- <img src="../../../app-assets/images/icons/bootstrap.svg" class="mr-75"
-                                                height="20" width="20" alt="Bootstrap"> --}}
                                             <span class="font-weight-bold">{{ $product->product_name }}</span>
                                         </td>
                                         <td><img src="{{ asset('uploads/product_photoes') }}/{{ $product->product_photo }}"
@@ -399,7 +397,7 @@ active
                     reverseButtons: true
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        var single_product_delete = $(this).data('id');
+                        let url = $(this).data('url');
                         $.ajaxSetup({
                             headers: {
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -408,7 +406,7 @@ active
 
                         $.ajax({
                             type: 'DELETE',
-                            url: "{{ route('product.destroy', '') }}/"+single_product_delete,
+                            url: url,
                             data: {single_product_delete:single_product_delete},
                             success: function (response) {
                                 if (response.status=='success') {

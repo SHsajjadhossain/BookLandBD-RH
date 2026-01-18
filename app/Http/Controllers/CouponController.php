@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CouponFormRequest;
+use App\Models\Category;
 use App\Models\Coupon;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -14,7 +15,11 @@ class CouponController extends Controller
      */
     public function index()
     {
-        //
+        $coupons = Coupon::orderBy('created_at', 'desc')->paginate();
+        return view('admin.pages.coupon.index',[
+            'coupons' => $coupons,
+            'categories' => Category::orderBy('created_at', 'desc')->paginate(),
+        ]);
     }
 
     /**
