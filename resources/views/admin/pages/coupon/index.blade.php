@@ -393,13 +393,13 @@ active
                                                 {{-- Edit Modal End --}}
                                             </td>
                                             <td>
-                                                <span class="font-weight-bold">{{ $coupon->coupon_name }}</span>
+                                                <span class="font-weight-bold">{{ $coupon->coupon_name ?? '' }}</span>
                                             </td>
                                             <td>
-                                                <span class="font-weight-bold">{{ $coupon->coupon_validity }}</span>
+                                                <span class="font-weight-bold">{{ $coupon->coupon_validity ?? '' }}</span>
                                             </td>
 
-                                            <td><span class="font-weight-bold">{{ $coupon->created_at->diffForHumans() }}</span></td>
+                                            <td><span class="font-weight-bold">{{ $coupon->created_at->diffForHumans() ?? '' }}</span></td>
                                             {{-- <td><span class="mr-1 badge badge-pill badge-light-warning">Pending</span></td> --}}
                                         </tr>
                                     @empty
