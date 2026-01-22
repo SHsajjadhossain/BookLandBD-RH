@@ -2,7 +2,7 @@
 
 @section('title')
 
-Dashboard Pustok | Category
+Dashboard Pustok | Coupon
 
 @endsection
 
@@ -329,9 +329,9 @@ active
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
                                                                     <h5 class="modal-title">Edit Coupon</h5>
-                                                                    {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                         <span aria-hidden="true">&times;</span>
-                                                                    </button> --}}
+                                                                    </button>
                                                                 </div>
                                                                 {{-- @if ($errors->any())
                                                                 <div class="p-1 alert alert-danger">
