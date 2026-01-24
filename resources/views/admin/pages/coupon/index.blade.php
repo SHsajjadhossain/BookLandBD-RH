@@ -159,36 +159,36 @@ active
                                                     @endforeach
                                             </div>
                                         @endif --}}
-                                        <form action="{{ route('category.store') }}" method="POST" enctype="multipart/form-data">
+                                        <form action="{{ route('coupon.store') }}" method="POST" enctype="multipart/form-data">
                                             @csrf
                                             <div class="modal-body">
                                                 <div class="form-group">
-                                                    <label for="category_name">Coupon Name<span class="text-danger">*</span></label>
-                                                    <input type="text" value="{{ old('coupon_name') }}" name="coupon_name" id="category_name" class="form-control" placeholder="Enter Coupon Name" />
+                                                    <label for="coupon_name">Coupon Name<span class="text-danger">*</span></label>
+                                                    <input type="text" value="{{ old('coupon_name') }}" name="coupon_name" id="coupon_name" class="form-control" placeholder="Enter Coupon Name" />
 
                                                     @error('coupon_name')
                                                     <small class="text-danger">{{ $message }}</small>
                                                     @enderror
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="category_name">Coupon Discount Percentage<span class="text-danger">*</span></label>
-                                                    <input type="number" value="{{ old('discount_percentage') }}" name="discount_percentage" id="category_name" class="form-control" placeholder="Enter Coupon Discount Percentage" />
+                                                    <label for="discount_percentage">Coupon Discount Percentage<span class="text-danger">*</span></label>
+                                                    <input type="number" value="{{ old('discount_percentage') }}" name="discount_percentage" id="discount_percentage" class="form-control" placeholder="Enter Coupon Discount Percentage" />
 
                                                     @error('discount_percentage')
                                                     <small class="text-danger">{{ $message }}</small>
                                                     @enderror
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="category_name">Coupon Validity<span class="text-danger">*</span></label>
-                                                    <input type="date" value="{{ old('coupon_validity') }}" name="coupon_validity" id="category_name" class="form-control" placeholder="Enter Coupon Validity" />
+                                                    <label for="coupon_validity">Coupon Validity<span class="text-danger">*</span></label>
+                                                    <input type="date" value="{{ old('coupon_validity') }}" name="coupon_validity" id="coupon_validity" class="form-control" placeholder="Enter Coupon Validity" />
 
                                                     @error('coupon_validity')
                                                     <small class="text-danger">{{ $message }}</small>
                                                     @enderror
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="category_name">Coupon Limit<span class="text-danger">*</span></label>
-                                                    <input type="number" value="{{ old('coupon_limit') }}" name="coupon_limit" id="category_name" class="form-control" placeholder="Enter Coupon Limit" />
+                                                    <label for="coupon_limit">Coupon Limit<span class="text-danger">*</span></label>
+                                                    <input type="number" value="{{ old('coupon_limit') }}" name="coupon_limit" id="coupon_limit" class="form-control" placeholder="Enter Coupon Limit" />
 
                                                     @error('coupon_limit')
                                                     <small class="text-danger">{{ $message }}</small>
@@ -197,7 +197,7 @@ active
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                                <button type="submit" class="btn btn-primary">Add Coupon</button>
                                             </div>
                                         </form>
                                     </div>
@@ -407,63 +407,6 @@ active
                                             <td colspan="50" class="text-center"><span class="text-center text-danger font-weight-bold">No data to show</span></td>
                                         </tr>
                                     @endforelse
-
-                                    @push('all_modals')
-                                    <!-- Modal -->
-                                    {{-- @if (havePermission('category','edit')) --}}
-                                    <div class="modal fade" id="add_category_modal" tabindex="-1" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title">Edit Category</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                {{-- @if ($errors->any())
-                                                <div class="p-1 alert alert-danger">
-                                                    @foreach ($errors->all() as $error)
-                                                    <li>{{ $error }}</li>
-                                                    @endforeach
-                                                </div>
-                                                @endif --}}
-                                                <form action="{{ route('category.store') }}" method="POST" enctype="multipart/form-data">
-                                                    @csrf
-                                                    <div class="modal-body">
-                                                        <div class="form-group">
-                                                            <label for="category_name">Category Name<span class="text-danger">*</span></label>
-                                                            <input type="text" value="{{ old('category_name') }}" name="category_name" id="category_name"
-                                                                class="form-control">
-
-                                                            @error('category_name')
-                                                            <small class="text-danger">{{ $message }}</small>
-                                                            @enderror
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <label for="category_photo">Category Photo<small class="text-warning">(Dimensions: 521 x 270 px)</small>
-                                                                <span class="text-danger">*</span></label>
-                                                            <div class="mb-1 mr-1">
-                                                                <img src="" data-reset-src="" id="category_photo_upload_img"
-                                                                    class="rounded uploadedAvatar object-fit--cover" alt="category photo" width="200" height="80">
-                                                            </div>
-                                                            <input type="file" value="" name="category_photo" id="category_photo_upload" class="form-control">
-
-                                                            @error('category_photo')
-                                                            <small class="text-danger">{{ $message }}</small>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancle</button>
-                                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {{-- @endif --}}
-                                    @endpush
                                 </tbody>
                             </table>
                         </div>
