@@ -208,9 +208,9 @@
                         id="dropdown-user" href="javascript:void(0);" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false">
                         <div class="user-nav d-sm-flex d-none">
-                            <span class="user-name font-weight-bolder">{{ auth()->user()->name }}</span>
+                            <span class="user-name font-weight-bolder">{{ auth()->user()->name ?? '' }}</span>
                             <span class="user-status">
-                                @if (auth()->user()->role == '1')
+                                @if (auth()->user()->role ?? '' == '1')
                                     Admin
                                 @else
                                     Employee
@@ -218,7 +218,7 @@
                             </span>
                         </div>
                         <span class="avatar">
-                            <img class="round" src="{{ asset('uploads/profile_photoes') }}/{{ auth()->user()->profile_photo }}" alt="avatar" height="40" width="40">
+                            <img class="round" src="{{ asset('uploads/profile_photoes') }}/{{ auth()->user()->profile_photo ?? '' }}" alt="avatar" height="40" width="40">
                             {{-- <img class="round" src="{{ asset('dashboard_assets') }}/app-assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="40" width="40"> --}}
                             {{-- <span class="avatar-status-online"></span> --}}
                         </span>
@@ -493,20 +493,9 @@
                 <li class=" navigation-header"><span data-i18n="User Interface">Coupons</span><i
                         data-feather="more-horizontal"></i>
                 </li>
-                <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i
+                <li class="nav-item @yield('coupon-active')"><a class="d-flex align-items-center" href="{{ route('coupon.index') }}"><i
                             data-feather="trello"></i><span class="menu-title text-truncate"
                             data-i18n="Card">Coupons</span></a>
-                    <ul class="menu-content">
-                        <li class="@yield('add-coupon-active')"><a class="d-flex align-items-center" href="{{ route('coupon.create') }}"><i
-                                    data-feather="circle"></i><span class="menu-item text-truncate"
-                                    data-i18n="Basic">Add Coupon</span></a>
-                        </li>
-                        <li class="@yield('coupon-list-active')">
-                            <a class="d-flex align-items-center" href="{{ route('coupon.index') }}">
-                                <i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Statistics">Coupon List</span>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
                 <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Manage Website</span><i
                         data-feather="more-horizontal"></i>

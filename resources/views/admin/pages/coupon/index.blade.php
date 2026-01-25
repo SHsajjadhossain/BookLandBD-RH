@@ -6,7 +6,7 @@ Dashboard Pustok | Coupon
 
 @endsection
 
-@section('coupon-list-active')
+@section('coupon-active')
 
 active
 
@@ -272,6 +272,7 @@ active
                                         <th>Actions</th>
                                         <th>Coupon Name</th>
                                         <th>Coupon Validity</th>
+                                        <th>Coupon Limit</th>
                                         {{-- <th>Created By</th>
                                         <th>Updated By</th> --}}
                                         <th>Created At</th>
@@ -300,11 +301,6 @@ active
                                                             Edit
                                                         </button>
                                                         {{-- @endif --}}
-
-                                                        <a href="{{ route('category.show', $coupon->id) }}" class="dropdown-item">
-                                                            <i data-feather='eye'></i>
-                                                            Details
-                                                        </a>
 
                                                         {{-- @if (havePermission('category','delete')) --}}
                                                         {{-- <form action="" method="">
@@ -399,6 +395,7 @@ active
                                                 <span class="font-weight-bold">{{ $coupon->coupon_validity ?? '' }}</span>
                                             </td>
 
+                                            <td><span class="font-weight-bold">{{ $coupon->coupon_limit ?? '' }}</span></td>
                                             <td><span class="font-weight-bold">{{ $coupon->created_at->diffForHumans() ?? '' }}</span></td>
                                             {{-- <td><span class="mr-1 badge badge-pill badge-light-warning">Pending</span></td> --}}
                                         </tr>
