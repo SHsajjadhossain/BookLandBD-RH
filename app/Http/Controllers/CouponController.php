@@ -62,7 +62,14 @@ class CouponController extends Controller
      */
     public function update(Request $request, Coupon $coupon)
     {
-        //
+        Coupon::findOrFail($coupon->id)->update([
+            'coupon_name' => $request->coupon_update_name,
+            'discount_percentage' => $request->discount_update_percentage,
+            'coupon_validity' => $request->coupon_update_validity,
+            'coupon_limit' => $request->coupon_update_limit,
+        ]);
+
+        return back()->with('success', 'Coupon Updated Successfully !!');
     }
 
     /**

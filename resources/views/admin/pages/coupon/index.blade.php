@@ -336,41 +336,41 @@ active
                                                                     @endforeach
                                                                 </div>
                                                                 @endif --}}
-                                                                <form action="{{ route('category.update', $coupon->id) }}" method="POST" enctype="multipart/form-data">
+                                                                <form action="{{ route('coupon.update', $coupon->id) }}" method="POST" enctype="multipart/form-data">
                                                                     @csrf
                                                                     @method('PUT')
                                                                     <div class="modal-body">
-                                                                        <input type="hidden" name="category_update_id" value="{{ $coupon->id }}">
+                                                                        <input type="hidden" name="coupon_update_id" value="{{ $coupon->id }}">
                                                                         <div class="form-group">
-                                                                            <label for="category_name">Coupon Name<span class="text-danger">*</span></label>
-                                                                            <input type="text" value="{{ $coupon->coupon_name}}" name="category_update_name" id="category_name"
+                                                                            <label for="coupon_name">Coupon Name<span class="text-danger">*</span></label>
+                                                                            <input type="text" value="{{ $coupon->coupon_name}}" name="coupon_update_name" id="coupon_name"
                                                                                 class="form-control">
 
-                                                                            @error('category_update_name')
+                                                                            @error('coupon_update_name')
                                                                             <small class="text-danger">{{ $message }}</small>
                                                                             @enderror
                                                                         </div>
                                                                         <div class="form-group">
-                                                                            <label for="category_name">Coupon Discount Percentage<span class="text-danger">*</span></label>
-                                                                            <input type="number" value="{{ $coupon->discount_percentage }}" name="discount_percentage" id="category_name" class="form-control" placeholder="Enter Coupon Discount Percentage" />
+                                                                            <label for="discount_update_percentage">Coupon Discount Percentage<span class="text-danger">*</span></label>
+                                                                            <input type="number" value="{{ $coupon->discount_percentage }}" name="discount_update_percentage" id="category_name" class="form-control" placeholder="Enter Coupon Discount Percentage" />
 
-                                                                            @error('discount_percentage')
+                                                                            @error('discount_update_percentage')
+                                                                                <small class="text-danger">{{ $message }}</small>
+                                                                            @enderror
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="coupon_update_validity">Coupon Validity<span class="text-danger">*</span></label>
+                                                                            <input type="date" value="{{ $coupon->coupon_validity }}" name="coupon_update_validity" id="category_name" class="form-control" placeholder="Enter Coupon Validity" />
+
+                                                                            @error('coupon_update_validity')
                                                                             <small class="text-danger">{{ $message }}</small>
                                                                             @enderror
                                                                         </div>
                                                                         <div class="form-group">
-                                                                            <label for="category_name">Coupon Validity<span class="text-danger">*</span></label>
-                                                                            <input type="date" value="{{ $coupon->coupon_validity }}" name="coupon_validity" id="category_name" class="form-control" placeholder="Enter Coupon Validity" />
+                                                                            <label for="coupon_update_limit">Coupon Limit<span class="text-danger">*</span></label>
+                                                                            <input type="number" value="{{ $coupon->coupon_limit }}" name="coupon_update_limit" id="category_name" class="form-control" placeholder="Enter Coupon Limit" />
 
-                                                                            @error('coupon_validity')
-                                                                            <small class="text-danger">{{ $message }}</small>
-                                                                            @enderror
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label for="category_name">Coupon Limit<span class="text-danger">*</span></label>
-                                                                            <input type="number" value="{{ $coupon->coupon_limit }}" name="coupon_limit" id="category_name" class="form-control" placeholder="Enter Coupon Limit" />
-
-                                                                            @error('coupon_limit')
+                                                                            @error('coupon_update_limit')
                                                                             <small class="text-danger">{{ $message }}</small>
                                                                             @enderror
                                                                         </div>
@@ -425,22 +425,25 @@ active
 <script>
     $(document).ready(function () {
         var ids = [];
-        @error('category_name')
-        $('#add_category_modal').modal('show');
+        @error('coupon_name')
+        $('#add_coupon_modal').modal('show');
         @enderror
 
-        @error('category_photo')
-        $('#add_category_modal').modal('show');
+        @error('coupon_update_name')
+        $('#edit_category_'+'{{ old('coupon_update_id') }}').modal('show');
         @enderror
 
-        @error('category_update_name')
-        $('#edit_category_'+'{{ old('category_update_id') }}').modal('show');
+        @error('discount_update_percentage')
+        $('#edit_category_'+'{{ old('coupon_update_id') }}').modal('show');
         @enderror
 
-        @error('category_update_photo')
-        $('#edit_category_'+'{{ old('category_update_id') }}').modal('show');
+        @error('coupon_update_validity')
+        $('#edit_category_'+'{{ old('coupon_update_id') }}').modal('show');
         @enderror
 
+        @error('coupon_update_limit')
+        $('#edit_category_'+'{{ old('coupon_update_id') }}').modal('show');
+        @enderror
 
 
         // Table Search
@@ -478,7 +481,7 @@ active
                 text: '{{ session("success") }}',
                 icon: 'success',
                 customClass: {
-                confirmButton: 'btn btn-primary'
+                    confirmButton: 'btn btn-primary'
                 },
                 buttonsStyling: false
             });
