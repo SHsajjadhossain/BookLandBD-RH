@@ -35,6 +35,12 @@ class CouponController extends Controller
      */
     public function store(CouponFormRequest $request)
     {
+        $request->validate([
+            'coupon_name' => 'required',
+            'discount_percentage' => 'required',
+            'coupon_validity' => 'required|date|after:today',
+            'coupon_limit' => 'required|integer|min:1',
+        ]);
         Coupon::insert($request->except('_token') + [
             'created_at' => Carbon::now(),
         ]);
@@ -62,6 +68,13 @@ class CouponController extends Controller
      */
     public function update(Request $request, Coupon $coupon)
     {
+        $request->validate([
+            'coupon_name' => 'required',
+            'discount_percentage' => 'required',
+            'coupon_validity' => 'required|date|after:today',
+            'coupon_limit' => 'required|integer',
+        ]);
+
         Coupon::findOrFail($coupon->id)->update([
             'coupon_name' => $request->coupon_update_name,
             'discount_percentage' => $request->discount_update_percentage,
@@ -77,6 +90,11 @@ class CouponController extends Controller
      */
     public function destroy(Coupon $coupon)
     {
-        //
+        Coupon::findOrFail($coupon->id)->delete();
+
+        return response([
+            'status' => 'success',
+            'message' => 'Coupon Deleted Successfully'
+        ]);
     }
 }

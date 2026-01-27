@@ -180,10 +180,23 @@ active
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="coupon_validity">Coupon Validity<span class="text-danger">*</span></label>
-                                                    <input type="date" value="{{ old('coupon_validity') }}" name="coupon_validity" id="coupon_validity" class="form-control" placeholder="Enter Coupon Validity" />
+                                                    <div class="input-group">
 
+                                                        <input type="text"
+                                                            value="{{ old('coupon_validity') }}"
+                                                            name="coupon_validity"
+                                                            class="form-control flatpickr-date"
+                                                            id="coupon_validity"
+                                                            placeholder="Select Coupon Validity">
+
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text cursor-pointer calendar-icon">
+                                                                <i data-feather="calendar"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
                                                     @error('coupon_validity')
-                                                    <small class="text-danger">{{ $message }}</small>
+                                                        <small class="text-danger">{{ $message }}</small>
                                                     @enderror
                                                 </div>
                                                 <div class="form-group">
@@ -271,10 +284,9 @@ active
                                         </th>
                                         <th>Actions</th>
                                         <th>Coupon Name</th>
-                                        <th>Coupon Validity</th>
-                                        <th>Coupon Limit</th>
-                                        {{-- <th>Created By</th>
-                                        <th>Updated By</th> --}}
+                                        <th>Validity</th>
+                                        <th>Limit</th>
+                                        <th>Discount</th>
                                         <th>Created At</th>
                                     </tr>
                                 </thead>
@@ -296,31 +308,22 @@ active
                                                     </button>
                                                     <div class="dropdown-menu">
                                                         {{-- @if (havePermission('category','edit')) --}}
-                                                        <button data-toggle="modal" data-target="#edit_category_{{ $coupon->id }}" class="dropdown-item">
+                                                        <button data-toggle="modal" data-target="#edit_coupon_{{ $coupon->id }}" class="dropdown-item">
                                                             <i data-feather='edit'></i>
                                                             Edit
                                                         </button>
                                                         {{-- @endif --}}
-
-                                                        {{-- @if (havePermission('category','delete')) --}}
-                                                        {{-- <form action="" method="">
-                                                            <button type="submit" class="dropdown-item single-cat-delete" data-id ="{{ $category->id }}">
-                                                                <i data-feather="trash"></i>
-                                                                Delete
-                                                            </button>
-                                                        </form> --}}
-                                                            <a href="" data-id ="{{ $coupon->id }}" class="dropdown-item single-cat-delete">
+                                                            <a data-id ="{{ $coupon->id }}" class="dropdown-item single-coupon-delete">
                                                                 <i data-feather="trash"></i>
                                                                 Delete
                                                             </a>
-                                                        {{-- @endif --}}
                                                     </div>
                                                 </div>
                                                 {{-- Edit Modal Start --}}
                                                     @push('all_modals')
                                                     <!-- Modal -->
                                                     {{-- @if (havePermission('category','edit')) --}}
-                                                    <div class="modal fade" id="edit_category_{{ $coupon->id }}" tabindex="-1"    aria-hidden="true">
+                                                    <div class="modal fade" id="edit_coupon_{{ $coupon->id }}" tabindex="-1"    aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
@@ -343,34 +346,46 @@ active
                                                                         <input type="hidden" name="coupon_update_id" value="{{ $coupon->id }}">
                                                                         <div class="form-group">
                                                                             <label for="coupon_name">Coupon Name<span class="text-danger">*</span></label>
-                                                                            <input type="text" value="{{ $coupon->coupon_name}}" name="coupon_update_name" id="coupon_name"
+                                                                            <input type="text" value="{{ $coupon->coupon_name}}" name="coupon_name" id="coupon_name"
                                                                                 class="form-control">
 
-                                                                            @error('coupon_update_name')
+                                                                            @error('coupon_name')
                                                                             <small class="text-danger">{{ $message }}</small>
                                                                             @enderror
                                                                         </div>
                                                                         <div class="form-group">
-                                                                            <label for="discount_update_percentage">Coupon Discount Percentage<span class="text-danger">*</span></label>
-                                                                            <input type="number" value="{{ $coupon->discount_percentage }}" name="discount_update_percentage" id="category_name" class="form-control" placeholder="Enter Coupon Discount Percentage" />
+                                                                            <label for="discount_percentage">Coupon Discount Percentage<span class="text-danger">*</span></label>
+                                                                            <input type="number" value="{{ $coupon->discount_percentage }}" name="discount_percentage" id="category_name" class="form-control" placeholder="Enter Coupon Discount Percentage" />
 
-                                                                            @error('discount_update_percentage')
+                                                                            @error('discount_percentage')
                                                                                 <small class="text-danger">{{ $message }}</small>
                                                                             @enderror
                                                                         </div>
                                                                         <div class="form-group">
-                                                                            <label for="coupon_update_validity">Coupon Validity<span class="text-danger">*</span></label>
-                                                                            <input type="date" value="{{ $coupon->coupon_validity }}" name="coupon_update_validity" id="category_name" class="form-control" placeholder="Enter Coupon Validity" />
+                                                                            <label for="coupon_validity">Coupon Validity<span class="text-danger">*</span></label>
+                                                                            <div class="input-group">
+                                                                                <input type="date"
+                                                                                    value="{{ $coupon->coupon_validity }}"
+                                                                                    name="coupon_validity"
+                                                                                    class="form-control flatpickr-date"
+                                                                                    id="coupon_validity"
+                                                                                    placeholder="Select Coupon Validity">
 
-                                                                            @error('coupon_update_validity')
-                                                                            <small class="text-danger">{{ $message }}</small>
+                                                                                <div class="input-group-append">
+                                                                                    <span class="input-group-text cursor-pointer calendar-icon">
+                                                                                        <i data-feather="calendar"></i>
+                                                                                    </span>
+                                                                                </div>
+                                                                            </div>
+                                                                            @error('coupon_validity')
+                                                                                <small class="text-danger">{{ $message }}</small>
                                                                             @enderror
                                                                         </div>
                                                                         <div class="form-group">
-                                                                            <label for="coupon_update_limit">Coupon Limit<span class="text-danger">*</span></label>
-                                                                            <input type="number" value="{{ $coupon->coupon_limit }}" name="coupon_update_limit" id="category_name" class="form-control" placeholder="Enter Coupon Limit" />
+                                                                            <label for="coupon_limit">Coupon Limit<span class="text-danger">*</span></label>
+                                                                            <input type="number" value="{{ $coupon->coupon_limit }}" name="coupon_limit" id="category_name" class="form-control" placeholder="Enter Coupon Limit" />
 
-                                                                            @error('coupon_update_limit')
+                                                                            @error('coupon_limit')
                                                                             <small class="text-danger">{{ $message }}</small>
                                                                             @enderror
                                                                         </div>
@@ -396,8 +411,8 @@ active
                                             </td>
 
                                             <td><span class="font-weight-bold">{{ $coupon->coupon_limit ?? '' }}</span></td>
+                                            <td><span class="font-weight-bold">{{ $coupon->discount_percentage ?? '' }}</span></td>
                                             <td><span class="font-weight-bold">{{ $coupon->created_at->diffForHumans() ?? '' }}</span></td>
-                                            {{-- <td><span class="mr-1 badge badge-pill badge-light-warning">Pending</span></td> --}}
                                         </tr>
                                     @empty
                                         <tr>
@@ -424,27 +439,22 @@ active
 
 <script>
     $(document).ready(function () {
-        var ids = [];
-        @error('coupon_name')
-        $('#add_coupon_modal').modal('show');
-        @enderror
+        let ids = [];
+        // @error('coupon_name')
+        // $('#add_coupon_modal').modal('show');
+        // @enderror
 
-        @error('coupon_update_name')
-        $('#edit_category_'+'{{ old('coupon_update_id') }}').modal('show');
-        @enderror
+        // @error('coupon_validity')
+        // $('#add_coupon_modal').modal('show');
+        // @enderror
 
-        @error('discount_update_percentage')
-        $('#edit_category_'+'{{ old('coupon_update_id') }}').modal('show');
-        @enderror
-
-        @error('coupon_update_validity')
-        $('#edit_category_'+'{{ old('coupon_update_id') }}').modal('show');
-        @enderror
-
-        @error('coupon_update_limit')
-        $('#edit_category_'+'{{ old('coupon_update_id') }}').modal('show');
-        @enderror
-
+        const hasError = {{ $errors->any() ? 'true' : 'false' }};
+        const couponUpdateId = "{{ old('coupon_update_id') }}";
+        if (hasError && couponUpdateId) {
+            $('#edit_coupon_' + couponUpdateId).modal('show');
+        }else if (hasError) {
+            $('#add_coupon_modal').modal('show');
+        }
 
         // Table Search
 
@@ -504,20 +514,8 @@ active
 
     });
 
-    // @if (session("sub_cat_warn"))
-    //     Swal.fire({
-    //         title: 'Warning!',
-    //         text: ' {{session("sub_cat_warn")  }}',
-    //         icon: 'warning',
-    //         customClass: {
-    //         confirmButton: 'btn btn-primary'
-    //         },
-    //         buttonsStyling: false
-    //     });
-    // @endif
-
     //Sweet alert message single cat delete start
-        $(document).on('click', '.single-cat-delete', function (e) {
+        $(document).on('click', '.single-coupon-delete', function (e) {
                 e.preventDefault();
                 const swalWithBootstrapButtons = Swal.mixin({
                     customClass: {
@@ -544,7 +542,7 @@ active
                     reverseButtons: true
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        var single_delete = $(this).data('id');
+                        let single_delete = $(this).data('id');
                         $.ajaxSetup({
                             headers: {
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -552,15 +550,15 @@ active
                         });
 
                         $.ajax({
-                            type: 'POST',
-                            url: "{{ route('category.single_cat_delete') }}",
+                            type: 'DELETE',
+                            url: "{{ route('coupon.destroy', ':id') }}".replace(':id', single_delete),
                             data: {single_delete:single_delete},
                             success: function (response) {
                                 if (response.status=='success') {
                                     $("#"+response['tr']).slideUp('slow');
                                     swalWithBootstrapButtons.fire(
                                     'Deleted!',
-                                    'Your file has been deleted Successfully.',
+                                    response.message,
                                     'success'
                                     );
                                     $('.table').load(location.href+' .table');
@@ -590,6 +588,26 @@ active
                 })
         });
     //Sweet alert message single cat delete end
+
+    //Date picker start
+    $(document).ready(function () {
+
+        $('.flatpickr-date').flatpickr({
+            dateFormat: "Y-m-d",
+            minDate: "today",
+            allowInput: true,
+        });
+
+        $('.calendar-icon').on('click', function () {
+            $(this).closest('.input-group').find('.flatpickr-date').focus();
+        });
+    });
+    //Date picker end
+
+    if (typeof feather !== 'undefined') {
+        feather.replace();
+    }
+
 </script>
 
 @endpush
