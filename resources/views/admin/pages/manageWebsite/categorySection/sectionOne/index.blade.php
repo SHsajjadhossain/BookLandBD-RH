@@ -81,8 +81,8 @@ active
                                     @forelse ($sectionOne_info as $info)
                                     <tr id="tr_">
                                         <td>
-                                            <button data-toggle="modal" data-target="#edit_category_{{ $info->id }}" class="btn btn-secondary">
-                                                <i data-feather='edit'></i>
+                                            <button data-toggle="modal" data-target="#edit_category_{{ $info->id }}" class="btn btn-sm btn-warning waves-effect waves-float waves-light">
+                                                <i data-feather='edit' class="mr-25"></i>
                                                 Edit
                                             </button>
                                             {{-- Edit Modal Start --}}

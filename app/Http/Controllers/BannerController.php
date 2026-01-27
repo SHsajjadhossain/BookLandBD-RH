@@ -16,7 +16,7 @@ class BannerController extends Controller
 
     public function edit($banner_id)
     {
-        return view('admin.pages.banner.edit', [
+        return view('admin.pages.manageWebsite.banner.edit', [
             'single_banner' => Banner::find($banner_id),
         ]);
     }

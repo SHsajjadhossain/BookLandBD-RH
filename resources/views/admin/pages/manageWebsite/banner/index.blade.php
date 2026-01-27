@@ -84,9 +84,8 @@ active
                                     @forelse ($banners as $banner)
                                         <tr id="tr_">
                                             <td>
-                                                <a href="{{ route('banner.edit', $banner->id) }}" class="btn btn-secondary">
-                                                    <i data-feather="edit" class="mr-25"></i>
-                                                    <span>Edit</span>
+                                                <a href="{{ route('banner.edit', $banner->id) }}" class="btn btn-sm btn-warning waves-effect waves-float waves-light d-flex">
+                                                    <i data-feather='edit' class="mr-25"></i> Edit
                                                 </a>
                                             </td>
                                             <td>
@@ -96,7 +95,7 @@ active
                                                 <span class="font-weight-bold">{{ $banner->banner_title_big }}</span>
                                             </td>
                                             <td class="text-center">
-                                                <img src="{{ asset('uploads/banner_photoes') }}/{{ $banner->banner_photo }}" class="mr-75" height="120" width="250" alt="Banner Photo">
+                                                <img src="{{ asset('uploads/banner_photoes') }}/{{ $banner->banner_photo }}" class="mr-75" height="60" width="200" alt="Banner Photo">
                                             </td>
                                             <td>
                                                 <span class="font-weight-bold">{{ $banner->banner_text }}</span>
