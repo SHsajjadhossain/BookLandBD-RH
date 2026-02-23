@@ -525,19 +525,6 @@ active
             });
         @endif
 
-        @if (session("imgUpdateSuccess"))
-            // toastr.success("{{ session('imgUpdateSuccess') }}")
-            Swal.fire({
-                    title: 'Done!',
-                    text: '{{ session("imgUpdateSuccess") }}',
-                    icon: 'success',
-                    customClass: {
-                    confirmButton: 'btn btn-primary'
-                    },
-                    buttonsStyling: false
-            });
-        @endif
-
         // Tostr & SweetAlert2 success end
 
     });

@@ -90,7 +90,7 @@ class CategoryController extends Controller
             'category_name' => $request->category_update_name,
         ]);
 
-        return back()->with('imgUpdateSuccess', 'Category photo updated successfully!!');
+        return back()->with('success', 'Category updated successfully!!');
     }
 
     /**

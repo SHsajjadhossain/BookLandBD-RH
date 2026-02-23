@@ -387,7 +387,7 @@
                                     </g>
                                 </g>
                             </svg></span>
-                        <h2 class="brand-text">Vuexy</h2>
+                        <h2 class="brand-text">Pustok</h2>
                     </a></li>
                 <li class="nav-item nav-toggle"><a class="pr-0 nav-link modern-nav-toggle" data-toggle="collapse"><i
                             class="d-block d-xl-none text-primary toggle-icon font-medium-4" data-feather="x"></i><i
@@ -395,6 +395,7 @@
                             data-feather="disc" data-ticon="disc"></i></a></li>
             </ul>
         </div>
+        <hr>
         <div class="shadow-bottom"></div>
         <div class="main-menu-content">
             <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
@@ -405,7 +406,7 @@
                 </li>
                 <li class=" nav-item">
                     <a class="d-flex align-items-center" href="{{ route('frontend.home') }}">
-                        <i data-feather="eye"></i>
+                        <i data-feather="globe"></i>
                         <span class="menu-title text-truncate" data-i18n="web">View Website</span></a>
                 </li>
                 {{-- <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Apps &amp; Pages</span><i
