@@ -584,6 +584,9 @@ Pustok - Book Store
                                                         <i class="fas fa-heart"></i>
                                                     </a>
                                                 @endauth
+                                                {{-- <a href="#" data-bs-toggle="modal" data-bs-target="#quickModal" class="single-btn">
+                                                    <i class="fas fa-eye"></i>
+                                                </a> --}}
                                             </div>
                                         </div>
                                     </div>
