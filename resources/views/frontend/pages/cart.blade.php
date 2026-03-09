@@ -216,10 +216,12 @@ Pustok - Cart
                                     <td class="pro-quantity">
                                         <div class="pro-qty">
                                             <div class="count-input-block">
-                                                <input type="number" class="text-center form-control" name="quantity[{{ $single_cart->id }}]" value="{{ $single_cart->quantity }}">
+                                                <input type="number" class="text-center form-control cart-qty-input" name="quantity[{{ $single_cart->id }}]" value="{{ $single_cart->quantity }}" data-price="{{ $single_cart->relationWithProduct->product_price }}">
                                                 <div class="count-input-btns">
-                                                    <div class="inc-ammount count-btn" style="cursor: pointer;"><i class="zmdi zmdi-chevron-up"></i></div>
-                                                    <div class="dec-ammount count-btn" style="cursor: pointer;"><i class="zmdi zmdi-chevron-down"></i></div>
+                                                    <div class="cart-inc count-btn" style="cursor: pointer;"><i class="zmdi zmdi-chevron-up"></i></div>
+                                                    <div class="cart-dec count-btn" style="cursor: pointer;"><i class="zmdi zmdi-chevron-down"></i></div>
+                                                    {{-- <div class="inc-ammount count-btn" style="cursor: pointer;"><i class="zmdi zmdi-chevron-up"></i></div>
+                                                    <div class="dec-ammount count-btn" style="cursor: pointer;"><i class="zmdi zmdi-chevron-down"></i></div> --}}
                                                 </div>
                                             </div>
                                         </div>
@@ -325,7 +327,9 @@ Pustok - Cart
 
 @push('custom-js')
 <script>
+    // Quantity wise price auto update start
     $(document).ready(function () {
+
         setTimeout(() => {
             $('.cart_update_success').fadeOut('slow');
             $('.cart_remove_success').fadeOut('slow');
@@ -334,6 +338,66 @@ Pustok - Cart
         setTimeout(() => {
             $('.coupon-error').fadeOut('slow');
         }, 5000);
+
+        // শুধু cart page এর জন্য
+        if ($('.cart-qty-input').length > 0) {
+
+            function updatePrice() {
+                let cartTotal = 0;
+
+                $('.cart-qty-input').each(function () {
+                    let quantity = parseInt($(this).val()) || 1;
+                    let price = parseFloat($(this).data('price')) || 0;
+                    let subtotal = quantity * price;
+                    let row = $(this).closest('tr');
+                    row.find('.pro-subtotal span').text('৳' + subtotal.toFixed(2));
+                    cartTotal += subtotal;
+                });
+
+                $('p:contains("Cart Total") .text-primary').text('৳' + cartTotal.toFixed(2));
+
+                let discountText = $('p:contains("Discount Total") .text-primary').text().replace('৳', '').trim();
+                let discount = parseFloat(discountText) || 0;
+                $('p:contains("Sub Total") .text-primary').text('৳' + Math.round(cartTotal - discount));
+                $('h2:contains("Grand Total") .text-primary').text('৳' + Math.round(cartTotal - discount) + '.00');
+            }
+
+            // + button
+            $('.cart-inc').on('click', function () {
+                let input = $(this).closest('.count-input-block').find('.cart-qty-input');
+                input.val(parseInt(input.val()) + 1);
+                updatePrice();
+            });
+
+            // - button
+            $('.cart-dec').on('click', function () {
+                let input = $(this).closest('.count-input-block').find('.cart-qty-input');
+                let val = parseInt(input.val());
+                if (val > 1) {
+                    input.val(val - 1);
+                    updatePrice();
+                }
+            });
+
+            // Direct input
+            $('.cart-qty-input').on('input', function () {
+                if ($(this).val() < 1) $(this).val(1);
+                updatePrice();
+            });
+        }
+
     });
+    // Quantity wise price auto update end
+
+    // $(document).ready(function () {
+    //     setTimeout(() => {
+    //         $('.cart_update_success').fadeOut('slow');
+    //         $('.cart_remove_success').fadeOut('slow');
+    //     }, 3000);
+
+    //     setTimeout(() => {
+    //         $('.coupon-error').fadeOut('slow');
+    //     }, 5000);
+    // });
 </script>
 @endpush

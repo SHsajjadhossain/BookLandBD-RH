@@ -302,21 +302,21 @@ jQuery(document).ready(function($) {
         /*-------------------------------------
         	--> Quantity
         ---------------------------------------*/
-        $('.count-btn').on('click', function() {
-            var $button = $(this);
-            var oldValue = $button.parent('.count-input-btns').parent().find('input').val();
-            if ($button.hasClass('inc-ammount')) {
-                var newVal = parseFloat(oldValue) + 1;
-            } else {
-                // Don't allow decrementing below zero
-                if (oldValue > 1) {
-                    var newVal = parseFloat(oldValue) - 1;
-                } else {
-                    newVal = 1;
-                }
-            }
-            $button.parent('.count-input-btns').parent().find('input').val(newVal);
-        });
+        // $('.count-btn').on('click', function() {
+        //     var $button = $(this);
+        //     var oldValue = $button.parent('.count-input-btns').parent().find('input').val();
+        //     if ($button.hasClass('inc-ammount')) {
+        //         var newVal = parseFloat(oldValue) + 1;
+        //     } else {
+        //         // Don't allow decrementing below zero
+        //         if (oldValue > 1) {
+        //             var newVal = parseFloat(oldValue) - 1;
+        //         } else {
+        //             newVal = 1;
+        //         }
+        //     }
+        //     $button.parent('.count-input-btns').parent().find('input').val(newVal);
+        // });
         /*-------------------------------------
         	--> Shipping Form Toggle
         ---------------------------------------*/
