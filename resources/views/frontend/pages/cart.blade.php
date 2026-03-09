@@ -182,7 +182,7 @@ Pustok - Cart
                                 </tr>
                             </thead>
                             <tbody>
-                                <form action="{{ route('cart.update') }}" method="POST">
+                                <form action="{{ route('cart.update') }}" method="POST" id="cart-update-form">
                                     @csrf
                                 @php
                                     $cart_total = 0;
@@ -294,17 +294,18 @@ Pustok - Cart
                             <h4><span>Cart Summary</span></h4>
                             @php
                                 Session::put('s_cart_total', $cart_total);
+                                Session::put('s_discount_total', $discount_total);
                             @endphp
-                            <p>Cart Total <span class="text-primary">৳{{ $cart_total }}</span></p>
+                            <p>Cart Total <span class="text-primary">৳ {{ $cart_total }}</span></p>
                             <p>Discount Total
                                 @if ($coupon_name)
                                 ({{ ($coupon_name)?'Used coupon : '.$coupon_name:'' }})
                                 @endif
-                            <span class="text-primary">৳{{ $discount_total }}</span>
+                            <span class="text-primary">৳ {{ $discount_total }}</span>
                             </p>
-                            <p>Sub Total (approx.) <span class="text-primary">৳{{ round($cart_total - $discount_total)}}</span></p>
-                            <p>Shipping Cost <span class="text-primary">৳00.00</span></p>
-                            <h2>Grand Total <span class="text-primary">৳1250.00</span></h2>
+                            <p>Sub Total (approx.) <span class="text-primary">৳ {{ round($cart_total - $discount_total)}}</span></p>
+                            <p>Shipping Cost <span class="text-primary">৳ 00.00</span></p>
+                            <h2>Grand Total <span class="text-primary">৳ {{ round(($cart_total - $discount_total) + 00.00) }}</span></h2>
                         </div>
                         @if ($flag)
                         <div class="text-center alert alert-danger" style="border-radius: 50px;">
@@ -312,8 +313,13 @@ Pustok - Cart
                         </div>
                         @elseif (allCarts()->count() > 0)
                         <div class="cart-summary-button">
-                            <a href="{{ route('checkout') }}" class="checkout-btn c-btn btn--primary">Proceed To Checkout</a>
+                            <button type="button" class="checkout-btn c-btn btn--primary" id="proceed-checkout">
+                                Proceed To Checkout
+                            </button>
                         </div>
+                        {{-- <div class="cart-summary-button">
+                            <a href="{{ route('checkout') }}" class="checkout-btn c-btn btn--primary">Proceed To Checkout</a>
+                        </div> --}}
                         @endif
                     </div>
                 </div>
@@ -388,6 +394,22 @@ Pustok - Cart
 
     });
     // Quantity wise price auto update end
+
+    // Cart update when checkout button click
+    $(document).ready(function () {
+        // When click on checkout button cart update
+        $('#proceed-checkout').on('click', function () {
+            // hidden input এ checkout flag set করুন
+            $('<input>').attr({
+                type: 'hidden',
+                name: 'redirect_to_checkout',
+                value: '1'
+            }).appendTo('#cart-update-form');
+
+            $('#cart-update-form').submit();
+        });
+    });
+    // Cart update when checkout button click
 
     // $(document).ready(function () {
     //     setTimeout(() => {

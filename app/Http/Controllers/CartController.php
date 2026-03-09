@@ -131,6 +131,12 @@ class CartController extends Controller
                 ]);
             }
         }
+
+        // checkout redirect check
+        if ($request->redirect_to_checkout) {
+            return redirect()->route('checkout');
+        }
+        
         return back()->with('cart_update_success', 'Cart Updated Successfully !!');
     }
 
