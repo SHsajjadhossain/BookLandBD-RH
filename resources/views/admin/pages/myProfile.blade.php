@@ -166,10 +166,11 @@ Dashboard Pustok | My Profile
                                                     </div>
                                                 </div>
                                                 @error('password')
-                                                <span class="text-danger">{{ $message }}</span>
+                                                    <span class="text-danger">{{ $message }}</span>
                                                 @enderror
+
                                                 @if (session('errorpass'))
-                                                <span class="text-danger">{{ session('errorpass') }}</span>
+                                                    <span class="text-danger">{{ session('errorpass') }}</span>
                                                 @endif
                                             </div>
                                         </div>
@@ -193,7 +194,7 @@ Dashboard Pustok | My Profile
                                                     </div>
                                                 </div>
                                                 @error('new_password')
-                                                <span class="text-danger">{{ $message }}</span>
+                                                    <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
                                         </div>
@@ -218,8 +219,9 @@ Dashboard Pustok | My Profile
                                                     </div>
                                                 </div>
                                                 @error('confirm_new_password')
-                                                <span class="text-danger">{{ $message }}</span>
+                                                    <span class="text-danger">{{ $message }}</span>
                                                 @enderror
+
                                                 @if (session('errornewpass'))
                                                 <span class="text-danger">{{ session('errornewpass') }}</span>
                                                 @endif
@@ -272,10 +274,6 @@ Dashboard Pustok | My Profile
             //     }
             // });
         })
-
-        $(document).ready(function () {
-
-        });
 </script>
 
 @endpush

@@ -41,6 +41,11 @@ Pustok - Book Store | Dashboard
                         <!-- My Account Tab Content Start -->
                         <div class="col-lg-9 col-12 mt--30 mt-lg--0">
                             <div class="tab-content" id="myaccountContent">
+                                @if (session('success'))
+                                    <div class="pt-2 pb-2 alert alert-success" id="success-alert">
+                                        <span class="ml-2">{{ session('success') }}</span>
+                                    </div>
+                                @endif
                                 <!-- Single Tab Content Start -->
                                 <div class="tab-pane fade show active" id="dashboad" role="tabpanel">
                                     <div class="myaccount-content">
@@ -165,7 +170,8 @@ Pustok - Book Store | Dashboard
                                     <div class="myaccount-content">
                                         <h3>Account Details</h3>
                                         <div class="account-details-form">
-                                            <form action="#">
+                                            <form action="{{ route('user.profile.update') }}" method="POST">
+                                                @csrf
                                                 <div class="row">
                                                     {{-- <div class="col-lg-6 col-12 mb--30">
                                                         <input id="first-name" placeholder="First Name" type="text">
@@ -174,24 +180,47 @@ Pustok - Book Store | Dashboard
                                                         <input id="last-name" placeholder="Last Name" type="text">
                                                     </div> --}}
                                                     <div class="col-12 mb--30">
-                                                        <input id="display-name" value="{{ auth()->user()->name }}" placeholder="Full Name" type="text">
+                                                        <input id="display-name" value="{{ auth()->user()->name }}" name="name" placeholder="Full Name" type="text">
+                                                        @error('name')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
                                                     </div>
                                                     <div class="col-12 mb--30">
-                                                        <input id="email" value="{{ auth()->user()->email }}" placeholder="Email Address" type="email">
+                                                        <input id="email" value="{{ auth()->user()->email }}" name="email" placeholder="Email Address" type="email">
+                                                        @error('email')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
                                                     </div>
                                                     <div class="col-12 mb--30">
                                                         <h4>Password change</h4>
                                                     </div>
                                                     <div class="col-12 mb--30">
-                                                        <input id="current-pwd" placeholder="Current Password"
+                                                        <input id="current-pwd" name="password" placeholder="Current Password"
                                                             type="password">
+                                                            @error('password')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
+
+                                                            @if (session('errorpass'))
+                                                                <span class="text-danger">{{ session('errorpass') }}</span>
+                                                            @endif
                                                     </div>
                                                     <div class="col-lg-6 col-12 mb--30">
-                                                        <input id="new-pwd" placeholder="New Password" type="password">
+                                                        <input id="new-pwd" name="new_password" placeholder="New Password" type="password">
+                                                        @error('new_password')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
                                                     </div>
                                                     <div class="col-lg-6 col-12 mb--30">
-                                                        <input id="confirm-pwd" placeholder="Confirm Password"
+                                                        <input id="confirm-pwd" name="confirm_new_password" placeholder="Confirm Password"
                                                             type="password">
+                                                        @error('confirm_new_password')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+
+                                                        @if (session('errornewpass'))
+                                                            <span class="text-danger">{{ session('errornewpass') }}</span>
+                                                        @endif
                                                     </div>
                                                     <div class="col-12">
                                                         <button class="btn btn--primary">Save Changes</button>
@@ -204,10 +233,20 @@ Pustok - Book Store | Dashboard
                                 <!-- Single Tab Content End -->
                             </div>
                         </div>
-                        <!-- My Account Tab Content End --> 
+                        <!-- My Account Tab Content End -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
 @endsection
+
+@push('js')
+
+<script>
+    setTimeout(function () {
+        $('#success-alert').fadeOut('slow');
+    }, 5000); // 5 seconds
+</script>
+
+@endpush
