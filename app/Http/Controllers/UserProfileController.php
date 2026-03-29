@@ -35,17 +35,17 @@ class UserProfileController extends Controller
                         'password' => bcrypt($request->new_password)
                     ]);
 
-                    return back()->with('successpass', 'Your password updated successfully!!');
+                    return back()->with('success', 'Your password updated successfully!!')->withFragment('account-info');
                 }
                 else {
-                    return back()->with('errornewpass', 'The password does not match');
+                    return back()->with('errornewpass', 'The password does not match')->withFragment('account-info');
                 }
             }
             else {
-                return back()->with('errorpass', 'The current password does not match');
+                return back()->with('errorpass', 'The current password does not match')->withFragment('account-info');
             }
         }
 
-        return back()->with('success', 'Profile Updated Successfully!!');
+        return back()->with('success', 'Profile Updated Successfully!!')->withFragment('account-info');
     }
 }

@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="zxx">
 
-
-<!-- Mirrored from htmldemo.net/pustok/pustok/index-4.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 29 Apr 2024 20:31:34 GMT -->
-
 <head>
     @include('frontend.includes.header')
     <style>
@@ -93,7 +90,7 @@
                                     </ul>
                                 </li>
                                 @endauth
-                                <li><a href="#"><i class="icons-left fas fa-phone"></i> Contact</a>
+                                <li><a href="{{ route('frontend.contact') }}"><i class="icons-left fas fa-phone"></i> Contact</a>
                                 </li>
                                 </li>
                             </ul>
@@ -830,8 +827,5 @@
     <!-- Use Minified Plugins Version For Fast Page Load -->
         @include('frontend.includes.script')
 </body>
-
-
-<!-- Mirrored from htmldemo.net/pustok/pustok/index-4.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 29 Apr 2024 20:31:36 GMT -->
 
 </html>

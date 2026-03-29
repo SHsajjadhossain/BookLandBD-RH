@@ -24,7 +24,7 @@
                         <li><a href="#">New products</a></li>
                         <li><a href="#">Best sales</a></li>
                         <li><a href="{{ route('frontend.shop') }}">Stores</a></li>
-                        <li><a href="#">Contact us</a></li>
+                        <li><a href="{{ route('frontend.contact') }}">Contact us</a></li>
                     </ul>
                 </div>
             </div>

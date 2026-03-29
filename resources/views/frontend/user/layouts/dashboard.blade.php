@@ -172,13 +172,8 @@ Pustok - Book Store | Dashboard
                                         <div class="account-details-form">
                                             <form action="{{ route('user.profile.update') }}" method="POST">
                                                 @csrf
+                                                <input type="hidden" name="active_tab" value="account-info">
                                                 <div class="row">
-                                                    {{-- <div class="col-lg-6 col-12 mb--30">
-                                                        <input id="first-name" placeholder="First Name" type="text">
-                                                    </div>
-                                                    <div class="col-lg-6 col-12 mb--30">
-                                                        <input id="last-name" placeholder="Last Name" type="text">
-                                                    </div> --}}
                                                     <div class="col-12 mb--30">
                                                         <input id="display-name" value="{{ auth()->user()->name }}" name="name" placeholder="Full Name" type="text">
                                                         @error('name')
@@ -244,9 +239,28 @@ Pustok - Book Store | Dashboard
 @push('js')
 
 <script>
-    setTimeout(function () {
-        $('#success-alert').fadeOut('slow');
-    }, 5000); // 5 seconds
+    $(document).ready(function () {
+        // Tab active when validation error
+        @if ($errors->any() || session('errorpass') || session('errornewpass'))
+            $('.myaccount-tab-menu a[href="#account-info"]').tab('show');
+            window.location.hash = '#account-info';
+        @endif
+
+        // Page load URL hash and active tab set
+        if (window.location.hash) {
+            $('.myaccount-tab-menu a[href="' + window.location.hash + '"]').tab('show');
+        }
+
+        // when click on tab URL hash update
+        $('.myaccount-tab-menu a[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
+            window.location.hash = e.target.hash;
+        });
+
+        // Alert fadeout
+        setTimeout(function () {
+            $('#success-alert').fadeOut('slow');
+        }, 3500); // 3.5 seconds
+    });
 </script>
 
 @endpush

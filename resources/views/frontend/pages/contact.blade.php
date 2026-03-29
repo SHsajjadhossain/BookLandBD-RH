@@ -26,11 +26,11 @@ Pustok - Contact
 <main class="contact_area inner-page-sec-padding-bottom">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12">
+            {{-- <div class="col-lg-12">
                 <div id="google-map"></div>
-            </div>
+            </div> --}}
         </div>
-        <div class="row mt--60 ">
+        <div class="row mt--0 ">
             <div class="col-lg-5 col-md-5 col-12">
                 <div class="contact_adress">
                     <div class="ct_address">
