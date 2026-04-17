@@ -35,4 +35,4 @@
         });
     });
 </script>
-@stack('custom-js')
+@stack('js')
